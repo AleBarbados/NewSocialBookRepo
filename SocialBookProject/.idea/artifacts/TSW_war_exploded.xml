@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="TSW:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/TSW_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="SocialBook/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="SocialBook" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
