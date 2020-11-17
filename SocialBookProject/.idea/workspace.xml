@@ -6,7 +6,13 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e6293094-58c0-4e46-b253-0c198eb804cd" name="Default Changelist" comment="" />
+    <list default="true" id="e6293094-58c0-4e46-b253-0c198eb804cd" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documenti/Casi d_uso.odt" beforeDir="false" afterPath="$PROJECT_DIR$/../Documenti/Casi_d_uso.odt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Documenti/~$si d_uso.odt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/socialBook/db/database.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/socialBook/db/database.sql" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,6 +27,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
     <option name="FILTER_WARNINGS" value="false" />
@@ -29,6 +38,7 @@
     <option name="CUSTOM_FILTER" />
   </component>
   <component name="ProjectId" id="1bACHoG1KRQKWKw2VIydLmN8Yui" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -37,6 +47,7 @@
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/web/WEB-INF" />
@@ -55,53 +66,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="JetRunConfigurationType" factoryName="Kotlin">
-      <module name="SocialBook" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="WORKING_DIRECTORY" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType" factoryName="Kotlin script">
-      <module name="SocialBook" />
-      <option name="filePath" />
-      <option name="vmParameters" />
-      <option name="alternativeJrePath" />
-      <option name="programParameters" />
-      <option name="passParentEnvs" value="true" />
-      <option name="workingDirectory" />
-      <option name="isAlternativeJrePathEnabled" value="false" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="filePath" />
-      <option name="vmParameters" />
-      <option name="alternativeJrePath" />
-      <option name="programParameters" />
-      <option name="passParentEnvs" value="true" />
-      <option name="workingDirectory" />
-      <option name="isAlternativeJrePathEnabled" value="false" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="WORKING_DIRECTORY" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Tomcat 9.0.33" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.33" ALTERNATIVE_JRE_ENABLED="false">
       <deployment>
         <artifact name="TSW:war exploded">
@@ -214,6 +178,7 @@
       <workItem from="1590421808753" duration="1458000" />
       <workItem from="1590423755927" duration="374000" />
       <workItem from="1604012499262" duration="8539000" />
+      <workItem from="1604521687157" duration="1140000" />
     </task>
     <servers />
   </component>
@@ -221,6 +186,14 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="375" y="0" width="619" height="726" key="#Tomcat_9.0.33" timestamp="1604522322227">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="375" y="0" width="619" height="726" key="#Tomcat_9.0.33/0.0.1366.728@0.0.1366.728" timestamp="1604522322227" />
+    <state x="280" y="24" width="800" height="675" key="#Tomcat_Server" timestamp="1604522319110">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="280" y="24" width="800" height="675" key="#Tomcat_Server/0.0.1366.728@0.0.1366.728" timestamp="1604522319110" />
     <state x="491" y="50" width="374" height="624" key="#com.intellij.ide.util.MemberChooser" timestamp="1604015133494">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -241,14 +214,18 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="411" y="121" width="524" height="482" key="#com.intellij.util.ui.classpath.ChooseLibrariesDialog/0.0.1366.728@0.0.1366.728" timestamp="1604020959339" />
+    <state x="463" y="105" width="424" height="510" key="FileChooserDialogImpl" timestamp="1604522308808">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="463" y="105" width="424" height="510" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1604522308808" />
     <state x="166" y="0" width="1024" height="728" key="SettingsEditor" timestamp="1604021007518">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="166" y="0" width="1024" height="728" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1604021007518" />
-    <state x="315" y="200" key="com.intellij.ide.util.TipDialog" timestamp="1604012499807">
+    <state x="315" y="200" key="com.intellij.ide.util.TipDialog" timestamp="1604521693127">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="315" y="200" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1604012499806" />
+    <state x="315" y="200" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1604521693127" />
     <state x="347" y="159" key="run.anything.popup" timestamp="1604020121901">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

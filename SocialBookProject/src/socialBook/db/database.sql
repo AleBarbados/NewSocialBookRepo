@@ -75,6 +75,5 @@ CREATE TABLE booklist (
     creatore bool,
     constraint foreign key(id_utente) references utente(id),
     constraint foreign key(id_libro) references libro(id)
-
-
 );
+
