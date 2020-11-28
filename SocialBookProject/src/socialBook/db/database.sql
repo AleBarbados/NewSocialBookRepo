@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS 'socialBook';
-USE 'socialBook';
+CREATE DATABASE IF NOT EXISTS socialBook;
+USE socialBook;
 
 DROP TABLE IF EXISTS
     booklist;
@@ -15,8 +15,6 @@ DROP TABLE IF EXISTS
     login;
 DROP TABLE IF EXISTS
     utente;
-
-
 
 CREATE TABLE utente (
   id int(11) NOT NULL AUTO_INCREMENT,
@@ -76,4 +74,3 @@ CREATE TABLE booklist (
     constraint foreign key(id_utente) references utente(id),
     constraint foreign key(id_libro) references libro(id)
 );
-
