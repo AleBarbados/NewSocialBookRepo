@@ -7,7 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e6293094-58c0-4e46-b253-0c198eb804cd" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../Documenti/RAD/modello_funzionale/Problem Statement SocialBook.doc" beforeDir="false" afterPath="$PROJECT_DIR$/../Documenti/RAD/modello_funzionale/Problem Statement SocialBook.doc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,11 +38,12 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mysql" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -62,7 +64,18 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="Tomcat 9.0.33" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.33" ALTERNATIVE_JRE_ENABLED="false">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Tomcat 9.0.31" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.31" ALTERNATIVE_JRE_ENABLED="false">
       <deployment>
         <artifact name="TSW:war exploded">
           <settings>
@@ -97,6 +110,21 @@
         </SHUTDOWN>
       </ConfigurationWrapper>
       <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Profile">
         <option name="USE_ENV_VARIABLES" value="true" />
         <STARTUP>
           <option name="USE_DEFAULT" value="true" />
@@ -156,6 +184,7 @@
       </list>
     </option>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -176,58 +205,22 @@
       <workItem from="1604012499262" duration="8539000" />
       <workItem from="1604521687157" duration="1140000" />
       <workItem from="1605781734876" duration="23000" />
+      <workItem from="1609281302302" duration="4561000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="3" />
   </component>
-  <component name="WindowStateProjectService">
-    <state x="375" y="0" width="619" height="726" key="#Tomcat_9.0.33" timestamp="1604522322227">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="375" y="0" width="619" height="726" key="#Tomcat_9.0.33/0.0.1366.728@0.0.1366.728" timestamp="1604522322227" />
-    <state x="280" y="24" width="800" height="675" key="#Tomcat_Server" timestamp="1604522319110">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="280" y="24" width="800" height="675" key="#Tomcat_Server/0.0.1366.728@0.0.1366.728" timestamp="1604522319110" />
-    <state x="491" y="50" width="374" height="624" key="#com.intellij.ide.util.MemberChooser" timestamp="1604015133494">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="491" y="50" width="374" height="624" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1604015133494" />
-    <state x="511" y="77" width="324" height="570" key="#com.intellij.openapi.roots.ui.configuration.libraryEditor.LibraryEditorDialog" timestamp="1604020931914">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="511" y="77" width="324" height="570" key="#com.intellij.openapi.roots.ui.configuration.libraryEditor.LibraryEditorDialog/0.0.1366.728@0.0.1366.728" timestamp="1604020931913" />
-    <state x="281" y="0" width="783" height="726" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1604018900072">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="281" y="0" width="783" height="726" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1366.728@0.0.1366.728" timestamp="1604018900072" />
-    <state x="416" y="112" width="524" height="499" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1604018381275">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="416" y="112" width="524" height="499" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1604018381275" />
-    <state x="411" y="121" width="524" height="482" key="#com.intellij.util.ui.classpath.ChooseLibrariesDialog" timestamp="1604020959339">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="411" y="121" width="524" height="482" key="#com.intellij.util.ui.classpath.ChooseLibrariesDialog/0.0.1366.728@0.0.1366.728" timestamp="1604020959339" />
-    <state x="521" y="119" width="424" height="510" key="FileChooserDialogImpl" timestamp="1605781754770">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="463" y="105" width="424" height="510" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1604522308808" />
-    <state x="521" y="119" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1605781754770" />
-    <state x="166" y="0" width="1024" height="728" key="SettingsEditor" timestamp="1604021007518">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="166" y="0" width="1024" height="728" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1604021007518" />
-    <state x="354" y="226" key="com.intellij.ide.util.TipDialog" timestamp="1605781734929">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="315" y="200" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1604521693127" />
-    <state x="354" y="226" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1605781734928" />
-    <state x="347" y="159" key="run.anything.popup" timestamp="1604020121901">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="347" y="159" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1604020121901" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
