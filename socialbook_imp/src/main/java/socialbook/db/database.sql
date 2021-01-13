@@ -166,4 +166,4 @@ CREATE TABLE profiling(
     employee bool NOT NULL,
     worker bool NOT NULL,
     freelance bool NOT NULL,
-
+);

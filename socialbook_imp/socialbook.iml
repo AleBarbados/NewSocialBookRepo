@@ -39,5 +39,6 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.platform:junit-platform-engine:1.7.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.tomcat:tomcat-jdbc:10.0.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.tomcat:tomcat-juli:10.0.0" level="project" />
+    <orderEntry type="library" name="apache-tomcat-9.01" level="application" />
   </component>
 </module>
