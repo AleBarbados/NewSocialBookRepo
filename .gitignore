@@ -16,5 +16,7 @@ SocialBookProject/.idea/workspace.xml
 *.bak_000f
 *.bak_001d
 /socialbook_imp/target/
-.iml
+*.iml
 /socialbook_imp/.idea/
+*.iml
+socialbook_imp/socialbook.iml
