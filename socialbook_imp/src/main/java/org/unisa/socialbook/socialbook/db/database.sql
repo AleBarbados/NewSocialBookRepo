@@ -165,4 +165,4 @@ CREATE TABLE message(
     message_body varchar(100) NOT NULL,
     CONSTRAINT fk_m_t FOREIGN KEY (id_ticket) REFERENCES ticket (id_ticket)
 );
-/* manca tabella profilazione aaabukkinemammt*/
+/* manca tabella profilazione aaabukkinemammt2*/
