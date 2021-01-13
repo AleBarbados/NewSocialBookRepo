@@ -15,5 +15,6 @@ Documenti/RAD/modello_funzionale/~$oblem Statement SocialBook.doc
 SocialBookProject/.idea/workspace.xml
 *.bak_000f
 *.bak_001d
-/target/
+/socialbook_imp/target/
 .iml
+/socialbook_imp/.idea/
