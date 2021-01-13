@@ -151,4 +151,19 @@ CREATE TABLE message(
     CONSTRAINT fk_m_t FOREIGN KEY (id_ticket) REFERENCES ticket (id_ticket)
 );
 
-/*boh dfcgdcjgcfjgc*/
+CREATE TABLE profiling(
+
+    id_customer int(11) PRIMARY KEY,
+    age_14_18 bool NOT NULL,
+    age_19_25 bool NOT NULL,
+    age_26_30 bool NOT NULL,
+    age_31_40 bool NOT NULL,
+    age_41_50 bool NOT NULL,
+    age_50_plus bool NOT NULL,
+    underage_sons bool NOT NULL,
+    student bool NOT NULL,
+    unemployed bool NOT NULL,
+    employee bool NOT NULL,
+    worker bool NOT NULL,
+    freelance bool NOT NULL,
+

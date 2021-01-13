@@ -7,3 +7,5 @@
 # Editor-based HTTP Client requests
 /httpRequests/
 /codeStyles/codeStyleConfig.xml
+/sqldialects.xml
+/db.properties
