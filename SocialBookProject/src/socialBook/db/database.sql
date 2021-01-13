@@ -69,8 +69,12 @@ CREATE TABLE booklist (
     id int AUTO_INCREMENT primary key ,
     nome varchar(20) not null ,
     id_libro int NOT NULL,
-    id_utente int NOT NULL,
+    id_cu int NOT NULL,
     creatore bool,
-    constraint foreign key(id_utente) references utente(id),
+    constraint foreign key(id_customer) references utente(id),
     constraint foreign key(id_libro) references libro(id)
+);
+
+
+
 );
