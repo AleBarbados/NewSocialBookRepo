@@ -1,4 +1,4 @@
-package org.unisa.socialbook.socialbook.model;
+package socialbook.model;
 
 
 import org.apache.tomcat.jdbc.pool.DataSource;
