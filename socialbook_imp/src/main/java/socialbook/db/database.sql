@@ -10,7 +10,7 @@ CREATE TABLE customer(
     email            varchar(100) NOT NULL,
     customer_pwd     varchar(16)  NOT NULL,
     customer_usr     varchar(16)  NOT NULL,
-    description      varchar(100) NOT NULL,
+    c_description      varchar(100) NOT NULL,
     PRIMARY KEY (id_customer),
     UNIQUE KEY (customer_usr),
     UNIQUE KEY (email)
@@ -168,7 +168,7 @@ CREATE TABLE profiling
     employee        bool NOT NULL,
     worker          bool NOT NULL,
     freelance       bool NOT NULL,
-    read            bool NOT NULL,
+    p_read            bool NOT NULL,
     play_instrument bool NOT NULL,
     sing            bool NOT NULL,
     dance           bool NOT NULL,
@@ -187,3 +187,5 @@ CREATE TABLE profiling
     CONSTRAINT fk_p_c FOREIGN KEY (id_customer) REFERENCES customer (id_customer)
 );
 
+INSERT INTO customer(customer_name, customer_surname, email, customer_pwd, customer_usr, c_description ) VALUES
+('Ale', 'Bar', 'ale.bar@gmail.com', 'barbados99', 'AleBarbados', 'studentessa disperata');
