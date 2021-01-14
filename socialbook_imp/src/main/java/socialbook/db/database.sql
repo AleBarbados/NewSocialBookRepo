@@ -10,6 +10,7 @@ CREATE TABLE customer(
     email            varchar(100) NOT NULL,
     customer_pwd     varchar(16)  NOT NULL,
     customer_usr     varchar(16)  NOT NULL,
+    description      varchar(100) NOT NULL,
     PRIMARY KEY (id_customer),
     UNIQUE KEY (customer_usr),
     UNIQUE KEY (email)
