@@ -8,14 +8,14 @@ import java.util.Objects;
 
 
 public class Customer {
-    public int id_customer;
-    public String c_name;
-    public String c_surname;
-    public String e_mail;
-    public String c_pwd;
-    public String c_usr;
-    public String description;
-    public static int last = 0;
+    private int id_customer;
+    private String c_name;
+    private String c_surname;
+    private String e_mail;
+    private String c_pwd;
+    private String c_usr;
+    private String description;
+    private static int last = 0;
 
     public Customer(){}
     public Customer(String c_name, String c_surname, String e_mail, String c_pwd, String c_usr, String description ){
