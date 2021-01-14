@@ -26,3 +26,4 @@ socialbook_imp/out/artifacts/socialbook_imp_war_exploded/WEB-INF/lib/tomcat-juli
 socialbook_imp/out/artifacts/socialbook_imp_war_exploded/WEB-INF/lib/tomcat-jdbc-10.0.0.jar
 socialbook_imp/out/artifacts/socialbook_imp_war_exploded/META-INF/MANIFEST.MF
 socialbook_imp/out/artifacts/socialbook_imp_war/socialbook_imp_war.war
+socialbook_imp/src/main/java/socialbook/db/db.properties

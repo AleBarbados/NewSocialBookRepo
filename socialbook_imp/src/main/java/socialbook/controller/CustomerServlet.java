@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet("/customerServlet")
-public class customerServlet extends HttpServlet {
+public class CustomerServlet extends HttpServlet {
     private final CustomerDAO customerDAO = new CustomerDAO();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
