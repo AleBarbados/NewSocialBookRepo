@@ -1,5 +1,5 @@
 DROP DATABASE IF EXISTS SocialBook;
-CREATE DATABASE IF NOT EXISTS SocialBook;
+CREATE DATABASE SocialBook;
 USE SocialBook;
 
 CREATE TABLE customer(
@@ -17,12 +17,12 @@ CREATE TABLE customer(
 
 CREATE TABLE book(
     ISBN             varchar(13) PRIMARY KEY,
-    title            varchar(30)   NOT NULL,
+    title            varchar(50)   NOT NULL,
     genre            varchar(16)   NOT NULL,
-    price            decimal(4, 2) NOT NULL,
-    publication_year date          NOT NULL,
+    price_cent       int(5)        NOT NULL,
+    publication_year year          NOT NULL,
     publishing_house varchar(30)   NOT NULL,
-    plot             varchar(100)  NOT NULL,
+    plot             varchar(500)  NOT NULL,
     catalogue        bool          NOT NULL
 );
 
@@ -170,4 +170,9 @@ CREATE TABLE profiling(
 );
 
 INSERT INTO customer(customer_name, customer_surname, email, customer_pwd, customer_usr, c_description ) VALUES
-('Ale', 'Bar', 'ale.bar@gmail.com', 'barbados99', 'AleBarbados', 'studentessa disperata');
+('Ale', 'Bar', 'ale.bar@gmail.com', SHA1('barbados99'), 'AleBarbados', 'studentessa disperata');
+
+INSERT INTO book(ISBN, title, genre, price_cent, publication_year, publishing_house, plot, catalogue) VALUES
+('9788869183157', 'Harry Potter e la pietra filosofale', 'Fantasy', 1800, 2018, 'Salani', "Nel giorno del suo undicesimo compleanno, la vita di Harry Potter cambia per sempre. Una lettera, consegnata dal gigantesco e arruffato Rubeus Hagrid, contiene infatti delle notizie sconvolgenti. Harry scopre di non essere un ragazzo come gli altri: è un mago e una straordinaria avventura lo aspetta..", true),
+('9788893817035', 'Harry Potter e la camera dei segreti', 'Fantasy', 1699, 2018, 'Salani', "Harry Potter è ormai celebre: durante il primo anno alla Scuola di Magia e Stregoneria di Hogwarts ha sconfitto il terribile Voldemort, vendicando la morte dei suoi genitori e coprendosi di gloria. Ma una spaventosa minaccia incombe sulla scuola: un incantesimo che colpisce i compagni di Harry, uno dopo l'altro, e che sembra legato a un antico mistero racchiuso nella tenebrosa Camera dei Segreti.", true),
+('9788869186127', 'Harry Potter e il prigioniero di Azkaban', 'Fantasy', 1850, 2018, 'Salani', "Una terribile minaccia incombe sulla Scuola di Magia e Stregoneria di Hogwarts. Sirius Black, il famigerato assassino, è evaso dalla prigione di Azkaban. È in caccia e la sua preda è proprio a Hogwarts, dove Harry e i suoi amici stanno per cominciare il loro terzo anno. Nonostante la sorveglianza dei Dissennatori la scuola non è più un luogo sicuro, perché al suo interno si nasconde un traditore...", false);
