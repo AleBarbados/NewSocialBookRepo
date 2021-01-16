@@ -4,6 +4,7 @@ import socialbook.model.Customer;
 import socialbook.model.CustomerDAO;
 import socialbook.model.FollowDAO;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,7 +32,19 @@ public class followEditServlet extends HttpServlet {
             request.setAttribute("customer", customerDAO.doRetriveById((Integer) request.getAttribute("id")));
             response.sendRedirect(dest);
         }else if(request.getParameter("edit")!=null){
-
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/customerEdit.jsp");
+            requestDispatcher.forward(request, response);
+        }else if(request.getParameter("unFollow")!=null){
+            Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
+            followDAO.doDelete(customer.getId_customer(), (Integer) request.getAttribute("id"));
+            String dest = request.getHeader("referer");     //prendiamo dall'header della richiesta l'url corrente
+            if(dest == null || dest.contains("/CustomerServlet") || dest.trim().isEmpty()){
+                dest = ".";     //la destinazione sarà la pagina corrente
+            }
+            request.setAttribute("follow", false);
+            request.setAttribute("redirect", true);
+            request.setAttribute("customer", customerDAO.doRetriveById((Integer) request.getAttribute("id")));
+            response.sendRedirect(dest);
         }
     }
 }

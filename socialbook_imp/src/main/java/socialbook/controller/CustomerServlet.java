@@ -2,6 +2,7 @@ package socialbook.controller;
 
 import socialbook.model.Customer;
 import socialbook.model.CustomerDAO;
+import socialbook.model.FollowDAO;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,6 +15,7 @@ import java.io.IOException;
 @WebServlet("/customerServlet")
 public class CustomerServlet extends HttpServlet {
     private final CustomerDAO customerDAO = new CustomerDAO();
+    private final FollowDAO followDAO = new FollowDAO();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }
@@ -22,6 +24,10 @@ public class CustomerServlet extends HttpServlet {
         if(request.getParameter("costumerView") != null || request.getParameter("redirect") != null){
             Customer c = customerDAO.doRetriveById(Integer.parseInt(request.getParameter("customer")));
             request.setAttribute("customer", c);
+            Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
+            if(followDAO.checkFollower(customer.getId_customer(), c.getId_customer())){
+                request.setAttribute("follow", true);
+            }
         }
         if(request.getParameter("personalView")!=null){
             request.setAttribute("view", true);

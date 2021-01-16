@@ -26,8 +26,11 @@
     </c:otherwise>
 </c:choose>
 <c:choose>
-    <c:when test="${cus!=personalCustomer}">
+    <c:when test="${!cus.equals(personalCustomer)}">
         <form action="followEdit?id=${customer.id_customer}"><input type="submit" name="follow" value="Follow"></form>
+    </c:when>
+    <c:when test="${!cus.equals(personalCustomer)||follow==true}">
+        <form action="followEdit?id=${customer.id_customer}"><input type="submit" name="unFollow" value="UnFollow"></form>
     </c:when>
     <c:otherwise>
         <form action="followEdit"><input type="submit" name="edit" value="Edit Profile"></form>

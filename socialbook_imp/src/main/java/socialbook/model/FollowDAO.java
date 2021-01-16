@@ -10,11 +10,13 @@ public class FollowDAO {
     public final static String DO_FOLLOW = "INSERT INTO follow(id_customer, id_follower) VALUES(?,?)";
     public final static String DO_RETRIVE_ALL_FOLLOWERS = "SELECT id_customer, id_follower FROM follow WHERE id_customer=?";
     public final static String DO_RETRIVE_ALL_FOLLOWED = "SELECT id_customer, id_follower FROM follow WHERE id_follower=?";
+    public final static String DO_DELETE = "DELETE FROM follow WHERE id_customer=? AND id_follower=?";
+
     public void doFollow(int customer, int follower) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(DO_FOLLOW);
             ps.setInt(customer, 1);
-            ps.setInt(customer, 2);
+            ps.setInt(follower, 2);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -56,5 +58,27 @@ public class FollowDAO {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public boolean checkFollower (int customer, int follower){
+        ArrayList<Follow> followers = doRetriveAllFollowed(customer);
+        if(followers!=null){
+            for (Follow f:followers) {
+                if(f.getFollower()==follower){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public void doDelete(int customer, int follower) {
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement(DO_DELETE);
+            ps.setInt(customer, 1);
+            ps.setInt(follower, 2);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
