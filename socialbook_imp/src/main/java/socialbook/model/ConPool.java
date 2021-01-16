@@ -34,7 +34,7 @@ public class ConPool {
             //p.setUsername(prop.getProperty("utente"));
             //p.setPassword(prop.getProperty("password"));
             p.setUsername("root");
-            p.setPassword("basedidati");
+            p.setPassword("sloslidu2");
             p.setMaxActive(100);
             p.setInitialSize(10);
             p.setMinIdle(10);

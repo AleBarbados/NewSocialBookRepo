@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class CustomerDAO {
 
     public final static String DO_RETRIEVE_BY_ID = "SELECT id_customer, customer_name, customer_surname, " +
-            "                               customer_pwd, customer_usr, c_description, email FROM customer WHERE id = ?";
+            "                               customer_pwd, customer_usr, c_description, email FROM customer WHERE id_customer = ?";
     public final static String DO_RETRIEVE_ALL = "SELECT id_customer, customer_name, customer_surname, " +
             "                               customer_pwd, customer_usr, c_description, email FROM customer";
     public final static String DO_RETRIEVE_BY_EMAIL = "SELECT id_customer,customer_name, customer_surname, " +

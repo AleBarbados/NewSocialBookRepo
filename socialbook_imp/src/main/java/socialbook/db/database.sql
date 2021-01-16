@@ -7,7 +7,7 @@ CREATE TABLE customer(
     customer_name    varchar(15),
     customer_surname varchar(15),
     email            varchar(100) NOT NULL,
-    customer_pwd     varchar(16)  NOT NULL,
+    customer_pwd     varchar(160)  NOT NULL,
     customer_usr     varchar(16)  NOT NULL,
     c_description    varchar(100) NOT NULL,
     PRIMARY KEY (id_customer),
@@ -136,6 +136,13 @@ CREATE TABLE message(
     CONSTRAINT fk_m_t FOREIGN KEY (id_ticket) REFERENCES ticket (id_ticket)
 );
 
+CREATE TABLE follow(
+    id_customer int(11) AUTO_INCREMENT PRIMARY KEY,
+    id_follower int(11) NOT NULL,
+    CONSTRAINT fk_f_c FOREIGN KEY (id_customer) REFERENCES customer (id_customer),
+    CONSTRAINT fk_f_f FOREIGN KEY (id_follower) REFERENCES customer (id_customer)
+);
+
 CREATE TABLE profiling(
     id_customer     int(11) PRIMARY KEY,
     age_14_18       bool NOT NULL,
@@ -170,7 +177,8 @@ CREATE TABLE profiling(
 );
 
 INSERT INTO customer(customer_name, customer_surname, email, customer_pwd, customer_usr, c_description) VALUES
-('Ale', 'Bar', 'ale.bar@gmail.com', SHA1('barbados99'), 'AleBarbados', 'studentessa disperata');
+('Ale', 'Bar', 'ale.bar@gmail.com', SHA1('barbados99'), 'AleBarbados', 'studentessa disperata'),
+('Luca', 'Russo', 'luketto.222000@gmail.com', SHA1('pizzamandolino'), 'LukettoFurbetto', 'Voglio disperatamente porre fine alla mia vita alle volte');
 
 INSERT INTO book(ISBN, title, genre, price_cent, publication_year, publishing_house, plot, catalogue) VALUES
 ('9788869183157', 'Harry Potter e la pietra filosofale', 'Fantasy', 1800, 2018, 'Salani', "Nel giorno del suo undicesimo compleanno, la vita di Harry Potter cambia per sempre. Una lettera, consegnata dal gigantesco e arruffato Rubeus Hagrid, contiene infatti delle notizie sconvolgenti. Harry scopre di non essere un ragazzo come gli altri: è un mago e una straordinaria avventura lo aspetta..", true),

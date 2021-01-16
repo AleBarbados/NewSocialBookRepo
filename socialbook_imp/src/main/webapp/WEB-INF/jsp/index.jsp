@@ -8,7 +8,8 @@
 <h1><%= "Hello World!" %>
 </h1>
 <br/>
-<a href="hello-servlet">Hello Servlet</a>
-<form action="customerServlet" method="get"> <button name=”cutomerView” type=”submit”>Account</button></form>
+<form action="customerServlet" method="get">
+    <input type="submit" name="personalView" value="Account">
+</form>
 </body>
 </html>
