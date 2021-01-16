@@ -31,8 +31,7 @@ public class ProvaServlet extends HttpServlet {
         ArrayList<Book> books = bookDAO.doRetrieveAll();
         request.setAttribute("books", books);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/index.jsp");
         dispatcher.forward(request, response);
     }
-
 }

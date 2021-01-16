@@ -169,7 +169,7 @@ CREATE TABLE profiling(
     CONSTRAINT fk_p_c FOREIGN KEY (id_customer) REFERENCES customer (id_customer)
 );
 
-INSERT INTO customer(customer_name, customer_surname, email, customer_pwd, customer_usr, c_description ) VALUES
+INSERT INTO customer(customer_name, customer_surname, email, customer_pwd, customer_usr, c_description) VALUES
 ('Ale', 'Bar', 'ale.bar@gmail.com', SHA1('barbados99'), 'AleBarbados', 'studentessa disperata');
 
 INSERT INTO book(ISBN, title, genre, price_cent, publication_year, publishing_house, plot, catalogue) VALUES

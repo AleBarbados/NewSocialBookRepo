@@ -11,7 +11,6 @@ public class Book {
     private String publishing_house;
     private String plot;
     private boolean catalogue;
-    private String price_euro;
 
     public Book() { }
 
@@ -91,11 +90,7 @@ public class Book {
     }
 
     public String getPrice_euro() {
-        return price_euro;
-    }
-
-    public void setPrice_euro(String pe) {
-        price_euro = String.format("% .2f", price_cent/100.00);
+        return String.format("% .2f", price_cent/100.00);
     }
 
     @Override

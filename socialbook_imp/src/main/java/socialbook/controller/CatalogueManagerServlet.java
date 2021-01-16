@@ -16,33 +16,27 @@ public class CatalogueManagerServlet extends HttpServlet {
     private final BookDAO bookDAO = new BookDAO();
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String isbn = request.getParameter("isbn");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/prova.jsp");
 
-        if(request.getParameter("inserimento") != null) {   //click sul bottone "inserisci"
-            if(isbn != null)    //click su uno dei libri già presenti nel database, ma attualmente non presenti nel catalogo
-                bookDAO.doUpdateCatalogue(isbn, true);
-            else {  //creazione di un nuovo libro, aggiunto al database e catalogo
-                Book l = new Book();
-
-                l.setIsbn(request.getParameter("newIsbn"));
-                l.setTitle(request.getParameter("title"));
-                l.setGenre(request.getParameter("genre"));
-                l.setPrice_cent(Integer.parseInt(request.getParameter("price")));
-                l.setPublication_year(Integer.parseInt(request.getParameter("publication_year")));
-                l.setPublishing_house(request.getParameter("publishing_house"));
-                l.setPlot(request.getParameter("plot"));
-                l.setCatalogue(true);
-
-                bookDAO.doSave(l);
-            }
-        } else if(request.getParameter("modifica") != null) {   //click sul bottone "modifica" relativo a un libro
-            int p = Integer.parseInt(request.getParameter("price"));
-            bookDAO.doUpdatePrice(isbn, p);
-        } else {    //click sul bottone "rimuovi" relativo a un libro
-            bookDAO.doUpdateCatalogue(isbn, false);
+        String dest = request.getHeader("referer");     //prendiamo dall'header della richiesta l'url corrente
+        if(dest == null || dest.contains("/catalogueManagerServlet") || dest.trim().isEmpty()){
+            dest = ".";     //la destinazione sarà la pagina corrente
         }
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/prova.jsp");
-        dispatcher.forward(request, response);
+        if(request.getParameter("inserimento") != null) {   //click sul bottone "inserisci"
+            if(isbn != null) {       //click su uno dei libri già presenti nel database, ma attualmente non presenti nel catalogo
+                bookDAO.doUpdateCatalogue(isbn, true);
+                response.sendRedirect(dest);
+            } else {
+                dispatcher.forward(request, response);
+            }
+        } else if(request.getParameter("modifica") != null) {   //click sul bottone "modifica" relativo a un libro
+            dispatcher.forward(request, response);
+            //bookDAO.doUpdatePrice(isbn, p);
+        } else {    //click sul bottone "rimuovi" relativo a un libro attualmente nel catalogo
+            bookDAO.doUpdateCatalogue(isbn, false);
+            response.sendRedirect(dest);
+        }
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
