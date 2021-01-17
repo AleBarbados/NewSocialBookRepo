@@ -8,7 +8,21 @@
 <h1><%= "Hello World!" %>
 </h1>
 <br/>
-<a href="hello-servlet">Hello Servlet</a>
-<form action="customerServlet" method="get"> <button name=”cutomerView” type=”submit”>Account</button></form>
+<form action="customerServlet" method="get">
+    <input type="submit" name="personalView" value="Account">
+</form>
+<form action="customerServlet" method="get">
+    <input type="submit" name="costumerView" value="Utente">
+    <input type="hidden" name="customer"  value="2">
+</form>
+<table>
+    <tr>
+        <th>menu</th>
+    </tr>
+    <tr>
+        <th><a href="WEB-INF/jsp/registration.jsp">Registrazione</a></th>
+
+    </tr>
+</table>
 </body>
 </html>
