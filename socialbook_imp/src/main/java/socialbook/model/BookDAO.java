@@ -11,11 +11,14 @@ public class BookDAO {
     private final static String DO_UPDATE_PRICE = "UPDATE book SET price_cent = ? WHERE ISBN = ?";
     private final static String DO_SAVE = "INSERT INTO book (ISBN, title, genre, price_cent, publication_year, publishing_house, plot, catalogue) VALUES (?,?,?,?,?,?,?,?)";
     private final static String DO_RETRIEVE_ALL = "SELECT ISBN, title, genre, price_cent, publication_year, publishing_house, plot, catalogue FROM book";
+    private final static String DO_RETRIEVE_CATALOGUE_BY_ISBN = "SELECT catalogue FROM book WHERE ISBN = ?";
+    private final static String DO_RETRIEVE_BY_ISBN = "SELECT ISBN, title, genre, price_cent, publication_year, publishing_house, plot, catalogue FROM book "
+            + "WHERE ISBN = ?";
 
-    public void doUpdateCatalogue(String isbn, boolean b) {
+    public void doUpdateCatalogue(String isbn) {
         try(Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(DO_UPDATE_CATALOGUE);
-            ps.setBoolean(1, b);
+            ps.setBoolean(1, !doRetrieveCatalogueByIsbn(isbn));
             ps.setString(2, isbn);
 
             if (ps.executeUpdate() != 1) {
@@ -69,20 +72,54 @@ public class BookDAO {
 
             ResultSet rs = ps.executeQuery();
             while(rs.next()) {
-                Book b = new Book();
-
-                b.setIsbn(rs.getString(1));
-                b.setTitle(rs.getString(2));
-                b.setGenre(rs.getString(3));
-                b.setPrice_cent(rs.getInt(4));
-                b.setPublication_year(rs.getInt(5));
-                b.setPublishing_house(rs.getString(6));
-                b.setPlot(rs.getString(7));
-                b.setCatalogue(rs.getBoolean(8));
-
-                books.add(b);
+                books.add(createBook(rs));
             }
             return books;
+        } catch(SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public Book doRetrieveByIsbn(String isbn) {
+        try(Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement(DO_RETRIEVE_BY_ISBN);
+            ps.setString(1, isbn);
+
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()) {
+                return createBook(rs);
+            }
+            return null;
+        } catch(SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private Book createBook(ResultSet rs) throws SQLException {
+        Book b = new Book();
+
+        b.setIsbn(rs.getString(1));
+        b.setTitle(rs.getString(2));
+        b.setGenre(rs.getString(3));
+        b.setPrice_cent(rs.getInt(4));
+        b.setPublication_year(rs.getInt(5));
+        b.setPublishing_house(rs.getString(6));
+        b.setPlot(rs.getString(7));
+        b.setCatalogue(rs.getBoolean(8));
+
+        return b;
+    }
+
+    private boolean doRetrieveCatalogueByIsbn(String isbn) {
+        try(Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement(DO_RETRIEVE_CATALOGUE_BY_ISBN);
+            ps.setString(1, isbn);
+
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()) {
+                return rs.getBoolean(1);
+            }
+            return false;
         } catch(SQLException e) {
             throw new RuntimeException(e);
         }

@@ -7,7 +7,7 @@ CREATE TABLE customer(
     customer_name    varchar(15),
     customer_surname varchar(15),
     email            varchar(100) NOT NULL,
-    customer_pwd     varchar(16)  NOT NULL,
+    customer_pwd     varchar(160)  NOT NULL,
     customer_usr     varchar(16)  NOT NULL,
     c_description    varchar(100) NOT NULL,
     PRIMARY KEY (id_customer),
