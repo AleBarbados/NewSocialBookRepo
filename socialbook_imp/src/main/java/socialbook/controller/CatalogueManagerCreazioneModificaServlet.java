@@ -36,7 +36,7 @@ public class CatalogueManagerCreazioneModificaServlet extends HttpServlet {
 
         request.setAttribute("books", bookDAO.doRetrieveAll());
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/libri.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/libri.jsp");
         dispatcher.forward(request, response);
     }
 

@@ -32,7 +32,7 @@ public class CatalogueManagerInserimentoRimozioneServlet extends HttpServlet {
             else
                 request.setAttribute("operazione", "creazione");
 
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/crea_modifica_libro.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/crea_modifica_libro.jsp");
             dispatcher.forward(request, response);
         }
     }
