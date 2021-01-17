@@ -11,5 +11,14 @@
 <form action="customerServlet" method="get">
     <input type="submit" name="personalView" value="Account">
 </form>
+<table>
+    <tr>
+        <th>menu</th>
+    </tr>
+    <tr>
+        <th><a href="WEB-INF/jsp/registration.jsp">Registrazione</a></th>
+
+    </tr>
+</table>
 </body>
 </html>
