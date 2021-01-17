@@ -8,24 +8,27 @@ import java.util.ArrayList;
 
 public class FollowDAO {
     public final static String DO_FOLLOW = "INSERT INTO follow(id_customer, id_follower) VALUES(?,?)";
-    public final static String DO_RETRIVE_ALL_FOLLOWERS = "SELECT id_customer, id_follower FROM follow WHERE id_customer=?";
-    public final static String DO_RETRIVE_ALL_FOLLOWED = "SELECT id_customer, id_follower FROM follow WHERE id_follower=?";
+    public final static String DO_RETRIVE_ALL_FOLLOWERS = "SELECT id_customer, id_follower FROM follow WHERE id_follower=?";
+    public final static String DO_RETRIVE_ALL_FOLLOWED = "SELECT id_customer, id_follower FROM follow WHERE id_customer=?";
     public final static String DO_DELETE = "DELETE FROM follow WHERE id_customer=? AND id_follower=?";
 
     public void doFollow(int customer, int follower) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(DO_FOLLOW);
-            ps.setInt(customer, 1);
-            ps.setInt(follower, 2);
+            ps.setInt(1, customer);
+            ps.setInt(2, follower);
+            if (ps.executeUpdate() != 1) {
+                throw new RuntimeException("INSERT error.");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public ArrayList<Follow> doRetriveAllFollowers(int customer) {
+    public ArrayList<Follow> doRetriveAllFollowers(int follower) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(DO_RETRIVE_ALL_FOLLOWERS);
-            ps.setInt(customer, 1);
+            ps.setInt(1, follower);
             ArrayList<Follow> followers = new ArrayList<>();
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -41,10 +44,10 @@ public class FollowDAO {
         return null;
     }
 
-    public ArrayList<Follow> doRetriveAllFollowed(int follower) {
+    public ArrayList<Follow> doRetriveAllFollowed(int customer) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(DO_RETRIVE_ALL_FOLLOWED);
-            ps.setInt(follower, 1);
+            ps.setInt(1, customer);
             ArrayList<Follow> followers = new ArrayList<>();
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -75,8 +78,11 @@ public class FollowDAO {
     public void doDelete(int customer, int follower) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(DO_DELETE);
-            ps.setInt(customer, 1);
-            ps.setInt(follower, 2);
+            ps.setInt(follower, 1);
+            ps.setInt(customer, 2);
+            if (ps.executeUpdate() != 1) {
+                throw new RuntimeException("DELETE error.");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

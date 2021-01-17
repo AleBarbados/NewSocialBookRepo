@@ -14,11 +14,9 @@
 <h1>we bucchin</h1>
 <c:choose>
     <c:when test="${customer!=null}">
-        <c:set var = "cus" value = "${customer}"/>
         <h1>${customer.c_usr}</h1>
     </c:when>
-    <c:when test="${personalCustomer!=null&&view!=null}">
-        <c:set var = "cus" value = "${personalCustomer}"/>
+    <c:when test="${personalCustomer!=null&&view==true}">
         <h1>${personalCustomer.c_usr}</h1>
     </c:when>
     <c:otherwise>
@@ -26,11 +24,17 @@
     </c:otherwise>
 </c:choose>
 <c:choose>
-    <c:when test="${!cus.equals(personalCustomer)}">
-        <form action="followEdit?id=${customer.id_customer}"><input type="submit" name="follow" value="Follow"></form>
+    <c:when test="${follow!=true&&view!=true}">
+        <form action="followEdit">
+            <input type="submit" name="follow" value="Follow">
+            <input type="hidden" name="id" value="${customer.id_customer}">
+        </form>
     </c:when>
-    <c:when test="${!cus.equals(personalCustomer)||follow==true}">
-        <form action="followEdit?id=${customer.id_customer}"><input type="submit" name="unFollow" value="UnFollow"></form>
+    <c:when test="${follow==true&&view!=true}">
+        <form action="followEdit">
+            <input type="submit" name="unFollow" value="UnFollow">
+            <input type="hidden" name="id" value="${customer.id_customer}">
+        </form>
     </c:when>
     <c:otherwise>
         <form action="followEdit"><input type="submit" name="edit" value="Edit Profile"></form>

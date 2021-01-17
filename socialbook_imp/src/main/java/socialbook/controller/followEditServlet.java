@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "followEditServlet")
+@WebServlet("/followEdit")
 public class followEditServlet extends HttpServlet {
     private static CustomerDAO customerDAO = new CustomerDAO();
     private static FollowDAO followDAO = new FollowDAO();
@@ -23,27 +23,28 @@ public class followEditServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getParameter("follow")!=null){
             Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
-            followDAO.doFollow(customer.getId_customer(), (Integer) request.getAttribute("id"));
+            followDAO.doFollow(Integer.parseInt(request.getParameter("id")), customer.getId_customer() );
             String dest = request.getHeader("referer");     //prendiamo dall'header della richiesta l'url corrente
             if(dest == null || dest.contains("/CustomerServlet") || dest.trim().isEmpty()){
                 dest = ".";     //la destinazione sarà la pagina corrente
             }
+            request.setAttribute("follow", true);
             request.setAttribute("redirect", true);
-            request.setAttribute("customer", customerDAO.doRetriveById((Integer) request.getAttribute("id")));
+            request.setAttribute("customer", customerDAO.doRetriveById(Integer.parseInt(request.getParameter("id"))));
             response.sendRedirect(dest);
         }else if(request.getParameter("edit")!=null){
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/customerEdit.jsp");
             requestDispatcher.forward(request, response);
         }else if(request.getParameter("unFollow")!=null){
             Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
-            followDAO.doDelete(customer.getId_customer(), (Integer) request.getAttribute("id"));
+            followDAO.doDelete(customer.getId_customer(), Integer.parseInt(request.getParameter("id")));
             String dest = request.getHeader("referer");     //prendiamo dall'header della richiesta l'url corrente
             if(dest == null || dest.contains("/CustomerServlet") || dest.trim().isEmpty()){
                 dest = ".";     //la destinazione sarà la pagina corrente
             }
             request.setAttribute("follow", false);
             request.setAttribute("redirect", true);
-            request.setAttribute("customer", customerDAO.doRetriveById((Integer) request.getAttribute("id")));
+            request.setAttribute("customer", customerDAO.doRetriveById(Integer.parseInt(request.getParameter("id"))));
             response.sendRedirect(dest);
         }
     }

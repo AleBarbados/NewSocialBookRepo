@@ -25,7 +25,7 @@ public class CustomerServlet extends HttpServlet {
             Customer c = customerDAO.doRetriveById(Integer.parseInt(request.getParameter("customer")));
             request.setAttribute("customer", c);
             Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
-            if(followDAO.checkFollower(customer.getId_customer(), c.getId_customer())){
+            if(followDAO.checkFollower( c.getId_customer(), customer.getId_customer())){
                 request.setAttribute("follow", true);
             }
         }

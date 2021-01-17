@@ -11,5 +11,9 @@
 <form action="customerServlet" method="get">
     <input type="submit" name="personalView" value="Account">
 </form>
+<form action="customerServlet" method="get">
+    <input type="submit" name="costumerView" value="Utente">
+    <input type="hidden" name="customer"  value="2">
+</form>
 </body>
 </html>
