@@ -11,10 +11,11 @@ public class Book {
     private String publishing_house;
     private String plot;
     private boolean catalogue;
+    private String image;
 
     public Book() { }
 
-    public Book(String i, String t, String g, int pc, int py, String ph, String pl, boolean c) {
+    public Book(String i, String t, String g, int pc, int py, String ph, String pl, boolean c, String im) {
         isbn = i;
         title = t;
         genre = g;
@@ -23,6 +24,7 @@ public class Book {
         publishing_house = ph;
         plot = pl;
         catalogue = c;
+        image = im;
     }
 
     public String getIsbn() {
@@ -93,6 +95,14 @@ public class Book {
         return String.format("% .2f", price_cent/100.00);
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String i) {
+        image = i;
+    }
+
     @Override
     public boolean equals(Object o) {
         if(this == o) return true;
@@ -100,6 +110,6 @@ public class Book {
         Book book = (Book) o;
         return Objects.equals(isbn, book.isbn) && Objects.equals(title, book.title) && Objects.equals(genre, book.genre)
                 && price_cent == book.price_cent && publication_year == book.publication_year && Objects.equals(publishing_house, book.publishing_house)
-                && Objects.equals(plot, book.plot);
+                && Objects.equals(plot, book.plot) && Objects.equals(image, book.image);
     }
 }

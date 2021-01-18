@@ -11,13 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet("/mostraLibriServlet")
-public class MostraCatalogoServlet extends HttpServlet {
+public class MostraLibriServlet extends HttpServlet {
     private BookDAO bookDAO = new BookDAO();
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("books", bookDAO.doRetrieveAll());
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/libri.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/libri.jsp");
         dispatcher.forward(request, response);
     }
 }

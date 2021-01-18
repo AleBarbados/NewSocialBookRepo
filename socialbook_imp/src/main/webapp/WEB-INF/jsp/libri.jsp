@@ -8,9 +8,15 @@
 <body>
     <h1>Tutti i libri</h1>
         <c:forEach items="${books}" var="book">
-            <table style="border:black">
+            <table>
                 <tr>
-                    <td>${book.title}</td>
+                    <td><img width="60px" height="60px" alt="immagine prodotto" src="${pageContext.request.contextPath}/images/book/${book.image}"></td>
+                </tr>
+                <tr>
+                    <td><h2>${book.title}</h2></td>
+                </tr>
+                <tr>
+                    <td>PREZZO: ${book.price_euro}</td>
                 </tr>
                 <c:choose>
                     <c:when test="${book.catalogue == true}">
@@ -50,8 +56,9 @@
                     </td>
                 </tr>
             </table>
+            <br>
         </c:forEach>
-        <br>
+        <br><br>
 
         <form action="catalogueManagerServlet1" method="get">
             <input type="hidden" name="operazione" value="creazione">
