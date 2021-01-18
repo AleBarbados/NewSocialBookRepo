@@ -18,5 +18,17 @@
 <form action="newCustomerServlet" method="get">
     <input type="submit" name="toRegistrationServlet" value="Registrati">
 </form>
+
+<form action="login-servlet"  method="post" class="form-container">
+    <h2>Login</h2>
+    <label for = "username" ><b>Username</b></label>
+    <br>
+    <input type="text" placeholder="Enter Username" width="150px" id ="username" name = "username" required>
+
+    <label for="pwd"><b>Password</b></label><br>
+    <input type="password" placeholder="Enter Password" width="150px" id ="pwd" name = "pwd" required>
+
+    <button type="submit" class="btn">Login</button>
+</form>
 </body>
 </html>

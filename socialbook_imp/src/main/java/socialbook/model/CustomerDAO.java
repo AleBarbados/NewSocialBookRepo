@@ -12,6 +12,10 @@ public class CustomerDAO {
             "                               customer_pwd, customer_usr, c_description FROM customer WHERE email = ?";
     public final static String DO_SAVE = "INSERT INTO customer(id_customer, customer_name, customer_surname, customer_pwd, customer_usr, email, c_description)" +
             "                             VALUES (?, ?, ?, ?, ?, ?, ?);";
+    public final static String DO_RETRIEVE_BY_USERNAME_AND_PASSWORD = "SELECT id_customer FROM customer WHERE customer_usr =? AND customer_pwd = SHA1(?)";
+    public final static String DO_RETRIEVE_BY_USERNAME = "SELECT id_customer,customer_name, customer_surname, " +
+            "                               customer_pwd, email, c_description FROM customer WHERE customer_usr = ?";
+
 
     public Customer doRetriveById(int id){
         try (Connection con = ConPool.getConnection()) {
@@ -102,6 +106,45 @@ public class CustomerDAO {
         }
 
     }
+    public boolean validate(String usr, String pwd){
+        boolean validation = false;
+        ResultSet rs;
+        try(Connection c = ConPool.getConnection()){
+            PreparedStatement ps =
+                    c.prepareStatement(DO_RETRIEVE_BY_USERNAME_AND_PASSWORD);
+            ps.setString(1, usr);
+            ps.setString(2, pwd);
+            rs = ps.executeQuery();
+            validation = rs.next();
 
+        }
+        catch (SQLException e){
+            System.out.println(e);
+
+        }
+        return validation;
+    }
+
+    public Customer doRetrieveByUsername(String username){
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement(DO_RETRIEVE_BY_USERNAME);
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                Customer c = new Customer();
+                c.setC_usr(username);
+                c.setId_customer(rs.getInt(1));
+                c.setC_name(rs.getString(2));
+                c.setC_surname(rs.getString(3));
+                c.setC_pwd(rs.getString(4));
+                c.setE_mail(rs.getString(5));
+                c.setDescription(rs.getString(6));
+                return c;
+            }
+            return null;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 }
