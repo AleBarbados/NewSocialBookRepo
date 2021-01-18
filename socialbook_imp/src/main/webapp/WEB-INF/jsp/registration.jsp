@@ -19,7 +19,7 @@
         <li>
             <div class="mail">
                 <form id = "sub_form" name = "form" action = "registration-servlet" method="post" onsubmit=" return validate()">
-                    <ul>
+                    <ul id = "first-part">
                         <li><label for = 'name'>Nome:</label><br>
                             <input type = 'text' id = 'name' required/></li>
 
@@ -41,7 +41,107 @@
                         <li><label for = 'description'>Descrizione:</label><br>
                             <textarea id='description' name='description' rows='4' cols='50'></textarea>
                         </li>
-
+                        <li><button class = "next" onclick="nextForm()">Next </button></li>
+                    </ul>
+                    <ul id = "second-part" hidden>
+                        <li>
+                            <label for="age">Quanti anni hai?</label>
+                            <select name="age" id="age">
+                                <option value="age-14-18">14-18</option>
+                                <option value="age-19-25">19-25</option>
+                                <option value="age-26-30">26-30</option>
+                                <option value="age-31-40">31-40</option>
+                                <option value="age-41-50">41-50</option>
+                                <option value="age-50-plus">50+</option>
+                            </select>  </li>
+                        <li>
+                            <label for="underage-sons"> Hai figli minorenni?</label>
+                            <input type="checkbox" id="underage-sons" name="underage-sons">
+                        </li>
+                        <li>
+                            <label for="work">Che ruolo rivesti? </label>
+                            <select name="age" id="work">
+                                <option value="student">studente</option>
+                                <option value="unemployed">disoccupato</option>
+                                <option value="employee">impiegato</option>
+                                <option value="worker">operaio</option>
+                                <option value="freelance">libero professionista</option>
+                            </select>  </li>
+                        <li><label>Nel tempo libero ti piace:</label>
+                            <label for="read">leggere </label>
+                            <input type="checkbox" id="read" name="read"><br>
+                            <label for="play-instrument">suonare</label>
+                            <input type="checkbox" id="play-instrument" name="play-instruments"><br>
+                            <label for="sing">cantare</label>
+                            <input type="checkbox" id="sing" name="sing"><br>
+                            <label for="dance">ballare</label>
+                            <input type="checkbox" id="dance" name="dance"><br>
+                            <label for="videogame">giocare ai videogiochi</label>
+                            <input type="checkbox" id="videogame" name="videogame"><br>
+                            <label for="travels">viaggiare</label>
+                            <input type="checkbox" id="travels" name="travels"><br>
+                            <label for="cooking"> cucinare</label>
+                            <input type="checkbox" id="cooking" name="cooking"><br>
+                            <label for="sport"> fare sport</label>
+                            <input type="checkbox" id="sport" name="sport"><br>
+                            <label for="volunteering ">fare volontariato</label>
+                            <input type="checkbox" id="volunteering " name="volunteering "><br>
+                            <label for="art"> dedicarti all'arte, in tutte le sue forme</label>
+                            <input type="checkbox" id="art" name="art"><br>
+                            <label for="beauty">dedicarti alla cura del corpo ed al beauty</label>
+                            <input type="checkbox" id="beauty" name="beauty"><br>
+                            <label for="cartoon">guardare cartoni animati/anime </label>
+                            <input type="checkbox" id="cartoon" name="cartoon"><br>
+                            <label for="walk">fare delle passeggiate</label>
+                            <input type="checkbox" id="walk" name="walk"><br>
+                            <label for="tv-series">guardare serie tv</label>
+                            <input type="checkbox" id="tv-series" name="tv-series">
+                        </li>
+                        <li><label>Generi che ti piacciono:</label>
+                            <label for="crime_novel">Giallo</label>
+                            <input type="checkbox" id="crime_novel" name="crime_novel"><br>
+                            <label for="soap_drama">Drammatico</label>
+                            <input type="soap_drama" id="soap_drama" name="soap_drama"><br>
+                            <label for="romance_novel">Romantico</label>
+                            <input type="checkbox" id="romance_novel" name="romance_novel"><br>
+                            <label for="historical_novel">Storico</label>
+                            <input type="checkbox" id="historical_novel" name="historical_novel"><br>
+                            <label for="comics">Fumetti</label>
+                            <input type="checkbox" id="comics" name="comics"><br>
+                            <label for="sci-fi">Fantascienza</label>
+                            <input type="checkbox" id="sci-fi" name="sci-fi"><br>
+                            <label for="fantasy">Fantasy</label>
+                            <input type="checkbox" id="fantasy" name="fantasy"><br>
+                            <label for="adventure"> Avventura</label>
+                            <input type="checkbox" id="adventure" name="adventure"><br>
+                            <label for="buildunsgroman">Romanzo di formazione</label>
+                            <input type="checkbox" id="buildunsgroman" name="buildunsgroman"><br>
+                            <label for="horror">Horror</label>
+                            <input type="checkbox" id="horror" name="horror"><br>
+                            <label for="poem">Poesia</label>
+                            <input type="checkbox" id="poem" name="poem"><br>
+                            <label for="nonfiction">Saggi </label>
+                            <input type="checkbox" id="nonfiction" name="nonfiction"><br>
+                            <label for="psychological">Psicologico</label>
+                            <input type="checkbox" id="psychological" name="psychological"><br>
+                            <label for="motivational">Motivazionale</label>
+                            <input type="checkbox" id="motivational" name="motivational"><br>
+                            <label for="timely_novel">Attualità</label>
+                            <input type="checkbox" id="timely_novel" name="timely_novel"><br>
+                            <label for="satirist">Satira</label>
+                            <input type="checkbox" id="satirist" name="satirist"><br>
+                            <label for="science">Scienza</label>
+                            <input type="checkbox" id="science" name="science"><br>
+                            <label for="classic">Classici</label>
+                            <input type="checkbox" id="classic" name="classic">
+                        </li>
+                        <li>
+                            <label for="num_pages">Quante pagine preferisci leggere?</label>
+                            <select name="num_pages" id="num_pages">
+                                <option value="pages_400_plus">più di 400 pagine</option>
+                                <option value="pages_400_less">meno di 400 pagine</option>
+                            </select>
+                        </li>
                         <li class='submit'><input type = 'submit' name = 'submit' value = 'Conferma'/></li>
 
                     </ul>
@@ -92,7 +192,17 @@
         }
 
     }
+
+        function nextForm() {
+        document.getElementById("first-part").style.display = "none";
+        document.getElementById("second-part").style.display = "block";
+    }
+
+
+
 </script>
 
 </body>
 </html>
+
+

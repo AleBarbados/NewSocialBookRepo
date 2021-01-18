@@ -19,11 +19,9 @@ public class VerifyMail extends HttpServlet {
         response.setContentType("text/xml");
         if (email.matches("^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$")
                 && customerDAO.doRetriveByEmail(email) == null) {
-            System.out.println("entra nel doget yes");
             response.getWriter().append("<ok/>");
 
         } else {
-            System.out.println("entra nel doget no");
 
             response.getWriter().append("<no/>");
         }

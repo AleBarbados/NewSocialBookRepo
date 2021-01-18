@@ -15,14 +15,8 @@
     <input type="submit" name="costumerView" value="Utente">
     <input type="hidden" name="customer"  value="2">
 </form>
-<table>
-    <tr>
-        <th>menu</th>
-    </tr>
-    <tr>
-        <th><a href="WEB-INF/jsp/registration.jsp">Registrazione</a></th>
-
-    </tr>
-</table>
+<form action="newCustomerServlet" method="get">
+    <input type="submit" name="toRegistrationServlet" value="Registrati">
+</form>
 </body>
 </html>
