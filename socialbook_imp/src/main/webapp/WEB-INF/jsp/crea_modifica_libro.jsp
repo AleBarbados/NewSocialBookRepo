@@ -6,12 +6,20 @@
 </head>
 
 <body>
-    <form action="catalogueManagerServlet2" method="get">
+    <form action="catalogueManagerServlet2" method="post" enctype="multipart/form-data">
         <table>
+            <c:if test="${operazione == 'creazione'}">
+                <tr>
+                    <td><h3>Immagine</h3></td>
+                    <td>
+                        <input type="file" name="foto">
+                    </td>
+                </tr>
+            </c:if>
             <tr>
                 <td><h3>ISBN</h3></td>
                 <td>
-                    <input type="text" name="isbn" required
+                    <input type="text" name="isbn" required maxlength="25"
                     <c:if test="${operazione != 'creazione'}" >
                            value="${book.isbn}" disabled>
                     </c:if>
@@ -48,7 +56,7 @@
             <tr>
                 <td><h3>Anno</h3></td>
                 <td>
-                    <input type="text" name="publication_year" required
+                    <input type="number" name="publication_year" required
                     <c:if test="${operazione != 'creazione'}" >
                            value="${book.publication_year}" disabled>
                     </c:if>
@@ -76,6 +84,51 @@
                     </c:choose>
                 </td>
             </tr>
+            <tr>
+                <c:choose>
+                    <c:when test="${operazione != 'creazione'}">
+                        <c:forEach items="${authors}" var="author">
+                            <tr>
+                                <td>Nome autore</td>
+                                <td>
+                                    <input type="text" value="${author.name}" disabled>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Cognome autore</td>
+                                <td>
+                                    <input type="text" value="${author.surname}" disable>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </c:when>
+                    <c:otherwise>
+                        <tr>
+                            <td>Nome autore</td>
+                            <td>
+                                <input type="text" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Cognome autore</td>
+                            <td>
+                                <input type="text" value="${author.surname}" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Nome autore</td>
+                            <td>
+                                <input type="text" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Cognome autore</td>
+                            <td>
+                                <input type="text" value="${author.surname}" required>
+                            </td>
+                        </tr>
+                    </c:otherwise>
+                </c:choose>
         </table>
 
         <input type="hidden" name="isbn_modifica" value="${book.isbn}">

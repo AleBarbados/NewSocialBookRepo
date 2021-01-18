@@ -11,6 +11,14 @@
     <title>Edit Your Profile</title>
 </head>
 <body>
-
+    <form action="editServlet" method="post">
+        <label>Cambia Password:
+            <input type="text" name="password" value="password">
+        </label>
+        <label>Cambia Descrizione:
+            <input type="text" name="descrizione" value="descrizione">
+        </label>
+        <input type="submit" value="EditProfile">
+    </form>
 </body>
 </html>

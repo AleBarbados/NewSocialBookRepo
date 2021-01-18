@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet("/followEdit")
-public class followEditServlet extends HttpServlet {
+public class FollowEditServlet extends HttpServlet {
     private static CustomerDAO customerDAO = new CustomerDAO();
     private static FollowDAO followDAO = new FollowDAO();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

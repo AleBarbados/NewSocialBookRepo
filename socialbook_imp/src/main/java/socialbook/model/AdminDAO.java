@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class AdminDAO {
-    public final static String DO_RETRIEVE_BY_USR_E_PWD = "SELECT admn_usr, admn_pwd, admn_role FROM admin WHERE admn_usr = ?" +
+    private final static String DO_RETRIEVE_BY_USR_E_PWD = "SELECT admn_usr, admn_pwd, admn_role FROM admin WHERE admn_usr = ?" +
             "AND admn_pwd = ?";
 
     public Admin doRetrieveByUsrEPwd(String u, String p) {
