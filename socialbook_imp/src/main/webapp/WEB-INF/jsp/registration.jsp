@@ -44,7 +44,23 @@
                         <li><button class = "next" onclick="nextForm()">Next </button></li>
                     </ul>
                     <ul id = "second-part" hidden>
-
+                        <li>
+                            <label for="age">Quanti anni hai?</label>
+                            <select name="age" id="age">
+                                <option value="age-14-18">14-18</option>
+                                <option value="age-19-25">19-25</option>
+                                <option value="age-26-30">26-30</option>
+                                <option value="age-31-40">31-40</option>
+                                <option value="age-41-50">41-50</option>
+                                <option value="age-50-plus">50+</option>
+                            </select>  </li>
+                        <li>
+                            <label for="underage_sons"> Hai figli minorenni?</label><br>
+                            <select name="underage_sons" id="underage_sons">
+                                <option value="yes">si</option>
+                                <option value="no">no</option>
+                            </select>
+                        </li>
                         <li>
                             <label for="work">Che ruolo rivesti? </label><br>
                             <select name="work" id="work">
@@ -70,7 +86,19 @@
                             <label for="cooking"> cucinare</label>
                             <input type="checkbox" id="cooking" name="cooking"><br>
                             <label for="sport"> fare sport</label>
-                            <input type="checkbox" id="sport" name="sport"><
+                            <input type="checkbox" id="sport" name="sport"><br>
+                            <label for="volunteering ">fare volontariato</label>
+                            <input type="checkbox" id="volunteering " name="volunteering "><br>
+                            <label for="art"> dedicarti all'arte, in tutte le sue forme</label>
+                            <input type="checkbox" id="art" name="art"><br>
+                            <label for="beauty">dedicarti alla cura del corpo ed al beauty</label>
+                            <input type="checkbox" id="beauty" name="beauty"><br>
+                            <label for="cartoon">guardare cartoni animati/anime </label>
+                            <input type="checkbox" id="cartoon" name="cartoon"><br>
+                            <label for="walk">fare delle passeggiate</label>
+                            <input type="checkbox" id="walk" name="walk"><br>
+                            <label for="tv-series">guardare serie tv</label>
+                            <input type="checkbox" id="tv-series" name="tv-series">
                         </li>
                         <li><label>Generi che ti piacciono:</label><br>
                             <label for="crime_novel">Giallo</label>
@@ -110,7 +138,13 @@
                             <label for="classic">Classici</label>
                             <input type="checkbox" id="classic" name="classic">
                         </li>
-
+                        <li>
+                            <label for="num_pages">Quante pagine preferisci leggere?</label><br>
+                            <select name="num_pages" id="num_pages">
+                                <option value="pages_400_plus">più di 400 pagine</option>
+                                <option value="pages_400_less">meno di 400 pagine</option>
+                            </select>
+                        </li>
                         <li><label>Scegli un libro in base a quali parametri?</label><br>
                             <label for="choice_author">autore</label>
                             <input type="checkbox" id="choice_author" name="choice_author"><br>
