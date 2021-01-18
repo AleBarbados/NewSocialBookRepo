@@ -8,21 +8,24 @@ import java.util.Objects;
 
 
 public class Customer {
-    public int id_customer;
-    public String c_name;
-    public String c_surname;
-    public String e_mail;
-    public String c_pwd;
-    public String c_usr;
-    public static int last = 0;
+    private int id_customer;
+    private String c_name;
+    private String c_surname;
+    private String e_mail;
+    private String c_pwd;
+    private String c_usr;
+    private String description;
+    private static int last = 0;
+
     public Customer(){}
-    public Customer(String c_name, String c_surname, String e_mail, String c_pwd, String c_usr ){
+    public Customer(String c_name, String c_surname, String e_mail, String c_pwd, String c_usr, String description ){
         this.id_customer = last ++;
         this.c_name = c_name;
         this.c_surname = c_surname;
         this.e_mail = e_mail;
         this.c_pwd = c_pwd;
         this.c_usr = c_usr;
+        this.description = description;
     }
 
     public int getId_customer() {
@@ -80,6 +83,14 @@ public class Customer {
         this.c_usr = c_usr;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -89,6 +100,8 @@ public class Customer {
         result = prime * result + ((c_name == null) ? 0 : c_name.hashCode());
         result = prime * result + ((c_pwd == null) ? 0 : c_pwd.hashCode());
         result = prime * result + ((c_usr == null) ? 0 : c_usr.hashCode());
+        result = prime * result + ((description == null) ? 0 : description.hashCode());
+
         return result;
     }
 
