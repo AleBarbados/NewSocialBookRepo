@@ -33,8 +33,8 @@ public class ConPool {
             p.setDriverClassName("com.mysql.cj.jdbc.Driver");
             //p.setUsername(prop.getProperty("utente"));
             //p.setPassword(prop.getProperty("password"));
-            p.setUsername("pippo");
-            p.setPassword("pippo");
+            p.setUsername("root");
+            p.setPassword("sloslidu2");
             p.setMaxActive(100);
             p.setInitialSize(10);
             p.setMinIdle(10);

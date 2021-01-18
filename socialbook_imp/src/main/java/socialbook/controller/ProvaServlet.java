@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@WebServlet(urlPatterns = "", name = "HomeServlet", loadOnStartup = 1)
+/*@WebServlet(urlPatterns = "", name = "HomeServlet", loadOnStartup = 1)
 public class ProvaServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -34,4 +34,4 @@ public class ProvaServlet extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/prova.jsp");
         dispatcher.forward(request, response);
     }
-}
+}*/

@@ -8,10 +8,12 @@ public class CustomerDAO {
             "                               customer_pwd, customer_usr, c_description, email FROM customer WHERE id_customer = ?";
     public final static String DO_RETRIEVE_ALL = "SELECT id_customer, customer_name, customer_surname, " +
             "                               customer_pwd, customer_usr, c_description, email FROM customer";
-    public final static String DO_RETRIEVE_BY_EMAIL = "SELECT id_customer,customer_name, customer_surname, " +
+    public final static String DO_RETRIEVE_BY_EMAIL = "SELECT id_customer, customer_name, customer_surname, " +
             "                               customer_pwd, customer_usr, c_description FROM customer WHERE email = ?";
     public final static String DO_SAVE = "INSERT INTO customer(id_customer, customer_name, customer_surname, customer_pwd, customer_usr, email, c_description)" +
             "                             VALUES (?, ?, ?, ?, ?, ?, ?);";
+
+    public final static String DO_UPDATE = "UPDATE customer SET customer_pwd=?, c_description=? WHERE id_customer=?";
 
     public Customer doRetriveById(int id){
         try (Connection con = ConPool.getConnection()) {
@@ -104,4 +106,18 @@ public class CustomerDAO {
     }
 
 
+    public void doUpdate(Customer customer) {
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con
+                    .prepareStatement(DO_UPDATE );
+            ps.setString(1, customer.getC_pwd());
+            ps.setString(2, customer.getDescription());
+            ps.setInt(3, customer.getId_customer());
+            if (ps.executeUpdate() != 1) {
+                throw new RuntimeException("UPDATE error.");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
