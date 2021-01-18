@@ -10,6 +10,8 @@ public class CustomerDAO {
             "                               customer_pwd, customer_usr, c_description, email FROM customer";
     public final static String DO_RETRIEVE_BY_EMAIL = "SELECT id_customer,customer_name, customer_surname, " +
             "                               customer_pwd, customer_usr, c_description FROM customer WHERE email = ?";
+    public final static String DO_SAVE = "INSERT INTO customer(id_customer, customer_name, customer_surname, customer_pwd, customer_usr, email, c_description)" +
+            "                             VALUES (?, ?, ?, ?, ?, ?, ?);";
 
     public Customer doRetriveById(int id){
         try (Connection con = ConPool.getConnection()) {
@@ -78,5 +80,28 @@ public class CustomerDAO {
             throw new RuntimeException(e);
         }
     }
+    public void doSave( Customer customer){
+
+        try(Connection c = ConPool.getConnection()){
+            PreparedStatement ps =
+                    c.prepareStatement(DO_SAVE, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, customer.getId_customer());
+            ps.setString(2, customer.getC_name());
+            ps.setString(3, customer.getC_surname());
+            ps.setString(4, customer.getC_pwd());
+            ps.setString(5, customer.getC_usr());
+            ps.setString(6, customer.getE_mail());
+            ps.setString(7, customer.getDescription());
+            if (ps.executeUpdate() != 1) {
+                throw new RuntimeException("INSERT error.");
+            }
+
+
+        }catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+
+    }
+
 
 }

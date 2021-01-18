@@ -44,30 +44,17 @@
                         <li><button class = "next" onclick="nextForm()">Next </button></li>
                     </ul>
                     <ul id = "second-part" hidden>
+
                         <li>
-                            <label for="age">Quanti anni hai?</label>
-                            <select name="age" id="age">
-                                <option value="age-14-18">14-18</option>
-                                <option value="age-19-25">19-25</option>
-                                <option value="age-26-30">26-30</option>
-                                <option value="age-31-40">31-40</option>
-                                <option value="age-41-50">41-50</option>
-                                <option value="age-50-plus">50+</option>
-                            </select>  </li>
-                        <li>
-                            <label for="underage-sons"> Hai figli minorenni?</label>
-                            <input type="checkbox" id="underage-sons" name="underage-sons">
-                        </li>
-                        <li>
-                            <label for="work">Che ruolo rivesti? </label>
-                            <select name="age" id="work">
+                            <label for="work">Che ruolo rivesti? </label><br>
+                            <select name="work" id="work">
                                 <option value="student">studente</option>
                                 <option value="unemployed">disoccupato</option>
                                 <option value="employee">impiegato</option>
                                 <option value="worker">operaio</option>
                                 <option value="freelance">libero professionista</option>
                             </select>  </li>
-                        <li><label>Nel tempo libero ti piace:</label>
+                        <li><label>Nel tempo libero ti piace:</label><br>
                             <label for="read">leggere </label>
                             <input type="checkbox" id="read" name="read"><br>
                             <label for="play-instrument">suonare</label>
@@ -83,25 +70,13 @@
                             <label for="cooking"> cucinare</label>
                             <input type="checkbox" id="cooking" name="cooking"><br>
                             <label for="sport"> fare sport</label>
-                            <input type="checkbox" id="sport" name="sport"><br>
-                            <label for="volunteering ">fare volontariato</label>
-                            <input type="checkbox" id="volunteering " name="volunteering "><br>
-                            <label for="art"> dedicarti all'arte, in tutte le sue forme</label>
-                            <input type="checkbox" id="art" name="art"><br>
-                            <label for="beauty">dedicarti alla cura del corpo ed al beauty</label>
-                            <input type="checkbox" id="beauty" name="beauty"><br>
-                            <label for="cartoon">guardare cartoni animati/anime </label>
-                            <input type="checkbox" id="cartoon" name="cartoon"><br>
-                            <label for="walk">fare delle passeggiate</label>
-                            <input type="checkbox" id="walk" name="walk"><br>
-                            <label for="tv-series">guardare serie tv</label>
-                            <input type="checkbox" id="tv-series" name="tv-series">
+                            <input type="checkbox" id="sport" name="sport"><
                         </li>
-                        <li><label>Generi che ti piacciono:</label>
+                        <li><label>Generi che ti piacciono:</label><br>
                             <label for="crime_novel">Giallo</label>
                             <input type="checkbox" id="crime_novel" name="crime_novel"><br>
                             <label for="soap_drama">Drammatico</label>
-                            <input type="soap_drama" id="soap_drama" name="soap_drama"><br>
+                            <input type="checkbox" id="soap_drama" name="soap_drama"><br>
                             <label for="romance_novel">Romantico</label>
                             <input type="checkbox" id="romance_novel" name="romance_novel"><br>
                             <label for="historical_novel">Storico</label>
@@ -135,12 +110,31 @@
                             <label for="classic">Classici</label>
                             <input type="checkbox" id="classic" name="classic">
                         </li>
-                        <li>
-                            <label for="num_pages">Quante pagine preferisci leggere?</label>
-                            <select name="num_pages" id="num_pages">
-                                <option value="pages_400_plus">più di 400 pagine</option>
-                                <option value="pages_400_less">meno di 400 pagine</option>
-                            </select>
+
+                        <li><label>Scegli un libro in base a quali parametri?</label><br>
+                            <label for="choice_author">autore</label>
+                            <input type="checkbox" id="choice_author" name="choice_author"><br>
+                            <label for="choice_publishing_house">Casa editrice</label>
+                            <input type="checkbox" id="choice_publishing_house" name="choice_publishing_house"><br>
+                            <label for="romance_novel">Premi</label>
+                            <input type="checkbox" id="choice_prize" name="choice_prize"><br>
+                            <label for="choice_genre">Genere</label>
+                            <input type="checkbox" id="choice_genre" name="choice_genre"><br>
+                            <label for="choice_review">Recensioni</label>
+                            <input type="checkbox" id="choice_review" name="choice_review"><br>
+                            <label for="choice_school">Suggerimento scolastico</label>
+                            <input type="checkbox" id="choice_school" name="choice_school"><br>
+                            <label for="choice_plot">Trama</label>
+                            <input type="checkbox" id="choice_plot" name="choice_plot"><br>
+                            <label for="choice_cover">Copertina</label>
+                            <input type="checkbox" id="choice_cover" name="choice_cover"><br>
+                            <label for="choice_title">Titolo</label>
+                            <input type="checkbox" id="choice_title" name="choice_title"><br>
+                            <label for="choice_first_impact">Sfogliandolo</label>
+                            <input type="checkbox" id="choice_first_impact" name="choice_first_impact"><br>
+                            <label for="choice_advice">Consiglio di terzi</label>
+                            <input type="checkbox" id="choice_advice" name="choice_advice"><br>
+
                         </li>
                         <li class='submit'><input type = 'submit' name = 'submit' value = 'Conferma'/></li>
 
@@ -204,5 +198,4 @@
 
 </body>
 </html>
-
 
