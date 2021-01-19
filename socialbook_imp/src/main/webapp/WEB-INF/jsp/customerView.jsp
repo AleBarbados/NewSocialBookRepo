@@ -40,5 +40,17 @@
         <form action="followEdit"><input type="submit" name="edit" value="Edit Profile"></form>
     </c:otherwise>
 </c:choose>
+<form action="FollowersServlet" method="get">
+    <c:choose>
+        <c:when test="${customer!=null}">
+            <input type="hidden" value="${customer.id_customer}" name="id">
+        </c:when>
+        <c:when test="${personalCustomer!=null&&view==true}">
+            <input type="hidden" value="${personalCustomer.id_customer}" name="id">
+        </c:when>
+    </c:choose>
+    <input type="submit" name="Following" value="Following">
+    <input type="submit" name="Followers" value="Followers">
+</form>
 </body>
 </html>

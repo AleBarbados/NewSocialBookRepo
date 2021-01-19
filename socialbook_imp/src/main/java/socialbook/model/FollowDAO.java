@@ -8,8 +8,8 @@ import java.util.ArrayList;
 
 public class FollowDAO {
     public final static String DO_FOLLOW = "INSERT INTO follow(id_customer, id_follower) VALUES(?,?)";
-    public final static String DO_RETRIVE_ALL_FOLLOWERS = "SELECT id_customer, id_follower FROM follow WHERE id_follower=?";
-    public final static String DO_RETRIVE_ALL_FOLLOWED = "SELECT id_customer, id_follower FROM follow WHERE id_customer=?";
+    public final static String DO_RETRIVE_ALL_FOLLOWERS = "SELECT id_customer, id_follower FROM follow WHERE  id_customer=?";
+    public final static String DO_RETRIVE_ALL_FOLLOWED = "SELECT id_customer, id_follower FROM follow WHERE  id_follower=?";
     public final static String DO_DELETE = "DELETE FROM follow WHERE id_customer=? AND id_follower=?";
 
     public void doFollow(int customer, int follower) {
