@@ -18,3 +18,16 @@ SocialBookProject/.idea/workspace.xml
 /socialbook_imp/target/
 .iml
 /socialbook_imp/.idea/
+socialbook_imp/socialbook.iml
+socialbook_imp/src/main/java/socialbook/db/db.properties
+socialbook_imp/out/artifacts/socialbook_imp_war_exploded/WEB-INF/web.xml
+socialbook_imp/out/artifacts/socialbook_imp_war_exploded/WEB-INF/lib/tomcat-juli-10.0.0.jar
+socialbook_imp/out/artifacts/socialbook_imp_war_exploded/WEB-INF/lib/tomcat-jdbc-10.0.0.jar
+socialbook_imp/out/artifacts/socialbook_imp_war_exploded/META-INF/MANIFEST.MF
+socialbook_imp/out/artifacts/socialbook_imp_war/socialbook_imp_war.war
+socialbook_imp/src/main/java/socialbook/db/db.properties
+socialbook_imp/src/main/java/socialbook/db/db.properties
+socialbook_imp/src/main/java/socialbook/db/db.properties
+socialbook_imp/out/artifacts/socialbook_imp_war_exploded/WEB-INF/classes/socialbook/model/ConPool.class
+.idea/
+
