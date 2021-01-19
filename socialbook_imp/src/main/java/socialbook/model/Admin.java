@@ -17,7 +17,7 @@ public class Admin {
 
     public Admin(String u, String p, String r) {
         a_usr = u;
-        a_pwd = Utility.encryptionSHA1(p);
+        a_pwd = p;
         a_role = r;
     }
 

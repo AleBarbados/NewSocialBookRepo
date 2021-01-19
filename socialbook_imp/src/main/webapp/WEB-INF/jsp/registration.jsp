@@ -21,22 +21,22 @@
                 <form id = "sub_form" name = "form" action = "registration-servlet" method="post" onsubmit=" return validate()">
                     <ul id = "first-part">
                         <li><label for = 'name'>Nome:</label><br>
-                            <input type = 'text' id = 'name' required/></li>
+                            <input type = 'text' id = 'name' name = 'name' required/></li>
 
                         <li><label for = 'surname'>Cognome:</label><br>
-                            <input type = 'text' id = 'surname' required/></li>
+                            <input type = 'text' id = 'surname' name = 'surname' required/></li>
 
                         <li><label for = 'username'>Username:</label><br>
-                            <input type = 'text' id = 'username' required/></li>
+                            <input type = 'text' id = 'username' name = 'username' required/></li>
 
                         <li><label for = 'email'>Email:</label><br>
-                            <input type = 'text' id = 'email' pattern ="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"  required/></li>
+                            <input type = 'text' id = 'email' name = 'email' pattern ="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"  required/></li>
 
                         <li><label for = 'password'>Password :(almeno 8 caratteri, deve contenere: una lettera maiuscola, una minuscola, un numero)</label><br>
-                            <input type = 'password' id = 'password'   required/></li>
+                            <input type = 'password' id = 'password' name = 'password'   required/></li>
 
                         <li><label for = 'passwordConfirm'>Conferma password </label><br>
-                            <input type = 'password' id = 'passwordConfirm'  required/></li>
+                            <input type = 'password' id = 'passwordConfirm' name = 'passwordConfirm'  required/></li>
 
                         <li><label for = 'description'>Descrizione:</label><br>
                             <textarea id='description' name='description' rows='4' cols='50'></textarea></li>

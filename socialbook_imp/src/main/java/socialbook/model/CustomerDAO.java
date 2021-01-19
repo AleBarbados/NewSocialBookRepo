@@ -109,13 +109,10 @@ public class CustomerDAO {
 
     }
     public boolean validate(String usr, String pwd){
-        boolean validation = false;
 
         Customer customer = doRetrieveByUsername(usr);
-        if(customer.getC_pwd().equals(pwd)){
-            validation = true;
-        }
-        return validation;
+        System.out.println("validating pwd given:"+pwd+" stored:"+customer.getC_pwd());
+        return (customer.getC_pwd().equals(pwd));
     }
 
     public Customer doRetrieveByUsername(String username){

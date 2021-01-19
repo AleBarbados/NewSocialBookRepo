@@ -17,15 +17,13 @@ public class Customer {
     private String c_pwd;
     private String c_usr;
     private String description;
-    private static int last = 0;
 
     public Customer(){}
     public Customer(String c_name, String c_surname, String e_mail, String c_pwd, String c_usr, String description ){
-        this.id_customer = last ++;
         this.c_name = c_name;
         this.c_surname = c_surname;
         this.e_mail = e_mail;
-        this.c_pwd = Utility.encryptionSHA1(c_pwd);
+        this.c_pwd =c_pwd;
         this.c_usr = c_usr;
         this.description = description;
     }
@@ -67,15 +65,7 @@ public class Customer {
     }
 
     public void setC_pwd(String c_pwd) {
-
-        try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-1");
-            digest.reset();
-            digest.update(c_pwd.getBytes(StandardCharsets.UTF_8));
-            this.c_pwd = String.format("%040x", new BigInteger(1, digest.digest()));
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        }
+            this.c_pwd = c_pwd;
     }
 
     public String getC_usr() {

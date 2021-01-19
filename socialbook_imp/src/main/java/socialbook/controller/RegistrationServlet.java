@@ -1,5 +1,6 @@
 package socialbook.controller;
 
+import socialbook.Utility.Utility;
 import socialbook.model.Customer;
 import socialbook.model.CustomerDAO;
 
@@ -26,9 +27,10 @@ public class RegistrationServlet extends HttpServlet {
         req.getParameterMap().entrySet().stream().forEach(e->System.out.println(e.getKey()+ " "+e.getValue().toString()));
 
 
-        String addr = "/index.jsp";
-        Customer customer = new Customer(name, surname, email, password, username, description);
+        String addr = "WEB-INF/jsp/index.jsp";
+        Customer customer = new Customer(name, surname, email,  Utility.encryptionSHA1(password), username, description);
         CustomerDAO customerDAO = new CustomerDAO();
+        System.out.println("numero caratteri pwd = " + customer.getC_pwd().length());
         customerDAO.doSave(customer);
 
         RequestDispatcher dispatcher =
