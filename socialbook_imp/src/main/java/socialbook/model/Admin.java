@@ -1,5 +1,7 @@
 package socialbook.model;
 
+import socialbook.Utility.Utility;
+
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -15,7 +17,7 @@ public class Admin {
 
     public Admin(String u, String p, String r) {
         a_usr = u;
-        a_pwd = p;
+        a_pwd = Utility.encryptionSHA1(p);
         a_role = r;
     }
 

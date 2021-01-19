@@ -40,7 +40,11 @@
 
                         <li><label for = 'description'>Descrizione:</label><br>
                             <textarea id='description' name='description' rows='4' cols='50'></textarea>
+<<<<<<< HEAD
                         </li>
+=======
+                        </li> <%--
+>>>>>>> bf4954d3e8550161cbd71439f0688b1714e8247f
                         <li><button class = "next" onclick="nextForm()">Next </button></li>
                     </ul>
                     <ul id = "second-part" hidden>
@@ -170,6 +174,11 @@
                             <input type="checkbox" id="choice_advice" name="choice_advice"><br>
 
                         </li>
+<<<<<<< HEAD
+=======
+                        <li><button class = "next" onclick="prevForm()">Prev </button></li> --%>
+
+>>>>>>> bf4954d3e8550161cbd71439f0688b1714e8247f
                         <li class='submit'><input type = 'submit' name = 'submit' value = 'Conferma'/></li>
 
                     </ul>
@@ -183,6 +192,10 @@
 <script >
 
     function validate() {
+<<<<<<< HEAD
+=======
+
+>>>>>>> bf4954d3e8550161cbd71439f0688b1714e8247f
         return (validateEmail() && validatePassword());
     }
 
@@ -209,6 +222,12 @@
             && password.toLowerCase() != password
             && /[0-9]/.test(password)) {
             if (password == document.form.passwordConfirm.value) {
+<<<<<<< HEAD
+=======
+
+                alert("finisco validate");
+
+>>>>>>> bf4954d3e8550161cbd71439f0688b1714e8247f
                 return (true);
             } else {
                 alert("Password non confermata");
@@ -225,7 +244,14 @@
         document.getElementById("first-part").style.display = "none";
         document.getElementById("second-part").style.display = "block";
     }
+<<<<<<< HEAD
 
+=======
+    function prevForm() {
+        document.getElementById("second-part").style.display = "none";
+        document.getElementById("first-part").style.display = "block";
+    }
+>>>>>>> bf4954d3e8550161cbd71439f0688b1714e8247f
 
 
 </script>

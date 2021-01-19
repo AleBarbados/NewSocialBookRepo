@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+
 @WebServlet("/registration-servlet")
 public class RegistrationServlet extends HttpServlet {
     @Override
@@ -21,8 +22,11 @@ public class RegistrationServlet extends HttpServlet {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
         String description = req.getParameter("description");
-        String addr = "/index.jsp";
 
+        req.getParameterMap().entrySet().stream().forEach(e->System.out.println(e.getKey()+ " "+e.getValue().toString()));
+
+
+        String addr = "/index.jsp";
         Customer customer = new Customer(name, surname, email, password, username, description);
         CustomerDAO customerDAO = new CustomerDAO();
         customerDAO.doSave(customer);
