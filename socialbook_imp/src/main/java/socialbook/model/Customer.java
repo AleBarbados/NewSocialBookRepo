@@ -1,5 +1,7 @@
 package socialbook.model;
 
+import socialbook.Utility.Utility;
+
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -23,7 +25,7 @@ public class Customer {
         this.c_name = c_name;
         this.c_surname = c_surname;
         this.e_mail = e_mail;
-        this.c_pwd = c_pwd;
+        this.c_pwd = Utility.encryptionSHA1(c_pwd);
         this.c_usr = c_usr;
         this.description = description;
     }
@@ -65,6 +67,7 @@ public class Customer {
     }
 
     public void setC_pwd(String c_pwd) {
+
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-1");
             digest.reset();

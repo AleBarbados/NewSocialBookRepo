@@ -19,7 +19,7 @@
     <input type="submit" name="toRegistrationServlet" value="Registrati">
 </form>
 
-<form action="login-servlet"  method="post" class="form-container">
+<form action="login-servlet" id = "form-container" method="post" class="form-container">
     <h2>Login</h2>
     <label for = "username" ><b>Username</b></label>
     <br>
@@ -27,8 +27,18 @@
 
     <label for="pwd"><b>Password</b></label><br>
     <input type="password" placeholder="Enter Password" width="150px" id ="pwd" name = "pwd" required>
-
-    <button type="submit" class="btn">Login</button>
+    <button type="submit" class="btn" onclick="accesso()">Login</button>
 </form>
+
+<a href="logout-servlet" onclick="return confirm('sicuro di voler uscire?');"  >Logout</a>
+
+<script>
+    function accesso(){
+
+        document.getElementById("form-container").style.display = "none";
+        document.getElementById("logout-button").style.display = "block";
+    }
+</script>
+
 </body>
 </html>
