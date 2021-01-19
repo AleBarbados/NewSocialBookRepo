@@ -19,7 +19,6 @@
     <input type="submit" name="toRegistrationServlet" value="Registrati">
 </form>
 
-
 <form action="login-servlet" id = "form-container" method="post" class="form-container">
     <h2>Login</h2>
     <label for = "username" ><b>Username</b></label>
@@ -41,5 +40,6 @@
         document.getElementById("logout-button").style.display = "block";
     }
 </script>
+
 </body>
 </html>
