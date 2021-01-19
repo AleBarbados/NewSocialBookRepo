@@ -22,6 +22,7 @@ public class RegistrationServlet extends HttpServlet {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
         String description = req.getParameter("description");
+
         req.getParameterMap().entrySet().stream().forEach(e->System.out.println(e.getKey()+ " "+e.getValue().toString()));
 
 

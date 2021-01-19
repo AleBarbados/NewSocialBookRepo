@@ -27,6 +27,7 @@
 
     <label for="pwd"><b>Password</b></label><br>
     <input type="password" placeholder="Enter Password" width="150px" id ="pwd" name = "pwd" required>
+
     <button type="submit" class="btn" onclick="accesso()">Login</button>
 </form>
 

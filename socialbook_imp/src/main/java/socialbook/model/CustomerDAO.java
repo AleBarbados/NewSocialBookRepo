@@ -12,6 +12,7 @@ public class CustomerDAO {
             "                               customer_pwd, customer_usr, c_description FROM customer WHERE email = ?";
     public final static String DO_SAVE = "INSERT INTO customer(id_customer, customer_name, customer_surname, customer_pwd, customer_usr, email, c_description)" +
             "                             VALUES (?, ?, ?, ?, ?, ?, ?);";
+
     public final static String DO_RETRIEVE_BY_USERNAME = "SELECT id_customer,customer_name, customer_surname, " +
             "                               customer_pwd, email, c_description FROM customer WHERE customer_usr = ?";
 
@@ -109,6 +110,7 @@ public class CustomerDAO {
     }
     public boolean validate(String usr, String pwd){
         boolean validation = false;
+
         Customer customer = doRetrieveByUsername(usr);
         if(customer.getC_pwd().equals(pwd)){
             validation = true;

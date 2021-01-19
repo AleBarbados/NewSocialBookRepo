@@ -16,7 +16,7 @@ SocialBookProject/.idea/workspace.xml
 *.bak_000f
 *.bak_001d
 /socialbook_imp/target/
-*.iml
+.iml
 /socialbook_imp/.idea/
 *.iml
 socialbook_imp/socialbook.iml
@@ -31,3 +31,4 @@ socialbook_imp/src/main/java/socialbook/db/db.properties
 socialbook_imp/src/main/java/socialbook/db/db.properties
 socialbook_imp/out/artifacts/socialbook_imp_war_exploded/WEB-INF/classes/socialbook/model/ConPool.class
 .idea/
+

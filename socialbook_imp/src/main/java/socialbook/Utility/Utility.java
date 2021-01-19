@@ -38,6 +38,7 @@ public class Utility {
 
         return fileName;
     }
+
     public static String encryptionSHA1(String pwd){
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-1");

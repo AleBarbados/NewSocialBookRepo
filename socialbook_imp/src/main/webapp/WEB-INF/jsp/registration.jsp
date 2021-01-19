@@ -39,8 +39,9 @@
                             <input type = 'password' id = 'passwordConfirm'  required/></li>
 
                         <li><label for = 'description'>Descrizione:</label><br>
-                            <textarea id='description' name='description' rows='4' cols='50'></textarea>
-                        </li> <%--
+                            <textarea id='description' name='description' rows='4' cols='50'></textarea></li>
+                        <%--
+
                         <li><button class = "next" onclick="nextForm()">Next </button></li>
                     </ul>
                     <ul id = "second-part" hidden>
@@ -185,7 +186,6 @@
 <script >
 
     function validate() {
-
         return (validateEmail() && validatePassword());
     }
 
@@ -212,7 +212,6 @@
             && password.toLowerCase() != password
             && /[0-9]/.test(password)) {
             if (password == document.form.passwordConfirm.value) {
-
                 alert("finisco validate");
 
                 return (true);
@@ -231,11 +230,11 @@
         document.getElementById("first-part").style.display = "none";
         document.getElementById("second-part").style.display = "block";
     }
+
     function prevForm() {
         document.getElementById("second-part").style.display = "none";
         document.getElementById("first-part").style.display = "block";
     }
-
 
 </script>
 
