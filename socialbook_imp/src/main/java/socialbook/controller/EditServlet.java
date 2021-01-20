@@ -1,5 +1,6 @@
 package socialbook.controller;
 
+import socialbook.Utility.Utility;
 import socialbook.model.Customer;
 import socialbook.model.CustomerDAO;
 
@@ -22,6 +23,7 @@ public class EditServlet extends HttpServlet {
             Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
             customer.setC_pwd(request.getParameter("password"));
             customer.setDescription(request.getParameter("descrizione"));
+            String fileName = Utility.aggiuntaFoto(request);
             customerDAO.doUpdate(customer);
         }
         String dest = request.getHeader("referer");     //prendiamo dall'header della richiesta l'url corrente

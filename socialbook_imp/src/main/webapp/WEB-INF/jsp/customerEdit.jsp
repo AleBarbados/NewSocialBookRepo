@@ -18,6 +18,9 @@
         <label>Cambia Descrizione:
             <input type="text" name="descrizione" value="descrizione">
         </label>
+        <label>Immagine
+            <input type="file" name="foto">
+        </label>
         <input type="submit" value="EditProfile">
     </form>
 </body>

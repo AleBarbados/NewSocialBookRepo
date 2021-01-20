@@ -5,19 +5,19 @@ import java.util.ArrayList;
 public class CustomerDAO {
 
     public final static String DO_RETRIEVE_BY_ID = "SELECT id_customer, customer_name, customer_surname, " +
-            "                               customer_pwd, customer_usr, c_description, email FROM customer WHERE id_customer = ?";
+            "                               customer_pwd, customer_usr, c_description, email, image FROM customer WHERE id_customer = ?";
     public final static String DO_RETRIEVE_ALL = "SELECT id_customer, customer_name, customer_surname, " +
-            "                               customer_pwd, customer_usr, c_description, email FROM customer";
+            "                               customer_pwd, customer_usr, c_description, email, image FROM customer";
     public final static String DO_RETRIEVE_BY_EMAIL = "SELECT id_customer, customer_name, customer_surname, " +
-            "                               customer_pwd, customer_usr, c_description FROM customer WHERE email = ?";
-    public final static String DO_SAVE = "INSERT INTO customer(id_customer, customer_name, customer_surname, customer_pwd, customer_usr, email, c_description)" +
-            "                             VALUES (?, ?, ?, ?, ?, ?, ?);";
+            "                               customer_pwd, customer_usr, c_description, image FROM customer WHERE email = ?";
+    public final static String DO_SAVE = "INSERT INTO customer(id_customer, customer_name, customer_surname, customer_pwd, customer_usr, email, c_description, image)" +
+            "                             VALUES (?, ?, ?, ?, ?, ?, ?,?);";
 
     public final static String DO_RETRIEVE_BY_USERNAME = "SELECT id_customer,customer_name, customer_surname, " +
-            "                               customer_pwd, email, c_description FROM customer WHERE customer_usr = ?";
+            "                               customer_pwd, email, c_description, image FROM customer WHERE customer_usr = ?";
 
 
-    public final static String DO_UPDATE = "UPDATE customer SET customer_pwd=?, c_description=? WHERE id_customer=?";
+    public final static String DO_UPDATE = "UPDATE customer SET customer_pwd=?, c_description=?, image=? WHERE id_customer=?";
 
     public Customer doRetriveById(int id){
         try (Connection con = ConPool.getConnection()) {
@@ -33,6 +33,7 @@ public class CustomerDAO {
                 c.setC_usr(rs.getString(5));
                 c.setDescription(rs.getString(6));
                 c.setE_mail(rs.getString(7));
+                c.setImage(rs.getString(8));
                 return c;
             }
             return null;
@@ -58,6 +59,7 @@ public class CustomerDAO {
                 c.setC_usr(rs.getString(5));
                 c.setDescription(rs.getString(6));
                 c.setE_mail(rs.getString(7));
+                c.setImage(rs.getString(8));
             }
             return customers;
         }catch(SQLException e){
@@ -79,6 +81,7 @@ public class CustomerDAO {
                 c.setC_pwd(rs.getString(4));
                 c.setC_usr(rs.getString(5));
                 c.setDescription(rs.getString(6));
+                c.setImage(rs.getString(7));
                 return c;
             }
             return null;
@@ -98,6 +101,7 @@ public class CustomerDAO {
             ps.setString(5, customer.getC_usr());
             ps.setString(6, customer.getE_mail());
             ps.setString(7, customer.getDescription());
+            ps.setString(8, customer.getImage());
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("INSERT error.");
             }
@@ -129,6 +133,7 @@ public class CustomerDAO {
                 c.setC_pwd(rs.getString(4));
                 c.setE_mail(rs.getString(5));
                 c.setDescription(rs.getString(6));
+                c.setImage(rs.getString(7));
                 return c;
             }
             return null;
@@ -143,7 +148,8 @@ public class CustomerDAO {
                     .prepareStatement(DO_UPDATE );
             ps.setString(1, customer.getC_pwd());
             ps.setString(2, customer.getDescription());
-            ps.setInt(3, customer.getId_customer());
+            ps.setString(3, customer.getImage());
+            ps.setInt(4, customer.getId_customer());
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("UPDATE error.");
             }

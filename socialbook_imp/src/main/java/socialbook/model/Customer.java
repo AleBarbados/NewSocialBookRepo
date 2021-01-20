@@ -17,6 +17,7 @@ public class Customer {
     private String c_pwd;
     private String c_usr;
     private String description;
+    private String image;
 
     public Customer(){}
     public Customer(String c_name, String c_surname, String e_mail, String c_pwd, String c_usr, String description ){
@@ -26,6 +27,14 @@ public class Customer {
         this.c_pwd =c_pwd;
         this.c_usr = c_usr;
         this.description = description;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public int getId_customer() {
