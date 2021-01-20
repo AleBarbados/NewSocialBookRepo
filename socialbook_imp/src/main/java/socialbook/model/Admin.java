@@ -1,7 +1,5 @@
 package socialbook.model;
 
-import socialbook.Utility.Utility;
-
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -34,14 +32,7 @@ public class Admin {
     }
 
     public void setA_pwd(String p) {
-        try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-1");
-            digest.reset();
-            digest.update(a_pwd.getBytes(StandardCharsets.UTF_8));
-            this.a_pwd = String.format("%040x", new BigInteger(1, digest.digest()));
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        }
+        a_pwd = p;
     }
 
     public String getA_role() {

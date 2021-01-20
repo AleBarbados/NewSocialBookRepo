@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 public class AuthorDAO {
     private final String DO_SAVE_AUTHOR = "INSERT INTO author (author_name, author_surname) VALUES (?,?)";
+    private final String DO_SAVE_AUTHOR_ASSOCIATION = "INSERT INTO authorAssociation (id_author, ISBN) VALUES (?,?)";
+    private final String DO_RETRIEVE_MAX_IDAUTHOR = "SELECT MAX(id_author) FROM author";
     private final String DO_RETRIEVE_IDAUTHOR_BY_ISBN = "SELECT id_author FROM authorAssociation WHERE ISBN = ?";
     private final String DO_RETRIEVE_AUTHORS_BY_ISBN = "SELECT author_name, author_surname FROM author WHERE id_author = ?";
 
@@ -23,9 +25,9 @@ public class AuthorDAO {
                     throw new RuntimeException("INSERT error.");
                 }
 
-                ps = con.prepareStatement("INSERT INTO authorAssociation (id_author, isbn) VALUES (?,?)");
-                ps.setString(1,isbn);
-                ps.setInt(2,returnMaxCodice());
+                ps = con.prepareStatement(DO_SAVE_AUTHOR_ASSOCIATION);
+                ps.setInt(1,returnMaxCodiceAuthor());
+                ps.setString(2,isbn);
 
                 if (ps.executeUpdate() != 1) {
                     throw new RuntimeException("INSERT error.");
@@ -36,11 +38,11 @@ public class AuthorDAO {
         }
     }
 
-    private int returnMaxCodice(){
+    private int returnMaxCodiceAuthor(){
         try (Connection con = ConPool.getConnection()) {
             int value = 0;
 
-            PreparedStatement ps = con.prepareStatement("SELECT MAX(id_author) FROM author");
+            PreparedStatement ps = con.prepareStatement(DO_RETRIEVE_MAX_IDAUTHOR);
 
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {

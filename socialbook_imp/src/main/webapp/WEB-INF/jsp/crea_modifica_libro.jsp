@@ -84,51 +84,50 @@
                     </c:choose>
                 </td>
             </tr>
-            <tr>
-                <c:choose>
-                    <c:when test="${operazione != 'creazione'}">
-                        <c:forEach items="${authors}" var="author">
-                            <tr>
-                                <td>Nome autore</td>
-                                <td>
-                                    <input type="text" value="${author.name}" disabled>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Cognome autore</td>
-                                <td>
-                                    <input type="text" value="${author.surname}" disable>
-                                </td>
-                            </tr>
-                        </c:forEach>
-                    </c:when>
-                    <c:otherwise>
+            <c:choose>
+                <c:when test="${operazione == 'modifica'}">
+                    <c:forEach items="${authors}" var="author">
                         <tr>
                             <td>Nome autore</td>
                             <td>
-                                <input type="text" required>
+                                <input type="text" value="${author.name}" disabled>
                             </td>
                         </tr>
                         <tr>
                             <td>Cognome autore</td>
                             <td>
-                                <input type="text" value="${author.surname}" required>
+                                <input type="text" value="${author.surname}" disabled>
                             </td>
                         </tr>
-                        <tr>
-                            <td>Nome autore</td>
-                            <td>
-                                <input type="text" required>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Cognome autore</td>
-                            <td>
-                                <input type="text" value="${author.surname}" required>
-                            </td>
-                        </tr>
-                    </c:otherwise>
-                </c:choose>
+                    </c:forEach>
+                </c:when>
+                <c:otherwise>
+                    <tr>
+                        <td>Nome autore</td>
+                        <td>
+                            <input type="text" name="author_name1" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Cognome autore</td>
+                        <td>
+                            <input type="text" name="author_surname1"required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Nome autore</td>
+                        <td>
+                            <input type="text" name="author_name2">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Cognome autore</td>
+                        <td>
+                            <input type="text" name="author_surname2">
+                        </td>
+                    </tr>
+                </c:otherwise>
+            </c:choose>
         </table>
 
         <input type="hidden" name="isbn_modifica" value="${book.isbn}">

@@ -5,19 +5,17 @@ import java.util.ArrayList;
 public class CustomerDAO {
 
     public final static String DO_RETRIEVE_BY_ID = "SELECT id_customer, customer_name, customer_surname, " +
-            "                               customer_pwd, customer_usr, c_description, email, image FROM customer WHERE id_customer = ?";
+            "customer_pwd, customer_usr, c_description, email, image FROM customer WHERE id_customer = ?";
     public final static String DO_RETRIEVE_ALL = "SELECT id_customer, customer_name, customer_surname, " +
-            "                               customer_pwd, customer_usr, c_description, email, image FROM customer";
+            "customer_pwd, customer_usr, c_description, email, image FROM customer";
     public final static String DO_RETRIEVE_BY_EMAIL = "SELECT id_customer, customer_name, customer_surname, " +
-            "                               customer_pwd, customer_usr, c_description, image FROM customer WHERE email = ?";
+            "customer_pwd, customer_usr, c_description, image FROM customer WHERE email = ?";
     public final static String DO_SAVE = "INSERT INTO customer(id_customer, customer_name, customer_surname, customer_pwd, customer_usr, email, c_description, image)" +
-            "                             VALUES (?, ?, ?, ?, ?, ?, ?,?);";
-
+            "VALUES (?, ?, ?, ?, ?, ?, ?,?);";
     public final static String DO_RETRIEVE_BY_USERNAME = "SELECT id_customer,customer_name, customer_surname, " +
-            "                               customer_pwd, email, c_description, image FROM customer WHERE customer_usr = ?";
-
-
+            "customer_pwd, email, c_description, image FROM customer WHERE customer_usr = ?";
     public final static String DO_UPDATE = "UPDATE customer SET customer_pwd=?, c_description=?, image=? WHERE id_customer=?";
+    private final static String DO_DELETE_BY_ID = "DELETE FROM customer WHERE id_customer = ?";
 
     public Customer doRetriveById(int id){
         try (Connection con = ConPool.getConnection()) {
@@ -33,7 +31,11 @@ public class CustomerDAO {
                 c.setC_usr(rs.getString(5));
                 c.setDescription(rs.getString(6));
                 c.setE_mail(rs.getString(7));
-                c.setImage(rs.getString(8));
+
+                String image = rs.getString(8);
+                if(image != null)
+                    c.setImage(image);
+
                 return c;
             }
             return null;
@@ -154,6 +156,19 @@ public class CustomerDAO {
                 throw new RuntimeException("UPDATE error.");
             }
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void doDeleteById(int id) {
+        try(Connection con = ConPool.getConnection()) {
+           PreparedStatement ps = con.prepareStatement(DO_DELETE_BY_ID);
+           ps.setInt(1, id);
+
+            if (ps.executeUpdate() != 1) {
+                throw new RuntimeException("DELETE error.");
+            }
+        }catch(SQLException e) {
             throw new RuntimeException(e);
         }
     }

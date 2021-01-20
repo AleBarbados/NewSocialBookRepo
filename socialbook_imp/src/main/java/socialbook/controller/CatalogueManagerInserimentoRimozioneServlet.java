@@ -18,6 +18,7 @@ public class CatalogueManagerInserimentoRimozioneServlet extends HttpServlet {
     private final BookDAO bookDAO = new BookDAO();
     private final AuthorDAO authorDAO = new AuthorDAO();
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String isbn = request.getParameter("isbn");
         String dest = request.getHeader("referer");
@@ -44,6 +45,7 @@ public class CatalogueManagerInserimentoRimozioneServlet extends HttpServlet {
         }
     }
 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }

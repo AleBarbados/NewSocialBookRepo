@@ -21,6 +21,7 @@ public class CatalogueManagerCreazioneModificaServlet extends HttpServlet {
     private final BookDAO bookDAO = new BookDAO();
     private final AuthorDAO authorDAO = new AuthorDAO();
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int price_cent = Integer.parseInt(request.getParameter("price_cent"));
         String isbnMod = request.getParameter("isbn_modifica");
@@ -41,24 +42,25 @@ public class CatalogueManagerCreazioneModificaServlet extends HttpServlet {
 
             ArrayList<Author> authors = new ArrayList<Author>();
             Author a;
-            String name, surname;
+            String name, surname, n = "author_name", s = "author_surname";
 
             for(int i = 1; i<6; i++) {
-                name = request.getParameter("author_name"+i);
-                surname = request.getParameter("author_surname"+i);
+                name = request.getParameter(n+i);
+                surname = request.getParameter(s+i);
 
                 if(name != null && surname != null) {
                     a = new Author(name, surname);
                     authors.add(a);
-                }
+                } else break;
             }
 
             authorDAO.doSave(authors, isbn);        //al libro con questo isbn vengono associati gli autori inseriti
         }
 
-        response.sendRedirect("/socialbook_war/mostraLibriServlet?");        //FUNZIONA INSERIMENTO/RIMOZIONE DA CATALOGO MA NON IMMAGINE
+        response.sendRedirect("/socialbook_war/mostraLibriServlet?");
     }
 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }
