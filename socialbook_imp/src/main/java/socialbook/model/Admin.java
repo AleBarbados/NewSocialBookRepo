@@ -2,10 +2,6 @@ package socialbook.model;
 
 import socialbook.Utility.AdminRole;
 
-import java.math.BigInteger;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
 
 public class Admin {

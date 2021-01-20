@@ -4,7 +4,7 @@ import java.sql.Date;
 import java.util.GregorianCalendar;
 import java.util.Objects;
 
-public class Review {
+public class  Review {
     private String text;
     private int id_review;
     private int vote;

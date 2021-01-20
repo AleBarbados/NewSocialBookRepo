@@ -9,11 +9,12 @@
 </h1>
 <br/>
 <form action="customerServlet" method="get">
+    <input type="hidden" name="personalView" value="view">
     <input type="submit" name="personalView" value="Account">
 </form>
 <form action="customerServlet" method="get">
     <input type="submit" name="costumerView" value="Utente">
-    <input type="hidden" name="customer"  value="2">
+    <input type="hidden" name="customer" value="2">
 </form>
 <form action="newCustomerServlet" method="get">
     <input type="submit" name="toRegistrationServlet" value="Registrati">
