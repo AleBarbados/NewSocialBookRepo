@@ -11,19 +11,22 @@
     <title>Edit Your Profile</title>
 </head>
 <body>
-    <form action="customerEdit" method="post" enctype="multipart/form-data">
+    <form name = "editForm" action="customerEdit" method="post" enctype="multipart/form-data">
+
+        <label>Immagine
+        <input type="file" name="foto">
+    </label>
         <label>Cambia Password:
             <input type="text" name="password">
         </label>
         <label>Cambia Descrizione:
             <input type="text" name="descrizione">
         </label>
-        <label>Immagine
-            <input type="file" name="foto">
-        </label>
+
 
         <input type="hidden" name="editProfile" value="editProfile">
-        <input type="submit" value="EditProfile">
+        <input type="submit" onclick="Check()" value="EditProfile">
     </form>
+
 </body>
 </html>
