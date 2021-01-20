@@ -64,7 +64,7 @@ public class FollowDAO {
     }
 
     public boolean checkFollower (int customer, int follower){
-        ArrayList<Follow> followers = doRetriveAllFollowed(customer);
+        ArrayList<Follow> followers = doRetriveAllFollowers(customer);
         if(followers!=null){
             for (Follow f:followers) {
                 if(f.getFollower()==follower){

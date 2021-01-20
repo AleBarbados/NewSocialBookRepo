@@ -24,6 +24,7 @@ public class EditServlet extends HttpServlet {
             customer.setC_pwd(request.getParameter("password"));
             customer.setDescription(request.getParameter("descrizione"));
             String fileName = Utility.aggiuntaFoto(request);
+            customer.setImage(fileName);
             customerDAO.doUpdate(customer);
         }
         String dest = request.getHeader("referer");     //prendiamo dall'header della richiesta l'url corrente

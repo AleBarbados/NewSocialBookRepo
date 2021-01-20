@@ -15,9 +15,11 @@
 <c:choose>
     <c:when test="${customer!=null}">
         <h1>${customer.c_usr}</h1>
+        <img width="60px" height="60px" alt="immagine customer" src="${pageContext.request.contextPath}/images/${customer.image}">
     </c:when>
     <c:when test="${personalCustomer!=null&&view==true}">
         <h1>${personalCustomer.c_usr}</h1>
+        <img width="60px" height="60px" alt="immagine customer" src="${pageContext.request.contextPath}/images/${personalCustomer.image}">
     </c:when>
     <c:otherwise>
         <h1>UTENTE NON TROVATO</h1>

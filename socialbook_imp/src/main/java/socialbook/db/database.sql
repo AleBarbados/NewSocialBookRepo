@@ -10,7 +10,7 @@ CREATE TABLE customer(
     customer_pwd     varchar(100)  NOT NULL,
     customer_usr     varchar(16)  NOT NULL,
     c_description    varchar(150) NOT NULL,
-    image            varchar(20),
+    image            varchar(80),
     PRIMARY KEY (id_customer),
     UNIQUE KEY (customer_usr),
     UNIQUE KEY (email)
@@ -75,7 +75,8 @@ CREATE TABLE infoPayment(
 CREATE TABLE bookList(
     id_booklist   int AUTO_INCREMENT PRIMARY KEY,
     booklist_name varchar(30) NOT NULL,
-    favorite      bool        NOT NULL
+    favorite      bool        NOT NULL,
+    image         varchar(80)
 );
 
 CREATE TABLE booklistDetail(

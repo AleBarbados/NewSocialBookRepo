@@ -11,7 +11,7 @@
     <title>Edit Your Profile</title>
 </head>
 <body>
-    <form action="editServlet" method="post">
+    <form action="editServlet" method="post" enctype="multipart/form-data">
         <label>Cambia Password:
             <input type="text" name="password" value="password">
         </label>
