@@ -146,8 +146,7 @@ public class CustomerDAO {
 
     public void doUpdate(Customer customer) {
         try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con
-                    .prepareStatement(DO_UPDATE );
+            PreparedStatement ps = con.prepareStatement(DO_UPDATE );
             ps.setString(1, customer.getC_pwd());
             ps.setString(2, customer.getDescription());
             ps.setString(3, customer.getImage());

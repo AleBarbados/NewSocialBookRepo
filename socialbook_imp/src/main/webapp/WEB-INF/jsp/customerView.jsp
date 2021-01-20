@@ -39,7 +39,10 @@
         </form>
     </c:when>
     <c:otherwise>
-        <form action="followEdit"><input type="submit" name="edit" value="Edit Profile"></form>
+        <form action="followEdit">
+            <input type="hidden" name="editProfile" value="edit">
+            <input type="submit" value="Edit Profile">
+        </form>
     </c:otherwise>
 </c:choose>
 <form action="FollowersServlet" method="get">

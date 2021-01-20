@@ -32,7 +32,8 @@ public class CustomerServlet extends HttpServlet {
         if(request.getParameter("personalView")!=null){
             request.setAttribute("view", true);
         }
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/customerView.jsp");
-            requestDispatcher.forward(request, response);
+
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/customerView.jsp");
+        requestDispatcher.forward(request, response);
     }
 }
