@@ -13,7 +13,7 @@ public class  Review {
     private String isbn;
 
 
-    public Review(String text, java.sql.Date date, int id_review, int vote, String isbn, int id_customer){
+    public Review(int id_review, int id_customer, String ISBN, Date review_date, String body, int vote){
         this.date=date;
         this.id_review=id_review;
         this.text=text;
