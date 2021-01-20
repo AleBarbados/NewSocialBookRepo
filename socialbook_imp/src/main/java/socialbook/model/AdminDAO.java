@@ -1,5 +1,7 @@
 package socialbook.model;
 
+import socialbook.Utility.AdminRole;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,7 +23,7 @@ public class AdminDAO {
 
                 a.setA_usr(rs.getString(1));
                 a.setA_pwd(rs.getString(2));
-                a.setA_role(rs.getString(3));
+                a.setA_role(AdminRole.valueOf(rs.getString(3)));
 
                 return a;
             }

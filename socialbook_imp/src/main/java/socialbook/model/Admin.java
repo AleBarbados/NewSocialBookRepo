@@ -1,5 +1,7 @@
 package socialbook.model;
 
+import socialbook.Utility.AdminRole;
+
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -9,11 +11,11 @@ import java.util.Objects;
 public class Admin {
     private String a_usr;
     private String a_pwd;
-    private String a_role;
+    private AdminRole a_role;
 
     public Admin() { }
 
-    public Admin(String u, String p, String r) {
+    public Admin(String u, String p, AdminRole r) {
         a_usr = u;
         a_pwd = p;
         a_role = r;
@@ -35,11 +37,11 @@ public class Admin {
         a_pwd = p;
     }
 
-    public String getA_role() {
+    public AdminRole getA_role() {
         return a_role;
     }
 
-    public void setA_role(String r) {
+    public void setA_role(AdminRole r) {
         a_role = r;
     }
 

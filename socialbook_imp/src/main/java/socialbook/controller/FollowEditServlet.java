@@ -42,6 +42,7 @@ public class FollowEditServlet extends HttpServlet {
             }
             response.sendRedirect(dest);
         }else if(request.getParameter("EditProfile")!=null) {
+            System.out.println("entro in edit profile");
             Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
             customer.setC_pwd(request.getParameter("password"));
             customer.setDescription(request.getParameter("descrizione"));
