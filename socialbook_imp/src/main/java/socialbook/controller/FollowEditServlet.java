@@ -1,5 +1,6 @@
 package socialbook.controller;
 
+import socialbook.Utility.Utility;
 import socialbook.model.Customer;
 import socialbook.model.CustomerDAO;
 import socialbook.model.FollowDAO;
@@ -46,6 +47,18 @@ public class FollowEditServlet extends HttpServlet {
             request.setAttribute("redirect", true);
             request.setAttribute("customer", customerDAO.doRetriveById(Integer.parseInt(request.getParameter("id"))));
             response.sendRedirect(dest);
+        }else if(request.getParameter("EditProfile")!=null) {
+            Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
+            customer.setC_pwd(request.getParameter("password"));
+            customer.setDescription(request.getParameter("descrizione"));
+            String fileName = Utility.aggiuntaFoto(request);
+            customer.setImage(fileName);
+            customerDAO.doUpdate(customer);
         }
+        String dest = request.getHeader("referer");     //prendiamo dall'header della richiesta l'url corrente
+        if(dest == null || dest.contains("/CustomerServlet") || dest.trim().isEmpty()){
+            dest = ".";     //la destinazione sarà la pagina corrente
+        }
+        response.sendRedirect(dest);
     }
 }
