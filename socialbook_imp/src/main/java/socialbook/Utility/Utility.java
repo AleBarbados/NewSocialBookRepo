@@ -52,10 +52,10 @@ public class Utility {
         return pwd;
     }
 
-    public static void redirect(HttpServletResponse response, String dest, String confronto) throws IOException {
-        if (dest == null || dest.contains(confronto) || dest.trim().isEmpty()) {
-            dest = ".";     //la destinazione sarà la pagina corrente
+    public static void redirect(HttpServletResponse response, String destinazione, String confronto) throws IOException {
+        if (destinazione == null || destinazione.contains(confronto) || destinazione.trim().isEmpty()) {
+            destinazione = ".";     //la destinazione sarà la pagina corrente
         }
-        response.sendRedirect(dest);
+        response.sendRedirect(destinazione);
     }
 }

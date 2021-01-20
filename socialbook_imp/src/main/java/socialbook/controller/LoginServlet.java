@@ -31,7 +31,7 @@ public class LoginServlet extends HttpServlet {
         String pwd = Utility.encryptionSHA1(password);
 System.out.println(" u :"+usr+" p:"+pwd);
 
-        if (customerDAO.validate(usr, pwd) == true) {          //validazione utente
+        if (customerDAO.validate(usr, pwd)) {          //validazione utente
             System.out.println("entra in if");
             customer = customerDAO.doRetrieveByUsername(usr);
             System.out.println("customer " + customer.getC_name());

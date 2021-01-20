@@ -111,7 +111,7 @@
                     <tr>
                         <td>Cognome autore</td>
                         <td>
-                            <input type="text" name="author_surname1"required>
+                            <input type="text" name="author_surname1" required>
                         </td>
                     </tr>
                     <tr>

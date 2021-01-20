@@ -1,5 +1,6 @@
 package socialbook.controller;
 
+import socialbook.Utility.Utility;
 import socialbook.model.CustomerDAO;
 
 import javax.servlet.ServletException;
@@ -8,9 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-/*
+
 @WebServlet("/customerManagerServlet")
-public class CustomerManager extends HttpServlet {
+public class CustomerManagerServlet extends HttpServlet {
     private final CustomerDAO customerDAO = new CustomerDAO();
 
     @Override
@@ -19,10 +20,8 @@ public class CustomerManager extends HttpServlet {
         customerDAO.doDeleteById(c_id);
 
         String dest = request.getHeader("referer");
-        if (dest == null || dest.contains("/customerManagerServlet") || dest.trim().isEmpty()) {
-            dest = ".";     //la destinazione sarà la pagina corrente
-        }
-        response.sendRedirect(dest);
+        String conf = "/customerManagerServlet";
+        Utility.redirect(response, dest, conf);
     }
 
     @Override
@@ -30,4 +29,3 @@ public class CustomerManager extends HttpServlet {
         doGet(request, response);
     }
 }
-*/

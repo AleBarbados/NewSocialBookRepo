@@ -13,7 +13,7 @@ public class BookDAO {
     private final static String DO_RETRIEVE_ALL = "SELECT ISBN, title, genre, price_cent, publication_year, publishing_house, plot, catalogue, image FROM book";
     private final static String DO_RETRIEVE_CATALOGUE_BY_ISBN = "SELECT catalogue FROM book WHERE ISBN = ?";
     private final static String DO_RETRIEVE_BY_ISBN = "SELECT ISBN, title, genre, price_cent, publication_year, publishing_house, plot, catalogue, image FROM book "
-            + "WHERE ISBN = ?";
+            + " WHERE ISBN = ?";
 
     public void doUpdateCatalogue(String isbn) {
         try(Connection con = ConPool.getConnection()) {

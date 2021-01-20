@@ -7,11 +7,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class AuthorDAO {
-    private final String DO_SAVE_AUTHOR = "INSERT INTO author (author_name, author_surname) VALUES (?,?)";
-    private final String DO_SAVE_AUTHOR_ASSOCIATION = "INSERT INTO authorAssociation (id_author, ISBN) VALUES (?,?)";
-    private final String DO_RETRIEVE_MAX_IDAUTHOR = "SELECT MAX(id_author) FROM author";
-    private final String DO_RETRIEVE_IDAUTHOR_BY_ISBN = "SELECT id_author FROM authorAssociation WHERE ISBN = ?";
-    private final String DO_RETRIEVE_AUTHORS_BY_ISBN = "SELECT author_name, author_surname FROM author WHERE id_author = ?";
+    private final static String DO_SAVE_AUTHOR = "INSERT INTO author (author_name, author_surname) VALUES (?,?)";
+    private final static String DO_SAVE_AUTHOR_ASSOCIATION = "INSERT INTO authorAssociation (id_author, ISBN) VALUES (?,?)";
+    private final static String DO_RETRIEVE_MAX_IDAUTHOR = "SELECT MAX(id_author) FROM author";
+    private final static String DO_RETRIEVE_IDAUTHOR_BY_ISBN = "SELECT id_author FROM authorAssociation WHERE ISBN = ?";
+    private final static String DO_RETRIEVE_AUTHORS_BY_ISBN = "SELECT author_name, author_surname FROM author WHERE id_author = ?";
 
     public void doSave(ArrayList<Author> authors, String isbn) {
         try (Connection con = ConPool.getConnection()) {

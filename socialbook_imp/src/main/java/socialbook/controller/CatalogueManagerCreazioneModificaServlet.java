@@ -53,7 +53,6 @@ public class CatalogueManagerCreazioneModificaServlet extends HttpServlet {
                     authors.add(a);
                 } else break;
             }
-
             authorDAO.doSave(authors, isbn);        //al libro con questo isbn vengono associati gli autori inseriti
         }
 
