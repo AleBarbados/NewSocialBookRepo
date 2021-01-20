@@ -23,7 +23,7 @@ public class FollowEditServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String dest, conf, editProfile = request.getParameter("editProfile");
+        String dest, conf;
         RequestDispatcher dispatcher;
 
         if (request.getParameter("follow") != null) {
