@@ -121,6 +121,14 @@ CREATE TABLE booklistAssociation(
     PRIMARY KEY (id_booklist, id_book)
 );
 
+CREATE TABLE booklistAss(
+    id_book int NOT NULL,
+    id_booklist int NOT NULL,
+    PRIMARY KEY (id_customer, id_booklist),
+    CONSTRAINT fk_bd_b FOREIGN KEY (id_book) REFERENCES book (ISBN),
+    CONSTRAINT fk_bd_bl FOREIGN KEY (id_booklist) REFERENCES bookList (id_booklist)
+)
+
 CREATE TABLE admin(
     admn_usr 	varchar(16),
     admn_pwd 	varchar(16) NOT NULL,
@@ -283,3 +291,6 @@ INSERT INTO booklistDetail (id_customer, id_booklist, property) VALUES
 
 INSERT INTO booklistAssociation (id_booklist, id_book) VALUES
 (1, 9788869183157), (1, 9788893817035), (2, 9788869183157), (2, 9788869186127), (3, 9788869186127);
+(1, 1, 0);
+(1, 2, 0);
+(2, 3, 0);
