@@ -13,13 +13,15 @@ public class  Review {
     private String isbn;
 
 
-    public Review(int id_review, int id_customer, String ISBN, Date review_date, String body, int vote){
+    public Review(int id_customer, String ISBN, Date review_date, String body, int vote){
         this.date=date;
-        this.id_review=id_review;
         this.text=text;
         this.vote=vote;
         this.id_customer=id_customer;
         this.isbn=isbn;
+    }
+
+    public Review(){
     }
 
     public int getId_review() {

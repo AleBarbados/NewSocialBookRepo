@@ -25,15 +25,14 @@ public class NewReviewServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String dest = req.getHeader("referer");
-        String conf = "/ReviewServlet";
-        int id_review = Integer.parseInt(req.getParameter("id_review"));
+        String conf = "/newReviewServlet";
         int id_customer = Integer.parseInt(req.getParameter("id_customer"));
         String ISBN = req.getParameter("ISBN");
-        Date review_date = Date.valueOf(req.getParameter("publication_year"));
+        Date review_date = Date.valueOf(req.getParameter("date"));
         String body = req.getParameter("body");
         int vote = Integer.parseInt(req.getParameter("vote"));
 
-        ReviewDAO.doSave(new Review(id_review, id_customer, ISBN, review_date, body, vote));
+        ReviewDAO.doSave(new Review(id_customer, ISBN, review_date, body, vote));
         Utility.redirect(resp, dest, conf);
     }
 }
