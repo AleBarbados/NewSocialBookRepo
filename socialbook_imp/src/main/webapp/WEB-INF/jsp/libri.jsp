@@ -10,7 +10,7 @@
         <c:forEach items="${books}" var="book">
             <table>
                 <tr>
-                    <td><img width="60px" height="60px" alt="immagine prodotto" src="${pageContext.request.contextPath}/images/book/${book.image}"></td>
+                    <td><img width="60px" height="60px" alt="immagine prodotto" src="${pageContext.request.contextPath}/images/${book.image}"></td>
                 </tr>
                 <tr>
                     <td><h2>${book.title}</h2></td>

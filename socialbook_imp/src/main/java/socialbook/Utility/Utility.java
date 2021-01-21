@@ -2,6 +2,7 @@ package socialbook.Utility;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import java.io.File;
 import java.io.IOException;
@@ -49,5 +50,12 @@ public class Utility {
             throw new RuntimeException(e);
         }
         return pwd;
+    }
+
+    public static void redirect(HttpServletResponse response, String destinazione, String confronto) throws IOException {
+        if (destinazione == null || destinazione.contains(confronto) || destinazione.trim().isEmpty()) {
+            destinazione = ".";     //la destinazione sarà la pagina corrente
+        }
+        response.sendRedirect(destinazione);
     }
 }

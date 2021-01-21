@@ -7,9 +7,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class AuthorDAO {
-    private final String DO_SAVE_AUTHOR = "INSERT INTO author (author_name, author_surname) VALUES (?,?)";
-    private final String DO_RETRIEVE_IDAUTHOR_BY_ISBN = "SELECT id_author FROM authorAssociation WHERE ISBN = ?";
-    private final String DO_RETRIEVE_AUTHORS_BY_ISBN = "SELECT author_name, author_surname FROM author WHERE id_author = ?";
+    private final static String DO_SAVE_AUTHOR = "INSERT INTO author (author_name, author_surname) VALUES (?,?)";
+    private final static String DO_SAVE_AUTHOR_ASSOCIATION = "INSERT INTO authorAssociation (id_author, ISBN) VALUES (?,?)";
+    private final static String DO_RETRIEVE_MAX_IDAUTHOR = "SELECT MAX(id_author) FROM author";
+    private final static String DO_RETRIEVE_IDAUTHOR_BY_ISBN = "SELECT id_author FROM authorAssociation WHERE ISBN = ?";
+    private final static String DO_RETRIEVE_AUTHORS_BY_ISBN = "    SELECT author.author_name, author.author_surname FROM author" +
+            " JOIN authorassociation ON author.id_author=authorassociation.id_author WHERE ISBN=?";
 
     public void doSave(ArrayList<Author> authors, String isbn) {
         try (Connection con = ConPool.getConnection()) {
@@ -23,9 +26,9 @@ public class AuthorDAO {
                     throw new RuntimeException("INSERT error.");
                 }
 
-                ps = con.prepareStatement("INSERT INTO authorAssociation (id_author, isbn) VALUES (?,?)");
-                ps.setString(1,isbn);
-                ps.setInt(2,returnMaxCodice());
+                ps = con.prepareStatement(DO_SAVE_AUTHOR_ASSOCIATION);
+                ps.setInt(1,returnMaxCodiceAuthor());
+                ps.setString(2,isbn);
 
                 if (ps.executeUpdate() != 1) {
                     throw new RuntimeException("INSERT error.");
@@ -36,11 +39,11 @@ public class AuthorDAO {
         }
     }
 
-    private int returnMaxCodice(){
+    private int returnMaxCodiceAuthor(){
         try (Connection con = ConPool.getConnection()) {
             int value = 0;
 
-            PreparedStatement ps = con.prepareStatement("SELECT MAX(id_author) FROM author");
+            PreparedStatement ps = con.prepareStatement(DO_RETRIEVE_MAX_IDAUTHOR);
 
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -53,27 +56,22 @@ public class AuthorDAO {
     }
 
     public ArrayList<Author> doRetrieveAuthorsByIsbn(String isbn) {
-        try(Connection con = ConPool.getConnection()) {
-            int id = doRetrieveIdAuthorByIsbn(isbn);
+        try (Connection con = ConPool.getConnection()) {
+            ArrayList<Author> authors = new ArrayList<Author>();
 
-            if(id != -1) {
-                PreparedStatement ps = con.prepareStatement(DO_RETRIEVE_AUTHORS_BY_ISBN);
-                ps.setInt(1, id);
+            PreparedStatement ps = con.prepareStatement(DO_RETRIEVE_AUTHORS_BY_ISBN);
+            ps.setString(1, isbn);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String name = rs.getString(1);
+                String surname = rs.getString(2);
 
-                ArrayList<Author> authors = new ArrayList<Author>();
-
-                ResultSet rs = ps.executeQuery();
-                while(rs.next()) {
-                    String name = rs.getString(1);
-                    String surname = rs.getString(2);
-
-                    authors.add(new Author(name, surname));
-                }
-                return authors;
-            } else
-                return null;
-        } catch(SQLException e) {
-            throw new RuntimeException(e);
+                authors.add(new Author(name, surname));
+            }
+            return authors;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
         }
     }
 

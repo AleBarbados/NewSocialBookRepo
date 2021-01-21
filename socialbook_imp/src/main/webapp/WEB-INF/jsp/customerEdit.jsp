@@ -11,14 +11,20 @@
     <title>Edit Your Profile</title>
 </head>
 <body>
-    <form action="editServlet" method="post">
+    <form name = "editForm" action="customerEdit" method="post" enctype="multipart/form-data">
+        <label>Immagine
+            <input type="file" name="foto">
+        </label>
         <label>Cambia Password:
             <input type="text" name="password" value="password">
         </label>
         <label>Cambia Descrizione:
             <input type="text" name="descrizione" value="descrizione">
         </label>
-        <input type="submit" value="EditProfile">
+
+        <input type="hidden" name="editProfile" value="editProfile">
+        <input type="submit" onclick="Check()" value="Edit Profile">
     </form>
+
 </body>
 </html>

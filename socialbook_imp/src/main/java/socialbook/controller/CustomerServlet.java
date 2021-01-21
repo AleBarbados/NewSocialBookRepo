@@ -21,7 +21,7 @@ public class CustomerServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if(request.getParameter("costumerView") != null || request.getParameter("redirect") != null){
+        if(request.getParameter("costumerView") != null){
             Customer c = customerDAO.doRetriveById(Integer.parseInt(request.getParameter("customer")));
             request.setAttribute("customer", c);
             Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
@@ -32,7 +32,8 @@ public class CustomerServlet extends HttpServlet {
         if(request.getParameter("personalView")!=null){
             request.setAttribute("view", true);
         }
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/customerView.jsp");
-            requestDispatcher.forward(request, response);
+
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/customerView.jsp");
+        requestDispatcher.forward(request, response);
     }
 }

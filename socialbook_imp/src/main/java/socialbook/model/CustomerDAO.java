@@ -1,23 +1,22 @@
 package socialbook.model;
+
 import java.sql.*;
 import java.util.ArrayList;
 
 public class CustomerDAO {
 
-    public final static String DO_RETRIEVE_BY_ID = "SELECT id_customer, customer_name, customer_surname, " +
-            "                               customer_pwd, customer_usr, c_description, email FROM customer WHERE id_customer = ?";
-    public final static String DO_RETRIEVE_ALL = "SELECT id_customer, customer_name, customer_surname, " +
-            "                               customer_pwd, customer_usr, c_description, email FROM customer";
-    public final static String DO_RETRIEVE_BY_EMAIL = "SELECT id_customer, customer_name, customer_surname, " +
-            "                               customer_pwd, customer_usr, c_description FROM customer WHERE email = ?";
-    public final static String DO_SAVE = "INSERT INTO customer(id_customer, customer_name, customer_surname, customer_pwd, customer_usr, email, c_description)" +
-            "                             VALUES (?, ?, ?, ?, ?, ?, ?);";
-
-    public final static String DO_RETRIEVE_BY_USERNAME = "SELECT id_customer,customer_name, customer_surname, " +
-            "                               customer_pwd, email, c_description FROM customer WHERE customer_usr = ?";
-
-
-    public final static String DO_UPDATE = "UPDATE customer SET customer_pwd=?, c_description=? WHERE id_customer=?";
+    private final static String DO_RETRIEVE_BY_ID = "SELECT id_customer, customer_name, customer_surname, " +
+            " customer_pwd, customer_usr, c_description, email, image FROM customer WHERE id_customer = ?";
+    private final static String DO_RETRIEVE_ALL = "SELECT id_customer, customer_name, customer_surname, " +
+            " customer_pwd, customer_usr, c_description, email, image FROM customer";
+    private final static String DO_RETRIEVE_BY_EMAIL = "SELECT id_customer, customer_name, customer_surname, " +
+            " customer_pwd, customer_usr, c_description, image FROM customer WHERE email = ?";
+    private final static String DO_SAVE = "INSERT INTO customer(id_customer, customer_name, customer_surname, customer_pwd, customer_usr," +
+            " email, c_description, image) VALUES (?, ?, ?, ?, ?, ?, ?,?);";
+    private final static String DO_RETRIEVE_BY_USERNAME = "SELECT id_customer,customer_name, customer_surname, " +
+            " customer_pwd, email, c_description, image FROM customer WHERE customer_usr = ?";
+    private final static String DO_UPDATE = "UPDATE customer SET customer_pwd=?, c_description=?, image=? WHERE id_customer=?";
+    private final static String DO_DELETE_BY_ID = "DELETE FROM customer WHERE id_customer = ?";
 
     public Customer doRetriveById(int id){
         try (Connection con = ConPool.getConnection()) {
@@ -33,6 +32,11 @@ public class CustomerDAO {
                 c.setC_usr(rs.getString(5));
                 c.setDescription(rs.getString(6));
                 c.setE_mail(rs.getString(7));
+
+                String image = rs.getString(8);
+                if(image != null)
+                    c.setImage(image);
+
                 return c;
             }
             return null;
@@ -58,6 +62,9 @@ public class CustomerDAO {
                 c.setC_usr(rs.getString(5));
                 c.setDescription(rs.getString(6));
                 c.setE_mail(rs.getString(7));
+                c.setImage(rs.getString(8));
+
+                customers.add(c);
             }
             return customers;
         }catch(SQLException e){
@@ -79,6 +86,7 @@ public class CustomerDAO {
                 c.setC_pwd(rs.getString(4));
                 c.setC_usr(rs.getString(5));
                 c.setDescription(rs.getString(6));
+                c.setImage(rs.getString(7));
                 return c;
             }
             return null;
@@ -98,6 +106,7 @@ public class CustomerDAO {
             ps.setString(5, customer.getC_usr());
             ps.setString(6, customer.getE_mail());
             ps.setString(7, customer.getDescription());
+            ps.setString(8, customer.getImage());
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("INSERT error.");
             }
@@ -109,13 +118,10 @@ public class CustomerDAO {
 
     }
     public boolean validate(String usr, String pwd){
-        boolean validation = false;
 
         Customer customer = doRetrieveByUsername(usr);
-        if(customer.getC_pwd().equals(pwd)){
-            validation = true;
-        }
-        return validation;
+        System.out.println("validating pwd given:"+pwd+" stored:"+customer.getC_pwd());
+        return (customer.getC_pwd().equals(pwd));
     }
 
     public Customer doRetrieveByUsername(String username){
@@ -132,6 +138,7 @@ public class CustomerDAO {
                 c.setC_pwd(rs.getString(4));
                 c.setE_mail(rs.getString(5));
                 c.setDescription(rs.getString(6));
+                c.setImage(rs.getString(7));
                 return c;
             }
             return null;
@@ -142,15 +149,28 @@ public class CustomerDAO {
 
     public void doUpdate(Customer customer) {
         try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con
-                    .prepareStatement(DO_UPDATE );
+            PreparedStatement ps = con.prepareStatement(DO_UPDATE );
             ps.setString(1, customer.getC_pwd());
             ps.setString(2, customer.getDescription());
-            ps.setInt(3, customer.getId_customer());
+            ps.setString(3, customer.getImage());
+            ps.setInt(4, customer.getId_customer());
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("UPDATE error.");
             }
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void doDeleteById(int id) {
+        try(Connection con = ConPool.getConnection()) {
+           PreparedStatement ps = con.prepareStatement(DO_DELETE_BY_ID);
+           ps.setInt(1, id);
+
+            if (ps.executeUpdate() != 1) {
+                throw new RuntimeException("DELETE error.");
+            }
+        }catch(SQLException e) {
             throw new RuntimeException(e);
         }
     }

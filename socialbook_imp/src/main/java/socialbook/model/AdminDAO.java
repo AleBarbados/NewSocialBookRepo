@@ -1,13 +1,15 @@
 package socialbook.model;
 
+import socialbook.Utility.AdminRole;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class AdminDAO {
-    private final static String DO_RETRIEVE_BY_USR_E_PWD = "SELECT admn_usr, admn_pwd, admn_role FROM admin WHERE admn_usr = ?" +
-            "AND admn_pwd = ?";
+    private final static String DO_RETRIEVE_BY_USR_E_PWD = "SELECT admn_usr, admn_pwd, admn_role FROM admin WHERE admn_usr = ? " +
+            " AND admn_pwd = ?";
 
     public Admin doRetrieveByUsrEPwd(String u, String p) {
         try(Connection con = ConPool.getConnection()) {
@@ -16,12 +18,12 @@ public class AdminDAO {
             ps.setString(2, p);
 
             ResultSet rs = ps.executeQuery();
-            if(rs != null) {
+            if(rs.next()) {
                 Admin a = new Admin();
 
                 a.setA_usr(rs.getString(1));
                 a.setA_pwd(rs.getString(2));
-                a.setA_role(rs.getString(3));
+                a.setA_role(AdminRole.valueOf(rs.getString(3)));
 
                 return a;
             }

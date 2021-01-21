@@ -1,23 +1,19 @@
 package socialbook.model;
 
-import socialbook.Utility.Utility;
+import socialbook.Utility.AdminRole;
 
-import java.math.BigInteger;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
 
 public class Admin {
     private String a_usr;
     private String a_pwd;
-    private String a_role;
+    private AdminRole a_role;
 
     public Admin() { }
 
-    public Admin(String u, String p, String r) {
+    public Admin(String u, String p, AdminRole r) {
         a_usr = u;
-        a_pwd = Utility.encryptionSHA1(p);
+        a_pwd = p;
         a_role = r;
     }
 
@@ -34,21 +30,14 @@ public class Admin {
     }
 
     public void setA_pwd(String p) {
-        try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-1");
-            digest.reset();
-            digest.update(a_pwd.getBytes(StandardCharsets.UTF_8));
-            this.a_pwd = String.format("%040x", new BigInteger(1, digest.digest()));
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        }
+        a_pwd = p;
     }
 
-    public String getA_role() {
+    public AdminRole getA_role() {
         return a_role;
     }
 
-    public void setA_role(String r) {
+    public void setA_role(AdminRole r) {
         a_role = r;
     }
 

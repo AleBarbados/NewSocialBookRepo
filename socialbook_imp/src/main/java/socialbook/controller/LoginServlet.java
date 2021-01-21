@@ -29,13 +29,15 @@ public class LoginServlet extends HttpServlet {
         CustomerDAO customerDAO = new CustomerDAO();
         AdminDAO adminDAO = new AdminDAO();
         String pwd = Utility.encryptionSHA1(password);
+System.out.println(" u :"+usr+" p:"+pwd);
 
-
-        if (customerDAO.validate(usr, pwd) == true) {          //validazione utente
+        if (customerDAO.validate(usr, pwd)) {          //validazione utente
             System.out.println("entra in if");
             customer = customerDAO.doRetrieveByUsername(usr);
+            System.out.println("customer " + customer.getC_name());
             sessione.setAttribute("personalCustomer", customer);
-            System.out.println("entra in controllo utente");
+            RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/jsp/index.jsp");
+            rd.forward(req, resp);
         }
        else{
             // controllo amministratore
