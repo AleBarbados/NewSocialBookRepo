@@ -1,4 +1,5 @@
 package socialbook.model;
+
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -62,6 +63,8 @@ public class CustomerDAO {
                 c.setDescription(rs.getString(6));
                 c.setE_mail(rs.getString(7));
                 c.setImage(rs.getString(8));
+
+                customers.add(c);
             }
             return customers;
         }catch(SQLException e){

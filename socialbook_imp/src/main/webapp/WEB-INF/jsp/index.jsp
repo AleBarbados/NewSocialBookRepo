@@ -40,6 +40,9 @@
 <br>
 
 <br>
+<form action="customerManagerServlet" method="get">
+    <input type="submit" value="Mostra tutti gli utenti">
+</form>
 
 <a href="logout-servlet" onclick="return confirm('sicuro di voler uscire?');"  >Logout</a>
 

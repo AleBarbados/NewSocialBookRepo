@@ -3,6 +3,7 @@ package socialbook.controller;
 import socialbook.Utility.Utility;
 import socialbook.model.CustomerDAO;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,12 +17,20 @@ public class CustomerManagerServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int c_id = Integer.parseInt(request.getParameter("id"));
-        customerDAO.doDeleteById(c_id);
+        String id = request.getParameter("id");
 
-        String dest = request.getHeader("referer");
-        String conf = "/customerManagerServlet";
-        Utility.redirect(response, dest, conf);
+        if(id == null) {      //click sul bottone 'mostra tutti gli utenti'
+            request.setAttribute("customers", customerDAO.doRetrieveAll());
+
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/utenti.jsp");
+            dispatcher.forward(request, response);
+        } else {
+            customerDAO.doDeleteById(Integer.parseInt(id));
+
+            String dest = request.getHeader("referer");
+            String conf = "/customerManagerServlet";
+            Utility.redirect(response, dest, conf);
+        }
     }
 
     @Override
