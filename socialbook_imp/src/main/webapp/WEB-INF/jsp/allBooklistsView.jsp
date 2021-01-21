@@ -12,15 +12,27 @@
     <title>AllBooklists</title>
 </head>
 <body>
-<table>
-    <c:forEach items="${booklists}" var="booklist">
-        <tr>
-            <a href="/"></a>
-            <td>
-                <input type="text" value="${author.name}" disabled>
-            </td>
-        </tr>
-    </c:forEach>
-</table>
+<form action="FollowEditBooklist" method="get">
+    <input type="submit" name="Create" value="Nuova Booklist">
+    <c:choose>
+        <c:when test="${booklists}!=null">
+        <table>
+            <c:forEach items="${booklists}" var="booklist">
+                <tr>
+                    <td><a href="BooklistViewServlet?id=${booklist.id}">${booklist.name}</a></td>
+                    <td>
+                        <input type="submit" name="follow" value="Segui Booklist">
+                        <input type="submit" name="delete" value="Elimina">
+                        <input type="submit" name="edit" value="Modifica">
+                    </td>
+                </tr>
+            </c:forEach>
+        </table>
+        </c:when>
+        <c:otherwise>
+            Non ci sono Booklist
+        </c:otherwise>
+    </c:choose>
+</form>
 </body>
 </html>

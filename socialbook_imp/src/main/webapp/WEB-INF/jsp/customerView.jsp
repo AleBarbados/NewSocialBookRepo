@@ -23,12 +23,12 @@
                     <input type="hidden" name="id" value="${customer.id_customer}">
                 </form>
             </c:when>
-            <form action="FollowersServlet" method="get">
-                <input type="hidden" value="${customer.id_customer}" name="id">
-                <input type="submit" name="Following" value="Following">
-                <input type="submit" name="Followers" value="Followers">
-            </form>
         </c:choose>
+        <form action="FollowersServlet" method="get">
+            <input type="hidden" value="${customer.id_customer}" name="id">
+            <input type="submit" name="Following" value="Following">
+            <input type="submit" name="Followers" value="Followers">
+        </form>
         <form action="allBooklistServlet" method="get">
             <input type="hidden" name="id" value="${customer.id_customer}">
             <input type="submit" value="Mostra tutte le Booklist">
@@ -46,9 +46,12 @@
             <input type="submit" name="Following" value="Following">
             <input type="submit" name="Followers" value="Followers">
         </form>
-        <form action="/booklistView" method="get">
+        <form action="allBooklistServlet" method="get">
             <input type="hidden" name="id" value="${personalCustomer.id_customer}">
             <input type="submit" value="Mostra Booklist">
+        </form>
+        <form action="FollowEditBooklist" method="get">
+            <input type="submit" name="Create" value="Nuova Booklist">
         </form>
     </c:when>
     <c:otherwise>

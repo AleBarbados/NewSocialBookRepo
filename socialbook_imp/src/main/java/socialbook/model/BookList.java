@@ -3,10 +3,10 @@ package socialbook.model;
 public class BookList {
     private int id;
     private String name;
-    private int favorite;
+    private boolean favorite;
     private String image;
 
-    public BookList(int id, String name, int favorite, String image){
+    public BookList(int id, String name, boolean favorite, String image){
         this.id=id;
         this.name=name;
         this.favorite=favorite;
@@ -33,11 +33,11 @@ public class BookList {
         this.name = name;
     }
 
-    public int getFavorite() {
+    public boolean getFavorite() {
         return favorite;
     }
 
-    public void setFavorite(int favorite) {
+    public void setFavorite(boolean favorite) {
         this.favorite = favorite;
     }
 

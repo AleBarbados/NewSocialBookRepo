@@ -109,6 +109,18 @@ CREATE TABLE booklistDetail(
     PRIMARY KEY (id_customer, id_booklist)
 );
 
+CREATE TABLE booklistAssociation(
+    id_booklist  int NOT NULL,
+    id_book varchar(13) NOT NULL,
+    CONSTRAINT fk_ba_bl FOREIGN KEY (id_booklist) REFERENCES bookList (id_booklist)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE,
+    CONSTRAINT fk_ba_b FOREIGN KEY (id_book) REFERENCES book (ISBN)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE,
+    PRIMARY KEY (id_booklist, id_book)
+);
+
 CREATE TABLE admin(
     admn_usr 	varchar(16),
     admn_pwd 	varchar(16) NOT NULL,
@@ -258,3 +270,16 @@ INSERT INTO authorAssociation (id_author, ISBN) VALUES
 (1, '9788869183157'),
 (1, '9788893817035'),
 (1, '9788869186127');
+
+INSERT INTO booklist (booklist_name, favorite, image) VALUES
+('Super Incredibile', 0, ''),
+('Esilarante Cavoletto', 0, ''),
+('WOW', 0, '');
+
+INSERT INTO booklistDetail (id_customer, id_booklist, property) VALUES
+(1, 1, 0),
+(1, 2, 0),
+(2, 3, 0);
+
+INSERT INTO booklistAssociation (id_booklist, id_book) VALUES
+(1, 9788869183157), (1, 9788893817035), (2, 9788869183157), (2, 9788869186127), (3, 9788869186127);
