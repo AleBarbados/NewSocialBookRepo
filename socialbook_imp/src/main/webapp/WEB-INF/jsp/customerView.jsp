@@ -35,9 +35,9 @@
                 <input type="submit" name="Followers" value="Followers">
             </form>
         </c:choose>
-        <form action="/booklistView" method="get">
+        <form action="allBooklistServlet" method="get">
             <input type="hidden" name="id" value="${customer.id_customer}">
-            <input type="submit" value="Mostra Booklist">
+            <input type="submit" value="Mostra tutte le Booklist">
         </form>
     </c:when>
     <c:when test="${personalCustomer!=null&&view==true}">

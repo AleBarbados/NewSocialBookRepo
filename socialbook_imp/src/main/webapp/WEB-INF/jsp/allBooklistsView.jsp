@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: luket
@@ -11,6 +12,15 @@
     <title>AllBooklists</title>
 </head>
 <body>
-
+<table>
+    <c:forEach items="${booklists}" var="booklist">
+        <tr>
+            <a href="/"></a>
+            <td>
+                <input type="text" value="${author.name}" disabled>
+            </td>
+        </tr>
+    </c:forEach>
+</table>
 </body>
 </html>
