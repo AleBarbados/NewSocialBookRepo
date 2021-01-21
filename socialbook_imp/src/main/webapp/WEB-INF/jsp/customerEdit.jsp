@@ -11,18 +11,16 @@
     <title>Edit Your Profile</title>
 </head>
 <body>
-    <form action="customerEdit" method="post" enctype="multipart/form-data">
+    <form action="followEdit" method="post" enctype="multipart/form-data">
         <label>Cambia Password:
-            <input type="text" name="password">
+            <input type="text" name="password" value="password">
         </label>
         <label>Cambia Descrizione:
-            <input type="text" name="descrizione">
+            <input type="text" name="descrizione" value="descrizione">
         </label>
         <label>Immagine
             <input type="file" name="foto">
         </label>
-
-        <input type="hidden" name="editProfile" value="editProfile">
         <input type="submit" value="EditProfile">
     </form>
 </body>
