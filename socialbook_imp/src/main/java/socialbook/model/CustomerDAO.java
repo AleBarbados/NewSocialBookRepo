@@ -10,8 +10,8 @@ public class CustomerDAO {
             " customer_pwd, customer_usr, c_description, email, image FROM customer";
     private final static String DO_RETRIEVE_BY_EMAIL = "SELECT id_customer, customer_name, customer_surname, " +
             " customer_pwd, customer_usr, c_description, image FROM customer WHERE email = ?";
-    private final static String DO_SAVE = "INSERT INTO customer(id_customer, customer_name, customer_surname, customer_pwd, customer_usr, email, c_description, image) " +
-            " VALUES (?, ?, ?, ?, ?, ?, ?,?);";
+    private final static String DO_SAVE = "INSERT INTO customer(id_customer, customer_name, customer_surname, customer_pwd, customer_usr," +
+            " email, c_description, image) VALUES (?, ?, ?, ?, ?, ?, ?,?);";
     private final static String DO_RETRIEVE_BY_USERNAME = "SELECT id_customer,customer_name, customer_surname, " +
             " customer_pwd, email, c_description, image FROM customer WHERE customer_usr = ?";
     private final static String DO_UPDATE = "UPDATE customer SET customer_pwd=?, c_description=?, image=? WHERE id_customer=?";

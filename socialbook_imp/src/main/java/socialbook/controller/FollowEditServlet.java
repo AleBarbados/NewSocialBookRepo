@@ -15,8 +15,8 @@ import java.io.IOException;
 
 @WebServlet("/followEdit")
 public class FollowEditServlet extends HttpServlet {
-    private static CustomerDAO customerDAO = new CustomerDAO();
-    private static FollowDAO followDAO = new FollowDAO();
+    private final CustomerDAO customerDAO = new CustomerDAO();
+    private final FollowDAO followDAO = new FollowDAO();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);

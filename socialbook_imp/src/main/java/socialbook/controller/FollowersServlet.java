@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 @WebServlet("/FollowersServlet")
 public class FollowersServlet extends HttpServlet {
-    private static FollowDAO followDAO = new FollowDAO();
+    private final FollowDAO followDAO = new FollowDAO();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }
