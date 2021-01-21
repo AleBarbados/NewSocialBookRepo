@@ -13,6 +13,10 @@ public class BookList {
         this.image=image;
     }
 
+    public BookList() {
+
+    }
+
     public int getId() {
         return id;
     }
@@ -44,4 +48,5 @@ public class BookList {
     public void setImage(String image) {
         this.image = image;
     }
+
 }
