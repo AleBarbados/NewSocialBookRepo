@@ -32,6 +32,7 @@ public class CustomerEditServlet extends HttpServlet {
 
         customerDAO.doUpdate(customer);
 
+        request.setAttribute("view", true);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/customerView.jsp");
         dispatcher.forward(request, response);
     }

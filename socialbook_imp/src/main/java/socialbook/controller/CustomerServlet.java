@@ -21,7 +21,7 @@ public class CustomerServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if(request.getParameter("costumerView") != null || request.getParameter("redirect") != null){
+        if(request.getParameter("costumerView") != null){
             Customer c = customerDAO.doRetriveById(Integer.parseInt(request.getParameter("customer")));
             request.setAttribute("customer", c);
             Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
