@@ -32,9 +32,14 @@
     <button type="submit" class="btn" onclick="accesso()">Login</button>
 </form>
 
+<br>
+<br>
 <form action="mostraLibriServlet" method="get">
     <input type="submit" value="Mostra tutti i libri">
 </form>
+<br>
+
+<br>
 
 <a href="logout-servlet" onclick="return confirm('sicuro di voler uscire?');"  >Logout</a>
 

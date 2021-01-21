@@ -30,17 +30,17 @@ public class FollowEditServlet extends HttpServlet {
             Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
             followDAO.doFollow(Integer.parseInt(request.getParameter("id")), customer.getId_customer());
 
-            dest = request.getHeader("referer");
-            conf = "/customerServlet";
-            Utility.redirect(response, dest, conf);
+            //response.sendRedirect("/socialbook_war/customerServlet?");
+            //Utility.redirect(response, dest, conf);
+
+            dispatcher = request.getRequestDispatcher("/WEB-INF/customerView.jsp");
+            dispatcher.forward(request, response);
 
         } else if (request.getParameter("unFollow") != null) {
             Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
             followDAO.doDelete(customer.getId_customer(), Integer.parseInt(request.getParameter("id")));
 
-            dest = request.getHeader("referer");
-            conf = "/customerServlet";
-            Utility.redirect(response, dest, conf);
+            response.sendRedirect("/socialbook_war/customerServlet?");
 
         } else {
             if (request.getParameter("editProfile").equals("edit")) {

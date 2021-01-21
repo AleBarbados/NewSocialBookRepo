@@ -1,5 +1,4 @@
 package socialbook.model;
 
-public class BookListDAO {
-
+public class MessageDAO {
 }
