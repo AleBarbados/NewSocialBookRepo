@@ -43,7 +43,7 @@
                     </td>
                     <tr>
                         <td>
-                            <input type="number" name="vote" min="0" max="5" required>
+                            <input type="number" name="vote" min="1" max="5" required>
                         </td>
                     </tr>
                 </tr>
