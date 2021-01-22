@@ -53,7 +53,7 @@ CREATE TABLE customerOrder(
     order_price  decimal(6,2) NOT NULL,
     invoice_addr varchar(16)  NOT NULL,
     cart         bool NOT NULL,
-    date         date,
+    order_date   date,
     id_customer  int NOT NULL,
     CONSTRAINT fk_co_c FOREIGN KEY (id_customer) REFERENCES customer (id_customer)
     ON UPDATE CASCADE
@@ -75,13 +75,13 @@ CREATE TABLE orderDetail(
 );
 
 CREATE TABLE infoPayment(
-    card_number char(16),
-    name        varchar(12) NOT NULL,
-    surname     varchar(12) NOT NULL,
-    exp_date_mm varchar(2) NOT NULL,
-    exp_date_yy varchar(4) NOT NULL,
-    cvv         varchar(3) NOT NULL,
-    id_customer int NOT NULL,
+    card_number 	char(16),
+    payment_name    varchar(12) NOT NULL,
+    surname     	varchar(12) NOT NULL,
+    exp_date_mm 	varchar(2) NOT NULL,
+    exp_date_yy 	varchar(4) NOT NULL,
+    cvv         	varchar(3) NOT NULL,
+    id_customer 	int NOT NULL,
     CONSTRAINT fk_i_c FOREIGN KEY (id_customer) REFERENCES customer (id_customer)
     ON UPDATE CASCADE
     ON DELETE CASCADE,
@@ -121,14 +121,6 @@ CREATE TABLE booklistAssociation(
     PRIMARY KEY (id_booklist, id_book)
 );
 
-CREATE TABLE booklistAss(
-    id_book int NOT NULL,
-    id_booklist int NOT NULL,
-    PRIMARY KEY (id_customer, id_booklist),
-    CONSTRAINT fk_bd_b FOREIGN KEY (id_book) REFERENCES book (ISBN),
-    CONSTRAINT fk_bd_bl FOREIGN KEY (id_booklist) REFERENCES bookList (id_booklist)
-)
-
 CREATE TABLE admin(
     admn_usr 	varchar(16),
     admn_pwd 	varchar(16) NOT NULL,
@@ -153,13 +145,13 @@ CREATE TABLE review(
 );
 
 CREATE TABLE ticket(
-    id_ticket   int AUTO_INCREMENT,
-    id_customer int NOT NULL,
-    admn_usr    varchar(16) NOT NULL,
-    open_date   date NOT NULL,
-    issue       varchar(100) NOT NULL,
-    close_date  date,
-    status      varchar(20),
+    id_ticket   	int AUTO_INCREMENT,
+    id_customer 	int NOT NULL,
+    admn_usr    	varchar(16) NOT NULL,
+    open_date   	date NOT NULL,
+    issue       	varchar(100) NOT NULL,
+    close_date  	date,
+    status   varchar(20),
     CONSTRAINT fk_t_c FOREIGN KEY (id_customer) REFERENCES customer (id_customer)
     ON UPDATE CASCADE
     ON DELETE CASCADE,
@@ -290,7 +282,8 @@ INSERT INTO booklistDetail (id_customer, id_booklist, property) VALUES
 (2, 3, 0);
 
 INSERT INTO booklistAssociation (id_booklist, id_book) VALUES
-(1, 9788869183157), (1, 9788893817035), (2, 9788869183157), (2, 9788869186127), (3, 9788869186127);
-(1, 1, 0);
-(1, 2, 0);
-(2, 3, 0);
+(1, '9788869183157'),
+(1, '9788893817035'), 
+(2, '9788869183157'), 
+(2, '9788869186127'), 
+(3, '9788869186127');
