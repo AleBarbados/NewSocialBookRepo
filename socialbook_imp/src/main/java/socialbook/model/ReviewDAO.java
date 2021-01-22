@@ -11,6 +11,7 @@ public class ReviewDAO {
     private final static String DO_DELETE_BY_ID = "DELETE FROM review WHERE id_review = ?";
     private final static String DO_RETRIEVE_BY_ID = "SELECT id_review, id_customer, ISBN, review_date, body, vote FROM review WHERE id_review = ?";
     private final static String DO_RETRIEVE_BY_ISBN = "SELECT id_review, id_customer, ISBN, review_date, body, vote FROM review WHERE ISBN = ?";
+    private final static String DO_RETRIEVE_ALL = "SELECT id_review, id_customer, ISBN, review_date, body, vote FROM review";
 
     public void doSave(Review r) {
         try (Connection con = ConPool.getConnection()) {
@@ -84,6 +85,22 @@ public class ReviewDAO {
             }
             return reviews;
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ArrayList<Review> doRetrieveAll() {
+        try(Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement(DO_RETRIEVE_ALL);
+
+            ArrayList<Review> reviews = new ArrayList<>();
+
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()) {
+                reviews.add(createReview(rs));
+            }
+            return reviews;
+        } catch(SQLException e) {
             throw new RuntimeException(e);
         }
     }
