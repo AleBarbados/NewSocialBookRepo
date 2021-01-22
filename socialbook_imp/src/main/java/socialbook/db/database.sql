@@ -134,7 +134,7 @@ CREATE TABLE review(
     ISBN        varchar(13) NOT NULL,
     review_date date NOT NULL,
     body        varchar(100),
-    vote        int NOT NULL,
+    vote        int,
     CONSTRAINT fk_r_c FOREIGN KEY (id_customer) REFERENCES customer(id_customer)
     ON UPDATE CASCADE
     ON DELETE CASCADE,
@@ -151,7 +151,7 @@ CREATE TABLE ticket(
     open_date   	date NOT NULL,
     issue       	varchar(100) NOT NULL,
     close_date  	date,
-    status   varchar(20),
+    status          varchar(20),
     CONSTRAINT fk_t_c FOREIGN KEY (id_customer) REFERENCES customer (id_customer)
     ON UPDATE CASCADE
     ON DELETE CASCADE,
@@ -266,9 +266,6 @@ INSERT INTO book(ISBN, title, genre, price_cent, publication_year, publishing_ho
 INSERT INTO author(id_author, author_name, author_surname) VALUES
 (1, 'Joanne Kathleen', 'Rowling');
 
-INSERT INTO review (id_review, id_customer, ISBN, review_date, body, vote) VALUES
-(1, 1,'9788869183157', CURRENT_DATE, 'ciao', 2);
-
 INSERT INTO authorAssociation (id_author, ISBN) VALUES
 (1, '9788869183157'),
 (1, '9788893817035'),
@@ -290,3 +287,12 @@ INSERT INTO booklistAssociation (id_booklist, id_book) VALUES
 (2, '9788869183157'), 
 (2, '9788869186127'), 
 (3, '9788869186127');
+
+INSERT INTO review(id_customer, ISBN, review_date, body, vote) VALUES
+(1, '9788869183157', '2021-01-22', 'Molto soddisfatta da questo libro.', 5),
+(1, '9788869183157', '2020-01-14', NULL, 2),
+(2, '9788893817035', '2020-04-20', 'Questa storia è ok.', 3),
+(3, '9788869183157', '2018-01-14', 'Beh che dire', 1);
+
+INSERT INTO admin(admn_usr, admn_pwd, admn_role) VALUES
+('username', 'password', 'CUSTOMER_MANAGER');

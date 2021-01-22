@@ -1,5 +1,6 @@
 package socialbook.controller;
 
+import socialbook.model.AdminDAO;
 import socialbook.model.CustomerDAO;
 
 import javax.servlet.RequestDispatcher;
@@ -21,6 +22,9 @@ public class ServletELIMINARE extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         CustomerDAO customerDAO = new CustomerDAO();
         request.getSession().setAttribute("personalCustomer", customerDAO.doRetriveById(1));
+
+        /*AdminDAO adminDAO = new AdminDAO();
+        request.getSession().setAttribute("customerManager", adminDAO.doRetrieveByUsrEPwd("username", "password"));*/
 
         request.setAttribute("ISBN", "9788869183157");
 

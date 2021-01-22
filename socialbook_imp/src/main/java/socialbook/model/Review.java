@@ -5,22 +5,21 @@ import java.util.GregorianCalendar;
 import java.util.Objects;
 
 public class  Review {
-    private String text;
     private int id_review;
-    private int vote;
+    private String body;
+    private String vote;
     private java.sql.Date date;
     private int id_customer;
     private String isbn;
 
-    public Review(int id_customer, String ISBN, Date review_date, String body, int vote){
-        this.date=date;
-        this.text=text;
-        this.vote=vote;
-        this.id_customer=id_customer;
-        this.isbn=isbn;
-    }
+    public Review(){ }
 
-    public Review(){
+    public Review(String b, String v, java.sql.Date d, int ic, String is) {
+       body = b;
+       vote = v;
+       date = d;
+       id_customer = ic;
+       isbn = is;
     }
 
     public int getId_review() {
@@ -29,6 +28,30 @@ public class  Review {
 
     public void setId_review(int id_review) {
         this.id_review = id_review;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
+    }
+
+    public String getVote() {
+        return vote;
+    }
+
+    public void setVote(String vote) {
+        this.vote = vote;
+    }
+
+    public java.sql.Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public int getId_customer() {
@@ -47,38 +70,13 @@ public class  Review {
         this.isbn = isbn;
     }
 
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public int getVote() {
-        return vote;
-    }
-
-    public void setVote(int vote) {
-        this.vote = vote;
-    }
-
-    public java.sql.Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
         Review review = (Review) o;
-        return Objects.equals(text, review.text) && Objects.equals(date, review.date)
-                && Objects.equals(isbn,review.isbn)
-                && id_review == review.id_review && vote == review.vote && id_customer==review.id_customer;
+        return id_review == review.id_review && Objects.equals(body, review.body) && Objects.equals(vote, review.vote) &&
+                Objects.equals(date, review.date) && id_customer == review.id_customer && Objects.equals(isbn, review.isbn);
     }
 }
