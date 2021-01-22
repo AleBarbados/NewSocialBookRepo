@@ -266,6 +266,9 @@ INSERT INTO book(ISBN, title, genre, price_cent, publication_year, publishing_ho
 INSERT INTO author(id_author, author_name, author_surname) VALUES
 (1, 'Joanne Kathleen', 'Rowling');
 
+INSERT INTO review (id_review, id_customer, ISBN, review_date, body, vote) VALUES
+(1, 1,'9788869183157', CURRENT_DATE, 'ciao', 2);
+
 INSERT INTO authorAssociation (id_author, ISBN) VALUES
 (1, '9788869183157'),
 (1, '9788893817035'),
