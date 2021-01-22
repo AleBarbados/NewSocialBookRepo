@@ -48,6 +48,7 @@
         </form>
         <form action="allBooklistServlet" method="get">
             <input type="hidden" name="id" value="${personalCustomer.id_customer}">
+            <input type="hidden" name="view" value="true">
             <input type="submit" value="Mostra Booklist">
         </form>
         <form action="FollowEditBooklist" method="get">

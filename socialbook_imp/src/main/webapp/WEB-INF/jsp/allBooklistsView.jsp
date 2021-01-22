@@ -13,18 +13,29 @@
 </head>
 <body>
 <form action="FollowEditBooklist" method="get">
+    <c:if test="${view!=null}">
     <input type="submit" name="Create" value="Nuova Booklist">
+    </c:if>
     <c:choose>
-        <c:when test="${booklists}!=null">
+        <c:when test="${booklists!=null}">
         <table>
             <c:forEach items="${booklists}" var="booklist">
                 <tr>
-                    <td><a href="BooklistViewServlet?id=${booklist.id}">${booklist.name}</a></td>
-                    <td>
-                        <input type="submit" name="follow" value="Segui Booklist">
-                        <input type="submit" name="delete" value="Elimina">
-                        <input type="submit" name="edit" value="Modifica">
-                    </td>
+                        <c:choose>
+                            <c:when test="${view!=null}">
+                                <td><a href="BooklistViewServlet?id=${booklist.id}&view=true">${booklist.name}</a></td>
+                                <td>
+                                    <input type="submit" name="delete" value="Elimina">
+                                    <input type="submit" name="edit" value="Modifica">
+                                </td>
+                            </c:when>
+                            <c:otherwise>
+                                <td><a href="BooklistViewServlet?id=${booklist.id}">${booklist.name}</a></td>
+                                <td>
+                                    <input type="submit" name="follow" value="Segui Booklist">
+                                </td>
+                            </c:otherwise>
+                        </c:choose>
                 </tr>
             </c:forEach>
         </table>
@@ -33,19 +44,6 @@
             Non ci sono Booklist
         </c:otherwise>
     </c:choose>
-<input type="submit" name="Create" value="Nuova Booklist">
-<table>
-    <c:forEach items="${booklists}" var="booklist">
-        <tr>
-            <td><a href="BooklistViewServlet?id=${booklist.id}">${booklist.name}</a></td>
-            <td>
-                    <input type="submit" name="follow" value="Segui Booklist">
-                    <input type="submit" name="delete" value="Elimina">
-                    <input type="submit" name="edit" value="Modifica">
-            </td>
-        </tr>
-    </c:forEach>
-</table>
 </form>
 </body>
 </html>
