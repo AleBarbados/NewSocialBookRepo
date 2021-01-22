@@ -1,6 +1,5 @@
 package socialbook.controller;
 
-import socialbook.Utility.Utility;
 import socialbook.model.BookListDAO;
 import socialbook.model.Customer;
 

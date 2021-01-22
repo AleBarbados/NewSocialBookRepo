@@ -21,6 +21,9 @@ public class AllBooklistServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ArrayList<BookList> booklists = bookListDAO.doRetriveFromCustomer(Integer.parseInt(request.getParameter("id")));
+        if(request.getParameter("view")!=null){
+            request.setAttribute("view", true);
+        }
         request.setAttribute("booklists", booklists);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/allBooklistsView.jsp");
         requestDispatcher.forward(request, response);
