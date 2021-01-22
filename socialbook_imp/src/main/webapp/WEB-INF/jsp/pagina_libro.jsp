@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Book Page</title>
@@ -42,12 +43,13 @@
                     </td>
                     <tr>
                         <td>
-                            <input type="number" name="vote" required>
+                            <input type="number" name="vote" min="1" max="5" required>
                         </td>
                     </tr>
                 </tr>
                 <input type="submit" name="Inserisci">
             </form>
+            <c:if test="${review.id_customer == customer.id_customer && review.id_review>0}">
             <form action="reviewDeleteServlet" method="get">
                 <tr>
                     <td>
@@ -55,6 +57,7 @@
                         <input type="submit" name="Elimina">
                     </td>
             </form>
+            </c:if>
         </table>
     </table>
 </body>
