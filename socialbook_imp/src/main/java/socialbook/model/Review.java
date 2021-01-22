@@ -12,7 +12,6 @@ public class  Review {
     private int id_customer;
     private String isbn;
 
-
     public Review(int id_customer, String ISBN, Date review_date, String body, int vote){
         this.date=date;
         this.text=text;

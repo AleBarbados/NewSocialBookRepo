@@ -33,7 +33,6 @@
 </form>
 
 <br>
-<br>
 <form action="mostraLibriServlet" method="get">
     <input type="submit" value="Mostra tutti i libri">
 </form>
@@ -43,7 +42,16 @@
 <form action="customerManagerServlet" method="get">
     <input type="submit" value="Mostra tutti gli utenti">
 </form>
+<br>
 
+<br>
+<form action="customerManagerServlet" method="get">
+    <input type="hidden" name="libro" value="${ISBN}">
+    <input type="submit" value="Mostra libro">
+</form>
+<br>
+
+<br>
 <a href="logout-servlet" onclick="return confirm('sicuro di voler uscire?');"  >Logout</a>
 
 <script>

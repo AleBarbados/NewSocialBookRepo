@@ -22,7 +22,7 @@
                     <td>${c.description}</td>
                     <td>
                         <form action="customerManagerServlet" method="get">
-                            <input type="hidden" name="id" value="${c.id_customer}">
+                            <input type="hidden" name="c_id" value="${c.id_customer}">
                             <input type="submit" value="Rimuovi">
                         </form>
                     </td>

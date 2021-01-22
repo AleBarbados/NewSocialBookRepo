@@ -134,7 +134,7 @@ CREATE TABLE review(
     ISBN        varchar(13) NOT NULL,
     review_date date NOT NULL,
     body        varchar(100),
-    vote        int,
+    vote        int NOT NULL,
     CONSTRAINT fk_r_c FOREIGN KEY (id_customer) REFERENCES customer(id_customer)
     ON UPDATE CASCADE
     ON DELETE CASCADE,

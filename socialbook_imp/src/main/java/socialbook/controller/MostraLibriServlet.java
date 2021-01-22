@@ -12,7 +12,8 @@ import java.io.IOException;
 
 @WebServlet("/mostraLibriServlet")
 public class MostraLibriServlet extends HttpServlet {
-    private BookDAO bookDAO = new BookDAO();
+    private final BookDAO bookDAO = new BookDAO();
+
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("books", bookDAO.doRetrieveAll());
