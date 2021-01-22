@@ -21,10 +21,10 @@ public class ReviewDeleteServlet extends HttpServlet {
         int id = Integer.parseInt(req.getParameter("id_review"));
         String dest = req.getHeader("referer");
         String conf = "/reviewDeleteServlet";
-        if(id>0) {
+
             ReviewDAO.doDeleteById(id);
             Utility.redirect(resp, dest, conf);
-        }
+
     }
 
     @Override
