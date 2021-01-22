@@ -151,7 +151,7 @@ CREATE TABLE ticket(
     open_date   	date NOT NULL,
     issue       	varchar(100) NOT NULL,
     close_date  	date,
-    status   varchar(20),
+    t_status   varchar(20),
     CONSTRAINT fk_t_c FOREIGN KEY (id_customer) REFERENCES customer (id_customer)
     ON UPDATE CASCADE
     ON DELETE CASCADE,
