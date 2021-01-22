@@ -38,11 +38,11 @@
                         <input type="hidden" name="date" value="${review.review_date}">
                     </td>
                     <td>
-                        <textarea name="body" placeholder="Aggiungi una recensione ..." cols="30" rows="20" required></textarea>
+                        <textarea name="body" placeholder="Aggiungi una recensione ..." cols="30" rows="20"></textarea>
                     </td>
                     <tr>
                         <td>
-                            <input type="number" name="vote">
+                            <input type="number" name="vote" required>
                         </td>
                     </tr>
                 </tr>
