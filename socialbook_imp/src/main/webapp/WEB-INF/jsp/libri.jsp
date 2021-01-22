@@ -18,6 +18,12 @@
                 <tr>
                     <td>PREZZO: ${book.price_euro}</td>
                 </tr>
+                <tr>
+                    <form action="paginaLibroServlet" method="get">
+                        <input type="hidden" name="ISBN" value="${book.isbn}">
+                        <input type="submit" value="Visualizza">
+                    </form>
+                </tr>
                 <c:choose>
                     <c:when test="${book.catalogue == true}">
                         <tr>

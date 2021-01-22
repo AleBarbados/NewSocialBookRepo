@@ -23,9 +23,9 @@ public class PaginaLibroServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String isbn=req.getParameter("ISBN");
-        int id_review = Integer.parseInt(req.getParameter("id_review"));
+        //int id_review = Integer.parseInt(req.getParameter("id_review"));
         req.setAttribute("book", bookDAO.doRetrieveByIsbn(isbn));
-        req.setAttribute("review", reviewDAO.doRetrieveById(id_review));
+        //req.setAttribute("review", reviewDAO.doRetrieveByISBN(isbn));
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/jsp/pagina_libro.jsp");
         dispatcher.forward(req, resp);
