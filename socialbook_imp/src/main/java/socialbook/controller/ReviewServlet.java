@@ -1,8 +1,7 @@
 package socialbook.controller;
 
 import socialbook.Utility.Utility;
-import socialbook.model.Review;
-import socialbook.model.ReviewDAO;
+import socialbook.model.*;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,39 +17,39 @@ import java.util.GregorianCalendar;
 @WebServlet("/reviewServlet")
 public class ReviewServlet extends HttpServlet {
     private final ReviewDAO reviewDAO = new ReviewDAO();
+    private final BookDAO bookDAO = new BookDAO();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String review = request.getParameter("rimuovi_rec");
+        String isbn = request.getParameter("isbn");
+        Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
+        int id_customer = customer.getId_customer();
 
         if(review != null) {        //utente elimina la propria recensione
             reviewDAO.doDeleteById(Integer.parseInt(review));
-
-            response.sendRedirect(request.getParameter("referer"));
-        } else {
+        } else {        //utente aggiunge recensione
             GregorianCalendar gc = new GregorianCalendar();
             Review r = new Review();
-
-            String book = request.getParameter("book");
-            String utente = request.getParameter("utente");
 
             String str = "" + gc.get(Calendar.YEAR) + gc.get(Calendar.MONTH) + gc.get(Calendar.DAY_OF_MONTH);
             Calendar cal = Calendar.getInstance();      //si ottiene la data attuale
             java.sql.Date date = new Date (cal.getTimeInMillis());
 
-            r.setId_customer(Integer.parseInt(utente));
-            r.setIsbn(book);
+            r.setId_customer(id_customer);
+            r.setIsbn(isbn);
             r.setDate(date);
-
-            if(request.getParameter("operazione") != null) {        //si tratta di un voto
-                r.setVote(request.getParameter("voto"));
-            }
-
+            r.setVote(request.getParameter("voto"));
             r.setBody(request.getParameter("commento"));
             reviewDAO.doSave(r);
-
-            response.sendRedirect("/socialbook_war/customerManagerServlet?");
         }
+
+        Utility.checkReview(request, isbn, id_customer);
+        request.setAttribute("book", bookDAO.doRetrieveByIsbn(isbn));
+        request.setAttribute("recensioni", reviewDAO.doRetrieveByISBN(isbn));
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/pagina_libro.jsp");
+        dispatcher.forward(request, response);
     }
 
     @Override

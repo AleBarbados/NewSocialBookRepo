@@ -6,7 +6,8 @@ import java.util.ArrayList;
 public class ReviewDAO {
     private final static String DO_SAVE = "INSERT INTO review (id_customer, ISBN, review_date, body, vote) VALUES (?,?,?,?,?)";
     private final static String DO_DELETE_BY_ID = "DELETE FROM review WHERE id_review = ?";
-    private final static String DO_RETRIEVE_BY_ID = "SELECT id_review, id_customer, ISBN, review_date, body, vote FROM review WHERE id_review = ?";
+    private final static String DO_RETRIEVE_BY_ID_CUSTOMER_E_ISBN = "SELECT body, vote FROM review WHERE ISBN = ? "
+            + " AND id_customer = ?";
     private final static String DO_RETRIEVE_BY_ISBN = "SELECT id_review, id_customer, ISBN, review_date, body, vote FROM review WHERE ISBN = ?";
 
     public void doSave(Review r) {
@@ -27,7 +28,7 @@ public class ReviewDAO {
             rs.next();
 
             int id = rs.getInt(1);
-            r.setId_customer(id);
+            r.setId_review(id);
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -47,16 +48,24 @@ public class ReviewDAO {
         }
     }
 
-    public Review doRetrieveById(int id_review) {
+    public ArrayList<Review> verifyByIsbnEIdCustomer(String isbn, int id_customer) {
         try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement(DO_RETRIEVE_BY_ID);
-            ps.setInt(1, id_review);
+            PreparedStatement ps = con.prepareStatement(DO_RETRIEVE_BY_ID_CUSTOMER_E_ISBN);
+            ps.setString(1, isbn);
+            ps.setInt(2, id_customer);
+
+            ArrayList<Review> reviews = new ArrayList<>();
 
             ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                return createReview(rs);
+            while(rs.next()) {
+                Review r = new Review();
+
+                r.setBody(rs.getString(1));
+                r.setVote(rs.getString(2));
+
+                reviews.add(r);
             }
-            return null;
+            return reviews;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
