@@ -17,9 +17,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ArrayList;
 
 public class Utility {
+
     public static String aggiuntaFoto(HttpServletRequest request) throws IOException, ServletException {
         String CARTELLA_UPLOAD = "images";  //cartella in cui verranno salvate le immagini prese dal form
 
@@ -63,9 +66,15 @@ public class Utility {
         response.sendRedirect(destinazione);
     }
 
-    public static void checkReview(HttpServletRequest request, String isbn, int id) {
+    public static String formatDate(Date date){
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        return date == null ? "" : sdf.format(date);
+    }
+
+    public static void checkReview(HttpServletRequest request, String isbn, int id_customer) {
         ReviewDAO reviewDAO = new ReviewDAO();
-        Review review = reviewDAO.doRetrieveByISBNCustomer(isbn, id);
+        Review review = reviewDAO.doRetrieveByISBNCustomer(isbn, id_customer);
 
         if(review == null)      //utente non ha mai recensito questo libro
             request.setAttribute("recensione_si", "si");

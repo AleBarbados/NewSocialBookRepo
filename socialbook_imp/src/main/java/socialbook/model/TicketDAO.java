@@ -11,7 +11,7 @@ public class TicketDAO {
     private final static String DO_RETRIEVE_BY_ROLE = "SELECT ticket.id_ticket, ticket.id_customer, ticket.admn_usr, ticket.open_date, ticket.issue, ticket.close_date , ticket.t_status " +
             " FROM ticket , admin WHERE ticket.admn_usr = null AND admin.role = ?";
 
-    private final static String DO_RETRIEVE_BY_CUSTOMER = "SELECT id_ ticket, id_customer, admn_usr, open_date, issue, close_date , t_status " +
+    private final static String DO_RETRIEVE_BY_CUSTOMER = "SELECT id_ticket, id_customer, admn_usr, open_date, issue, close_date , t_status " +
             "             FROM ticket  WHERE id_customer = ?";
 
     private final static String DO_RETRIEVE_BY_ID = "SELECT id_customer, admn_usr, open_date, issue, close_date , t_status FROM ticket WHERE" +
@@ -23,6 +23,9 @@ public class TicketDAO {
             " WHERE admn_usr = ?";
 
     private final static String DO_SAVE = "INSERT INTO ticket(id_customer, admn_usr, open_date, issue, close_date , t_status) VALUES(?, ?, ?, ?, ?, ?) ";
+
+    private final static String DO_UPDATE_TICKET = "UPDATE ticket SET admn_usr = ?, t_status = ?, close_date = ? WHERE " +
+            " id_ticket = ?";
 
     public ArrayList<Ticket> doRetrieveByAdmin(String admn_usr){
         try(Connection con = ConPool.getConnection()){
@@ -101,8 +104,13 @@ public class TicketDAO {
             ResultSet rs = ps.executeQuery();
             Ticket ticket = new Ticket();
             if(rs.next()){
+                //id_customer, admn_usr, open_date, issue, close_date , t_status
                 ticket.setId_ticket(id_ticket);
+                ticket.setId_customer(rs.getInt(1));
+                ticket.setAdmn_usr(rs.getString(2));
+                ticket.setOpen_date(rs.getDate(3));
                 ticket.setIssue(rs.getString(4));
+                ticket.setClose_date(rs.getDate(5));
                 ticket.setStatus(StatusEnumeration.valueOf(rs.getString(6)));
             }
             return ticket;
@@ -148,10 +156,15 @@ public class TicketDAO {
     public void doUpdate(Ticket ticket){
         try(Connection c = ConPool.getConnection()){
 
-            c.createStatement().executeQuery("UPDATE ticket SET admn_usr = '" + ticket.getAdmn_usr() +  " ', t_status = '"+ ticket.getStatus().name()
-                    +"' , close_date = "+ ticket.getClose_date() +" WHERE id_ticket = " + ticket.getId_ticket()+";" );
-
-
+                PreparedStatement ps = c.prepareStatement(DO_UPDATE_TICKET);
+                System.out.println("status: " + ticket.getStatus().name());
+                ps.setString(1, ticket.getAdmn_usr());
+                ps.setString(2, ticket.getStatus().name());
+                ps.setDate(3,ticket.getClose_date()==null?null:new Date( ticket.getClose_date().getTime()));
+                ps.setInt(4,ticket.getId_ticket());
+                if(ps.executeUpdate() != 1) {
+                    throw new RuntimeException("UPDATE error.");
+                }
         }
         catch (SQLException e){
             System.out.println(e);

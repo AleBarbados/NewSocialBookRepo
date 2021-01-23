@@ -17,8 +17,9 @@ public class MessageDAO {
         try(Connection con = ConPool.getConnection()){
             ArrayList<Message> messages = new ArrayList<>();
             PreparedStatement ps = con.prepareStatement(DO_RETRIEVE_BY_TICKET );
-            ResultSet rs = ps.executeQuery();
             ps.setInt(1, id_ticket);
+            ResultSet rs = ps.executeQuery();
+
             while(rs.next()){
                 Message m = new Message();
                 m.setId_message(rs.getInt(1));
@@ -26,6 +27,7 @@ public class MessageDAO {
                 m.setTimestamp(rs.getTimestamp(3));
                 m.setMessage_body(rs.getString(4));
                 m.setId_ticket(id_ticket);
+                messages.add(m);
             }
             return messages;
         } catch(SQLException e){

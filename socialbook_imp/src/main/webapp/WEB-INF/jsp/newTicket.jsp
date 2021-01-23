@@ -12,11 +12,12 @@
     <title>New ticket</title>
 </head>
 <body>
+
     <c:choose>
-        <c:when test="${personalCustomer} != null">
+        <c:when test="${personalCustomer != null }">
     <form id = "new-ticket" name="new-ticket" method="post" action="new-ticket-servlet">
         <label for = "issue">Problema:</label><br>
-        <textarea id = "issue"></textarea>
+        <textarea id = "issue" name="issue"></textarea>
         <label for = "destination"> Problema di:</label>
         <select name="destination" id="destination">
             <option value="users"> utenza</option>

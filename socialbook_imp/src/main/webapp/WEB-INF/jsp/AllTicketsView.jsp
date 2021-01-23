@@ -12,17 +12,17 @@
     <title>All tickets</title>
 </head>
 <body>
-<form action="ticket-view" method="get">
+<form action="ticket-view-servlet" method="get">
 
     <c:choose>
-        <c:when test="${admin}!= null">
+        <c:when test="${admin != null}">
             <c:choose>
-            <c:when test="${ticketR} != null">
+            <c:when test="${ticketR != null && tickets.size() > 0}">
             <table id = "tableTicketRole" name = "tableTicketRole">
                 <tr>Ticket disponibili</tr>
                 <c:forEach items="${ticketsR}" var="ticketR">
                     <tr>
-                        <td><a href="TicketViewServlet?id=${ticketR.id_ticket}">Ticket :${ticketR.id_ticket}</a></td>
+                        <td><a href="ticket-view-servlet?id=${ticketR.id_ticket}">Ticket :${ticketR.id_ticket}</a></td>
                         <td>
                             <input type="submit" name="accept" value="Accetta incarico">
                         </td>
@@ -35,12 +35,12 @@
         </c:otherwise>
         </c:choose>
             <c:choose>
-                <c:when test="${ticket}!= null">
+                <c:when test="${ticket != null && tickets.size() > 0}">
 
             <table id = "tableTicket" name = "tableTicket">
                 <c:forEach items="${tickets}" var="ticket">
                     <tr>
-                        <td><a href="TicketViewServlet?id=${ticket.id_ticket}">Ticket :${ticket.id_ticket}</a></td>
+                        <td><a href="ticket-view-servlet?id=${ticket.id_ticket}">Ticket :${ticket.id_ticket}</a></td>
                         <td>
                             <input type="submit" name="delete" value="Elimina">
                         </td>
@@ -57,11 +57,12 @@
         <c:otherwise>
             <input type="submit" name="newTicket" value="Nuovo Ticket">
             <c:choose>
-                <c:when test="${tickets}!=null">
+                <c:when test="${tickets != null && tickets.size() > 0}"> entro in ticket non null
                 <table>
+                    <tr><c:out value="${tickets.size()}" ></c:out></tr>
                     <c:forEach items="${tickets}" var="ticket">
                         <tr>
-                            <td><a href="TicketViewServlet?id=${ticket.id_ticket}">Ticket :${ticket.id_ticket}</a></td>
+                            <td><a href="ticket-view-servlet?id=${ticket.id_ticket}">Ticket :${ticket.id_ticket}</a></td>
                             <td>
                                 <input type="submit" name="delete" value="Elimina">
                             </td>
