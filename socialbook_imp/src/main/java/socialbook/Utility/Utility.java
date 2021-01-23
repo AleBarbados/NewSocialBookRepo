@@ -14,8 +14,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Utility {
+
     public static String aggiuntaFoto(HttpServletRequest request) throws IOException, ServletException {
         String CARTELLA_UPLOAD = "images";  //cartella in cui verranno salvate le immagini prese dal form
 
@@ -57,5 +60,11 @@ public class Utility {
             destinazione = ".";     //la destinazione sarà la pagina corrente
         }
         response.sendRedirect(destinazione);
+    }
+
+    public static String formatDate(Date date){
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        return date == null ? "" : sdf.format(date);
     }
 }

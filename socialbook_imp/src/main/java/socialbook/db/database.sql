@@ -296,3 +296,6 @@ INSERT INTO review(id_customer, ISBN, review_date, body, vote) VALUES
 
 INSERT INTO admin(admn_usr, admn_pwd, admn_role) VALUES
 ('username', 'password', 'CUSTOMER_MANAGER');
+
+INSERT INTO ticket(id_ticket, id_customer, admn_usr, open_date, issue, close_date,t_status) VALUES
+(1, 1, 'username', '2018-01-14', 'aiuto, sito del cazzo', '2020-01-25', 'CLOSED');

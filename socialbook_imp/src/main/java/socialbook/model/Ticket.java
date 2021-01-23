@@ -1,6 +1,7 @@
 package socialbook.model;
 
 import socialbook.Utility.StatusEnumeration;
+import socialbook.Utility.Utility;
 
 import java.util.Date;
 
@@ -46,6 +47,11 @@ public class Ticket {
         return open_date;
     }
 
+    public String getStringOpen_date(){
+        System.out.println(Utility.formatDate(open_date));
+        return Utility.formatDate(open_date);
+    }
+
     public void setOpen_date(java.sql.Date open_date) {
         this.open_date = open_date;
     }
@@ -60,6 +66,11 @@ public class Ticket {
 
     public java.sql.Date getClose_date() {
         return close_date;
+    }
+
+    public String getStringClose_date(){
+        System.out.println(Utility.formatDate(close_date));
+        return Utility.formatDate(close_date);
     }
 
     public void setClose_date(java.sql.Date close_date) {

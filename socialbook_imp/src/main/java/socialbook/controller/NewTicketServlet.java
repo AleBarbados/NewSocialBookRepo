@@ -12,8 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
-@WebServlet("/new-servlet")
+@WebServlet("/new-ticket-servlet")
 public class NewTicketServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -24,8 +25,12 @@ public class NewTicketServlet extends HttpServlet {
             ticket.setStatus(StatusEnumeration.OPEN);
             ticket.setIssue(request.getParameter("issue"));
             ticket.setId_customer(customer.getId_customer());
+            if(ticket == null)
+                System.out.println("non c'è il ticket");
             ticketDAO.doSave(ticket);
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/allTicketsView.jsp");
+            List<Ticket> tickets = ticketDAO.doRetrieveByCustomer(customer.getId_customer());
+            request.setAttribute("tickets", tickets);
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/AllTicketsView.jsp");
             requestDispatcher.forward(request, response);
         }else{
             System.out.println("devo fare una pagina di prova ma ho sonno");

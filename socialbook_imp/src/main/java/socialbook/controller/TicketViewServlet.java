@@ -1,10 +1,7 @@
 package socialbook.controller;
 
 import socialbook.Utility.StatusEnumeration;
-import socialbook.model.Admin;
-import socialbook.model.MessageDAO;
-import socialbook.model.Ticket;
-import socialbook.model.TicketDAO;
+import socialbook.model.*;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,13 +10,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 
-@WebServlet("/ticket-view")
+@WebServlet("/ticket-view-servlet")
 public class TicketViewServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
+
+        doGet(request,response);
     }
+
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+
     String ADDRESS = "";
     TicketDAO ticketDAO = new TicketDAO();
 
@@ -32,12 +35,12 @@ public class TicketViewServlet extends HttpServlet {
         ticket.setAdmn_usr(admin.getA_usr());
         ticket.setStatus(StatusEnumeration.WORK_IN_PROGRESS);
             ticketDAO.doUpdate(ticket);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/allTicketsView.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/AllTicketsView.jsp");
         requestDispatcher.forward(request, response);
 
         } else if(request.getParameter("delete") != null){
         ticketDAO.doDeleteById(Integer.parseInt(request.getParameter("id")));
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/allTicketsView.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/AllTicketsView.jsp");
         requestDispatcher.forward(request, response);
 
         }else if(request.getParameter("newTicket") != null){
@@ -45,8 +48,12 @@ public class TicketViewServlet extends HttpServlet {
 
         }else{
         request.getSession().setAttribute("ticket", ticketDAO.doRetrieveById(Integer.parseInt(request.getParameter("id"))));
-        request.setAttribute("messages", messageDAO.doRetrieveByTicket(Integer.parseInt(request.getParameter("id"))));
-        ADDRESS = "WEB-INF/jsp/TicketViewProva";
+        ArrayList<Message> messages = messageDAO.doRetrieveByTicket(Integer.parseInt(request.getParameter("id")));
+        if(messages.size() == 0){
+           System.out.println("non prende i messaggi");
+        }
+        request.setAttribute("messages", messages);
+        ADDRESS = "WEB-INF/jsp/TicketViewProva.jsp";
         }
         RequestDispatcher rd = request.getRequestDispatcher(ADDRESS);
         rd.forward(request, response);
