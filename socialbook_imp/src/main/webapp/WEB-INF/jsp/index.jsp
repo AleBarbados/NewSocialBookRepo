@@ -45,7 +45,7 @@
 <br>
 
 <br>
-<form action="customerManagerReviewServlet" method="get">
+<form action="paginaLibroServlet" method="get">
     <input type="hidden" name="libro" value="${ISBN}">
     <input type="submit" value="Mostra libro">
 </form>

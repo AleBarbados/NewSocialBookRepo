@@ -1,9 +1,7 @@
 package socialbook.controller;
 
-import socialbook.model.BookDAO;
-import socialbook.model.CustomerDAO;
-import socialbook.model.Review;
-import socialbook.model.ReviewDAO;
+import socialbook.Utility.Utility;
+import socialbook.model.*;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,19 +14,23 @@ import java.sql.Date;
 
 @WebServlet("/paginaLibroServlet")
 public class PaginaLibroServlet extends HttpServlet {
-
     private BookDAO bookDAO = new BookDAO();
     private ReviewDAO reviewDAO = new ReviewDAO();
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String isbn=req.getParameter("ISBN");
-        //int id_review = Integer.parseInt(req.getParameter("id_review"));
-        req.setAttribute("book", bookDAO.doRetrieveByIsbn(isbn));
-        //req.setAttribute("review", reviewDAO.doRetrieveByISBN(isbn));
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String isbn = request.getParameter("libro");
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/jsp/pagina_libro.jsp");
-        dispatcher.forward(req, resp);
+        request.setAttribute("book", bookDAO.doRetrieveByIsbn(isbn));
+        request.setAttribute("recensioni", reviewDAO.doRetrieveByISBN(isbn));
+
+        Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
+        if(customer != null) {      //c'è un utente loggato
+            Utility.checkReview(request, isbn, customer.getId_customer());
+        }
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/pagina_libro.jsp");
+        dispatcher.forward(request, response);
     }
 
     @Override

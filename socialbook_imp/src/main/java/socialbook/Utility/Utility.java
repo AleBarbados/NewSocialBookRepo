@@ -1,5 +1,8 @@
 package socialbook.Utility;
 
+import socialbook.model.Review;
+import socialbook.model.ReviewDAO;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +19,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.ArrayList;
 
 public class Utility {
 
@@ -57,7 +61,7 @@ public class Utility {
 
     public static void redirect(HttpServletResponse response, String destinazione, String confronto) throws IOException {
         if (destinazione == null || destinazione.contains(confronto) || destinazione.trim().isEmpty()) {
-            destinazione = ".";     //la destinazione sarà la pagina corrente
+            destinazione = ".";     //la destinazione sarà l'homepage
         }
         response.sendRedirect(destinazione);
     }
@@ -66,5 +70,31 @@ public class Utility {
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         return date == null ? "" : sdf.format(date);
+    }
+
+       public static void checkReview(HttpServletRequest request, String isbn, int id_customer) {
+        ReviewDAO reviewDAO = new ReviewDAO();
+        ArrayList<Review> reviews = reviewDAO.verifyByIsbnEIdCustomer(isbn, id_customer);
+
+        String value, voto, commento;
+
+        if(reviews.isEmpty())
+            request.setAttribute("recensione", "si");       //non è già presente una recensione di questo utente
+
+        for(Review r : reviews) {
+            voto = r.getVote();
+            commento = r.getBody();
+
+
+        }
+         /*   if (voto != null && commento != null)        //utente ha inserito sia il voto che il commento
+                request.setAttribute("recensione", "no");
+            else {
+                if (voto != null)
+                    request.setAttribute("recensione", "commento_si");      //utente ha inserito solo il voto
+                else
+                    request.setAttribute("recensione", "voto_si");          //utente ha inserito solo il commento
+            }
+        }*/
     }
 }

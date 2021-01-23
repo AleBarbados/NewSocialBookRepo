@@ -20,19 +20,10 @@ public class CustomerManagerReviewServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        String isbn = request.getParameter("libro");
         String r_id = request.getParameter("r_id");
 
-        if(isbn != null) {      //click sul bottone 'mostra libro' dalla pagina index
-            request.setAttribute("book", bookDAO.doRetrieveByIsbn(isbn));
-            ArrayList<Review> reviews = reviewDAO.doRetrieveByISBN(isbn);
-            request.setAttribute("recensioni", reviews);
-
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/pagina_libro.jsp");
-            dispatcher.forward(request, response);
-        } else if(r_id != null) {      //click sul bottone per la rimozione di una recensione
+        if(r_id != null) {      //click sul bottone per la rimozione di una recensione
             reviewDAO.doDeleteById(Integer.parseInt(r_id));
-
             response.sendRedirect(request.getHeader("referer"));
         }
     }
