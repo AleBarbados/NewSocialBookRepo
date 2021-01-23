@@ -19,9 +19,34 @@ public class TicketDAO {
 
     private final static String DO_DELETE_BY_ID = "DELETE FROM ticket WHERE id_ticket = ? ";
 
-    private final static String DO_RETRIEVE_BY_ADMIN = "";
+    private final static String DO_RETRIEVE_BY_ADMIN = "SELECT id_ticket, id_customer, open_date, issue, close_date , t_status FROM ticket" +
+            " WHERE admn_usr = ?";
 
     private final static String DO_SAVE = "INSERT INTO ticket(id_customer, admn_usr, open_date, issue, close_date , t_status) VALUES(?, ?, ?, ?, ?, ?) ";
+
+    public ArrayList<Ticket> doRetrieveByAdmin(String admn_usr){
+        try(Connection con = ConPool.getConnection()){
+            ArrayList<Ticket> tickets = new ArrayList<>();
+            PreparedStatement ps = con.prepareStatement(DO_RETRIEVE_BY_ADMIN);
+            ps.setString(1, admn_usr);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                Ticket t = new Ticket();
+                t.setId_ticket(rs.getInt(1));
+                t.setId_customer(rs.getInt(2));
+                t.setAdmn_usr(admn_usr);
+                t.setOpen_date(rs.getDate(3));
+                t.setIssue(rs.getString(4));
+                t.setClose_date(rs.getDate(5));
+                t.setStatus(StatusEnumeration.valueOf(rs.getString(6)));
+                tickets.add(t);
+            }return tickets;
+
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     public ArrayList<Ticket> doRetrieveByRole( AdminRole role){
         try(Connection con = ConPool.getConnection()){
@@ -117,6 +142,19 @@ public class TicketDAO {
             t.setId_ticket(id);
         } catch (SQLException e){
             e.printStackTrace();
+        }
+    }
+
+    public void doUpdate(Ticket ticket){
+        try(Connection c = ConPool.getConnection()){
+
+            c.createStatement().executeQuery("UPDATE ticket SET admn_usr = '" + ticket.getAdmn_usr() +  " ', t_status = '"+ ticket.getStatus().name() +"' WHERE id_ticket = " + ticket.getId_ticket()+";" );
+
+
+        }
+        catch (SQLException e){
+            System.out.println(e);
+
         }
     }
 }

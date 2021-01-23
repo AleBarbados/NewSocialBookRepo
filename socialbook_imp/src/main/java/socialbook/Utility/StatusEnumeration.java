@@ -1,7 +1,7 @@
 package socialbook.Utility;
 
 public enum StatusEnumeration {
-    APERTO,
-    CHIUSO,
-    IN_LAVORAZIONE
+    OPEN,
+    CLOSED,
+    WORK_IN_PROGRESS
 }

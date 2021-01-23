@@ -27,10 +27,11 @@ public class AllTicketsServlet extends HttpServlet {
         Admin admin = (Admin) request.getSession().getAttribute("admin");
 
         if(admin != null) {
-            if(request.getParameter("section").equals("ruolo")){
-                tickets = ticketDAO.doRetrieveByRole(admin.getA_role());
-            }else {  //          tickets = ticketDAO.doRetrieveByAdmin(admin.getA_usr());
-            }
+
+            ArrayList<Ticket> ticketsR = ticketDAO.doRetrieveByRole(admin.getA_role());
+            request.setAttribute("ticketsR", ticketsR);
+            tickets = ticketDAO.doRetrieveByAdmin(admin.getA_usr());
+
         }else if(customer != null){
             tickets = ticketDAO.doRetrieveByCustomer(customer.getId_customer());
         }

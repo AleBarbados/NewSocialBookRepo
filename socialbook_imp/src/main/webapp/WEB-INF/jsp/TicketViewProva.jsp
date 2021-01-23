@@ -15,23 +15,22 @@
 <table>
 
     <tr>
-        <td><h2>Ticket numero${ticket.id_ticket}</h2></td>
+        <td><h2>Ticket numero: ${ticket.id_ticket}</h2></td>
     </tr>
     <tr>
-        <td>${ticket.open_date}</td>
+        <td>Data di apertura: ${ticket.open_date}</td>
     </tr>
     <tr>
-        <td>${ticket.close_date}</td>
+        <td>Data chiusura: ${ticket.close_date}</td>
     </tr>
     <tr>
-        <td>${ticket.t_status}</td>
+        <td>Status: ${ticket.t_status}</td>
     </tr>
-    <c:set var="count" value="0" scope="page" />
     <c:forEach var="message" items="${messages}">
         <c:if test="${message.sender == 0}">
-             <div  class="rTableRow"> </c:if>
+             <div  class="customer-message"> </c:if>
         <c:if test="${message.sender == 1}">
-             <div  class="rTableRow1"> </c:if>
+             <div  class="admin-message"> </c:if>
 
                  <tr>${message}</tr>
                  </c:forEach>
