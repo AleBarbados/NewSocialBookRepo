@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class TicketDAO {
 
     private final static String DO_RETRIEVE_BY_ROLE = "SELECT ticket.id_ticket, ticket.id_customer, ticket.admn_usr, ticket.open_date, ticket.issue, ticket.close_date , ticket.t_status " +
-            " FROM ticket , admin WHERE ticket.admn_usr = admin.admn_usr AND admin.role = ?";
+            " FROM ticket , admin WHERE ticket.admn_usr = null AND admin.role = ?";
 
     private final static String DO_RETRIEVE_BY_CUSTOMER = "SELECT id_ ticket, id_customer, admn_usr, open_date, issue, close_date , t_status " +
             "             FROM ticket  WHERE id_customer = ?";
@@ -148,7 +148,8 @@ public class TicketDAO {
     public void doUpdate(Ticket ticket){
         try(Connection c = ConPool.getConnection()){
 
-            c.createStatement().executeQuery("UPDATE ticket SET admn_usr = '" + ticket.getAdmn_usr() +  " ', t_status = '"+ ticket.getStatus().name() +"' WHERE id_ticket = " + ticket.getId_ticket()+";" );
+            c.createStatement().executeQuery("UPDATE ticket SET admn_usr = '" + ticket.getAdmn_usr() +  " ', t_status = '"+ ticket.getStatus().name()
+                    +"' , close_date = "+ ticket.getClose_date() +" WHERE id_ticket = " + ticket.getId_ticket()+";" );
 
 
         }

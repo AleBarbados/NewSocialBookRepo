@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Date;
 
 import static socialbook.Utility.StatusEnumeration.CLOSED;
 import static socialbook.Utility.StatusEnumeration.OPEN;
@@ -33,6 +34,8 @@ public class NewMessageServlet extends HttpServlet {
         if(request.getSession().getAttribute("admin") != null){
             sender = true;
             status = CLOSED;
+            Date close_date = new Date(new java.util.Date().getTime());
+            t.setClose_date(close_date);
 
         }else if(request.getSession().getAttribute("personalCustomer") != null ){
             sender = false;

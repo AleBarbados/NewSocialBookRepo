@@ -14,8 +14,8 @@
 <body>
 <form action="ticket-view" method="get">
 
-    <c:choose>                                          <!-- apro scelta -->
-        <c:when test="${admin}!= null">                 <!-- apro prima scelta, c'è l'admin attivo-->
+    <c:choose>
+        <c:when test="${admin}!= null">
             <c:choose>
             <c:when test="${ticketR} != null">
             <table id = "tableTicketRole" name = "tableTicketRole">
@@ -49,15 +49,15 @@
             </table>
 
                 </c:when>
-        <c:otherwise>                                                  <!-- apro possibilità non ticket admin-->
+        <c:otherwise>
             Nessun ticket disponibile
-        </c:otherwise>                                                 <!-- chiudo possibilità admin non ticket-->
-    </c:choose>                                                        <!-- chiudo possibilità ticket/ non ticket admin-->
-    </c:when>                                                          <!-- chiudo possibilità admin-->
-        <c:otherwise>                                                  <!-- apro possibilità customer-->
+        </c:otherwise>
+    </c:choose>
+    </c:when>
+        <c:otherwise>
             <input type="submit" name="newTicket" value="Nuovo Ticket">
-            <c:choose>                                                 <!-- apro scelta tra ticket/non ticket customer-->
-                <c:when test="${tickets}!=null">                       <!-- apro possibilità ticket per customer-->
+            <c:choose>
+                <c:when test="${tickets}!=null">
                 <table>
                     <c:forEach items="${tickets}" var="ticket">
                         <tr>
@@ -68,13 +68,13 @@
                         </tr>
                     </c:forEach>
                 </table>
-                </c:when>                                               <!-- chiudo possibilità tiket per customer-->
-                <c:otherwise>                                           <!-- apro possibilità non ticket per customer-->
+                </c:when>
+                <c:otherwise>
                 Non ci sono Tickets
-                </c:otherwise>                                          <!-- chiudo possibilità non ticket per customer-->
-            </c:choose>                                                 <!-- chiudo scelta tra ticket/non ticket-->
-        </c:otherwise>                                                  <!-- chiudo alternativa customer-->
-    </c:choose>                                                         <!-- chiudo scelta admin/customer-->
+                </c:otherwise>
+            </c:choose>
+        </c:otherwise>
+    </c:choose>
 
 </form>
 </body>

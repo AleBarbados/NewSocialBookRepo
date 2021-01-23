@@ -147,7 +147,7 @@ CREATE TABLE review(
 CREATE TABLE ticket(
     id_ticket   	int AUTO_INCREMENT,
     id_customer 	int NOT NULL,
-    admn_usr    	varchar(16) NOT NULL,
+    admn_usr    	varchar(16),
     open_date   	date NOT NULL,
     issue       	varchar(100) NOT NULL,
     close_date  	date,
@@ -271,7 +271,7 @@ INSERT INTO authorAssociation (id_author, ISBN) VALUES
 (1, '9788893817035'),
 (1, '9788869186127');
 
-INSERT INTO booklist (booklist_name, favorite, image) VALUES
+INSERT INTO bookList (booklist_name, favorite, image) VALUES
 ('Super Incredibile', 0, ''),
 ('Esilarante Cavoletto', 0, ''),
 ('WOW', 0, '');

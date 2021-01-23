@@ -36,7 +36,7 @@ public class AllTicketsServlet extends HttpServlet {
             tickets = ticketDAO.doRetrieveByCustomer(customer.getId_customer());
         }
         request.setAttribute("tickets", tickets);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/allTicketsView.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/AllTicketsView.jsp");
         requestDispatcher.forward(request, response);
     }
 }

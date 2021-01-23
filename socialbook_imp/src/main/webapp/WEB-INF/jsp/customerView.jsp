@@ -54,6 +54,7 @@
         <form action="FollowEditBooklist" method="get">
             <input type="submit" name="Create" value="Nuova Booklist">
         </form>
+        <h1> <a href = "all-ticket-servlet">tickets</a></h1>
     </c:when>
     <c:otherwise>
         <h1>UTENTE NON TROVATO</h1>
