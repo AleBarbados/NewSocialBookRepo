@@ -16,10 +16,12 @@
                     <td><h2>${book.title}</h2></td>
                 </tr>
                 <tr>
-                    <td>PREZZO: ${book.price_euro}</td>
+                    <c:if test="${book.catalogue}">
+                        <td>PREZZO: ${book.price_euro}</td>
+                    </c:if>
                 </tr>
                 <c:choose>
-                    <c:when test="${book.catalogue == true}">
+                    <c:when test="${book.catalogue}">
                         <tr>
                             <td>CATALOGO</td>
                         </tr>
@@ -46,15 +48,17 @@
                         </tr>
                     </c:otherwise>
                 </c:choose>
-                <tr>
-                    <td>
-                        <form action="catalogueManagerServlet1" method="get">
-                            <input type="hidden" name="isbn" value="${book.isbn}">
-                            <input type="hidden" name="operazione" value="modifica">
-                            <input type="submit" value="Modifica prezzo">
-                        </form>
-                    </td>
-                </tr>
+                <c:if test="${book.catalogue}">
+                    <tr>
+                        <td>
+                            <form action="catalogueManagerServlet1" method="get">
+                                <input type="hidden" name="isbn" value="${book.isbn}">
+                                <input type="hidden" name="operazione" value="modifica">
+                                <input type="submit" value="Modifica prezzo">
+                            </form>
+                        </td>
+                    </tr>
+                </c:if>
             </table>
             <br>
         </c:forEach>

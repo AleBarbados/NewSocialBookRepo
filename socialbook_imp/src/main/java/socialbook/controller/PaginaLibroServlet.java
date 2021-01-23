@@ -10,19 +10,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Date;
+import java.util.ArrayList;
 
 @WebServlet("/paginaLibroServlet")
 public class PaginaLibroServlet extends HttpServlet {
     private BookDAO bookDAO = new BookDAO();
     private ReviewDAO reviewDAO = new ReviewDAO();
+    private CustomerDAO customerDAO = new CustomerDAO();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String isbn = request.getParameter("libro");
 
+        ArrayList<Review> recensioni = reviewDAO.doRetrieveByISBN(isbn);
+        request.setAttribute("recensioni", recensioni);
         request.setAttribute("book", bookDAO.doRetrieveByIsbn(isbn));
-        request.setAttribute("recensioni", reviewDAO.doRetrieveByISBN(isbn));
+
+        ArrayList<Customer> customers = customerDAO.doRetrieveByReviews(recensioni);
+        request.setAttribute("customers", customers);
 
         Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
         if(customer != null) {      //c'è un utente loggato

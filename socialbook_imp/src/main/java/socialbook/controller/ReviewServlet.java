@@ -11,42 +11,87 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 @WebServlet("/reviewServlet")
 public class ReviewServlet extends HttpServlet {
     private final ReviewDAO reviewDAO = new ReviewDAO();
     private final BookDAO bookDAO = new BookDAO();
+    private final CustomerDAO customerDAO = new CustomerDAO();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String review = request.getParameter("rimuovi_rec");
         String isbn = request.getParameter("isbn");
+
         Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
         int id_customer = customer.getId_customer();
+
+        String vote, body;
 
         if(review != null) {        //utente elimina la propria recensione
             reviewDAO.doDeleteById(Integer.parseInt(review));
         } else {        //utente aggiunge recensione
-            GregorianCalendar gc = new GregorianCalendar();
-            Review r = new Review();
+            Review r = reviewDAO.doRetrieveByISBNCustomer(isbn, id_customer);
 
-            String str = "" + gc.get(Calendar.YEAR) + gc.get(Calendar.MONTH) + gc.get(Calendar.DAY_OF_MONTH);
             Calendar cal = Calendar.getInstance();      //si ottiene la data attuale
             java.sql.Date date = new Date (cal.getTimeInMillis());
 
-            r.setId_customer(id_customer);
-            r.setIsbn(isbn);
-            r.setDate(date);
-            r.setVote(request.getParameter("voto"));
-            r.setBody(request.getParameter("commento"));
-            reviewDAO.doSave(r);
+            if(r == null) {                 //utente non ha mai recensito il libro in questione
+                Review r_new = new Review();
+
+                r_new.setId_customer(id_customer);
+                r_new.setIsbn(isbn);
+                r_new.setDate(date);
+
+                vote = request.getParameter("voto");
+                if(vote == null)
+                    r_new.setVote("-");
+                else
+                    r_new.setVote(vote);
+
+                body = request.getParameter("commento");
+                if(body.equals(""))
+                    r_new.setBody("-");
+                else
+                    r_new.setBody(body);
+
+                reviewDAO.doSave(r_new);
+
+            } else {                  //utente ha già recensito il libro in questione
+                if(r.getBody().equals("-")) {
+                    body = request.getParameter("commento");
+
+                    if(body.equals(""))
+                        r.setBody("-");
+                    else
+                        r.setBody(body);
+                }
+
+                if(r.getVote().equals("-")) {
+                    vote = request.getParameter("voto");
+
+                    if(vote == null)
+                        r.setVote("-");
+                    else
+                        r.setVote(vote);
+                }
+
+                r.setDate(date);
+                reviewDAO.doUpdateById(r);
+            }
         }
 
-        Utility.checkReview(request, isbn, id_customer);
         request.setAttribute("book", bookDAO.doRetrieveByIsbn(isbn));
-        request.setAttribute("recensioni", reviewDAO.doRetrieveByISBN(isbn));
+
+        ArrayList<Review> recensioni = reviewDAO.doRetrieveByISBN(isbn);
+        request.setAttribute("recensioni", recensioni);
+
+        ArrayList<Customer> customers = customerDAO.doRetrieveByReviews(recensioni);
+        request.setAttribute("customers", customers);
+
+        Utility.checkReview(request, isbn, customer.getId_customer());
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/pagina_libro.jsp");
         dispatcher.forward(request, response);

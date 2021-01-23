@@ -289,7 +289,7 @@ INSERT INTO booklistAssociation (id_booklist, id_book) VALUES
 (3, '9788869186127');
 
 INSERT INTO review(id_customer, ISBN, review_date, body, vote) VALUES
-(1, '9788869183157', '2021-01-22', 'Molto soddisfatta da questo libro.', NULL),
+(1, '9788869183157', '2021-01-22', '-', '5'),
 (2, '9788893817035', '2020-04-20', 'Questa storia è ok.', '3'),
 (3, '9788869183157', '2018-01-14', 'Beh che dire', '1');
 

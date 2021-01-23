@@ -36,14 +36,20 @@
     <c:if test="${not empty recensioni}">
         <table id="boh">
             <tr>
-                <th>id customer</th>
+                <th>Nome</th>
+                <th>Cognome</th>
                 <th>vote</th>
                 <th>body</th>
                 <th>date</th>
             </tr>
                 <c:forEach items="${recensioni}" var="rec">
                     <tr>
-                        <td>${rec.id_customer}</td>
+                        <c:forEach items="${customers}" var="cus">
+                            <c:if test="${rec.id_customer == cus.id_customer}">
+                                <td>${cus.c_surname}</td>
+                                <td>${cus.c_name}</td>
+                            </c:if>
+                        </c:forEach>
                         <td>${rec.vote}</td>
                         <td>${rec.body}</td>
                         <td>${rec.date}</td>
@@ -71,25 +77,27 @@
         </table>
     </c:if>
     <br><br>
-    <c:if test="${personalCustomer != null && recensione != 'no'}">
-        <form action="reviewServlet" method="get">
-            <c:if test="${recensione == 'voto_si' || recensione == 'si'}">
-                <label>Voto:</label>
-                <input name="voto" list="valutazioni">
-                <datalist id="valutazioni">
-                    <option value="1">
-                    <option value="2">
-                    <option value="3">
-                    <option value="4">
-                    <option value="5">
-                </datalist>
-            </c:if>
-            <c:if test="${recensione == 'commento_si' || recensione == 'si' }">
-                <textarea name="commento" placeholder="Aggiungi un commento ..." cols="20" rows="20"></textarea>
-            </c:if>
-            <input type="hidden" name="isbn" value="${book.isbn}">
-            <input type="submit" value="conferma recensione">
-        </form>
+    <c:if test="${personalCustomer != null}">
+       <c:if test="${recensione_no == null}">
+           <form action="reviewServlet" method="get">
+               <c:if test="${vote != null || recensione_si != null}">
+                   <label>Voto:</label>
+                   <select name="voto">
+                       <option value="-">-</option>
+                       <option value="1">1</option>
+                       <option value="2">2</option>
+                       <option value="3">3</option>
+                       <option value="4">4</option>
+                       <option value="5">5</option>
+                   </select>
+               </c:if>
+               <c:if test="${body != null || recensione_si != null}">
+                   <textarea name="commento" placeholder="Aggiungi un commento ..." cols="20" rows="20"></textarea>
+               </c:if>
+               <input type="hidden" name="isbn" value="${book.isbn}">
+               <input type="submit" value="conferma recensione">
+           </form>
+       </c:if>
     </c:if>
 </body>
 </html>

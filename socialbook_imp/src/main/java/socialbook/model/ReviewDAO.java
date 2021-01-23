@@ -6,9 +6,10 @@ import java.util.ArrayList;
 public class ReviewDAO {
     private final static String DO_SAVE = "INSERT INTO review (id_customer, ISBN, review_date, body, vote) VALUES (?,?,?,?,?)";
     private final static String DO_DELETE_BY_ID = "DELETE FROM review WHERE id_review = ?";
-    private final static String DO_RETRIEVE_BY_ID_CUSTOMER_E_ISBN = "SELECT body, vote FROM review WHERE ISBN = ? "
-            + " AND id_customer = ?";
     private final static String DO_RETRIEVE_BY_ISBN = "SELECT id_review, id_customer, ISBN, review_date, body, vote FROM review WHERE ISBN = ?";
+    private final static String DO_RETRIEVE_BY_ISBN_CUSTOMER = "SELECT id_review, review_date, body, vote FROM review WHERE ISBN = ? "
+        + " AND id_customer = ?";
+    private final static String DO_UPDATE_BY_ID = "UPDATE review SET review_date = ?, body = ?, vote = ? WHERE id_review = ?";
 
     public void doSave(Review r) {
         try (Connection con = ConPool.getConnection()) {
@@ -48,29 +49,6 @@ public class ReviewDAO {
         }
     }
 
-    public ArrayList<Review> verifyByIsbnEIdCustomer(String isbn, int id_customer) {
-        try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement(DO_RETRIEVE_BY_ID_CUSTOMER_E_ISBN);
-            ps.setString(1, isbn);
-            ps.setInt(2, id_customer);
-
-            ArrayList<Review> reviews = new ArrayList<>();
-
-            ResultSet rs = ps.executeQuery();
-            while(rs.next()) {
-                Review r = new Review();
-
-                r.setBody(rs.getString(1));
-                r.setVote(rs.getString(2));
-
-                reviews.add(r);
-            }
-            return reviews;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     public ArrayList<Review> doRetrieveByISBN(String isbn) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(DO_RETRIEVE_BY_ISBN);
@@ -88,6 +66,46 @@ public class ReviewDAO {
         }
     }
 
+    public Review doRetrieveByISBNCustomer(String isbn, int id) {
+        try(Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement(DO_RETRIEVE_BY_ISBN_CUSTOMER);
+            ps.setString(1, isbn);
+            ps.setInt(2, id);
+
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()) {
+                Review r = new Review();
+
+                r.setId_review(rs.getInt(1));
+                r.setId_customer(id);
+                r.setIsbn(isbn);
+                r.setDate(rs.getDate(2));
+                r.setBody(rs.getString(3));
+                r.setVote(rs.getString(4));
+
+                return r;
+            }
+            return null;
+        } catch(SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void doUpdateById(Review r) {
+        try(Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement(DO_UPDATE_BY_ID);
+            ps.setDate(1,r.getDate());
+            ps.setString(2, r.getBody());
+            ps.setString(3, r.getVote());
+            ps.setInt(4, r.getId_review());
+
+            if(ps.executeUpdate() != 1)
+                throw new RuntimeException("UPDATE error.");
+
+        } catch(SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
     private Review createReview(ResultSet rs) throws SQLException {
         Review r = new Review();
 

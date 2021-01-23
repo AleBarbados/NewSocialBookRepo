@@ -17,6 +17,8 @@ public class CustomerDAO {
             " customer_pwd, email, c_description, image FROM customer WHERE customer_usr = ?";
     private final static String DO_UPDATE = "UPDATE customer SET customer_pwd=?, c_description=?, image=? WHERE id_customer=?";
     private final static String DO_DELETE_BY_ID = "DELETE FROM customer WHERE id_customer = ?";
+    private final static String DO_RETRIEVE_BY_REVIEWS = "SELECT c.id_customer, c.customer_name, c.customer_surname FROM customer c, review r " +
+            " WHERE c.id_customer = r.id_customer";
 
     public Customer doRetriveById(int id){
         try (Connection con = ConPool.getConnection()) {
@@ -171,6 +173,28 @@ public class CustomerDAO {
                 throw new RuntimeException("DELETE error.");
             }
         }catch(SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ArrayList<Customer> doRetrieveByReviews(ArrayList<Review> reviews) {
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement(DO_RETRIEVE_BY_REVIEWS);
+
+            ArrayList<Customer> customers = new ArrayList<>();
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()) {
+                Customer c = new Customer();
+
+                c.setId_customer(rs.getInt(1));
+                c.setC_name(rs.getString(2));
+                c.setC_surname(rs.getString(3));
+
+                customers.add(c);
+            }
+            return customers;
+        } catch(SQLException e) {
             throw new RuntimeException(e);
         }
     }

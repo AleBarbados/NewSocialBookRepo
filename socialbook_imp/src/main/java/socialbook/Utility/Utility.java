@@ -63,29 +63,24 @@ public class Utility {
         response.sendRedirect(destinazione);
     }
 
-    public static void checkReview(HttpServletRequest request, String isbn, int id_customer) {
+    public static void checkReview(HttpServletRequest request, String isbn, int id) {
         ReviewDAO reviewDAO = new ReviewDAO();
-        ArrayList<Review> reviews = reviewDAO.verifyByIsbnEIdCustomer(isbn, id_customer);
+        Review review = reviewDAO.doRetrieveByISBNCustomer(isbn, id);
 
-        String value, voto, commento;
+        if(review == null)      //utente non ha mai recensito questo libro
+            request.setAttribute("recensione_si", "si");
+        else {
+            String voto = review.getVote();
+            String body = review.getBody();
 
-        if(reviews.isEmpty())
-            request.setAttribute("recensione", "si");       //non è già presente una recensione di questo utente
+            if (!voto.equals("-") && !body.equals("-"))
+                request.setAttribute("recensione_no", "no");   //utente ha inserito sia voto che commento
 
-        for(Review r : reviews) {
-            voto = r.getVote();
-            commento = r.getBody();
+            if (voto.equals("-"))
+                request.setAttribute("vote", "si");     //utente ha inserito solo il commento
 
-
+            if (body.equals("-"))
+                request.setAttribute("body", "si");     //utente ha inserito solo il voto
         }
-         /*   if (voto != null && commento != null)        //utente ha inserito sia il voto che il commento
-                request.setAttribute("recensione", "no");
-            else {
-                if (voto != null)
-                    request.setAttribute("recensione", "commento_si");      //utente ha inserito solo il voto
-                else
-                    request.setAttribute("recensione", "voto_si");          //utente ha inserito solo il commento
-            }
-        }*/
     }
 }
