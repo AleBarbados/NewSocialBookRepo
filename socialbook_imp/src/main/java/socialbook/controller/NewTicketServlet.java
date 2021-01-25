@@ -1,5 +1,6 @@
 package socialbook.controller;
 
+import socialbook.Utility.AdminRole;
 import socialbook.Utility.StatusEnumeration;
 import socialbook.model.Customer;
 import socialbook.model.Ticket;
@@ -24,6 +25,10 @@ public class NewTicketServlet extends HttpServlet {
             Ticket ticket = new Ticket();
             ticket.setStatus(StatusEnumeration.OPEN);
             ticket.setIssue(request.getParameter("issue"));
+            if(request.getParameter("destination").equals("users")){
+                ticket.setDestination(AdminRole.CUSTOMER_MANAGER);
+            }else {ticket.setDestination(AdminRole.CATALOGUE_MANAGER);
+            }
             ticket.setId_customer(customer.getId_customer());
             if(ticket == null)
                 System.out.println("non c'è il ticket");

@@ -1,0 +1,13 @@
+# NON RINOMINARE questo file ma crearne uno nuovo con nome database.properties
+# in questa stessa cartella SENZA aggiungerlo a git !!!!
+# altrimenti viene versionato da git.
+# nel caso il vostro file database.properties viene versionato potete lanciare
+#
+# git rm --cached socialbook_imp/src/main/resources/database.properties
+# dalla cartella di base se siete sotto linux o dall astessa cartella senza path
+#
+database.server = localhost
+database.port = 3306
+database.name = SocialBook
+database.user = root
+database.password = basedidati

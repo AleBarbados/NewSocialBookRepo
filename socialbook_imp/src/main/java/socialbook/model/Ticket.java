@@ -1,5 +1,6 @@
 package socialbook.model;
 
+import socialbook.Utility.AdminRole;
 import socialbook.Utility.StatusEnumeration;
 import socialbook.Utility.Utility;
 
@@ -13,14 +14,16 @@ public class Ticket {
     private String issue;
     private java.sql.Date close_date;
     private StatusEnumeration status;
+    private AdminRole destination;
 
     public Ticket(){}
-    public Ticket(String admn_usr, java.sql.Date open_date, String issue, java.sql.Date close_date, StatusEnumeration status){
+    public Ticket(String admn_usr, java.sql.Date open_date, String issue, java.sql.Date close_date, StatusEnumeration status, AdminRole destination){
         this.admn_usr = admn_usr;
         this.open_date = open_date;
         this.issue = issue;
         this.close_date = close_date;
         this.status = status;
+        this.destination = destination;
     }
 
     public int getId_ticket(){return id_ticket; }
@@ -83,5 +86,13 @@ public class Ticket {
 
     public void setStatus(StatusEnumeration status) {
         this.status = status;
+    }
+
+    public AdminRole getDestination() {
+        return destination;
+    }
+
+    public void setDestination(AdminRole destination) {
+        this.destination = destination;
     }
 }

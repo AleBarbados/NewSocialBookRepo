@@ -8,21 +8,21 @@ import java.util.ArrayList;
 
 public class TicketDAO {
 
-    private final static String DO_RETRIEVE_BY_ROLE = "SELECT ticket.id_ticket, ticket.id_customer, ticket.admn_usr, ticket.open_date, ticket.issue, ticket.close_date , ticket.t_status " +
-            " FROM ticket , admin WHERE ticket.admn_usr = null AND admin.role = ?";
+    private final static String DO_RETRIEVE_BY_ROLE = "SELECT id_ticket, id_customer, admn_usr, open_date, issue, close_date , t_status " +
+            " FROM ticket  WHERE destination = ? and admn_usr IS NULL  ";
 
-    private final static String DO_RETRIEVE_BY_CUSTOMER = "SELECT id_ticket, id_customer, admn_usr, open_date, issue, close_date , t_status " +
+    private final static String DO_RETRIEVE_BY_CUSTOMER = "SELECT id_ticket, id_customer, admn_usr, open_date, issue, close_date , t_status, destination " +
             "             FROM ticket  WHERE id_customer = ?";
 
-    private final static String DO_RETRIEVE_BY_ID = "SELECT id_customer, admn_usr, open_date, issue, close_date , t_status FROM ticket WHERE" +
+    private final static String DO_RETRIEVE_BY_ID = "SELECT id_customer, admn_usr, open_date, issue, close_date , t_status, destination FROM ticket WHERE" +
             " id_ticket = ?";
 
     private final static String DO_DELETE_BY_ID = "DELETE FROM ticket WHERE id_ticket = ? ";
 
-    private final static String DO_RETRIEVE_BY_ADMIN = "SELECT id_ticket, id_customer, open_date, issue, close_date , t_status FROM ticket" +
+    private final static String DO_RETRIEVE_BY_ADMIN = "SELECT id_ticket, id_customer, open_date, issue, close_date , t_status, destination FROM ticket" +
             " WHERE admn_usr = ?";
 
-    private final static String DO_SAVE = "INSERT INTO ticket(id_customer, admn_usr, open_date, issue, close_date , t_status) VALUES(?, ?, ?, ?, ?, ?) ";
+    private final static String DO_SAVE = "INSERT INTO ticket(id_customer, admn_usr, open_date, issue, close_date , t_status, destination) VALUES(?, ?, ?, ?, ?, ?, ?) ";
 
     private final static String DO_UPDATE_TICKET = "UPDATE ticket SET admn_usr = ?, t_status = ?, close_date = ? WHERE " +
             " id_ticket = ?";
@@ -42,6 +42,7 @@ public class TicketDAO {
                 t.setIssue(rs.getString(4));
                 t.setClose_date(rs.getDate(5));
                 t.setStatus(StatusEnumeration.valueOf(rs.getString(6)));
+                t.setDestination(AdminRole.valueOf(rs.getString(7)));
                 tickets.add(t);
             }return tickets;
 
@@ -58,7 +59,9 @@ public class TicketDAO {
             ps.setString(1, s_role);
             ResultSet rs = ps.executeQuery();
             ArrayList<Ticket> tickets = new ArrayList<Ticket>();
+            System.out.println("sono in doretrievebyrole");
             while(rs.next()){
+                System.out.println("entro in while");
                 Ticket t = new Ticket();
                 t.setId_ticket(rs.getInt(1));
                 t.setId_customer(rs.getInt(2));
@@ -67,6 +70,8 @@ public class TicketDAO {
                 t.setIssue(rs.getString(5));
                 t.setClose_date(rs.getDate(6));
                 t.setStatus(StatusEnumeration.valueOf(rs.getString(7)));
+                t.setDestination(role);
+                System.out.println("ticket:"+ rs.getInt(1));
                 tickets.add(t);
             }
         return tickets;
@@ -89,6 +94,8 @@ public class TicketDAO {
                 t.setIssue(rs.getString(5));
                 t.setClose_date(rs.getDate(6));
                 t.setStatus(StatusEnumeration.valueOf(rs.getString(7)));
+                t.setDestination(AdminRole.valueOf(rs.getString(8)));
+
                 tickets.add(t);
             }
             return tickets;
@@ -104,7 +111,6 @@ public class TicketDAO {
             ResultSet rs = ps.executeQuery();
             Ticket ticket = new Ticket();
             if(rs.next()){
-                //id_customer, admn_usr, open_date, issue, close_date , t_status
                 ticket.setId_ticket(id_ticket);
                 ticket.setId_customer(rs.getInt(1));
                 ticket.setAdmn_usr(rs.getString(2));
@@ -112,6 +118,8 @@ public class TicketDAO {
                 ticket.setIssue(rs.getString(4));
                 ticket.setClose_date(rs.getDate(5));
                 ticket.setStatus(StatusEnumeration.valueOf(rs.getString(6)));
+                ticket.setDestination(AdminRole.valueOf(rs.getString(7)));
+
             }
             return ticket;
         }catch(SQLException e){
@@ -139,6 +147,7 @@ public class TicketDAO {
             ps.setString(4, t.getIssue());
             ps.setDate(5, t.getClose_date());
             ps.setString(6, t.getStatus().name());
+            ps.setString(7, t.getDestination().name());
 
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("INSERT error.");

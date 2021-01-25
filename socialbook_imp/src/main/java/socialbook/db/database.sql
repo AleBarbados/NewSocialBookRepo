@@ -123,7 +123,7 @@ CREATE TABLE booklistAssociation(
 
 CREATE TABLE admin(
     admn_usr 	varchar(16),
-    admn_pwd 	varchar(16) NOT NULL,
+    admn_pwd 	varchar(100) NOT NULL,
     admn_role 	varchar(16) NOT NULL,
     PRIMARY KEY(admn_usr)
 );
@@ -152,6 +152,7 @@ CREATE TABLE ticket(
     issue       	varchar(100) NOT NULL,
     close_date  	date,
     t_status   varchar(20),
+    destination varchar(20),
     CONSTRAINT fk_t_c FOREIGN KEY (id_customer) REFERENCES customer (id_customer)
     ON UPDATE CASCADE
     ON DELETE CASCADE,
@@ -294,7 +295,8 @@ INSERT INTO review(id_customer, ISBN, review_date, body, vote) VALUES
 (3, '9788869183157', '2018-01-14', 'Beh che dire', '1');
 
 INSERT INTO admin(admn_usr, admn_pwd, admn_role) VALUES
-('username', 'password', 'CUSTOMER_MANAGER');
+('username', 'password', 'CUSTOMER_MANAGER'),
+('usr', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'CUSTOMER_MANAGER');
 
-INSERT INTO ticket(id_ticket, id_customer, admn_usr, open_date, issue, close_date,t_status) VALUES
-(1, 1, 'username', '2018-01-14', 'aiuto, sito del cazzo', '2020-01-25', 'CLOSED');
+INSERT INTO ticket(id_ticket, id_customer,  open_date, issue, t_status, destination) VALUES
+(1, 1, '2018-01-14', 'aiuto, sito del cazzo', 'OPEN', 'CUSTOMER_MANAGER');
