@@ -45,6 +45,9 @@ System.out.println(" u :"+usr+" p:"+pwd);
 
             if ( admin != null) {
                 sessione.setAttribute("admin", admin);
+                System.out.println("salvato admin in sessione");
+                RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/jsp/customerManagerView.jsp");
+                rd.forward(req, resp);
 
             }else{
                 ADDRESS = "errorLogin.jsp";

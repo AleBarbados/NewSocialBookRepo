@@ -122,9 +122,12 @@ public class CustomerDAO {
     public boolean validate(String usr, String pwd){
 
         Customer customer = doRetrieveByUsername(usr);
+        if(customer == null)
+            return false;
+        else{
         System.out.println("validating pwd given:"+pwd+" stored:"+customer.getC_pwd());
         return (customer.getC_pwd().equals(pwd));
-    }
+    }}
 
     public Customer doRetrieveByUsername(String username){
         try (Connection con = ConPool.getConnection()) {

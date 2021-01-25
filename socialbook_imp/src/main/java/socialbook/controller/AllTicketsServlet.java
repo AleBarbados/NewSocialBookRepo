@@ -26,14 +26,13 @@ public class AllTicketsServlet extends HttpServlet {
         TicketDAO ticketDAO = new TicketDAO();
         ArrayList<Ticket> tickets = new ArrayList<>();
         Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
-        System.out.println("customer trovato: "+customer);
         Admin admin = (Admin) request.getSession().getAttribute("admin");
 
         if(admin != null) {
-            System.out.println("entro in admin");
 
             ArrayList<Ticket> ticketsR = ticketDAO.doRetrieveByRole(admin.getA_role());
             request.setAttribute("ticketsR", ticketsR);
+            System.out.println("tickets trovati: "+ ticketsR.size());
             tickets = ticketDAO.doRetrieveByAdmin(admin.getA_usr());
 
         }else if(customer != null){
