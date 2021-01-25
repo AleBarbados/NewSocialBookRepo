@@ -50,7 +50,7 @@ CREATE TABLE authorAssociation(
 
 CREATE TABLE customerOrder(
     id_order     int AUTO_INCREMENT,
-    order_price  decimal(6,2) NOT NULL,
+    order_price  int NOT NULL,
     invoice_addr varchar(16)  NOT NULL,
     cart         bool NOT NULL,
     order_date   date,
@@ -64,7 +64,7 @@ CREATE TABLE customerOrder(
 CREATE TABLE orderDetail(
     id_order int AUTO_INCREMENT,
     ISBN     varchar(13),
-    price    decimal(4, 2) NOT NULL,
+    price    int NOT NULL,
     CONSTRAINT fk_od_o FOREIGN KEY (id_order) REFERENCES customerOrder (id_order)
     ON UPDATE CASCADE
     ON DELETE CASCADE,
