@@ -32,7 +32,20 @@
         </tr>
     </table>
     <br><br>
-
+    <c:if test="${personalCustomer != null}">
+        <tr>
+            <td>
+                <form action="FollowEditBooklist" method="get">
+                    <input type="hidden" name="isbn" value="${book.isbn}">
+                    <input type="submit" name="addPreferiti" value="Aggiungi ai Preferiti">
+                </form>
+                <form action="ScegliBooklistServlet" method="get">
+                    <input type="hidden" name="isbn" value="${book.isbn}">
+                    <input type="submit" value="Aggiungi a Booklist">
+                </form>
+            </td>
+        </tr>
+    </c:if>
     <c:if test="${not empty recensioni}">
         <table id="boh">
             <tr>

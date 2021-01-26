@@ -275,12 +275,16 @@ INSERT INTO authorAssociation (id_author, ISBN) VALUES
 INSERT INTO bookList (booklist_name, favorite, image) VALUES
 ('Super Incredibile', 0, ''),
 ('Esilarante Cavoletto', 0, ''),
-('WOW', 0, '');
+('WOW', 0, ''),
+('Preferiti', 1, ''),
+('Preferiti', 1, '');
 
 INSERT INTO booklistDetail (id_customer, id_booklist, property) VALUES
 (1, 1, 0),
 (1, 2, 0),
-(2, 3, 0);
+(2, 3, 0),
+(1, 4, 0),
+(2, 5, 0);
 
 INSERT INTO booklistAssociation (id_booklist, id_book) VALUES
 (1, '9788869183157'),

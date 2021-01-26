@@ -96,6 +96,7 @@ public class CustomerDAO {
             throw new RuntimeException(e);
         }
     }
+
     public void doSave( Customer customer){
 
         try(Connection c = ConPool.getConnection()){
@@ -113,6 +114,10 @@ public class CustomerDAO {
                 throw new RuntimeException("INSERT error.");
             }
 
+            ResultSet rs = ps.getGeneratedKeys();
+            rs.next();
+            int id_customer = rs.getInt(1);
+            customer.setId_customer(id_customer);
 
         }catch (SQLException e){
             throw new RuntimeException(e);

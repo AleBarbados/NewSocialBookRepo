@@ -21,21 +21,19 @@
         <table>
             <c:forEach items="${booklists}" var="booklist">
                 <tr>
-                        <c:choose>
-                            <c:when test="${view!=null}">
-                                <td><a href="BooklistViewServlet?id=${booklist.id}&view=true">${booklist.name}</a></td>
-                                <td>
-                                    <input type="submit" name="delete" value="Elimina">
-                                    <input type="submit" name="edit" value="Modifica">
-                                </td>
-                            </c:when>
-                            <c:otherwise>
-                                <td><a href="BooklistViewServlet?id=${booklist.id}">${booklist.name}</a></td>
-                                <td>
-                                    <input type="submit" name="follow" value="Segui Booklist">
-                                </td>
-                            </c:otherwise>
-                        </c:choose>
+                    <c:choose>
+                        <c:when test="${view!=null}">
+                            <td><a href="BooklistViewServlet?id=${booklist.id}&view=true">${booklist.name}</a></td>
+                            <td>
+                                <input type="hidden" name="id" value="${booklist.id}">
+                                <input type="submit" name="delete" value="Elimina">
+                                <input type="submit" name="edit" value="Modifica">
+                            </td>
+                        </c:when>
+                        <c:otherwise>
+                            <td><a href="BooklistViewServlet?id=${booklist.id}">${booklist.name}</a></td>
+                        </c:otherwise>
+                    </c:choose>
                 </tr>
             </c:forEach>
         </table>

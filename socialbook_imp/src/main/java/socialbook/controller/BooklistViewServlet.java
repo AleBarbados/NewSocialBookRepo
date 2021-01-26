@@ -3,6 +3,7 @@ package socialbook.controller;
 import socialbook.model.Book;
 import socialbook.model.BookList;
 import socialbook.model.BookListDAO;
+import socialbook.model.Customer;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -27,6 +28,10 @@ public class BooklistViewServlet extends HttpServlet {
 
         if(request.getParameter("view")!=null){
             request.setAttribute("view", true);
+        }
+        Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
+        if(bookListDAO.checkFollower(customer.getId_customer(), id)){
+            request.setAttribute("follow", true);
         }
         request.setAttribute("booklist", b);
         request.setAttribute("books", books);
