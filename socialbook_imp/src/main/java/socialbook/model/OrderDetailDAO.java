@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class OrderDetailDAO {
     private static final String DO_RETRIEVE_BY_ORDER = "SELECT ISBN FROM orderDetail WHERE id_order = ?;";
 
-    private ArrayList<Book> doRetrieveByOrder(int id_order){
+    public ArrayList<Book> doRetrieveByOrder(int id_order){
 
         try(Connection con = ConPool.getConnection()){
         ArrayList<Book> books = new ArrayList<>();

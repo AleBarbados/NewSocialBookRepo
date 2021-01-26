@@ -1,10 +1,7 @@
 package socialbook.controller;
 
 import socialbook.Utility.Utility;
-import socialbook.model.BookList;
-import socialbook.model.BookListDAO;
-import socialbook.model.Customer;
-import socialbook.model.CustomerDAO;
+import socialbook.model.*;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -33,6 +30,10 @@ public class RegistrationServlet extends HttpServlet {
         Customer customer = new Customer(name, surname, email,  Utility.encryptionSHA1(password), username, description);
         CustomerDAO customerDAO = new CustomerDAO();
         customerDAO.doSave(customer);
+
+        Cart cart = new Cart(customer.getId_customer(), 0);
+        CartDAO cartDAO = new CartDAO();
+        cartDAO.doSave(cart, customer.getId_customer());
 
         BookList bookList = new BookList("preferiti", true, "");
         BookListDAO bookListDAO = new BookListDAO();

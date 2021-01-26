@@ -17,13 +17,13 @@ import java.util.List;
 
 @WebServlet("/new-ticket-servlet")
 public class NewTicketServlet extends HttpServlet {
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
-
-        if(customer != null) {
-            TicketDAO ticketDAO = new TicketDAO();
-            Ticket ticket = new Ticket();
+        TicketDAO ticketDAO = new TicketDAO();
+        Ticket ticket = new Ticket();
+        if(request.getParameter("customerManager") == null && request.getParameter("systemManager") == null){
 
             ticket.setStatus(StatusEnumeration.OPEN);
             ticket.setIssue(request.getParameter("issue"));
@@ -34,17 +34,26 @@ public class NewTicketServlet extends HttpServlet {
                 ticket.setDestination(AdminRole.CATALOGUE_MANAGER);
             }
 
-            ticket.setId_customer(customer.getId_customer());
-            ticketDAO.doSave(ticket);
+            if(customer != null){
 
+            ticket.setId_customer(customer.getId_customer());
             List<Ticket> tickets = ticketDAO.doRetrieveByCustomer(customer.getId_customer());
             request.setAttribute("tickets", tickets);
+            ticketDAO.doSave(ticket);
 
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/AllTicketsView.jsp");
+
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/AllTicketsView.jsp");
             requestDispatcher.forward(request, response);
-        } else {
-            System.out.println("devo fare una pagina di prova ma ho sonno");
+            } else {
+                ticket.setId_customer(-1);
+                ticketDAO.doSave(ticket);
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/index.jsp");
+            requestDispatcher.forward(request, response);
+            }
+        }else{
+            //errore, admin non può creare servlet
         }
     }
-
 }
+
+
