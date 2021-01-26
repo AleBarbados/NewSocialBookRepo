@@ -1,6 +1,8 @@
 package socialbook.controller;
 
 import socialbook.Utility.Utility;
+import socialbook.model.BookList;
+import socialbook.model.BookListDAO;
 import socialbook.model.Customer;
 import socialbook.model.CustomerDAO;
 
@@ -30,8 +32,11 @@ public class RegistrationServlet extends HttpServlet {
         String addr = "WEB-INF/jsp/index.jsp";
         Customer customer = new Customer(name, surname, email,  Utility.encryptionSHA1(password), username, description);
         CustomerDAO customerDAO = new CustomerDAO();
-        System.out.println("numero caratteri pwd = " + customer.getC_pwd().length());
         customerDAO.doSave(customer);
+
+        BookList bookList = new BookList("preferiti", true, "");
+        BookListDAO bookListDAO = new BookListDAO();
+        bookListDAO.doSave(bookList, customer.getId_customer());
 
         RequestDispatcher dispatcher =
                 req.getRequestDispatcher(addr);

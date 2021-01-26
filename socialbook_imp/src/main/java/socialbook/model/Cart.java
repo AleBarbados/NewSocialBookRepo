@@ -24,12 +24,12 @@ public class Cart {
         id_cart = id;
     }
 
-    public int getPrice() {
-        return price;
+    public float getPrice() {
+        return price/100;
     }
 
-    public void setPrice(int p) {
-        price = p;
+    public void setPrice(float p) {
+        price =(int) p*100;
     }
 
     public int getId_customer() {
@@ -58,7 +58,7 @@ public class Cart {
         return books.get(books.size()-1);
     }
 
-    public String getPrice_euro() {
+    public String getStringPrice_euro() {
         return String.format("% .2f", price/100.00);
     }
 

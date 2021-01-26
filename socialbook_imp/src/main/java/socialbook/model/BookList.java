@@ -17,6 +17,12 @@ public class BookList {
 
     }
 
+    public BookList(String name, boolean favorite, String image) {
+        this.name=name;
+        this.favorite=favorite;
+        this.image=image;
+    }
+
     public int getId() {
         return id;
     }

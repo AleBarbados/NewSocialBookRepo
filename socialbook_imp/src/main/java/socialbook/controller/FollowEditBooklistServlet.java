@@ -21,29 +21,41 @@ public class FollowEditBooklistServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String dest;
         RequestDispatcher dispatcher;
-
+        Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
         if (request.getParameter("follow") != null) {
-            Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
-            bookListDAO.doFollow(customer.getId_customer(), Integer.parseInt(request.getParameter("id")) );
+            bookListDAO.doFollow(customer.getId_customer(), Integer.parseInt(request.getParameter("id")));
 
             dest=request.getHeader("referer");
             response.sendRedirect(dest);
 
         } else if (request.getParameter("unFollow") != null) {
-            Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
             bookListDAO.doDelete(customer.getId_customer(), Integer.parseInt(request.getParameter("id")));
 
             dest=request.getHeader("referer");
             response.sendRedirect(dest);
 
-        } else {
-            if (request.getParameter("editProfile").equals("edit")) {
-                dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/customerEdit.jsp");
-            } else {
+        } else if(request.getParameter("delete") != null){
+            bookListDAO.doDelete(customer.getId_customer(), Integer.parseInt(request.getParameter("id")));
 
+            dest=request.getHeader("referer");
+            response.sendRedirect(dest);
 
-                dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/customerView.jsp");
+        } else if(request.getParameter("addPreferiti") != null){
+            bookListDAO.addFavorite(customer.getId_customer(), request.getParameter("isbn"));
+
+            dest=request.getHeader("referer");
+            response.sendRedirect(dest);
+
+        } else{
+            if (request.getParameter("edit") != null) {
+                request.setAttribute("operazione", "edit");
+                request.setAttribute("books", bookListDAO.doRetriveBooks(Integer.parseInt(request.getParameter("id"))));
+                request.setAttribute("booklist", bookListDAO.doRetriveBooklist(Integer.parseInt(request.getParameter("id"))));
+
+            }else if( request.getParameter("Create") != null) {
+                request.setAttribute("operazione", "Create");
             }
+            dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/booklistEditCreate.jsp");
             dispatcher.forward(request, response);
         }
     }

@@ -60,6 +60,16 @@
         <h1>UTENTE NON TROVATO</h1>
     </c:otherwise>
 </c:choose>
-
+<h1>Preferiti</h1>
+<table>
+<c:forEach items="${preferiti}" var="book">
+    <tr>
+        <td>
+            <h1>${book.title}</h1>
+            <a href="paginaLibroServlet?libro=${book.isbn}"><img width="60px" height="60px" alt="immagine prodotto" src="${pageContext.request.contextPath}/images/${book.image}"></a>
+        </td>
+    </tr>
+</c:forEach>
+</table>
 </body>
 </html>
