@@ -16,6 +16,9 @@ public class CustomerManagerServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if(request.getSession().getAttribute("customerManager") == null)
+            throw new socialbook.controller.ServletException("Solo il customer manager può effettuare questa operazione!!");
+
         String id = request.getParameter("id");
 
         if(id == null) {      //click sul bottone 'mostra tutti gli utenti'

@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,6 +49,13 @@
 <form action="paginaLibroServlet" method="get">
     <input type="hidden" name="libro" value="${ISBN}">
     <input type="submit" value="Mostra libro">
+</form>
+<br>
+
+<br>
+<form action="ricercaServlet" method="get">
+    <input type="text" placeholder="Cerca..." name="query" value="<c:out value='${param.query}'/>">
+    <button type="submit">search</button>
 </form>
 <br>
 

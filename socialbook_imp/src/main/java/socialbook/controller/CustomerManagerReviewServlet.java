@@ -20,6 +20,9 @@ public class CustomerManagerReviewServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        if(request.getSession().getAttribute("customerManager") == null)
+            throw new socialbook.controller.ServletException("Solo il catalogue manager può effettuare questa operazione!!");
+
         String r_id = request.getParameter("r_id");
 
         if(r_id != null) {      //click sul bottone per la rimozione di una recensione

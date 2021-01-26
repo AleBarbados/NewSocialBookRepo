@@ -21,6 +21,9 @@ public class CatalogueManagerInserimentoRimozioneServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if(request.getSession().getAttribute("catalogueManager") == null)
+            throw new socialbook.controller.ServletException("Solo il catalogue manager può effettuare questa operazione!!");
+
         String isbn = request.getParameter("isbn");
 
         String dest = request.getHeader("referer");

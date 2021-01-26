@@ -21,8 +21,10 @@ public class CustomerEditServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-
         Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
+
+        if(customer == null)
+            throw new socialbook.controller.ServletException("Bisogna prima effettuare l'accesso!!");
 
         String fileName = Utility.aggiuntaFoto(request);
 

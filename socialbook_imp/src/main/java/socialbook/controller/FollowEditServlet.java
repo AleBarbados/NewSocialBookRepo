@@ -23,39 +23,24 @@ public class FollowEditServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
+
+        if(customer == null)
+            throw new socialbook.controller.ServletException("Bisogna prima effettuare l'accesso!!");
+
         String dest;
-        RequestDispatcher dispatcher;
 
         if (request.getParameter("follow") != null) {
-            Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
             followDAO.doFollow(Integer.parseInt(request.getParameter("id")), customer.getId_customer());
 
             dest=request.getHeader("referer");
             response.sendRedirect(dest);
 
         } else if (request.getParameter("unFollow") != null) {
-            Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
             followDAO.doDelete(customer.getId_customer(), Integer.parseInt(request.getParameter("id")));
 
             dest=request.getHeader("referer");
             response.sendRedirect(dest);
-
-        } else {
-            if (request.getParameter("editProfile").equals("edit")) {
-                dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/customerEdit.jsp");
-            } else {
-                Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
-
-                customer.setC_pwd(Utility.encryptionSHA1(request.getParameter("password")));
-                customer.setDescription(request.getParameter("descrizione"));
-                String fileName = Utility.aggiuntaFoto(request);
-                customer.setImage(fileName);
-
-                customerDAO.doUpdate(customer);
-
-                dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/customerView.jsp");
-            }
-            dispatcher.forward(request, response);
         }
     }
 }

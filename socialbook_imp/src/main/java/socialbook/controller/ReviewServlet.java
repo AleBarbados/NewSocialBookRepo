@@ -22,10 +22,12 @@ public class ReviewServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
+        if(customer == null)
+            throw new socialbook.controller.ServletException("Devi prima effettuare l'accesso!!");
+
         String review = request.getParameter("rimuovi_rec");
         String isbn = request.getParameter("isbn");
-
-        Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
         int id_customer = customer.getId_customer();
 
         String vote, body;

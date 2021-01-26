@@ -9,11 +9,19 @@ import java.util.ArrayList;
 public class BookDAO {
     private final static String DO_UPDATE_CATALOGUE = "UPDATE book SET catalogue = ? WHERE ISBN = ?";
     private final static String DO_UPDATE_PRICE = "UPDATE book SET price_cent = ? WHERE ISBN = ?";
-    private final static String DO_SAVE = "INSERT INTO book (ISBN, title, genre, price_cent, publication_year, publishing_house, plot, catalogue, image) VALUES (?,?,?,?,?,?,?,?,?)";
-    private final static String DO_RETRIEVE_ALL = "SELECT ISBN, title, genre, price_cent, publication_year, publishing_house, plot, catalogue, image FROM book";
+    private final static String DO_SAVE = "INSERT INTO book (ISBN, title, genre, price_cent, publication_year, publishing_house, plot, catalogue, "
+            + " image) VALUES (?,?,?,?,?,?,?,?,?)";
+    private final static String DO_RETRIEVE_ALL = "SELECT ISBN, title, genre, price_cent, publication_year, publishing_house, plot, catalogue, "
+            + " image FROM book";
     private final static String DO_RETRIEVE_CATALOGUE_BY_ISBN = "SELECT catalogue FROM book WHERE ISBN = ?";
-    private final static String DO_RETRIEVE_BY_ISBN = "SELECT ISBN, title, genre, price_cent, publication_year, publishing_house, plot, catalogue, image FROM book "
-            + " WHERE ISBN = ?";
+    private final static String DO_RETRIEVE_BY_ISBN = "SELECT ISBN, title, genre, price_cent, publication_year, publishing_house, plot, catalogue, "
+            + " image FROM book WHERE ISBN = ?";
+    private final static String DO_RETRIEVE_BY_TITLE_OR_GENRE = "SELECT ISBN, title, genre, price_cent, publication_year, publishing_house, "
+            + " plot, catalogue, image FROM book WHERE title LIKE ? OR genre LIKE ? LIMIT ?,?";
+    private final static String DO_RETRIEVE_BY_TITLE = "SELECT ISBN, title, genre, price_cent, publication_year, publishing_house, "
+            + " plot, catalogue, image FROM book WHERE title LIKE ? LIMIT ?,?";
+    private final static String DO_RETRIEVE_BY_IDAUTHOR = "SELECT b.ISBN, b.title, b.genre, b.price_cent, b.publication_year, b.publishing_house, "
+            + " b.plot, b.catalogue, b.image FROM book b,authorAssociation a WHERE a.id_author = ? AND b.ISBN = a.ISBN";
 
     public void doUpdateCatalogue(String isbn) {
         try(Connection con = ConPool.getConnection()) {
@@ -95,6 +103,65 @@ public class BookDAO {
             throw new RuntimeException(e);
         }
     }
+
+    public ArrayList<Book> doRetrieveByTitleOrGenre(String like, int offset, int limit) {
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement(DO_RETRIEVE_BY_TITLE_OR_GENRE);
+            ps.setString(1, like+"%");
+            ps.setString(2, like+"%");
+            ps.setInt(3, offset);
+            ps.setInt(4, limit);
+
+            ArrayList<Book> books = new ArrayList<>();
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                books.add(createBook(rs));
+            }
+            return books;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ArrayList<Book> doRetrieveByTitle(String like, int offset, int limit) {
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement(DO_RETRIEVE_BY_TITLE);
+
+            ps.setString(1, like+"%");
+            ps.setInt(2, offset);
+            ps.setInt(3, limit);
+
+            ArrayList<Book> books = new ArrayList<>();
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+               books.add(createBook(rs));
+            }
+            return books;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ArrayList<Book> doRetrieveByIdAuthor(int id) {
+        try(Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement(DO_RETRIEVE_BY_IDAUTHOR);
+            ps.setInt(1, id);
+
+            ArrayList<Book> books = new ArrayList<>();
+
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()) {
+                books.add(createBook(rs));
+            }
+            return books;
+        } catch(SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     private Book createBook(ResultSet rs) throws SQLException {
         Book b = new Book();

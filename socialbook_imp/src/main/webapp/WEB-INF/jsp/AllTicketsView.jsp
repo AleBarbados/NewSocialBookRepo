@@ -15,7 +15,7 @@
 <form action="ticket-view-servlet" method="get">
 
     <c:choose>
-        <c:when test="${admin != null}">
+        <c:when test="${customerManager != null || systemManager != null}">
             <h1>Ticket disponibili size: ${ticketsR.size()}</h1>
             <h1>Ticket dell'admin size: ${tickets.size()}</h1>
 

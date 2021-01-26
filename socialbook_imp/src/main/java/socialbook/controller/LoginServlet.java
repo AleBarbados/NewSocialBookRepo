@@ -29,32 +29,35 @@ public class LoginServlet extends HttpServlet {
         CustomerDAO customerDAO = new CustomerDAO();
         AdminDAO adminDAO = new AdminDAO();
         String pwd = Utility.encryptionSHA1(password);
-System.out.println(" u :"+usr+" p:"+pwd);
 
         if (customerDAO.validate(usr, pwd)) {          //validazione utente
-            System.out.println("entra in if");
             customer = customerDAO.doRetrieveByUsername(usr);
-            System.out.println("customer " + customer.getC_name());
             sessione.setAttribute("personalCustomer", customer);
+
             RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/jsp/index.jsp");
             rd.forward(req, resp);
-        }
-       else{
+        } else {
             // controllo amministratore
             Admin admin = adminDAO.doRetrieveByUsrEPwd(usr, pwd);
 
-            if ( admin != null) {
-                sessione.setAttribute("admin", admin);
-                System.out.println("salvato admin in sessione");
+            if (admin != null) {
+                switch (admin.getA_role()) {
+                    case CUSTOMER_MANAGER:
+                        sessione.setAttribute("customerManager", admin);
+                        break;
+                    case CATALOGUE_MANAGER:
+                        sessione.setAttribute("catalogueManager", admin);
+                        break;
+                    case SYSTEM_MANAGER:
+                        sessione.setAttribute("systemManager", admin);
+                        break;
+                }
+
                 RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/jsp/customerManagerView.jsp");
                 rd.forward(req, resp);
-
-            }else{
-                ADDRESS = "errorLogin.jsp";
             }
-
         }
-        RequestDispatcher rd = req.getRequestDispatcher(ADDRESS);
-        rd.forward(req, resp);
+
+        throw new socialbook.controller.ServletException("Le credenziali inserite non sono valide!!");
     }
 }

@@ -23,6 +23,9 @@ public class CatalogueManagerCreazioneModificaServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if(request.getSession().getAttribute("catalogueManager") == null)
+            throw new socialbook.controller.ServletException("Solo il catalogue manager può effettuare questa operazione!!");
+
         int price_cent = Integer.parseInt(request.getParameter("price_cent"));
         String isbnMod = request.getParameter("isbn_modifica");
 

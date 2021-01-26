@@ -21,6 +21,7 @@ public class FollowersServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ArrayList<Follow> follows = new ArrayList<>();
+
         if(request.getParameter("Following")!=null){
             follows=followDAO.doRetriveAllFollowed(Integer.parseInt(request.getParameter("id")));
             request.setAttribute("Following", "Following");
