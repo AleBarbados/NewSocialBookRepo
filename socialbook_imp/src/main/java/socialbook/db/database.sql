@@ -147,7 +147,7 @@ CREATE TABLE review(
 
 CREATE TABLE ticket(
     id_ticket   	int AUTO_INCREMENT,
-    id_customer 	int NOT NULL,
+    id_customer 	int,
     admn_usr    	varchar(16),
     open_date   	date NOT NULL,
     issue       	varchar(100) NOT NULL,

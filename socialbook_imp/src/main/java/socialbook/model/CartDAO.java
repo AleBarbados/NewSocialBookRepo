@@ -4,18 +4,18 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class CartDAO {
-    private final static String DO_SAVE_CUSTOMER_CART = "INSERT INTO customerOrder (order_price, cart, id_customer) VALUES (?,?,?)";
+    private final static String DO_SAVE_CUSTOMER_CART = "INSERT INTO customerOrder (id_cart, order_price, cart, id_customer) VALUES (?,?,?)";
     private final static String DO_UPDATE_CUSTOMER_CART = "UPDATE customerOrder SET order_price = ? WHERE id_order = ?";
     private final static String DO_SAVE_BOOK_CART = "INSERT INTO orderDetail (id_order, ISBN) VALUES (?,?)";
     private final static String DO_DELETE_BOOK_CART = "DELETE  FROM orderDetail WHERE ISBN = ? AND id_order = ?;";
-    private final static String DO_RETRIEVE_BY_CUSTOMER = "SELECT id_order, order_price, invoice_addr, cart, order_date, id_customer" +
-            " FROM customerOrder WHERE id_customer = ? AND cart = true";
+    private final static String DO_RETRIEVE_BY_CUSTOMER = "SELECT id_order, order_price, id_customer" +
+            " WHERE id_customer = ? AND cart = true";
 
     public void doSave(Cart c, int id) {
         try(Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(DO_SAVE_CUSTOMER_CART, Statement.RETURN_GENERATED_KEYS);
             ps.setFloat(1, c.getPrice());
-            ps.setBoolean(2, false);
+            ps.setBoolean(2, true);
             ps.setInt(3, id);
 
             if (ps.executeUpdate() != 1) {
@@ -26,7 +26,7 @@ public class CartDAO {
             rs.next();
 
             int id_cart = rs.getInt(1);
-            c.setId_cart(id);
+            c.setId_cart(id_cart);
 
         } catch(SQLException e) {
             throw new RuntimeException(e);
@@ -50,7 +50,7 @@ public class CartDAO {
 
     }
 
-    private void doSaveBookCart(int id, String isbn) {
+    public void doSaveBookCart(int id, String isbn) {
         try(Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(DO_SAVE_BOOK_CART);
             ps.setInt(1, id);
@@ -65,7 +65,7 @@ public class CartDAO {
         }
     }
 
-    private void doDeleteBookFromCart(int id, String isbn){
+    public void doDeleteBookFromCart(int id, String isbn){
         try(Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(DO_DELETE_BOOK_CART);
             ps.setInt(2, id);
@@ -77,22 +77,18 @@ public class CartDAO {
         }
     }
 
-    public ArrayList<Order> doRetrieveByCustomer(int id_customer){
+    public Cart doRetrieveByCustomer(int id_customer){
         try(Connection con = ConPool.getConnection()){
-            ArrayList<Order> orders = new ArrayList<>();
+            Cart c = new Cart();
+
             PreparedStatement ps = con.prepareStatement(DO_RETRIEVE_BY_CUSTOMER);
             ps.setInt(1, id_customer);
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
-                Order o = new Order();
-                o.setId_order(rs.getInt(1));
-                o.setOrder_price(rs.getInt(2));
-                o.setInvoice_addr(rs.getString(3));
-                o.setCart(rs.getBoolean(4));
-                o.setDate(rs.getDate(5));
-                o.setId_customer(id_customer);
-                orders.add(o);
-            }return orders;
+            if(rs.next()){
+                c.setId_cart(rs.getInt(1));
+                c.setPrice(rs.getFloat(2));
+                c.setId_customer(id_customer);
+            }return c;
 
         }catch(SQLException e){
             e.printStackTrace();

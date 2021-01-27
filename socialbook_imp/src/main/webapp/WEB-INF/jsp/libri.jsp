@@ -47,6 +47,10 @@
                                     <input type="hidden" name="isbn" value="${book.isbn}">
                                     <input type="submit" value="Aggiungi a Booklist">
                                 </form>
+                                <form action = "show-cart-servlet" method = "get">
+                                <input type = "hidden" name = "isbn" value = "${book.isbn}">
+                                <input type = "submit" name = "addCart" value = "Aggiungi al carrello">
+                                </form>
                             </td>
                         </tr>
                     </c:when>
@@ -77,6 +81,10 @@
                                 <form action="ScegliBooklistServlet" method="get">
                                     <input type="hidden" name="isbn" value="${book.isbn}">
                                     <input type="submit" value="Aggiungi a Booklist">
+                                </form>
+                                <form action = "show-cart-servlet" method = "get">
+                                    <input type = "hidden" name = "isbn" value = "${book.isbn}">
+                                    <input type = "submit" name = "addCart" value="Aggiungi al carrello">
                                 </form>
                             </td>
                         </tr>

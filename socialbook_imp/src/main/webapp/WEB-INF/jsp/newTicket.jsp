@@ -14,7 +14,7 @@
 <body>
 
     <c:choose>
-        <c:when test="${personalCustomer != null }">
+        <c:when test="${customerManager == null && catalogueManager == null && systemManager == null }">
     <form id = "new-ticket" name="new-ticket" method="post" action="new-ticket-servlet">
         <label for = "issue">Problema:</label><br>
         <textarea id = "issue" name="issue"></textarea>

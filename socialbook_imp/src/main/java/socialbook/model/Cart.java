@@ -40,6 +40,10 @@ public class Cart {
         id_customer = id;
     }
 
+    public void setBooks(ArrayList<Book> books) {
+        this.books = books;
+    }
+
     public void insert(Book b) {
         books.add(b);
         price += b.getPrice_cent();

@@ -1,10 +1,7 @@
 package socialbook.controller;
 
 import socialbook.Utility.Utility;
-import socialbook.model.Admin;
-import socialbook.model.AdminDAO;
-import socialbook.model.Customer;
-import socialbook.model.CustomerDAO;
+import socialbook.model.*;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -33,6 +30,11 @@ public class LoginServlet extends HttpServlet {
         if (customerDAO.validate(usr, pwd)) {          //validazione utente
             customer = customerDAO.doRetrieveByUsername(usr);
             sessione.setAttribute("personalCustomer", customer);
+            Cart cart = new CartDAO().doRetrieveByCustomer(customer.getId_customer());
+            cart.setBooks(new OrderDetailDAO().doRetrieveByOrder(cart.getId_cart()));
+            sessione.setAttribute("cart", cart);
+
+
 
             RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/jsp/index.jsp");
             rd.forward(req, resp);
