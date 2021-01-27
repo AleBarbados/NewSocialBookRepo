@@ -20,14 +20,17 @@ public class AllBooklistServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ArrayList<BookList> booklists = bookListDAO.doRetriveFromCustomer(Integer.parseInt(request.getParameter("id")));
+        ArrayList<BookList> booklists = bookListDAO.doRetriveFromCustomer(Integer.parseInt(request.getParameter("id"))); //prendo le booklist create dall'utente
+        ArrayList<BookList> followed = bookListDAO.doRetriveFollowed(Integer.parseInt(request.getParameter("id")));//prendo le booklist seguite dall'utente
 
         if(request.getParameter("view")!=null){
-            request.setAttribute("view", true);
+            request.setAttribute("view", true);   //controllo se l'utente si trova sulla sua home
         }
+
         request.setAttribute("booklists", booklists);
+        request.setAttribute("followed", followed);  //setto le liste di booklist
 
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/allBooklistsView.jsp");
-        requestDispatcher.forward(request, response);
+        requestDispatcher.forward(request, response); //mando tutto alla jsp
     }
 }

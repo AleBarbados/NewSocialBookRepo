@@ -7,11 +7,14 @@ public class BookListDAO {
     private final static String DO_RETRIVE_BOOKLIST="SELECT id_booklist, booklist_name, favorite, image FROM booklist WHERE id_booklist=?";
     private final static String DO_RETRIVE_FROM_CUSTOMER = "SELECT booklist.id_booklist, booklist.booklist_name, booklist.favorite, booklist.image" +
             " FROM booklist JOIN booklistdetail ON booklist.id_booklist=booklistdetail.id_booklist WHERE booklistdetail.id_customer=? AND booklist.favorite=0 AND booklistdetail.property=0";
+    private final static String DO_RETRIVE_FOLLOWED = "SELECT booklist.id_booklist, booklist.booklist_name, booklist.favorite, booklist.image " +
+            "FROM booklist JOIN booklistdetail ON booklist.id_booklist=booklistdetail.id_booklist WHERE booklistdetail.id_customer=? AND booklist.favorite=0 AND booklistdetail.property=1";
     private final static String DO_FOLLOW = "INSERT INTO booklistdetail(id_customer, id_booklist, property) VALUES(?,?,1)";
     private final static String DO_SAVE_DETAIL = "INSERT INTO booklistdetail(id_customer, id_booklist, property) VALUES(?,?,0)";
     private final static String DO_SAVE = "INSERT INTO booklist(id_booklist, booklist_name, favorite, image) VALUES(?,?,?,?)";
     private final static String DO_SAVE_ASSOCIATION = "INSERT INTO booklistassociation(id_booklist, id_book) VALUES(?,?)";
-    private final static String DO_DELETE = "DELETE FROM booklistdetail WHERE id_customer=? AND id_booklist=?";
+    private final static String DO_UNFOLLOW = "DELETE FROM booklistdetail WHERE id_customer=? AND id_booklist=?";
+    private final static String DO_DELETE = "DELETE FROM booklist WHERE id_booklist=?";
     private final static String DO_RETRIVE_BOOKS = "SELECT book.ISBN, book.title, book.genre, book.price_cent, book.publication_year, book.publishing_house," +
             " book.plot, book.catalogue, book.image FROM book JOIN booklistassociation ON book.ISBN=booklistassociation.id_book WHERE booklistassociation.id_booklist=?";
     private final static String DO_RETRIVE_FROM_FOLLOW = "SELECT booklist.id_booklist, booklist.booklist_name, booklist.favorite, booklist.image" +
@@ -35,6 +38,28 @@ public class BookListDAO {
                 return b;
             }
             return null;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ArrayList<BookList> doRetriveFollowed(int id) {
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement(DO_RETRIVE_FOLLOWED);
+
+            ArrayList<BookList> bookLists = new ArrayList<>();
+
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                BookList b = new BookList();
+                b.setId(rs.getInt(1));
+                b.setName(rs.getString(2));
+                b.setFavorite(rs.getBoolean(3));
+                b.setImage(rs.getString(4));
+                bookLists.add(b);
+            }
+            return bookLists;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -75,9 +100,21 @@ public class BookListDAO {
         }
     }
 
-    public void doDelete(int id_customer, int id_booklist) {
+    public void doDelete(int id_booklist) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(DO_DELETE);
+            ps.setInt(1, id_booklist);
+            if (ps.executeUpdate() != 1) {
+                throw new RuntimeException("INSERT error.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void doUnFollow(int id_customer, int id_booklist) {
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement(DO_UNFOLLOW);
             ps.setInt(1, id_customer);
             ps.setInt(2, id_booklist);
             if (ps.executeUpdate() != 1) {

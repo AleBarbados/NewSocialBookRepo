@@ -22,6 +22,9 @@ public class ScegliBooklistServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Customer customer = (Customer) request.getSession().getAttribute("personalCustomer"); //prendo il customer dalla sessione
+        if(customer == null){
+            throw new socialbook.controller.ServletException("HEYY, devi fare l'accesso prima!!");  //controllo se il customer ha fatto l'accesso
+        }
 
         request.setAttribute("isbn", request.getParameter("isbn"));         //setto come attributo il parametro isbn che servirà nella servlet successiva
 

@@ -24,6 +24,9 @@ public class EditCreaBooklistServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
+        if(customer == null){
+            throw new socialbook.controller.ServletException("HEYY, devi fare l'accesso prima!!");
+        }
         BookList booklist = new BookList();
         if(request.getParameter("edit")!=null){
             booklist = bookListDAO.doRetriveBooklist(Integer.parseInt(request.getParameter("id")));

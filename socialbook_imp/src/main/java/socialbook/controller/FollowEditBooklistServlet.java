@@ -22,6 +22,9 @@ public class FollowEditBooklistServlet extends HttpServlet {
         String dest;
         RequestDispatcher dispatcher;
         Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
+        if(customer == null){
+            throw new socialbook.controller.ServletException("HEYY, devi fare l'accesso prima!!");
+        }
         if (request.getParameter("follow") != null) {
             bookListDAO.doFollow(customer.getId_customer(), Integer.parseInt(request.getParameter("id")));
 
@@ -29,13 +32,13 @@ public class FollowEditBooklistServlet extends HttpServlet {
             response.sendRedirect(dest);
 
         } else if (request.getParameter("unFollow") != null) {
-            bookListDAO.doDelete(customer.getId_customer(), Integer.parseInt(request.getParameter("id")));
+            bookListDAO.doUnFollow(customer.getId_customer(), Integer.parseInt(request.getParameter("id")));
 
             dest=request.getHeader("referer");
             response.sendRedirect(dest);
 
         } else if(request.getParameter("delete") != null){
-            bookListDAO.doDelete(customer.getId_customer(), Integer.parseInt(request.getParameter("id")));
+            bookListDAO.doDelete(Integer.parseInt(request.getParameter("id")));
 
             dest=request.getHeader("referer");
             response.sendRedirect(dest);

@@ -23,12 +23,13 @@ public class FollowEditServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher dispatcher;
         Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
+        String dest;
 
         if(customer == null)
             throw new socialbook.controller.ServletException("Bisogna prima effettuare l'accesso!!");
 
-        String dest;
 
         if (request.getParameter("follow") != null) {
             followDAO.doFollow(Integer.parseInt(request.getParameter("id")), customer.getId_customer());
@@ -41,6 +42,21 @@ public class FollowEditServlet extends HttpServlet {
 
             dest=request.getHeader("referer");
             response.sendRedirect(dest);
+
+        } else {
+            if (request.getParameter("editProfile").equals("edit")) {
+                dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/customerEdit.jsp");
+            } else {
+                customer.setC_pwd(Utility.encryptionSHA1(request.getParameter("password")));
+                customer.setDescription(request.getParameter("descrizione"));
+                String fileName = Utility.aggiuntaFoto(request);
+                customer.setImage(fileName);
+
+                customerDAO.doUpdate(customer);
+
+                dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/customerView.jsp");
+            }
+            dispatcher.forward(request, response);
         }
     }
 }
