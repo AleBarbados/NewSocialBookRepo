@@ -15,10 +15,8 @@
                 <form action="followEdit">
                     <input type="submit" name="follow" value="Follow">
                     <input type="hidden" name="id" value="${customer.id_customer}">
-                </form>
             </c:when>
             <c:when test="${follow==true&&view!=true}">
-                <form action="followEdit">
                     <input type="submit" name="unFollow" value="UnFollow">
                     <input type="hidden" name="id" value="${customer.id_customer}">
                 </form>

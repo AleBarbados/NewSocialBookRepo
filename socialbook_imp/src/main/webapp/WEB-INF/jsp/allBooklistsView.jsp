@@ -18,28 +18,55 @@
     </c:if>
     <c:choose>
         <c:when test="${booklists!=null}">
-        <table>
-            <c:forEach items="${booklists}" var="booklist">
-                <tr>
-                    <c:choose>
-                        <c:when test="${view!=null}">
-                            <td><a href="BooklistViewServlet?id=${booklist.id}&view=true">${booklist.name}</a></td>
-                            <td>
-                                <input type="hidden" name="id" value="${booklist.id}">
-                                <input type="submit" name="delete" value="Elimina">
-                                <input type="submit" name="edit" value="Modifica">
-                            </td>
-                        </c:when>
-                        <c:otherwise>
-                            <td><a href="BooklistViewServlet?id=${booklist.id}">${booklist.name}</a></td>
-                        </c:otherwise>
-                    </c:choose>
-                </tr>
-            </c:forEach>
-        </table>
+            <h1>Booklist create</h1><br>
+            <table>
+                <c:forEach items="${booklists}" var="booklist">
+                    <tr>
+                        <c:choose>
+                            <c:when test="${view!=null}">
+                                <td><a href="BooklistViewServlet?id=${booklist.id}&view=true">${booklist.name}</a></td>
+                                <td>
+                                    <input type="hidden" name="id" value="${booklist.id}">
+                                    <input type="submit" name="delete" value="Elimina">
+                                    <input type="submit" name="edit" value="Modifica">
+                                </td>
+                            </c:when>
+                            <c:otherwise>
+                                <td><a href="BooklistViewServlet?id=${booklist.id}">${booklist.name}</a></td>
+                            </c:otherwise>
+                        </c:choose>
+                    </tr>
+                </c:forEach>
+            </table>
         </c:when>
         <c:otherwise>
-            Non ci sono Booklist
+            Nessuna booklist Creata<br>
+        </c:otherwise>
+    </c:choose>
+    <c:choose>
+        <c:when test="${followed!=null}">
+            <h1>Booklist seguite</h1>
+            <table>
+                <c:forEach items="${followed}" var="booklist">
+                    <tr>
+                        <c:choose>
+                            <c:when test="${view!=null}">
+                                <td><a href="BooklistViewServlet?id=${booklist.id}&view=true">${booklist.name}</a></td>
+                                <td>
+                                    <input type="hidden" name="id" value="${booklist.id}"/>
+                                    <input type="submit" name="unFollow" value="unFollow">
+                                </td>
+                            </c:when>
+                            <c:otherwise>
+                                <td><a href="BooklistViewServlet?id=${booklist.id}">${booklist.name}</a></td>
+                            </c:otherwise>
+                        </c:choose>
+                    </tr>
+                </c:forEach>
+            </table>
+        </c:when>
+        <c:otherwise>
+            Nessuna Booklist seguita
         </c:otherwise>
     </c:choose>
 </form>
