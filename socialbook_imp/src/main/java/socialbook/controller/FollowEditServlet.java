@@ -24,26 +24,29 @@ public class FollowEditServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher dispatcher;
+        Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
+        String dest;
+
+        if(customer == null)
+            throw new socialbook.controller.ServletException("Bisogna prima effettuare l'accesso!!");
+
 
         if (request.getParameter("follow") != null) {
-            Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
             followDAO.doFollow(Integer.parseInt(request.getParameter("id")), customer.getId_customer());
 
-            dispatcher = request.getRequestDispatcher("/WEB-INF/customerView.jsp");
-            dispatcher.forward(request, response);
+            dest=request.getHeader("referer");
+            response.sendRedirect(dest);
 
         } else if (request.getParameter("unFollow") != null) {
-            Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
             followDAO.doDelete(customer.getId_customer(), Integer.parseInt(request.getParameter("id")));
 
-            response.sendRedirect("/socialbook_war/customerServlet?");
+            dest=request.getHeader("referer");
+            response.sendRedirect(dest);
 
         } else {
             if (request.getParameter("editProfile").equals("edit")) {
                 dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/customerEdit.jsp");
             } else {
-                Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
-
                 customer.setC_pwd(Utility.encryptionSHA1(request.getParameter("password")));
                 customer.setDescription(request.getParameter("descrizione"));
                 String fileName = Utility.aggiuntaFoto(request);

@@ -25,10 +25,8 @@
                         <c:choose>
                             <c:when test="${view!=null}">
                                 <td><a href="BooklistViewServlet?id=${booklist.id}&view=true">${booklist.name}</a></td>
-                                <td>
-                                    <input type="hidden" name="id" value="${booklist.id}">
-                                    <input type="submit" name="delete" value="Elimina">
-                                    <input type="submit" name="edit" value="Modifica">
+                                <td><a href="FollowEditBooklist?id=${booklist.id}&delete=true">Elimina</a>
+                                    <a href="FollowEditBooklist?id=${booklist.id}&edit=true">Modifica</a>
                                 </td>
                             </c:when>
                             <c:otherwise>
@@ -53,8 +51,7 @@
                             <c:when test="${view!=null}">
                                 <td><a href="BooklistViewServlet?id=${booklist.id}&view=true">${booklist.name}</a></td>
                                 <td>
-                                    <input type="hidden" name="id" value="${booklist.id}"/>
-                                    <input type="submit" name="unFollow" value="unFollow">
+                                    <a href="FollowEditBooklist?id=${booklist.id}&unFollow=true">UnFollow</a>
                                 </td>
                             </c:when>
                             <c:otherwise>

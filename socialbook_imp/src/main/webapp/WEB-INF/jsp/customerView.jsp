@@ -12,13 +12,15 @@
         <img width="60px" height="60px" alt="immagine customer" src="${pageContext.request.contextPath}/images/${customer.image}">
         <c:choose>
             <c:when test="${follow!=true&&view!=true}">
-                <form action="followEdit">
-                    <input type="submit" name="follow" value="Follow">
+                <form action="followEdit" method="post">
                     <input type="hidden" name="id" value="${customer.id_customer}">
+                    <input type="submit" name="follow" value="Follow">
+                </form>
             </c:when>
             <c:when test="${follow==true&&view!=true}">
-                    <input type="submit" name="unFollow" value="UnFollow">
+                <form action="followEdit" method="post">
                     <input type="hidden" name="id" value="${customer.id_customer}">
+                    <input type="submit" name="unFollow" value="UnFollow">
                 </form>
             </c:when>
         </c:choose>
