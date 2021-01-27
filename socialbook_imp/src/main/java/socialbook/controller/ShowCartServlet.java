@@ -1,5 +1,6 @@
 package socialbook.controller;
 
+import socialbook.Utility.BookAlreadyInsertException;
 import socialbook.model.*;
 
 import javax.servlet.RequestDispatcher;
@@ -21,15 +22,27 @@ public class ShowCartServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Cart cart = (Cart) req.getSession().getAttribute("cart");
-        CartDAO cartDAO = new CartDAO();
-        String isbn = req.getParameter("id");
+        System.out.println("carrello null" + cart.getBooks().size()+" id cart=" + cart.getId_cart());
 
-        if(req.getParameter("personalCustomer") != null) {
+        CartDAO cartDAO = new CartDAO();
+        String isbn = req.getParameter("isbn");
+
+        if(req.getSession().getAttribute("personalCustomer") != null) {
 
             if (req.getParameter("addCart") != null) {
 
+
+                System.out.println("supera insert");
+                try {
+                    cartDAO.doSaveBookCart(cart.getId_cart(), isbn);
+                } catch (BookAlreadyInsertException e) {
+                    e.printStackTrace();
+                    req.getSession().setAttribute("cart", cart);
+                    RequestDispatcher rd = req.getRequestDispatcher("WEB-INF/jsp/cartView.jsp");
+                    rd.forward(req, resp);
+                    return;
+                }
                 cart.insert(new BookDAO().doRetrieveByIsbn(isbn));
-                cartDAO.doSaveBookCart(cart.getId_cart(), isbn);
                 cartDAO.doUpdateCustomerCart(cart);
                 req.getSession().setAttribute("cart", cart);
 
@@ -46,7 +59,8 @@ public class ShowCartServlet extends HttpServlet {
             rd.forward(req, resp);
         }
         else {
-            //non puoi arrivare qui
+            throw new socialbook.controller.ServletException("Bisogna prima effettuare l'accesso!!");
+
         }
 
     }

@@ -9,13 +9,19 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>New ticket</title>
+    <title>Contattaci</title>
 </head>
 <body>
 
+    <h2>Cos'è SocialBook?</h2>
+    <p></p>
+    <h2>Chi siamo?</h2>
+    <p></p>
+
     <c:choose>
         <c:when test="${customerManager == null && catalogueManager == null && systemManager == null }">
-    <form id = "new-ticket" name="new-ticket" method="post" action="new-ticket-servlet">
+            <h2>Che succede?</h2>
+            <form id = "new-ticket" name="new-ticket" method="post" action="new-ticket-servlet">
         <label for = "issue">Problema:</label><br>
         <textarea id = "issue" name="issue"></textarea>
         <label for = "destination"> Problema di:</label>

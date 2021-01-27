@@ -9,18 +9,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Carrello</title>
 </head>
 <body>
 <h1>Carrello:</h1>
     <c:choose>
-            <c:when test="${cart.books.size() == 0}">
+            <c:when test="${cart.getBooks().size() == 0}">
 
                 Nessun elemento nel carrello
 
             </c:when>
     <c:otherwise>
-        <c:forEach items="${cart.books}" var="book">
+        <c:forEach items="${cart.getBooks()}" var="book">
         <table>
             <tr>
                 <td><img width="60px" height="60px" alt="immagine prodotto" src="${pageContext.request.contextPath}/images/${book.image}"></td>

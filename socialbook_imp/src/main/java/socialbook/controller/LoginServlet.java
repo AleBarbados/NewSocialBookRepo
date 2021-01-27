@@ -31,7 +31,7 @@ public class LoginServlet extends HttpServlet {
             customer = customerDAO.doRetrieveByUsername(usr);
             sessione.setAttribute("personalCustomer", customer);
             Cart cart = new CartDAO().doRetrieveByCustomer(customer.getId_customer());
-            cart.setBooks(new OrderDetailDAO().doRetrieveByOrder(cart.getId_cart()));
+            System.out.println("cart id: "+ cart.getId_cart());
             sessione.setAttribute("cart", cart);
 
 

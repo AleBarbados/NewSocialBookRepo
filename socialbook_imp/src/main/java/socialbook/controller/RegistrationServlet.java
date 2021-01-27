@@ -43,5 +43,4 @@ public class RegistrationServlet extends HttpServlet {
                 req.getRequestDispatcher(addr);
         dispatcher.forward(req, resp);
     }
-
 }

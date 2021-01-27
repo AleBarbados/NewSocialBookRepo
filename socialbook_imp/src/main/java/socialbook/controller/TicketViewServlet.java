@@ -1,5 +1,6 @@
 package socialbook.controller;
 
+import socialbook.Utility.AdminRole;
 import socialbook.Utility.StatusEnumeration;
 import socialbook.model.*;
 
@@ -34,30 +35,42 @@ public class TicketViewServlet extends HttpServlet {
         MessageDAO messageDAO = new MessageDAO();
 
         if(request.getParameter("name") == null) {
-            if (customer == null)
+            if (customer == null && customerManager == null && systemManager == null)
                 throw new socialbook.controller.ServletException("Bisogna prima effettuare l'accesso!!");
 
             request.getSession().setAttribute("ticket", ticketDAO.doRetrieveById(Integer.parseInt(request.getParameter("id"))));
             ArrayList<Message> messages = messageDAO.doRetrieveByTicket(Integer.parseInt(request.getParameter("id")));
-            if (messages.size() == 0) {
-                throw new socialbook.controller.ServletException("Problema nella visualizzazione dei messaggi!!");
-            }
+
             request.setAttribute("messages", messages);
-            ADDRESS = "WEB-INF/jsp/TicketViewProva.jsp";
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/TicketViewProva.jsp");
+            requestDispatcher.forward(request, response);
         }
 
         if(request.getParameter("name").equals("accept")) {
             if(customerManager == null && systemManager == null)
                 throw new socialbook.controller.ServletException("Solo il customer manager e il system managere possono effettuare quest'operazione!!");
 
-            Ticket ticket = ticketDAO.doRetrieveById(Integer.parseInt(request.getParameter("id")));
+            String urs = "";
+            AdminRole adminRole = null;
 
-            if(customerManager != null)
+            Ticket ticket = ticketDAO.doRetrieveById(Integer.parseInt(request.getParameter("id")));
+            ticket.setStatus(StatusEnumeration.WORK_IN_PROGRESS);
+
+
+            if(customerManager != null){
+                urs = customerManager.getA_usr();
+                adminRole = AdminRole.CUSTOMER_MANAGER;
                 ticket.setAdmn_usr(customerManager.getA_usr());
-            else
+
+            } else{
+                urs = systemManager.getA_usr();
+                adminRole = AdminRole.SYSTEM_MANAGER;
                 ticket.setAdmn_usr(systemManager.getA_usr());
 
-            ticket.setStatus(StatusEnumeration.WORK_IN_PROGRESS);
+            }
+            request.setAttribute("ticket", new TicketDAO().doRetrieveByAdmin(urs));
+            request.setAttribute("ticketR", new TicketDAO().doRetrieveByRole(adminRole));
+
             ticketDAO.doUpdate(ticket);
 
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/AllTicketsView.jsp");

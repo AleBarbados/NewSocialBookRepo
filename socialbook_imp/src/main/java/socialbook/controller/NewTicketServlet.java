@@ -28,7 +28,7 @@ public class NewTicketServlet extends HttpServlet {
             ticket.setStatus(StatusEnumeration.OPEN);
             ticket.setIssue(request.getParameter("issue"));
 
-            if(request.getParameter("destination").equals("users")){
+            if("users".equals(request.getParameter("destination"))){
                 ticket.setDestination(AdminRole.CUSTOMER_MANAGER);
             }else {
                 ticket.setDestination(AdminRole.CATALOGUE_MANAGER);
@@ -45,13 +45,14 @@ public class NewTicketServlet extends HttpServlet {
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/AllTicketsView.jsp");
             requestDispatcher.forward(request, response);
             } else {
-                ticket.setId_customer(-1);
+                System.out.println("entro in ticketservlet col customer null");
+                ticket.setId_customer(4);
                 ticketDAO.doSave(ticket);
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/index.jsp");
             requestDispatcher.forward(request, response);
             }
         }else{
-            //errore, admin non può creare servlet
+            //errore, admin non può creare ticket
         }
     }
 }

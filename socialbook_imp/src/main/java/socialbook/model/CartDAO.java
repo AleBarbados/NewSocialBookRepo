@@ -1,19 +1,22 @@
 package socialbook.model;
 
+import socialbook.Utility.BookAlreadyInsertException;
+
 import java.sql.*;
 import java.util.ArrayList;
 
 public class CartDAO {
-    private final static String DO_SAVE_CUSTOMER_CART = "INSERT INTO customerOrder (id_cart, order_price, cart, id_customer) VALUES (?,?,?)";
+    private final static String DO_SAVE_CUSTOMER_CART = "INSERT INTO customerOrder ( order_price, cart, id_customer) VALUES (?,?,?)";
     private final static String DO_UPDATE_CUSTOMER_CART = "UPDATE customerOrder SET order_price = ? WHERE id_order = ?";
     private final static String DO_SAVE_BOOK_CART = "INSERT INTO orderDetail (id_order, ISBN) VALUES (?,?)";
     private final static String DO_DELETE_BOOK_CART = "DELETE  FROM orderDetail WHERE ISBN = ? AND id_order = ?;";
-    private final static String DO_RETRIEVE_BY_CUSTOMER = "SELECT id_order, order_price, id_customer" +
+    private final static String DO_RETRIEVE_BY_CUSTOMER = "SELECT id_order, order_price, id_customer FROM customerOrder " +
             " WHERE id_customer = ? AND cart = true";
 
     public void doSave(Cart c, int id) {
         try(Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(DO_SAVE_CUSTOMER_CART, Statement.RETURN_GENERATED_KEYS);
+
             ps.setFloat(1, c.getPrice());
             ps.setBoolean(2, true);
             ps.setInt(3, id);
@@ -50,17 +53,20 @@ public class CartDAO {
 
     }
 
-    public void doSaveBookCart(int id, String isbn) {
+    public void doSaveBookCart(int id_order, String isbn) throws  BookAlreadyInsertException{
         try(Connection con = ConPool.getConnection()) {
+            System.out.println("do save book cart id "+id_order+" isbn "+isbn);
             PreparedStatement ps = con.prepareStatement(DO_SAVE_BOOK_CART);
-            ps.setInt(1, id);
+            ps.setInt(1, id_order);
             ps.setString(2, isbn);
 
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("INSERT error.");
             }
 
-        } catch(SQLException e) {
+        }catch (SQLIntegrityConstraintViolationException sicve){
+            throw new BookAlreadyInsertException(sicve);
+        }catch(SQLException e) {
             throw new RuntimeException(e);
         }
     }
@@ -86,8 +92,10 @@ public class CartDAO {
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
                 c.setId_cart(rs.getInt(1));
+                System.out.println("set id cart "+ c.getId_cart());
                 c.setPrice(rs.getFloat(2));
                 c.setId_customer(id_customer);
+                c.setBooks(new OrderDetailDAO().doRetrieveByOrder(c.getId_cart()));
             }return c;
 
         }catch(SQLException e){

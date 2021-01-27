@@ -35,6 +35,12 @@
         <td>Status: ${ticket.status.name()}</td>
     </tr>
     <tr><h3>Messaggi:</h3></tr>
+    <c:choose>
+    <c:when test="${message.size() == 0}">
+    <h4>Nessun messaggio</h4>
+    </c:when>
+    <c:otherwise>
+
     <c:forEach var="message" items="${messages}">
     <c:if test="${message.sender == false}">
     <div  class="customer-message"> </c:if>
@@ -43,6 +49,8 @@
 
                  <tr><td>${message.message_body}<td></tr>
                  </c:forEach>
+            </c:otherwise>
+            </c:choose>
 </table>
                  <form id = "insertMessageForm" name ="insertMessageForm" method="post" action="new-message-servlet">
                      <textarea name="message" placeholder="Aggiungi un messaggio ..." cols="30" rows="30"></textarea>

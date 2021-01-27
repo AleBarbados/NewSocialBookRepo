@@ -58,7 +58,7 @@
     <button type="submit">search</button>
 </form>
 <br>
-
+<a href="ticket-view-servlet?id=null&name=newTicket"> Contattaci</a>
 <br>
 <a href="logout-servlet" onclick="return confirm('sicuro di voler uscire?');"  >Logout</a>
 

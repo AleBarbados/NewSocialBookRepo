@@ -5,7 +5,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class InfoPaymentDAO {
-    private final static String DO_SAVE = "INSERT INTO Infopayment(id_customer, card_number, payment_name, payment_surname, " +
+    private final static String DO_SAVE = "INSERT INTO infoPayment(id_customer, card_number, payment_name, payment_surname, " +
             "           exp_date_mm, exp_date_yy, cvv) VALUES(?, ?, ?, ?, ?, ?, ?)";
     private final static String DO_DELETE = "DELETE FROM infoPayment WHERE id_customer = ?";
     private final static String DO_RETRIEVE_BY_CUSTOMER = "SELECT id_customer, card_number, payment_name, payment_surname, " +

@@ -4,8 +4,8 @@ USE SocialBook;
 
 CREATE TABLE customer(
     id_customer      int AUTO_INCREMENT,
-    customer_name    varchar(15),
-    customer_surname varchar(15),
+    customer_name    varchar(15) NOT NULL,
+    customer_surname varchar(15) NOT NULL,
     email            varchar(50) NOT NULL,
     customer_pwd     varchar(100) NOT NULL,
     customer_usr     varchar(16) NOT NULL,
@@ -53,7 +53,7 @@ CREATE TABLE authorAssociation(
 CREATE TABLE customerOrder(
     id_order     int AUTO_INCREMENT,
     order_price  decimal(6,2) NOT NULL,
-    invoice_addr varchar(16)  NOT NULL,
+    invoice_addr varchar(16) ,
     cart         bool NOT NULL,
     order_date   date,
     id_customer  int NOT NULL,
@@ -89,7 +89,7 @@ CREATE TABLE infoPayment(
     PRIMARY KEY(card_number)
 );
 
-CREATE TABLE bookList(
+CREATE TABLE booklist(
     id_booklist   int AUTO_INCREMENT,
     booklist_name varchar(30) NOT NULL,
     favorite      bool NOT NULL,
@@ -97,23 +97,23 @@ CREATE TABLE bookList(
 	PRIMARY KEY(id_booklist)
 );
 
-CREATE TABLE booklistDetail(
+CREATE TABLE booklistdetail(
     id_customer int NOT NULL,
     id_booklist int NOT NULL,
     property    bool NOT NULL,
     CONSTRAINT fk_bd_c FOREIGN KEY (id_customer) REFERENCES customer (id_customer)
     ON UPDATE CASCADE
     ON DELETE CASCADE,
-    CONSTRAINT fk_bd_bl FOREIGN KEY (id_booklist) REFERENCES bookList (id_booklist)
+    CONSTRAINT fk_bd_bl FOREIGN KEY (id_booklist) REFERENCES booklist (id_booklist)
     ON UPDATE CASCADE
     ON DELETE CASCADE,
     PRIMARY KEY (id_customer, id_booklist)
 );
 
-CREATE TABLE booklistAssociation(
+CREATE TABLE booklistassociation(
     id_booklist  int NOT NULL,
     id_book varchar(13) NOT NULL,
-    CONSTRAINT fk_ba_bl FOREIGN KEY (id_booklist) REFERENCES bookList (id_booklist)
+    CONSTRAINT fk_ba_bl FOREIGN KEY (id_booklist) REFERENCES booklist (id_booklist)
     ON UPDATE CASCADE
     ON DELETE CASCADE,
     CONSTRAINT fk_ba_b FOREIGN KEY (id_book) REFERENCES book (ISBN)
@@ -134,7 +134,7 @@ CREATE TABLE review(
     id_customer int NOT NULL,
     ISBN        varchar(13) NOT NULL,
     review_date date NOT NULL,
-    body        varchar(100),
+    body        varchar(300),
     vote        varchar(4),
     CONSTRAINT fk_r_c FOREIGN KEY (id_customer) REFERENCES customer(id_customer)
     ON UPDATE CASCADE
@@ -147,12 +147,12 @@ CREATE TABLE review(
 
 CREATE TABLE ticket(
     id_ticket   	int AUTO_INCREMENT,
-    id_customer 	int,
+    id_customer 	int ,
     admn_usr    	varchar(16),
     open_date   	date NOT NULL,
     issue       	varchar(100) NOT NULL,
     close_date  	date,
-    t_status   varchar(20),
+    t_status   varchar(20) NOT NULL,
     destination varchar(20),
     CONSTRAINT fk_t_c FOREIGN KEY (id_customer) REFERENCES customer (id_customer)
     ON UPDATE CASCADE
@@ -260,6 +260,7 @@ INSERT INTO customer(customer_name, customer_surname, email, customer_pwd, custo
 ('Luca', 'Russo', 'luketto.222000@gmail.com', SHA1('pizzamandolino'), 'LukettoFurbetto', 'Voglio disperatamente porre fine alla mia vita alle volte', 'c2.jpg'),
 ('Jeka', 'Proietto', 'angpro99@gmail.com', SHA1('vivaicarlini'), 'Jeka', 'beh che dire, follettini e follettine', 'c3.jpg');
 
+
 INSERT INTO book(ISBN, title, genre, price_cent, publication_year, publishing_house, plot, catalogue, image) VALUES
 ('9788869183157', 'Harry Potter e la pietra filosofale', 'Fantasy', 1800, 2018, 'Salani', 'Nel giorno del suo undicesimo compleanno, la vita di Harry Potter cambia per sempre. Una lettera, consegnata dal gigantesco e arruffato Rubeus Hagrid, contiene infatti delle notizie sconvolgenti. Harry scopre di non essere un ragazzo come gli altri: è un mago e una straordinaria avventura lo aspetta..', true, 'b1.jpg'),
 ('9788893817035', 'Harry Potter e la camera dei segreti', 'Fantasy', 1699, 2018, 'Salani', 'Harry Potter è ormai celebre: durante il primo anno alla Scuola di Magia e Stregoneria di Hogwarts ha sconfitto il terribile Voldemort, vendicando la morte dei suoi genitori e coprendosi di gloria. Ma una spaventosa minaccia incombe sulla scuola: un incantesimo che colpisce i compagni di Harry, uno dopo l''altro, e che sembra legato a un antico mistero racchiuso nella tenebrosa Camera dei Segreti.', true, 'b2.jpg'),
@@ -280,21 +281,21 @@ INSERT INTO authorAssociation (id_author, ISBN) VALUES
 (3, '00000'),
 (3, '12345');
 
-INSERT INTO bookList (booklist_name, favorite, image) VALUES
+INSERT INTO booklist (booklist_name, favorite, image) VALUES
 ('Super Incredibile', 0, ''),
 ('Esilarante Cavoletto', 0, ''),
 ('WOW', 0, ''),
 ('Preferiti', 1, ''),
 ('Preferiti', 1, '');
 
-INSERT INTO booklistDetail (id_customer, id_booklist, property) VALUES
+INSERT INTO booklistdetail (id_customer, id_booklist, property) VALUES
 (1, 1, 0),
 (1, 2, 0),
 (2, 3, 0),
 (1, 4, 0),
 (2, 5, 0);
 
-INSERT INTO booklistAssociation (id_booklist, id_book) VALUES
+INSERT INTO booklistassociation (id_booklist, id_book) VALUES
 (1, '9788869183157'),
 (1, '9788893817035'), 
 (2, '9788869183157'), 
@@ -312,3 +313,6 @@ INSERT INTO admin(admn_usr, admn_pwd, admn_role) VALUES
 
 INSERT INTO ticket(id_ticket, id_customer,  open_date, issue, t_status, destination) VALUES
 (1, 1, '2018-01-14', 'aiuto, sito del cazzo', 'OPEN', 'CUSTOMER_MANAGER');
+
+INSERT INTO customer(customer_name, customer_surname, email, customer_pwd, customer_usr, c_description) VALUES
+('Utente', 'Fittizio', 'nonpuoesistere@gmail.hhi', SHA1('nonpuoiaccedere'), 'UtenteFittizio', 'utente fittizio');
