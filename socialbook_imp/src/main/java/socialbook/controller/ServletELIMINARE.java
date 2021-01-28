@@ -22,8 +22,8 @@ public class ServletELIMINARE extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         CustomerDAO customerDAO = new CustomerDAO();
-        request.getSession().setAttribute("personalCustomer", customerDAO.doRetriveById(5));
-        request.getSession().setAttribute("cart", new CartDAO().doRetrieveByCustomer(5));
+        request.getSession().setAttribute("personalCustomer", customerDAO.doRetriveById(1));
+        request.getSession().setAttribute("cart", new CartDAO().doRetrieveByCustomer(1));
 
         /*AdminDAO adminDAO = new AdminDAO();
         request.getSession().setAttribute("customerManager", adminDAO.doRetrieveByUsrEPwd("username", "password"));*/

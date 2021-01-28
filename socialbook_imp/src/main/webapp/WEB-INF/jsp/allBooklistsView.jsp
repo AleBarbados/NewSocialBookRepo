@@ -9,63 +9,112 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>AllBooklists</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#03a6f3">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-<form action="FollowEditBooklist" method="get">
-    <c:if test="${view!=null}">
-    <input type="submit" name="Create" value="Nuova Booklist">
-    </c:if>
-    <c:choose>
-        <c:when test="${booklists!=null}">
-            <h1>Booklist create</h1><br>
-            <table>
-                <c:forEach items="${booklists}" var="booklist">
-                    <tr>
-                        <c:choose>
-                            <c:when test="${view!=null}">
-                                <td><a href="BooklistViewServlet?id=${booklist.id}&view=true">${booklist.name}</a></td>
-                                <td><a href="FollowEditBooklist?id=${booklist.id}&delete=true">Elimina</a>
-                                    <a href="FollowEditBooklist?id=${booklist.id}&edit=true">Modifica</a>
-                                </td>
-                            </c:when>
-                            <c:otherwise>
-                                <td><a href="BooklistViewServlet?id=${booklist.id}">${booklist.name}</a></td>
-                            </c:otherwise>
-                        </c:choose>
-                    </tr>
-                </c:forEach>
-            </table>
-        </c:when>
-        <c:otherwise>
-            Nessuna booklist Creata<br>
-        </c:otherwise>
-    </c:choose>
-    <c:choose>
-        <c:when test="${followed!=null}">
-            <h1>Booklist seguite</h1>
-            <table>
-                <c:forEach items="${followed}" var="booklist">
-                    <tr>
-                        <c:choose>
-                            <c:when test="${view!=null}">
-                                <td><a href="BooklistViewServlet?id=${booklist.id}&view=true">${booklist.name}</a></td>
-                                <td>
-                                    <a href="FollowEditBooklist?id=${booklist.id}&unFollow=true">UnFollow</a>
-                                </td>
-                            </c:when>
-                            <c:otherwise>
-                                <td><a href="BooklistViewServlet?id=${booklist.id}">${booklist.name}</a></td>
-                            </c:otherwise>
-                        </c:choose>
-                    </tr>
-                </c:forEach>
-            </table>
-        </c:when>
-        <c:otherwise>
-            Nessuna Booklist seguita
-        </c:otherwise>
-    </c:choose>
-</form>
+    <section class="static about-sec">
+        <div class="container">
+            <form action="FollowEditBooklist" method="get">
+                <c:if test="${view!=null}">
+                    <input class="btn" type="submit" name="Create" value="Nuova Booklist">
+                </c:if>
+            </form>
+            <c:choose>
+                <c:when test="${booklists!=null}">
+                    <h2>Booklist create</h2><br>
+                    <div class="recomended-sec">
+                        <div class="row">
+                            <c:forEach items="${booklists}" var="booklist">
+                                <c:choose>
+                                    <c:when test="${view!=null}">
+                                        <div class="col-lg-3 col-md-6">
+                                            <div class="item">
+                                                <img alt="immagine booklist" src="${pageContext.request.contextPath}/images/${booklist.image}">
+                                                <h3>${booklist.name}</h3>
+                                                <div class="hover">
+                                                    <a href="BooklistViewServlet?id=${booklist.id}&view=true">
+                                                        <span><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <a href="FollowEditBooklist?id=${booklist.id}&delete=true">Elimina</a>
+                                            <a href="FollowEditBooklist?id=${booklist.id}&edit=true">Modifica</a>
+                                        </div>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <div class="col-lg-3 col-md-6">
+                                            <div class="item">
+                                                <img alt="immagine booklist" src="${pageContext.request.contextPath}/images/${booklist.image}">
+                                                <h3>${booklist.name}</h3>
+                                                <div class="hover">
+                                                    <a href="BooklistViewServlet?id=${booklist.id}">
+                                                        <span><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:forEach>
+                        </div>
+                    </div>
+                </c:when>
+                <c:otherwise>
+                Nessuna booklist Creata<br>
+                </c:otherwise>
+            </c:choose>
+            <c:choose>
+                <c:when test="${followed!=null}">
+                    <h2>Booklist seguite</h2>
+                    <div class="recomended-sec">
+                        <div class="row">
+                            <c:forEach items="${followed}" var="booklist">
+                                <c:choose>
+                                    <c:when test="${view!=null}">
+                                        <div class="col-lg-3 col-md-6">
+                                           <div class="item">
+                                                <img alt="immagine booklist" src="${pageContext.request.contextPath}/images/${booklist.image}">
+                                                <h3>${booklist.name}</h3>
+                                                <div class="hover">
+                                                    <a href="BooklistViewServlet?id=${booklist.id}">
+                                                        <span><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <a href="FollowEditBooklist?id=${booklist.id}&unFollow=true">UnFollow</a>
+                                        </div>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <div class="col-lg-3 col-md-6">
+                                            <div class="item">
+                                                <img alt="immagine booklist" src="${pageContext.request.contextPath}/images/${booklist.image}">
+                                                <h3>${booklist.name}</h3>
+                                                <div class="hover">
+                                                    <a href="BooklistViewServlet?id=${booklist.id}">
+                                                        <span><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:forEach>
+                        </div>
+                    </div>
+                </c:when>
+                <c:otherwise>
+                Nessuna Booklist seguita
+                </c:otherwise>
+            </c:choose>
+        </div>
+    </section>
 </body>
 </html>

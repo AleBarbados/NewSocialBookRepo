@@ -30,7 +30,7 @@ public class EditCreaBooklistServlet extends HttpServlet {
         BookList booklist = new BookList();
         if(request.getParameter("edit")!=null){
             booklist = bookListDAO.doRetriveBooklist(Integer.parseInt(request.getParameter("id")));
-            if(request.getParameter("image")!=null) {
+            if(request.getParameter("foto")!=null) {
                 String fileName = Utility.aggiuntaFoto(request);
                 booklist.setImage(fileName);
             }
@@ -40,8 +40,9 @@ public class EditCreaBooklistServlet extends HttpServlet {
             bookListDAO.doUpdate(booklist);
         }else if(request.getParameter("Create")!=null){
 
-            if(request.getParameter("image")!=null) {
-            booklist.setImage(request.getParameter("image"));
+            if(request.getParameter("foto")!=null) {
+                String fileName = Utility.aggiuntaFoto(request);
+                booklist.setImage(fileName);
             }
             if(request.getParameter("nome")!=null) {
                 booklist.setName(request.getParameter("nome"));

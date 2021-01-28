@@ -14,12 +14,6 @@
 </head>
 <body>
 
-<div class="breadcrumb">
-    <div class="container">
-        <a class="breadcrumb-item" href="index.html">Home</a>
-        <span class="breadcrumb-item active">Terms and Condition</span>
-    </div>
-</div>
 <section class="product-sec">
     <div class="container">
         <c:choose>
@@ -137,7 +131,7 @@
                     <div class="item">
                         <a href="paginaLibroServlet?libro=${book.isbn}"><img alt="immagine prodotto" src="${pageContext.request.contextPath}/images/${book.image}"></a>
                         <h3>${book.title}</h3>
-                        <h6><span class="price">${book.price_cent/100}euro</span> / <a href="cartServlet?isbn=${book.isbn}">Aggiungi al carrello</a></h6>
+                        <h6><span class="price">${book.price_cent/100}euro</span> / <a href="show-cart-servlet?isbn=${book.isbn}&addCart=true">Aggiungi al carrello</a></h6>
                         <div class="hover">
                             <span><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>
                         </div>
