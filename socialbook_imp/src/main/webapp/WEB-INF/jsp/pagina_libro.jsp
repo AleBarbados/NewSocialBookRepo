@@ -5,6 +5,9 @@
     <title>Book Page</title>
 </head>
 <body>
+<header>
+    <jsp:include page="header.jsp"> <jsp:param name="header.jsp" value="Home"/></jsp:include>
+</header>
     <table>
         <tr>
             <td><img width="60px" height="60px" alt="immagine prodotto" src="${pageContext.request.contextPath}/images/${book.image}"></td>

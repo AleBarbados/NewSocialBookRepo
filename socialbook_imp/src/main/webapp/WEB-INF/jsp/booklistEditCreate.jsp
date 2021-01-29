@@ -5,6 +5,9 @@
     <title>Modifica Crea Booklist</title>
 </head>
 <body>
+<header>
+    <jsp:include page="header.jsp"> <jsp:param name="header.jsp" value="Home"/></jsp:include>
+</header>
 <form action="EditCreaBooklistServlet" method="post">
     <c:if test="${operazione == 'edit'}">
         <input type="hidden" name="edit" value="edit">

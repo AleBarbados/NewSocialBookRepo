@@ -6,6 +6,9 @@
 </head>
 
 <body>
+<header>
+    <jsp:include page="header.jsp"> <jsp:param name="header.jsp" value="Home"/></jsp:include>
+</header>
 <h1>Tutti i libri</h1>
 <c:forEach items="${books}" var="book">
     <table>

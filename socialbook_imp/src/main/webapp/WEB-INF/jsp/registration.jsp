@@ -11,7 +11,9 @@
     <title>Registrazione</title>
 </head>
 <body class="body-registrati" onload='document.form.email.focus()'>
-
+<header>
+    <jsp:include page="header.jsp"> <jsp:param name="header.jsp" value="Home"/></jsp:include>
+</header>
 <div class = "main">
     <ul>
         <li><h3>Registrati:</h3></li>

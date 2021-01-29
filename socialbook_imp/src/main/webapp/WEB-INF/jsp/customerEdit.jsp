@@ -4,6 +4,9 @@
     <title>Edit Your Profile</title>
 </head>
 <body>
+<header>
+    <jsp:include page="header.jsp"> <jsp:param name="header.jsp" value="Home"/></jsp:include>
+</header>
     <form name = "editForm" action="customerEdit" method="post">
         <div>
             <img width="80px" height="80px" src="images/${personalCustomer.image}" alt="0">

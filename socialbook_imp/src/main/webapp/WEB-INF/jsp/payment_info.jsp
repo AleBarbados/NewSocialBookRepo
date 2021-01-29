@@ -11,6 +11,9 @@
     <title>Info Pagamento</title>
 </head>
 <body>
+<header>
+    <jsp:include page="header.jsp"> <jsp:param name="header.jsp" value="Home"/></jsp:include>
+</header>
         <div id="checkout">
 
             <div class="dati_ordine">

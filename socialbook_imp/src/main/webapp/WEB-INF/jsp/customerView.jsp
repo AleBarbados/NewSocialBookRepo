@@ -13,7 +13,9 @@
     <title>Account Customer</title>
 </head>
 <body>
-
+<header>
+    <jsp:include page="header.jsp"> <jsp:param name="header.jsp" value="Home"/></jsp:include>
+</header>
 <section class="product-sec">
     <div class="container">
         <c:choose>

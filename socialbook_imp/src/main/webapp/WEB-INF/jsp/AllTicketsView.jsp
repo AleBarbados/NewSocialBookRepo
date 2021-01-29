@@ -12,6 +12,9 @@
     <title>All tickets</title>
 </head>
 <body>
+<header>
+    <jsp:include page="header.jsp"> <jsp:param name="header.jsp" value="Home"/></jsp:include>
+</header>
 <form action="ticket-view-servlet" method="get">
 
     <c:choose>

@@ -4,6 +4,9 @@
     <title>Book Page</title>
 </head>
 <body>
+<header>
+    <jsp:include page="header.jsp"> <jsp:param name="header.jsp" value="Home"/></jsp:include>
+</header>
     <h3>Parola cercata: ${parolaCercata}</h3>
     <c:forEach items="${books}" var="book">
         <a href="paginaLibroServlet?libro=<c:out value="${book.isbn}"/>">

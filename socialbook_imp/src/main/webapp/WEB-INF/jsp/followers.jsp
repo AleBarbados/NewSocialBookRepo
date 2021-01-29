@@ -15,7 +15,11 @@
 <head>
     <title>followers</title>
 </head>
+
 <body>
+<header>
+    <jsp:include page="header.jsp"> <jsp:param name="header.jsp" value="Home"/></jsp:include>
+</header>
 <%
     CustomerDAO customerDAO = new CustomerDAO();
     ArrayList<Follow> follows = (ArrayList<Follow>) request.getAttribute("follows");

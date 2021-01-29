@@ -20,6 +20,9 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+<header>
+    <jsp:include page="header.jsp"> <jsp:param name="header.jsp" value="Home"/></jsp:include>
+</header>
     <section class="static about-sec">
         <div class="container">
             <form action="FollowEditBooklist" method="get">

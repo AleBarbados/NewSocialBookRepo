@@ -20,6 +20,9 @@
     <title>Booklist</title>
 </head>
 <body>
+<header>
+    <jsp:include page="header.jsp"> <jsp:param name="header.jsp" value="Home"/></jsp:include>
+</header>
     <section class="static about-sec">
         <div class="container">
             <c:choose>

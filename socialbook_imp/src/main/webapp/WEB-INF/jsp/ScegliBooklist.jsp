@@ -12,7 +12,9 @@
     <title>Scegli Booklist</title>
 </head>
 <body>
-
+<header>
+    <jsp:include page="header.jsp"> <jsp:param name="header.jsp" value="Home"/></jsp:include>
+</header>
 <c:choose>
     <c:when test="${booklists!=null}">
         <table>

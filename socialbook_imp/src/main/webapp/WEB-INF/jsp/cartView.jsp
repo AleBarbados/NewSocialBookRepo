@@ -12,6 +12,9 @@
     <title>Carrello</title>
 </head>
 <body>
+<header>
+    <jsp:include page="header.jsp"> <jsp:param name="header.jsp" value="Home"/></jsp:include>
+</header>
 <h1>Carrello:</h1>
     <c:choose>
             <c:when test="${cart.getBooks().size() == 0}">

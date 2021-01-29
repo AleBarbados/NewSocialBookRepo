@@ -12,7 +12,9 @@
     <title>Contattaci</title>
 </head>
 <body>
-
+<header>
+    <jsp:include page="header.jsp"> <jsp:param name="header.jsp" value="Home"/></jsp:include>
+</header>
     <h2>Cos'è SocialBook?</h2>
     <p></p>
     <h2>Chi siamo?</h2>
