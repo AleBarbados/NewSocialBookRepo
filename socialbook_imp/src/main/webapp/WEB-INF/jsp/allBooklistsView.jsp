@@ -23,7 +23,7 @@
     <section class="static about-sec">
         <div class="container">
             <form action="FollowEditBooklist" method="get">
-                <c:if test="${view!=null}">
+                <c:if test="${idCustomer == personalCustomer.id_customer}">
                     <input class="btn" type="submit" name="Create" value="Nuova Booklist">
                 </c:if>
             </form>
@@ -34,13 +34,13 @@
                         <div class="row">
                             <c:forEach items="${booklists}" var="booklist">
                                 <c:choose>
-                                    <c:when test="${view!=null}">
+                                    <c:when test="${idCustomer == personalCustomer.id_customer}">
                                         <div class="col-lg-3 col-md-6">
                                             <div class="item">
                                                 <img alt="immagine booklist" src="images/${booklist.image}">
                                                 <h3>${booklist.name}</h3>
                                                 <div class="hover">
-                                                    <a href="BooklistViewServlet?id=${booklist.id}&view=true">
+                                                    <a href="BooklistViewServlet?id=${booklist.id}&idCustomer=${personalCustomer.id_customer}">
                                                         <span><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>
                                                     </a>
                                                 </div>
@@ -55,7 +55,7 @@
                                                 <img alt="immagine booklist" src="${pageContext.request.contextPath}/images/${booklist.image}">
                                                 <h3>${booklist.name}</h3>
                                                 <div class="hover">
-                                                    <a href="BooklistViewServlet?id=${booklist.id}">
+                                                    <a href="BooklistViewServlet?id=${booklist.id}&idCustomer=${idCustomer}">
                                                         <span><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>
                                                     </a>
                                                 </div>
@@ -78,13 +78,13 @@
                         <div class="row">
                             <c:forEach items="${followed}" var="booklist">
                                 <c:choose>
-                                    <c:when test="${view!=null}">
+                                    <c:when test="${idCustomer == personalCustomer.id_customer}">
                                         <div class="col-lg-3 col-md-6">
                                            <div class="item">
                                                 <img alt="immagine booklist" src="${pageContext.request.contextPath}/images/${booklist.image}">
                                                 <h3>${booklist.name}</h3>
                                                 <div class="hover">
-                                                    <a href="BooklistViewServlet?id=${booklist.id}">
+                                                    <a href="BooklistViewServlet?id=${booklist.id}&idCustomer=${idCustomer}">
                                                         <span><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>
                                                     </a>
                                                 </div>
@@ -98,7 +98,7 @@
                                                 <img alt="immagine booklist" src="${pageContext.request.contextPath}/images/${booklist.image}">
                                                 <h3>${booklist.name}</h3>
                                                 <div class="hover">
-                                                    <a href="BooklistViewServlet?id=${booklist.id}">
+                                                    <a href="BooklistViewServlet?id=${booklist.id}&idCustomer=${idCustomer}">
                                                         <span><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>
                                                     </a>
                                                 </div>

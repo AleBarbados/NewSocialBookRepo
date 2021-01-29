@@ -29,7 +29,7 @@
                     <form action="FollowEditBooklist" method="get">
                         <input type="hidden" class="btn" name="id" value="${booklist.id}"/>
                         <c:choose>
-                            <c:when test="${view!=null}">
+                            <c:when test="${idCustomer == personalCustomer.id_customer}">
                                 <input type="submit" class="btn" name="edit" value="Modifica">
                                 <input type="submit" class="btn black" name="delete" value="Elimina">
                             </c:when>

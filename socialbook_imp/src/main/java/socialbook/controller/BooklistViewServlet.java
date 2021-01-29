@@ -26,13 +26,14 @@ public class BooklistViewServlet extends HttpServlet {
         ArrayList<Book> books = bookListDAO.doRetriveBooks(id);
         BookList b = bookListDAO.doRetriveBooklist(id);
 
-        if(request.getParameter("view")!=null){
-            request.setAttribute("view", true);
-        }
         Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
-        if(bookListDAO.checkFollower(customer.getId_customer(), id)){
+
+        if(customer.getId_customer()==Integer.parseInt(request.getParameter("idCustomer")))
+            request.setAttribute("idCustomer", customer.getId_customer());
+
+        if(bookListDAO.checkFollower(customer.getId_customer(), id))
             request.setAttribute("follow", true);
-        }
+
         request.setAttribute("booklist", b);
         request.setAttribute("books", books);
 

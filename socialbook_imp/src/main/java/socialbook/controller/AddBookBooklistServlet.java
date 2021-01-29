@@ -23,6 +23,9 @@ public class AddBookBooklistServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if(request.getSession().getAttribute("personalCustomer")==null)
+            throw new socialbook.controller.ServletException("Bisogna prima effettuare l'accesso!!");
+
         bookListDAO.doSaveBook(Integer.parseInt(request.getParameter("id")), request.getParameter("isbn")); //salviamo il libro nella booklist
 
         ArrayList<Book> books = bookDAO.doRetrieveAll();

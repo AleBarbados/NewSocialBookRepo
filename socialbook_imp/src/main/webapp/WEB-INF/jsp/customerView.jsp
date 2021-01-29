@@ -35,7 +35,7 @@
                     <p>${customer.description}</p>
                     <ul>
                         <c:choose>
-                            <c:when test="${follow!=true&&view!=true}">
+                            <c:when test="${follow!=true&&idCustomer == personalCustomer.id_customer}">
                                 <li>
                                     <form action="followEdit" method="post">
                                         <input type="hidden" name="id" value="${customer.id_customer}">
@@ -43,7 +43,7 @@
                                     </form>
                                 </li>
                             </c:when>
-                            <c:when test="${follow==true&&view!=true}">
+                            <c:when test="${follow==true&&idCustomer == personalCustomer.id_customer}">
                                 <li>
                                     <form action="followEdit" method="post">
                                         <input type="hidden" name="id" value="${customer.id_customer}">
@@ -68,7 +68,7 @@
                     </div>
                 </div>
             </c:when>
-            <c:when test="${personalCustomer!=null&&view==true}">
+            <c:when test="${personalCustomer!=null&&idCustomer == personalCustomer.id_customer}">
                 <h1>${personalCustomer.c_usr}</h1>
                 <div class="row">
                     <div class="col-md-6 slider-sec">
@@ -94,7 +94,6 @@
                             <li>
                                 <form action="allBooklistServlet" method="get">
                                     <input type="hidden" name="id" value="${personalCustomer.id_customer}">
-                                    <input type="hidden" name="view" value="true">
                                     <input class="btn black" type="submit" value="Mostra Booklist">
                                 </form>
                             </li>

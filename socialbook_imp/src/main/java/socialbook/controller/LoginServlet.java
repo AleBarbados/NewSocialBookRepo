@@ -31,9 +31,8 @@ public class LoginServlet extends HttpServlet {
             customer = customerDAO.doRetrieveByUsername(usr);
             sessione.setAttribute("personalCustomer", customer);
             Cart cart = new CartDAO().doRetrieveByCustomer(customer.getId_customer());
-            System.out.println("cart id: "+ cart.getId_cart());
+            System.out.println("cart id: " + cart.getId_cart());
             sessione.setAttribute("cart", cart);
-
 
 
             RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/jsp/index.jsp");
@@ -61,5 +60,9 @@ public class LoginServlet extends HttpServlet {
         }
 
         throw new socialbook.controller.ServletException("Le credenziali inserite non sono valide!!");
+    }
+
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doPost(req, resp);
     }
 }

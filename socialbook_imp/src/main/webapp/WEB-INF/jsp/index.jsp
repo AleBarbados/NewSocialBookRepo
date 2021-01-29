@@ -5,6 +5,9 @@
 <head>
     <title>JSP - Hello World</title>
 </head>
+<header>
+    <jsp:include page="header.jsp"> <jsp:param name="header.jsp" value="Home"/></jsp:include>
+</header>
 <body>
 <h1><%= "Hello World!" %>
 </h1>
@@ -15,7 +18,7 @@
 </form>
 <form action="customerServlet" method="get">
     <input type="submit" name="costumerView" value="Utente">
-    <input type="hidden" name="customer" value="2">
+    <input type="hidden" name="idCustomer" value="2">
 </form>
 <form action="newCustomerServlet" method="get">
     <input type="submit" name="toRegistrationServlet" value="Registrati">
