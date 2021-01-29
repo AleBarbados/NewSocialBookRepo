@@ -11,7 +11,7 @@ public class BookListDAO {
             "FROM booklist JOIN booklistdetail ON booklist.id_booklist=booklistdetail.id_booklist WHERE booklistdetail.id_customer=? AND booklist.favorite=0 AND booklistdetail.property=1";
     private final static String DO_FOLLOW = "INSERT INTO booklistdetail(id_customer, id_booklist, property) VALUES(?,?,1)";
     private final static String DO_SAVE_DETAIL = "INSERT INTO booklistdetail(id_customer, id_booklist, property) VALUES(?,?,0)";
-    private final static String DO_SAVE = "INSERT INTO booklist(id_booklist, booklist_name, favorite, image) VALUES(?,?,?,?)";
+    private final static String DO_SAVE = "INSERT INTO booklist(booklist_name, favorite, image) VALUES(?,?,?)";
     private final static String DO_SAVE_ASSOCIATION = "INSERT INTO booklistassociation(id_booklist, id_book) VALUES(?,?)";
     private final static String DO_UNFOLLOW = "DELETE FROM booklistdetail WHERE id_customer=? AND id_booklist=?";
     private final static String DO_DELETE = "DELETE FROM booklist WHERE id_booklist=?";
@@ -186,14 +186,13 @@ public class BookListDAO {
         }
     }
 
-    public void doSave(BookList bookList, int id){
+    public void doSave(BookList bookList, int id_customer){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(DO_SAVE, Statement.RETURN_GENERATED_KEYS);
 
-            ps.setInt(1, bookList.getId());
-            ps.setString(2, bookList.getName());
-            ps.setBoolean(3, bookList.getFavorite());
-            ps.setString(4, bookList.getImage());
+            ps.setString(1, bookList.getName());
+            ps.setBoolean(2, bookList.getFavorite());
+            ps.setString(3, bookList.getImage());
 
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("INSERT error.");
@@ -202,10 +201,10 @@ public class BookListDAO {
 
             ResultSet rs = ps.getGeneratedKeys();
             rs.next();
-            int id_customer = rs.getInt(1);
+            int id_booklist = rs.getInt(1);
 
-            ps2.setInt(1, id);
-            ps2.setInt(2, id_customer);
+            ps2.setInt(1, id_customer);
+            ps2.setInt(2, id_booklist);
 
             if (ps2.executeUpdate() != 1) {
                 throw new RuntimeException("INSERT error.");

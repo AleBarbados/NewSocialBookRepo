@@ -28,7 +28,7 @@
                 </c:if>
             </form>
             <c:choose>
-                <c:when test="${booklists!=null}">
+                <c:when test="${booklists != null}">
                     <h2>Booklist create</h2><br>
                     <div class="recomended-sec">
                         <div class="row">
@@ -37,7 +37,7 @@
                                     <c:when test="${view!=null}">
                                         <div class="col-lg-3 col-md-6">
                                             <div class="item">
-                                                <img alt="immagine booklist" src="${pageContext.request.contextPath}/images/${booklist.image}">
+                                                <img alt="immagine booklist" src="images/${booklist.image}">
                                                 <h3>${booklist.name}</h3>
                                                 <div class="hover">
                                                     <a href="BooklistViewServlet?id=${booklist.id}&view=true">

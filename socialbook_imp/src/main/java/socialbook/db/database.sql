@@ -282,9 +282,9 @@ INSERT INTO authorAssociation (id_author, ISBN) VALUES
 (3, '12345');
 
 INSERT INTO booklist (booklist_name, favorite, image) VALUES
-('Super Incredibile', 0, ''),
-('Esilarante Cavoletto', 0, ''),
-('WOW', 0, ''),
+('Super Incredibile', 0, 'c1.jpg'),
+('Esilarante Cavoletto', 0, 'c2.jpg'),
+('WOW', 0, 'c1.jpg'),
 ('Preferiti', 1, ''),
 ('Preferiti', 1, '');
 

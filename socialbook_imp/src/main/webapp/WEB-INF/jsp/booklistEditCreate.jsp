@@ -1,36 +1,42 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: luket
-  Date: 23/01/2021
-  Time: 15:06
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Modifica Crea Booklist</title>
 </head>
 <body>
-<form action="EditCreaBooklistServlet" method="post" enctype="multipart/form-data">
-    <label>Immagine
-        <input type="file" name="foto">
-    </label>
+<form action="EditCreaBooklistServlet" method="post">
     <c:if test="${operazione == 'edit'}">
-        <input type="hidden" value="edit" name="edit">
+        <input type="hidden" name="edit" value="edit">
         <input type="hidden" value="${booklist.id}" name="id">
         <label>Nome=
-            <input type="text" name="nome" value="${booklist.name}"/>
+            <input type="text" name="nome" value="${booklist.name}" required>
         </label>
     </c:if>
     <c:if test="${operazione == 'Create'}">
         <input type="hidden" value="Create" name="Create">
         <label>Nome=
-            <input type="text" name="nome"/>
+            <input type="text" name="nome" required>
         </label>
+        <div>
+            <img width="80px" height="80px" src="images/b1.jpg" alt="1">
+            <input type="radio" name="foto" value="b1.jpg">
+        </div>
+        <div>
+            <img width="80px" height="80px" src="images/b2.jpg" alt="2">
+            <input type="radio" name="foto" value="b2.jpg">
+        </div>
+        <div>
+            <img width="80px" height="80px" src="images/b3.jpg" alt="3">
+            <input type="radio" name="foto" value="b3.jpg">
+        </div>
+        <div>
+            <img width="80px" height="80px" src="images/b4.jpg" alt="4">
+            <input type="radio" name="foto" value="b4.jpg">
+        </div>
     </c:if>
 
-    <input type="submit" value="Va al catalogo">
+    <input type="submit" value="Salva">
 </form>
 </body>
 </html>

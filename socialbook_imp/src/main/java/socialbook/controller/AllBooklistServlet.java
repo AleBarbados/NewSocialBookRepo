@@ -2,8 +2,10 @@ package socialbook.controller;
 
 import socialbook.model.BookList;
 import socialbook.model.BookListDAO;
+import socialbook.model.Customer;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.Servlet;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,8 +22,13 @@ public class AllBooklistServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ArrayList<BookList> booklists = bookListDAO.doRetriveFromCustomer(Integer.parseInt(request.getParameter("id"))); //prendo le booklist create dall'utente
-        ArrayList<BookList> followed = bookListDAO.doRetriveFollowed(Integer.parseInt(request.getParameter("id")));//prendo le booklist seguite dall'utente
+        Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
+
+        if(customer == null)
+            throw new socialbook.controller.ServletException("Bisogna prima effettuare l'accesso!!");
+
+        ArrayList<BookList> booklists = bookListDAO.doRetriveFromCustomer(customer.getId_customer()); //prendo le booklist create dall'utente
+        ArrayList<BookList> followed = bookListDAO.doRetriveFollowed(customer.getId_customer());//prendo le booklist seguite dall'utente
 
         if(request.getParameter("view")!=null){
             request.setAttribute("view", true);   //controllo se l'utente si trova sulla sua home

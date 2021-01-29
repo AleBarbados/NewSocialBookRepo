@@ -26,7 +26,7 @@ public class CustomerEditServlet extends HttpServlet {
         if(customer == null)
             throw new socialbook.controller.ServletException("Bisogna prima effettuare l'accesso!!");
 
-        String fileName = Utility.aggiuntaFoto(request);
+        String fileName = request.getParameter("foto");
 
         customer.setC_pwd(Utility.encryptionSHA1(request.getParameter("password")));
         customer.setDescription(request.getParameter("descrizione"));
