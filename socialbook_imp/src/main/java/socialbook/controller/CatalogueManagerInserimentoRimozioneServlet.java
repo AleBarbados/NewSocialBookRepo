@@ -26,14 +26,13 @@ public class CatalogueManagerInserimentoRimozioneServlet extends HttpServlet {
 
         String isbn = request.getParameter("isbn");
 
-        String dest = request.getHeader("referer");
-        String conf = "/catalogueManagerServlet1";
+        String destination = request.getHeader("referer");
+        String comparison = "/catalogueManagerServlet1";
 
         if(request.getParameter("operazione") == null) {      //inserimento/rimozione dal catalogo
             bookDAO.doUpdateCatalogue(isbn);
 
-            Utility.redirect(response, dest, conf);
-
+            Utility.redirect(response, destination, comparison);
         } else {
             if(request.getParameter("operazione").equals("modifica")) {     //click su 'modifica prezzo'
                 request.setAttribute("operazione", "modifica");

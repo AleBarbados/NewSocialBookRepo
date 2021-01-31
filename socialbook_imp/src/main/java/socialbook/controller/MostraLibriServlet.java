@@ -14,11 +14,16 @@ import java.io.IOException;
 public class MostraLibriServlet extends HttpServlet {
     private final BookDAO bookDAO = new BookDAO();
 
-
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("books", bookDAO.doRetrieveAll());
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/libri.jsp");
         dispatcher.forward(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
     }
 }

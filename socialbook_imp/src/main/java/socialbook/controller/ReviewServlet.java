@@ -26,71 +26,70 @@ public class ReviewServlet extends HttpServlet {
         if(customer == null)
             throw new socialbook.controller.ServletException("Devi prima effettuare l'accesso!!");
 
-        String review = request.getParameter("rimuovi_rec");
+        String idReview = request.getParameter("rimuovi_rec");
         String isbn = request.getParameter("isbn");
-        int id_customer = customer.getId_customer();
+        int idCustomer = customer.getId_customer();
 
         String vote, body;
 
-        if(review != null) {        //utente elimina la propria recensione
-            reviewDAO.doDeleteById(Integer.parseInt(review));
+        if(idReview != null) {        //utente elimina la propria recensione
+            reviewDAO.doDeleteById(Integer.parseInt(idReview));
         } else {        //utente aggiunge recensione
-            Review r = reviewDAO.doRetrieveByISBNCustomer(isbn, id_customer);
+            Review review = reviewDAO.doRetrieveByISBNCustomer(isbn, idCustomer);
 
-            Calendar cal = Calendar.getInstance();      //si ottiene la data attuale
-            java.sql.Date date = new Date (cal.getTimeInMillis());
+            Calendar calendar = Calendar.getInstance();      //si ottiene la data attuale
+            java.sql.Date date = new Date (calendar.getTimeInMillis());
 
-            if(r == null) {                 //utente non ha mai recensito il libro in questione
-                Review r_new = new Review();
+            if(review == null) {                 //utente non ha mai recensito il libro in questione
+                Review newReview = new Review();
 
-                r_new.setId_customer(id_customer);
-                r_new.setIsbn(isbn);
-                r_new.setDate(date);
+                newReview.setId_customer(idCustomer);
+                newReview.setIsbn(isbn);
+                newReview.setDate(date);
 
                 vote = request.getParameter("voto");
                 if(vote == null)
-                    r_new.setVote("-");
+                    newReview.setVote("-");
                 else
-                    r_new.setVote(vote);
+                    newReview.setVote(vote);
 
                 body = request.getParameter("commento");
                 if(body.equals(""))
-                    r_new.setBody("-");
+                    newReview.setBody("-");
                 else
-                    r_new.setBody(body);
+                    newReview.setBody(body);
 
-                reviewDAO.doSave(r_new);
-
+                reviewDAO.doSave(newReview);
             } else {                  //utente ha già recensito il libro in questione
-                if(r.getBody().equals("-")) {
+                if(review.getBody().equals("-")) {
                     body = request.getParameter("commento");
 
                     if(body.equals(""))
-                        r.setBody("-");
+                        review.setBody("-");
                     else
-                        r.setBody(body);
+                        review.setBody(body);
                 }
 
-                if(r.getVote().equals("-")) {
+                if(review.getVote().equals("-")) {
                     vote = request.getParameter("voto");
 
                     if(vote == null)
-                        r.setVote("-");
+                        review.setVote("-");
                     else
-                        r.setVote(vote);
+                        review.setVote(vote);
                 }
 
-                r.setDate(date);
-                reviewDAO.doUpdateById(r);
+                review.setDate(date);
+                reviewDAO.doUpdateById(review);
             }
         }
 
         request.setAttribute("book", bookDAO.doRetrieveByIsbn(isbn));
 
-        ArrayList<Review> recensioni = reviewDAO.doRetrieveByISBN(isbn);
-        request.setAttribute("recensioni", recensioni);
+        ArrayList<Review> reviews = reviewDAO.doRetrieveByISBN(isbn);
+        request.setAttribute("recensioni", reviews);
 
-        ArrayList<Customer> customers = customerDAO.doRetrieveByReviews(recensioni);
+        ArrayList<Customer> customers = customerDAO.doRetrieveByReviews(reviews);
         request.setAttribute("customers", customers);
 
         Utility.checkReview(request, isbn, customer.getId_customer());

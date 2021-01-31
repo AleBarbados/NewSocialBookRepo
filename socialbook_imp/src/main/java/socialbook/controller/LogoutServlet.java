@@ -15,30 +15,35 @@ import java.io.IOException;
 @WebServlet("/logout-servlet")
 public class LogoutServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
 
-        Admin customerM = (Admin) session.getAttribute("customerManager");
-        Admin catalogueM = (Admin) session.getAttribute("catalogueManager");
-        Admin systemM = (Admin) session.getAttribute("systemManager");
+        Admin customerManager = (Admin) session.getAttribute("customerManager");
+        Admin catalogueManager = (Admin) session.getAttribute("catalogueManager");
+        Admin systemManager = (Admin) session.getAttribute("systemManager");
         Customer customer = (Customer) session.getAttribute("personalCustomer");
 
-        if(customerM == null && catalogueM == null && systemM == null && customer == null)
+        if(customerManager == null && catalogueManager == null && systemManager == null && customer == null)
             throw new socialbook.controller.ServletException("Bisgona aver effettuato l'accesso!!");
 
-        if(customerM != null)
+        if(customerManager != null)
             session.removeAttribute("customerManager");
 
-        if(catalogueM != null)
+        if(catalogueManager != null)
             session.removeAttribute("catalogueManager");
 
-        if(systemM != null)
+        if(systemManager != null)
             session.removeAttribute("systemManager");
 
         if(customer != null)
             session.removeAttribute("personalCustomer");
 
-        RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/jsp/index.jsp");
-        rd.forward(req,resp);
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/index.jsp");
+        rd.forward(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
     }
 }

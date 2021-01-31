@@ -17,14 +17,15 @@ import java.util.List;
 
 @WebServlet("/new-ticket-servlet")
 public class NewTicketServlet extends HttpServlet {
+    private final TicketDAO ticketDAO = new TicketDAO();
 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
-        TicketDAO ticketDAO = new TicketDAO();
         Ticket ticket = new Ticket();
-        if(request.getParameter("customerManager") == null && request.getParameter("systemManager") == null){
+        RequestDispatcher dispatcher;
 
+        if(request.getParameter("customerManager") == null && request.getParameter("systemManager") == null){
             ticket.setStatus(StatusEnumeration.OPEN);
             ticket.setIssue(request.getParameter("issue"));
 
@@ -35,21 +36,20 @@ public class NewTicketServlet extends HttpServlet {
             }
 
             if(customer != null){
+                ticket.setId_customer(customer.getId_customer());
 
-            ticket.setId_customer(customer.getId_customer());
-            List<Ticket> tickets = ticketDAO.doRetrieveByCustomer(customer.getId_customer());
-            request.setAttribute("tickets", tickets);
-            ticketDAO.doSave(ticket);
-
-
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/AllTicketsView.jsp");
-            requestDispatcher.forward(request, response);
-            } else {
-                System.out.println("entro in ticketservlet col customer null");
-                ticket.setId_customer(4);
+                List<Ticket> tickets = ticketDAO.doRetrieveByCustomer(customer.getId_customer());
+                request.setAttribute("tickets", tickets);
                 ticketDAO.doSave(ticket);
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/index.jsp");
-            requestDispatcher.forward(request, response);
+
+                dispatcher = request.getRequestDispatcher("WEB-INF/jsp/AllTicketsView.jsp");
+                dispatcher.forward(request, response);
+            } else {
+                ticket.setId_customer(4);       //4 è l'id di un customer fittizio
+                ticketDAO.doSave(ticket);
+
+                dispatcher = request.getRequestDispatcher("WEB-INF/jsp/index.jsp");
+                dispatcher.forward(request, response);
             }
         }else{
             //errore, admin non può creare ticket

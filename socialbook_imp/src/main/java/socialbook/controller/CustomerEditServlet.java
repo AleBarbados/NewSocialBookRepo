@@ -1,6 +1,5 @@
 package socialbook.controller;
 
-
 import socialbook.Utility.Utility;
 import socialbook.model.Customer;
 import socialbook.model.CustomerDAO;
@@ -38,7 +37,6 @@ public class CustomerEditServlet extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/customerView.jsp");
         dispatcher.forward(request, response);
     }
-
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

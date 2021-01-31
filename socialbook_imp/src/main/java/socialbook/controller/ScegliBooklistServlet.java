@@ -16,10 +16,13 @@ import java.util.ArrayList;
 @WebServlet("/ScegliBooklistServlet")
 public class ScegliBooklistServlet extends HttpServlet {
     private final BookListDAO bookListDAO = new BookListDAO();
+
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Customer customer = (Customer) request.getSession().getAttribute("personalCustomer"); //prendo il customer dalla sessione
         if(customer == null){
@@ -28,11 +31,10 @@ public class ScegliBooklistServlet extends HttpServlet {
 
         request.setAttribute("isbn", request.getParameter("isbn"));         //setto come attributo il parametro isbn che servirà nella servlet successiva
 
-        ArrayList<BookList> b = bookListDAO.doRetriveFromCustomer(customer.getId_customer()); //prendo le sue booklist e le setto come Attributo
-        request.setAttribute("booklists", b);
-
-        RequestDispatcher dispatcher;                                                         //faccio il forward alla pagina delle booklist
-        dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/ScegliBooklist.jsp");
+        ArrayList<BookList> booklists = bookListDAO.doRetriveFromCustomer(customer.getId_customer()); //prendo le sue booklist e le setto come Attributo
+        request.setAttribute("booklists", booklists);
+                                                      
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/ScegliBooklist.jsp");
         dispatcher.forward(request, response);
     }
 }

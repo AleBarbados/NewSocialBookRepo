@@ -14,12 +14,15 @@ import java.io.IOException;
 @WebServlet("/FollowEditBooklist")
 public class FollowEditBooklistServlet extends HttpServlet {
     private final BookListDAO bookListDAO = new BookListDAO();
+
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String dest;
+        String destination;
         RequestDispatcher dispatcher;
         Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
         if(customer == null)
@@ -28,26 +31,26 @@ public class FollowEditBooklistServlet extends HttpServlet {
         if (request.getParameter("follow") != null) {
             bookListDAO.doFollow(customer.getId_customer(), Integer.parseInt(request.getParameter("id")));
 
-            dest=request.getHeader("referer");
-            response.sendRedirect(dest);
+            destination = request.getHeader("referer");
+            response.sendRedirect(destination);
 
         } else if (request.getParameter("unFollow") != null) {
             bookListDAO.doUnFollow(customer.getId_customer(), Integer.parseInt(request.getParameter("id")));
 
-            dest=request.getHeader("referer");
-            response.sendRedirect(dest);
+            destination = request.getHeader("referer");
+            response.sendRedirect(destination);
 
         } else if(request.getParameter("delete") != null){
             bookListDAO.doDelete(Integer.parseInt(request.getParameter("id")));
 
-            dest=request.getHeader("referer");
-            response.sendRedirect(dest);
+            destination =request.getHeader("referer");
+            response.sendRedirect(destination);
 
         } else if(request.getParameter("addPreferiti") != null){
             bookListDAO.addFavorite(customer.getId_customer(), request.getParameter("isbn"));
 
-            dest=request.getHeader("referer");
-            response.sendRedirect(dest);
+            destination = request.getHeader("referer");
+            response.sendRedirect(destination);
 
         } else{
             if (request.getParameter("edit") != null) {

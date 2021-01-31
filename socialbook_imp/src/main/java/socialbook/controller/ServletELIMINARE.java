@@ -1,6 +1,5 @@
 package socialbook.controller;
 
-import socialbook.model.AdminDAO;
 import socialbook.model.CartDAO;
 import socialbook.model.CustomerDAO;
 

@@ -17,10 +17,13 @@ import java.util.ArrayList;
 @WebServlet("/BooklistViewServlet")
 public class BooklistViewServlet extends HttpServlet {
     private final BookListDAO bookListDAO = new BookListDAO();
+
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         ArrayList<Book> books = bookListDAO.doRetriveBooks(id);

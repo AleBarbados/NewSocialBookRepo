@@ -12,45 +12,46 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-
 @WebServlet("/login-servlet")
 public class LoginServlet extends HttpServlet {
+    private final CustomerDAO customerDAO = new CustomerDAO();
+    private final AdminDAO adminDAO = new AdminDAO();
+    private final CartDAO cartDAO = new CartDAO();
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
 
-        HttpSession sessione = req.getSession();
-        String ADDRESS = "/WEB-INF/jsp/index.jsp";
-        String usr = req.getParameter("username");
+        String username = req.getParameter("username");
         String password = req.getParameter("pwd");
-        Customer customer;
-        CustomerDAO customerDAO = new CustomerDAO();
-        AdminDAO adminDAO = new AdminDAO();
         String pwd = Utility.encryptionSHA1(password);
 
-        if (customerDAO.validate(usr, pwd)) {          //validazione utente
-            customer = customerDAO.doRetrieveByUsername(usr);
-            sessione.setAttribute("personalCustomer", customer);
-            Cart cart = new CartDAO().doRetrieveByCustomer(customer.getId_customer());
-            System.out.println("cart id: " + cart.getId_cart());
-            sessione.setAttribute("cart", cart);
+        Customer customer;
 
+        if (customerDAO.validate(username, pwd)) {          //validazione utente
+            customer = customerDAO.doRetrieveByUsername(username);
+            session.setAttribute("personalCustomer", customer);
+
+            Cart cart = cartDAO.doRetrieveByCustomer(customer.getId_customer());
+            System.out.println("cart id: " + cart.getId_cart());
+            session.setAttribute("cart", cart);
 
             RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/jsp/index.jsp");
             rd.forward(req, resp);
         } else {
             // controllo amministratore
-            Admin admin = adminDAO.doRetrieveByUsrEPwd(usr, pwd);
+            Admin admin = adminDAO.doRetrieveByUsrEPwd(username, pwd);
 
             if (admin != null) {
                 switch (admin.getA_role()) {
                     case CUSTOMER_MANAGER:
-                        sessione.setAttribute("customerManager", admin);
+                        session.setAttribute("customerManager", admin);
                         break;
                     case CATALOGUE_MANAGER:
-                        sessione.setAttribute("catalogueManager", admin);
+                        session.setAttribute("catalogueManager", admin);
                         break;
                     case SYSTEM_MANAGER:
-                        sessione.setAttribute("systemManager", admin);
+                        session.setAttribute("systemManager", admin);
                         break;
                 }
 

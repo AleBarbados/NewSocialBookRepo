@@ -22,11 +22,11 @@ public class PaginaLibroServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String isbn = request.getParameter("libro");
 
-        ArrayList<Review> recensioni = reviewDAO.doRetrieveByISBN(isbn);
-        request.setAttribute("recensioni", recensioni);
+        ArrayList<Review> reviews = reviewDAO.doRetrieveByISBN(isbn);
+        request.setAttribute("recensioni", reviews);
         request.setAttribute("book", bookDAO.doRetrieveByIsbn(isbn));
 
-        ArrayList<Customer> customers = customerDAO.doRetrieveByReviews(recensioni);
+        ArrayList<Customer> customers = customerDAO.doRetrieveByReviews(reviews);
         request.setAttribute("customers", customers);
 
         Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
@@ -39,7 +39,7 @@ public class PaginaLibroServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doGet(req, resp);
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
     }
 }

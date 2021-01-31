@@ -16,8 +16,11 @@ import java.util.ArrayList;
 
 @WebServlet("/ticket-view-servlet")
 public class TicketViewServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private final TicketDAO ticketDAO = new TicketDAO();
+    private final MessageDAO messageDAO = new MessageDAO();
 
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request,response);
     }
 
@@ -30,9 +33,7 @@ public class TicketViewServlet extends HttpServlet {
         Admin systemManager = (Admin) session.getAttribute("systemManager");
 
         String ADDRESS = "";
-        TicketDAO ticketDAO = new TicketDAO();
-
-        MessageDAO messageDAO = new MessageDAO();
+        RequestDispatcher dispatcher;
 
         if(request.getParameter("name") == null) {
             if (customer == null && customerManager == null && systemManager == null)
@@ -42,15 +43,15 @@ public class TicketViewServlet extends HttpServlet {
             ArrayList<Message> messages = messageDAO.doRetrieveByTicket(Integer.parseInt(request.getParameter("id")));
 
             request.setAttribute("messages", messages);
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/TicketViewProva.jsp");
-            requestDispatcher.forward(request, response);
+            dispatcher = request.getRequestDispatcher("WEB-INF/jsp/TicketViewProva.jsp");
+            dispatcher.forward(request, response);
         }
 
         if(request.getParameter("name").equals("accept")) {
             if(customerManager == null && systemManager == null)
                 throw new socialbook.controller.ServletException("Solo il customer manager e il system managere possono effettuare quest'operazione!!");
 
-            String urs = "";
+            String username = "";
             AdminRole adminRole = null;
 
             Ticket ticket = ticketDAO.doRetrieveById(Integer.parseInt(request.getParameter("id")));
@@ -58,23 +59,21 @@ public class TicketViewServlet extends HttpServlet {
 
 
             if(customerManager != null){
-                urs = customerManager.getA_usr();
+                username = customerManager.getA_usr();
                 adminRole = AdminRole.CUSTOMER_MANAGER;
                 ticket.setAdmn_usr(customerManager.getA_usr());
-
             } else{
-                urs = systemManager.getA_usr();
+                username = systemManager.getA_usr();
                 adminRole = AdminRole.SYSTEM_MANAGER;
                 ticket.setAdmn_usr(systemManager.getA_usr());
-
             }
-            request.setAttribute("ticket", new TicketDAO().doRetrieveByAdmin(urs));
+            request.setAttribute("ticket", new TicketDAO().doRetrieveByAdmin(username));
             request.setAttribute("ticketR", new TicketDAO().doRetrieveByRole(adminRole));
 
             ticketDAO.doUpdate(ticket);
 
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/AllTicketsView.jsp");
-            requestDispatcher.forward(request, response);
+            dispatcher = request.getRequestDispatcher("WEB-INF/jsp/AllTicketsView.jsp");
+            dispatcher.forward(request, response);
 
         } else if(request.getParameter("name").equals("delete")) {
             if (customer == null && customerManager == null && systemManager == null)
@@ -82,17 +81,16 @@ public class TicketViewServlet extends HttpServlet {
 
             ticketDAO.doDeleteById(Integer.parseInt(request.getParameter("id")));
 
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/AllTicketsView.jsp");
-            requestDispatcher.forward(request, response);
+            dispatcher = request.getRequestDispatcher("WEB-INF/jsp/AllTicketsView.jsp");
+            dispatcher.forward(request, response);
         }
 
         if(request.getParameter("id").equals("null") && request.getParameter("name").equals("newTicket")) {
             ADDRESS = "WEB-INF/jsp/newTicket.jsp";
-
         }
 
-        RequestDispatcher rd = request.getRequestDispatcher(ADDRESS);
-        rd.forward(request, response);
+        dispatcher = request.getRequestDispatcher(ADDRESS);
+        dispatcher.forward(request, response);
     }
 
 }

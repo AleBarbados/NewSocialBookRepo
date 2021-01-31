@@ -14,13 +14,15 @@ import java.util.ArrayList;
 
 @WebServlet("/all-ticket-servlet")
 public class AllTicketsServlet extends HttpServlet {
+    private final TicketDAO ticketDAO = new TicketDAO();
+
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         doGet(request, response);
-
     }
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws  ServletException, IOException {
 
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws  ServletException, IOException {
         Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
         Admin customerManager = (Admin) request.getSession().getAttribute("customerManager");
         Admin systemManager = (Admin) request.getSession().getAttribute("systemManager");
@@ -28,17 +30,17 @@ public class AllTicketsServlet extends HttpServlet {
         if(customer == null && customerManager == null && systemManager == null)
             throw new socialbook.controller.ServletException("Bisogna prima effettuare l'accesso!!");
 
-        TicketDAO ticketDAO = new TicketDAO();
         ArrayList<Ticket> tickets;
+        ArrayList<Ticket> ticketsByAdminRole;
 
         if(customerManager != null) {
-            ArrayList<Ticket> ticketsR = ticketDAO.doRetrieveByRole(AdminRole.CUSTOMER_MANAGER);
-            request.setAttribute("ticketsR", ticketsR);
+            ticketsByAdminRole = ticketDAO.doRetrieveByRole(AdminRole.CUSTOMER_MANAGER);
+            request.setAttribute("ticketsR", ticketsByAdminRole);
 
             tickets = ticketDAO.doRetrieveByAdmin(customerManager.getA_usr());
         } else if(systemManager != null) {
-            ArrayList<Ticket> ticketsR = ticketDAO.doRetrieveByRole(AdminRole.SYSTEM_MANAGER);
-            request.setAttribute("ticketsR", ticketsR);
+            ticketsByAdminRole = ticketDAO.doRetrieveByRole(AdminRole.SYSTEM_MANAGER);
+            request.setAttribute("ticketsR", ticketsByAdminRole);
 
             tickets = ticketDAO.doRetrieveByAdmin(systemManager.getA_usr());
         }else

@@ -17,9 +17,7 @@ public class Admin {
         a_role = r;
     }
 
-    public String getA_usr() {
-        return a_usr;
-    }
+    public String getA_usr() { return a_usr; }
 
     public void setA_usr(String u) {
         a_usr = u;

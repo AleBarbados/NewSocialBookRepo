@@ -11,12 +11,12 @@ import java.io.IOException;
 @WebServlet("/newCustomerServlet")
 public class NewCustomerServlet extends HttpServlet {
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doGet(req, resp);
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
     }
 
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("WEB-INF/jsp/registration.jsp");
-        requestDispatcher.forward(req, resp);
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/registration.jsp");
+        requestDispatcher.forward(request, response);
     }
 }

@@ -26,11 +26,11 @@ public class CatalogueManagerCreazioneModificaServlet extends HttpServlet {
         if(request.getSession().getAttribute("catalogueManager") == null)
             throw new socialbook.controller.ServletException("Solo il catalogue manager può effettuare questa operazione!!");
 
-        int price_cent = Integer.parseInt(request.getParameter("price_cent"));
-        String isbnMod = request.getParameter("isbn_modifica");
+        int priceCent = Integer.parseInt(request.getParameter("price_cent"));
+        String isbnModify = request.getParameter("isbn_modifica");
 
-        if(!isbnMod.equals("")) {        //modifica libro esistente (prezzo)
-            bookDAO.doUpdatePrice(isbnMod, price_cent);
+        if(!isbnModify.equals("")) {        //modifica libro esistente (prezzo)
+            bookDAO.doUpdatePrice(isbnModify, priceCent);
         } else {        //creazione nuovo libro
             String fileName = Utility.aggiuntaFoto(request);
 
@@ -41,10 +41,10 @@ public class CatalogueManagerCreazioneModificaServlet extends HttpServlet {
             String publishing_house = request.getParameter("publishing_house");
             String plot = request.getParameter("plot");
 
-            bookDAO.doSave(new Book(isbn, title, genre, price_cent, publication_year, publishing_house, plot, true, fileName));
+            bookDAO.doSave(new Book(isbn, title, genre, priceCent, publication_year, publishing_house, plot, true, fileName));
 
-            ArrayList<Author> authors = new ArrayList<Author>();
-            Author a;
+            ArrayList<Author> authors = new ArrayList<>();
+            Author author;
             String name, surname, n = "author_name", s = "author_surname";
 
             for(int i = 1; i<6; i++) {
@@ -52,8 +52,8 @@ public class CatalogueManagerCreazioneModificaServlet extends HttpServlet {
                 surname = request.getParameter(s+i);
 
                 if(name != null && surname != null) {
-                    a = new Author(name, surname);
-                    authors.add(a);
+                    author = new Author(name, surname);
+                    authors.add(author);
                 } else break;
             }
             authorDAO.doSave(authors, isbn);        //al libro con questo isbn vengono associati gli autori inseriti

@@ -15,10 +15,13 @@ import java.util.ArrayList;
 @WebServlet("/FollowersServlet")
 public class FollowersServlet extends HttpServlet {
     private final FollowDAO followDAO = new FollowDAO();
+
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ArrayList<Follow> follows = new ArrayList<>();
 

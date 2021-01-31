@@ -14,12 +14,13 @@ import java.io.IOException;
 @WebServlet("/EditCreaBooklistServlet")
 public class EditCreaBooklistServlet extends HttpServlet {
     private final BookListDAO bookListDAO = new BookListDAO();
-    private final BookDAO bookDAO = new BookDAO();
 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
         if(customer == null){
@@ -27,21 +28,21 @@ public class EditCreaBooklistServlet extends HttpServlet {
         }
 
         BookList booklist = new BookList();
-        String idStr = request.getParameter("id");
-        String nome = request.getParameter("nome");
+        String idBooklist = request.getParameter("id");
+        String name = request.getParameter("nome");
 
-        if(idStr != null) {         //modifica booklist
-            booklist = bookListDAO.doRetriveBooklist(Integer.parseInt(idStr));
+        if(idBooklist != null) {         //modifica booklist
+            booklist = bookListDAO.doRetriveBooklist(Integer.parseInt(idBooklist));
         }
 
-        if(nome != null)
-            booklist.setName(nome);
+        if(name != null)
+            booklist.setName(name);
 
         String fileName = request.getParameter("foto");
         if(fileName != null)
             booklist.setImage(fileName);
         else
-            booklist.setImage("bl0.jpg");
+            booklist.setImage("bl0.jpg");       //se l'utente non sceglie nessuna immagine, verrà salvata una predefinita
 
         booklist.setFavorite(false);
 
@@ -49,38 +50,6 @@ public class EditCreaBooklistServlet extends HttpServlet {
             bookListDAO.doUpdate(booklist);
         else
             bookListDAO.doSave(booklist, customer.getId_customer());
-
-
-        /*BookList booklist = new BookList();
-        if(request.getParameter("edit")!=null){
-
-            if(request.getParameter("foto")!=null) {
-                String fileName = Utility.aggiuntaFoto(request);
-                booklist.setImage(fileName);
-            }
-            if(request.getParameter("nome")!=null) {
-                booklist.setName(request.getParameter("nome"));
-            }
-            bookListDAO.doUpdate(booklist);
-        }else if(request.getParameter("Create")!=null){
-
-            if(request.getParameter("foto")!=null) {
-                String fileName = Utility.aggiuntaFoto(request);
-                booklist.setImage(fileName);
-            }
-            if(request.getParameter("nome")!=null) {
-                booklist.setName(request.getParameter("nome"));
-            }
-            bookListDAO.doSave(booklist, customer.getId_customer());
-        }
-        ArrayList<Book> books = bookDAO.doRetrieveAll();
-        request.setAttribute("books", books); */
-
-        /*request.setAttribute("booklists", bookListDAO.doRetriveFromCustomer(customer.getId_customer()));
-        request.setAttribute("followed", bookListDAO.doRetriveFollowed(customer.getId_customer()));*/
-
-        /*RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/index.jsp");
-        dispatcher.forward(request, response);*/
 
         response.sendRedirect("allBooklistServlet?view=true");
     }

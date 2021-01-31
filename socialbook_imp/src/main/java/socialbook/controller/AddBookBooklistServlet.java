@@ -3,7 +3,6 @@ package socialbook.controller;
 import socialbook.model.Book;
 import socialbook.model.BookDAO;
 import socialbook.model.BookListDAO;
-import socialbook.model.Customer;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,10 +17,13 @@ import java.util.ArrayList;
 public class AddBookBooklistServlet extends HttpServlet {
     private final BookListDAO bookListDAO = new BookListDAO();
     private final BookDAO bookDAO = new BookDAO();
+
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getSession().getAttribute("personalCustomer")==null)
             throw new socialbook.controller.ServletException("Bisogna prima effettuare l'accesso!!");

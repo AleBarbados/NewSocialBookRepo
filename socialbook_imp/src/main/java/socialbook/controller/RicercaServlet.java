@@ -20,25 +20,25 @@ public class RicercaServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String parolaCercata = request.getParameter("query");
+        String searchedWord = request.getParameter("query");
 
-        if(parolaCercata.equals(""))
+        if(searchedWord.equals(""))
             throw new socialbook.controller.ServletException("Non hai inserito nessuna parola!!");
 
-        ArrayList<Book> books = bookDAO.doRetrieveByTitleOrGenre(parolaCercata, 0, 10);
-        ArrayList<Integer> authors = authorDAO.doRetrieveIdAuthorLike(parolaCercata, 0, 10);
-        ArrayList<Book> book_autore = new ArrayList<>();
+        ArrayList<Book> books = bookDAO.doRetrieveByTitleOrGenre(searchedWord, 0, 10);
+        ArrayList<Integer> authors = authorDAO.doRetrieveIdAuthorLike(searchedWord, 0, 10);
+        ArrayList<Book> authorsBook = new ArrayList<>();
 
         for(Integer id : authors) {
-            book_autore = bookDAO.doRetrieveByIdAuthor(id);
+            authorsBook = bookDAO.doRetrieveByIdAuthor(id);
         }
 
-        for(Book b : book_autore) {
+        for(Book b : authorsBook) {
             if(!books.contains(b))
                 books.add(b);
         }
 
-        request.setAttribute("parolaCercata", parolaCercata);
+        request.setAttribute("parolaCercata", searchedWord);
         request.setAttribute("books", books);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/ricerca.jsp");

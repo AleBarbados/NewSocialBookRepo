@@ -19,16 +19,15 @@ public class CustomerManagerServlet extends HttpServlet {
         if(request.getSession().getAttribute("customerManager") == null)
             throw new socialbook.controller.ServletException("Solo il customer manager può effettuare questa operazione!!");
 
-        String id = request.getParameter("id");
+        String idCustomer = request.getParameter("id");
 
-        if(id == null) {      //click sul bottone 'mostra tutti gli utenti'
+        if(idCustomer == null) {      //click sul bottone 'mostra tutti gli utenti'
             request.setAttribute("customers", customerDAO.doRetrieveAll());
 
             RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/utenti.jsp");
             dispatcher.forward(request, response);
         } else {
-            customerDAO.doDeleteById(Integer.parseInt(id));
-
+            customerDAO.doDeleteById(Integer.parseInt(idCustomer));
             response.sendRedirect(request.getHeader("referer"));
         }
     }

@@ -18,14 +18,16 @@ public class FollowEditServlet extends HttpServlet {
     private final CustomerDAO customerDAO = new CustomerDAO();
     private final FollowDAO followDAO = new FollowDAO();
 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher dispatcher;
         Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
-        String dest;
+        String destination;
 
         if(customer == null)
             throw new socialbook.controller.ServletException("Bisogna prima effettuare l'accesso!!");
@@ -34,14 +36,14 @@ public class FollowEditServlet extends HttpServlet {
         if (request.getParameter("follow") != null) {
             followDAO.doFollow(Integer.parseInt(request.getParameter("id")), customer.getId_customer());
 
-            dest=request.getHeader("referer");
-            response.sendRedirect(dest);
+            destination = request.getHeader("referer");
+            response.sendRedirect(destination);
 
         } else if (request.getParameter("unFollow") != null) {
             followDAO.doDelete(customer.getId_customer(), Integer.parseInt(request.getParameter("id")));
 
-            dest=request.getHeader("referer");
-            response.sendRedirect(dest);
+            destination = request.getHeader("referer");
+            response.sendRedirect(destination);
 
         } else {
             if (request.getParameter("editProfile").equals("edit")) {

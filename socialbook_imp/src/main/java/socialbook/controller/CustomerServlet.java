@@ -15,33 +15,37 @@ public class CustomerServlet extends HttpServlet {
     private final CustomerDAO customerDAO = new CustomerDAO();
     private final FollowDAO followDAO = new FollowDAO();
     private final BookListDAO booklistDAO = new BookListDAO();
+
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
+        Customer customerLoggato = (Customer) request.getSession().getAttribute("personalCustomer");
 
         if(request.getParameter("costumerView") != null){
+            Customer customer = customerDAO.doRetriveById(Integer.parseInt(request.getParameter("idCustomer")));
+            request.setAttribute("customer", customer);   //setto il customer come attributo
 
-            Customer c = customerDAO.doRetriveById(Integer.parseInt(request.getParameter("idCustomer")));
-            request.setAttribute("customer", c);   //setto il customer come attributo
-
-            if(followDAO.checkFollower( c.getId_customer(), customer.getId_customer())){              //controllo se l'utente loggato segue il costumer
+            if(followDAO.checkFollower(customer.getId_customer(), customerLoggato.getId_customer())){      //controllo se l'utente loggato segue il costumer
                 request.setAttribute("follow", true);
             }
 
-            request.setAttribute("idCustomer", customer.getId_customer());
-            BookList b = booklistDAO.doRetriveFavorite(customer.getId_customer());
-            request.setAttribute("preferiti", booklistDAO.doRetriveBooks(b.getId()));  //prendo preferiti del customer per renderle poi visibili sulla sua pagoina
+            request.setAttribute("idCustomer", customerLoggato.getId_customer());
 
-        } else if(request.getParameter("personalView")!=null){ //in caso l'utente voglia visitare la su area personale carichiamo i suoi dati
-            if(customer == null)
+            BookList favourites = booklistDAO.doRetriveFavorite(customerLoggato.getId_customer());
+            request.setAttribute("preferiti", booklistDAO.doRetriveBooks(favourites.getId()));  //prendo preferiti del customer per renderle poi visibili sulla sua pagoina
+
+        } else if(request.getParameter("personalView") != null){    //in caso l'utente voglia visitare la sua area personale carichiamo i suoi dati
+            if(customerLoggato == null)
                 throw new socialbook.controller.ServletException("HEYY, devi fare l'accesso prima!!");
 
-            request.setAttribute("idCustomer", customer.getId_customer());
-            BookList b = booklistDAO.doRetriveFavorite(customer.getId_customer());
-            request.setAttribute("preferiti", booklistDAO.doRetriveBooks(b.getId()));
+            request.setAttribute("idCustomer", customerLoggato.getId_customer());
+
+            BookList favourites = booklistDAO.doRetriveFavorite(customerLoggato.getId_customer());
+            request.setAttribute("preferiti", booklistDAO.doRetriveBooks(favourites.getId()));
         }
 
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/customerView.jsp");
