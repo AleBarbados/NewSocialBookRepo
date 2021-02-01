@@ -1,6 +1,6 @@
 package socialbook.controller.GestioneUtente;
 
-import socialbook.model.*;
+import socialbook.model.GestioneDatabase.*;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -40,7 +40,7 @@ public class CustomerServlet extends HttpServlet {
 
         } else if(request.getParameter("personalView") != null){    //in caso l'utente voglia visitare la sua area personale carichiamo i suoi dati
             if(customerLoggato == null)
-                throw new socialbook.controller.ServletException("HEYY, devi fare l'accesso prima!!");
+                throw new socialbook.utility.ServletException("HEYY, devi fare l'accesso prima!!");
 
             request.setAttribute("idCustomer", customerLoggato.getId_customer());
 

@@ -1,7 +1,7 @@
 package socialbook.controller.GestioneUtente;
 
-import socialbook.model.Admin;
-import socialbook.model.Customer;
+import socialbook.model.GestioneDatabase.Admin;
+import socialbook.model.GestioneDatabase.Customer;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -24,7 +24,7 @@ public class LogoutServlet extends HttpServlet {
         Customer customer = (Customer) session.getAttribute("personalCustomer");
 
         if(customerManager == null && catalogueManager == null && systemManager == null && customer == null)
-            throw new socialbook.controller.ServletException("Bisgona aver effettuato l'accesso!!");
+            throw new socialbook.utility.ServletException("Bisgona aver effettuato l'accesso!!");
 
         if(customerManager != null)
             session.removeAttribute("customerManager");

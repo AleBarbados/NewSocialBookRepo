@@ -1,7 +1,9 @@
 package socialbook.controller.GestioneAcquisto;
 
-import socialbook.Utility.BookAlreadyInsertException;
-import socialbook.model.*;
+import socialbook.model.GestioneDatabase.BookDAO;
+import socialbook.model.GestioneDatabase.Cart;
+import socialbook.model.GestioneDatabase.CartDAO;
+import socialbook.utility.BookAlreadyInsertException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -55,7 +57,7 @@ public class ShowCartServlet extends HttpServlet {
             dispatcher.forward(req, resp);
         }
         else {
-            throw new socialbook.controller.ServletException("Bisogna prima effettuare l'accesso!!");
+            throw new socialbook.utility.ServletException("Bisogna prima effettuare l'accesso!!");
         }
     }
 }

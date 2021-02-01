@@ -1,9 +1,9 @@
 package socialbook.controller.GestioneUtente;
 
-import socialbook.model.BookList;
-import socialbook.model.BookListDAO;
-import socialbook.model.Customer;
-import socialbook.model.CustomerDAO;
+import socialbook.model.GestioneDatabase.BookList;
+import socialbook.model.GestioneDatabase.BookListDAO;
+import socialbook.model.GestioneDatabase.Customer;
+import socialbook.model.GestioneDatabase.CustomerDAO;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

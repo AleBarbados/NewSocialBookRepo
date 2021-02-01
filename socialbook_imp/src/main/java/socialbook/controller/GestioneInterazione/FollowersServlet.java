@@ -1,7 +1,7 @@
 package socialbook.controller.GestioneInterazione;
 
-import socialbook.model.Follow;
-import socialbook.model.FollowDAO;
+import socialbook.model.GestioneDatabase.Follow;
+import socialbook.model.GestioneDatabase.FollowDAO;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

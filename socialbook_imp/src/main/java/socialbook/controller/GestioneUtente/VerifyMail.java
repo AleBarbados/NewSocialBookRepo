@@ -1,6 +1,6 @@
 package socialbook.controller.GestioneUtente;
 
-import socialbook.model.CustomerDAO;
+import socialbook.model.GestioneDatabase.CustomerDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

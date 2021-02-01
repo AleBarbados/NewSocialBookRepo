@@ -1,10 +1,10 @@
 package socialbook.controller.GestioneTicket;
 
-import socialbook.Utility.AdminRole;
-import socialbook.Utility.StatusEnumeration;
-import socialbook.model.Customer;
-import socialbook.model.Ticket;
-import socialbook.model.TicketDAO;
+import socialbook.utility.AdminRole;
+import socialbook.utility.StatusEnumeration;
+import socialbook.model.GestioneDatabase.Customer;
+import socialbook.model.GestioneDatabase.Ticket;
+import socialbook.model.GestioneDatabase.TicketDAO;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

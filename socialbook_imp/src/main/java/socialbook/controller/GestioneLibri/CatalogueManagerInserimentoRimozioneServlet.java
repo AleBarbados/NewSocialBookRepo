@@ -1,9 +1,9 @@
 package socialbook.controller.GestioneLibri;
 
-import socialbook.Utility.Utility;
-import socialbook.model.Author;
-import socialbook.model.AuthorDAO;
-import socialbook.model.BookDAO;
+import socialbook.utility.Utility;
+import socialbook.model.GestioneDatabase.Author;
+import socialbook.model.GestioneDatabase.AuthorDAO;
+import socialbook.model.GestioneDatabase.BookDAO;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -22,7 +22,7 @@ public class CatalogueManagerInserimentoRimozioneServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getSession().getAttribute("catalogueManager") == null)
-            throw new socialbook.controller.ServletException("Solo il catalogue manager può effettuare questa operazione!!");
+            throw new socialbook.utility.ServletException("Solo il catalogue manager può effettuare questa operazione!!");
 
         String isbn = request.getParameter("isbn");
 

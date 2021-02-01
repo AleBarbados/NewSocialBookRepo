@@ -1,8 +1,8 @@
 package socialbook.controller.GestioneVisualizzazione;
 
-import socialbook.model.AuthorDAO;
-import socialbook.model.Book;
-import socialbook.model.BookDAO;
+import socialbook.model.GestioneDatabase.AuthorDAO;
+import socialbook.model.GestioneDatabase.Book;
+import socialbook.model.GestioneDatabase.BookDAO;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -23,7 +23,7 @@ public class RicercaServlet extends HttpServlet {
         String searchedWord = request.getParameter("query");
 
         if(searchedWord.equals(""))
-            throw new socialbook.controller.ServletException("Non hai inserito nessuna parola!!");
+            throw new socialbook.utility.ServletException("Non hai inserito nessuna parola!!");
 
         ArrayList<Book> books = bookDAO.doRetrieveByTitleOrGenre(searchedWord, 0, 10);
         ArrayList<Integer> authors = authorDAO.doRetrieveIdAuthorLike(searchedWord, 0, 10);

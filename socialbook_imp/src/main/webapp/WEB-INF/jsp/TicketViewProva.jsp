@@ -1,5 +1,5 @@
 <%@ page import="java.sql.Date" %>
-<%@ page import="socialbook.model.Ticket" %>
+<%@ page import="socialbook.model.GestioneDatabase.Ticket" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.

@@ -1,7 +1,7 @@
 package socialbook.controller.GestioneUtente;
 
-import socialbook.Utility.Utility;
-import socialbook.model.*;
+import socialbook.model.GestioneDatabase.*;
+import socialbook.utility.Utility;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

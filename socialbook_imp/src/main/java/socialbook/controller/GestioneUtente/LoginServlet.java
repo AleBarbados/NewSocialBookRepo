@@ -1,7 +1,7 @@
 package socialbook.controller.GestioneUtente;
 
-import socialbook.Utility.Utility;
-import socialbook.model.*;
+import socialbook.model.GestioneDatabase.*;
+import socialbook.utility.Utility;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -60,7 +60,7 @@ public class LoginServlet extends HttpServlet {
             }
         }
 
-        throw new socialbook.controller.ServletException("Le credenziali inserite non sono valide!!");
+        throw new socialbook.utility.ServletException("Le credenziali inserite non sono valide!!");
     }
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

@@ -1,6 +1,6 @@
 package socialbook.controller.GestioneCustomer;
 
-import socialbook.model.CustomerDAO;
+import socialbook.model.GestioneDatabase.CustomerDAO;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,7 +17,7 @@ public class CustomerManagerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getSession().getAttribute("customerManager") == null)
-            throw new socialbook.controller.ServletException("Solo il customer manager può effettuare questa operazione!!");
+            throw new socialbook.utility.ServletException("Solo il customer manager può effettuare questa operazione!!");
 
         String idCustomer = request.getParameter("id");
 

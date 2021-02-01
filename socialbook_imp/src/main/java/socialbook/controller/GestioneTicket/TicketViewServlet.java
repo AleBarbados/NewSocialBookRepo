@@ -1,8 +1,8 @@
 package socialbook.controller.GestioneTicket;
 
-import socialbook.Utility.AdminRole;
-import socialbook.Utility.StatusEnumeration;
-import socialbook.model.*;
+import socialbook.model.GestioneDatabase.*;
+import socialbook.utility.AdminRole;
+import socialbook.utility.StatusEnumeration;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -37,7 +37,7 @@ public class TicketViewServlet extends HttpServlet {
 
         if(request.getParameter("name") == null) {
             if (customer == null && customerManager == null && systemManager == null)
-                throw new socialbook.controller.ServletException("Bisogna prima effettuare l'accesso!!");
+                throw new socialbook.utility.ServletException("Bisogna prima effettuare l'accesso!!");
 
             request.getSession().setAttribute("ticket", ticketDAO.doRetrieveById(Integer.parseInt(request.getParameter("id"))));
             ArrayList<Message> messages = messageDAO.doRetrieveByTicket(Integer.parseInt(request.getParameter("id")));
@@ -49,7 +49,7 @@ public class TicketViewServlet extends HttpServlet {
 
         if(request.getParameter("name").equals("accept")) {
             if(customerManager == null && systemManager == null)
-                throw new socialbook.controller.ServletException("Solo il customer manager e il system managere possono effettuare quest'operazione!!");
+                throw new socialbook.utility.ServletException("Solo il customer manager e il system managere possono effettuare quest'operazione!!");
 
             String username = "";
             AdminRole adminRole = null;
@@ -77,7 +77,7 @@ public class TicketViewServlet extends HttpServlet {
 
         } else if(request.getParameter("name").equals("delete")) {
             if (customer == null && customerManager == null && systemManager == null)
-                throw new socialbook.controller.ServletException("Bisogna prima effettuare l'accesso!!");
+                throw new socialbook.utility.ServletException("Bisogna prima effettuare l'accesso!!");
 
             ticketDAO.doDeleteById(Integer.parseInt(request.getParameter("id")));
 

@@ -1,10 +1,10 @@
 package socialbook.controller.GestioneLibri;
 
-import socialbook.Utility.Utility;
-import socialbook.model.Author;
-import socialbook.model.AuthorDAO;
-import socialbook.model.Book;
-import socialbook.model.BookDAO;
+import socialbook.utility.Utility;
+import socialbook.model.GestioneDatabase.Author;
+import socialbook.model.GestioneDatabase.AuthorDAO;
+import socialbook.model.GestioneDatabase.Book;
+import socialbook.model.GestioneDatabase.BookDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -24,7 +24,7 @@ public class CatalogueManagerCreazioneModificaServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getSession().getAttribute("catalogueManager") == null)
-            throw new socialbook.controller.ServletException("Solo il catalogue manager può effettuare questa operazione!!");
+            throw new socialbook.utility.ServletException("Solo il catalogue manager può effettuare questa operazione!!");
 
         int priceCent = Integer.parseInt(request.getParameter("price_cent"));
         String isbnModify = request.getParameter("isbn_modifica");

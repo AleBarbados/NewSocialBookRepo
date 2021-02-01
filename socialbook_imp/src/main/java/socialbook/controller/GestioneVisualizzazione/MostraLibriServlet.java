@@ -1,6 +1,6 @@
 package socialbook.controller.GestioneVisualizzazione;
 
-import socialbook.model.BookDAO;
+import socialbook.model.GestioneDatabase.BookDAO;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

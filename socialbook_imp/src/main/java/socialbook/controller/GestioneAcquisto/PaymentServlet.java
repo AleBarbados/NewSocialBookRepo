@@ -1,6 +1,6 @@
 package socialbook.controller.GestioneAcquisto;
 
-import socialbook.model.*;
+import socialbook.model.GestioneDatabase.*;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,7 +20,7 @@ public class PaymentServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
         if(customer == null)
-            throw new socialbook.controller.ServletException("Bisogna prima effettuare l'accesso!!");
+            throw new socialbook.utility.ServletException("Bisogna prima effettuare l'accesso!!");
 
         if("Procedi al pagamento".equals(request.getParameter("pay"))){
             InfoPayment infoPayment = new InfoPayment();

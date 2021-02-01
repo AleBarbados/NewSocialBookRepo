@@ -1,9 +1,8 @@
 package socialbook.controller.GestioneInterazione;
 
-import socialbook.Utility.Utility;
-import socialbook.model.Customer;
-import socialbook.model.CustomerDAO;
-import socialbook.model.FollowDAO;
+import socialbook.model.GestioneDatabase.Customer;
+import socialbook.model.GestioneDatabase.CustomerDAO;
+import socialbook.model.GestioneDatabase.FollowDAO;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -30,7 +29,7 @@ public class FollowEditServlet extends HttpServlet {
         String destination;
 
         if(customer == null)
-            throw new socialbook.controller.ServletException("Bisogna prima effettuare l'accesso!!");
+            throw new socialbook.utility.ServletException("Bisogna prima effettuare l'accesso!!");
 
 
         if (request.getParameter("follow") != null) {
@@ -45,19 +44,8 @@ public class FollowEditServlet extends HttpServlet {
             destination = request.getHeader("referer");
             response.sendRedirect(destination);
 
-        } else {
-            if (request.getParameter("editProfile").equals("edit")) {
-                dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/customerEdit.jsp");
-            } else {
-                customer.setC_pwd(Utility.encryptionSHA1(request.getParameter("password")));
-                customer.setDescription(request.getParameter("descrizione"));
-                String fileName = Utility.aggiuntaFoto(request);
-                customer.setImage(fileName);
-
-                customerDAO.doUpdate(customer);
-
-                dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/customerView.jsp");
-            }
+        } else if (request.getParameter("editProfile") != null) {
+            dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/customerEdit.jsp");
             dispatcher.forward(request, response);
         }
     }

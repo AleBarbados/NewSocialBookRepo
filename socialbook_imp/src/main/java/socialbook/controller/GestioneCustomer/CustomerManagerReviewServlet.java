@@ -1,6 +1,6 @@
 package socialbook.controller.GestioneCustomer;
 
-import socialbook.model.ReviewDAO;
+import socialbook.model.GestioneDatabase.ReviewDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,7 +16,7 @@ public class CustomerManagerReviewServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         if(request.getSession().getAttribute("customerManager") == null)
-            throw new socialbook.controller.ServletException("Solo il catalogue manager può effettuare questa operazione!!");
+            throw new socialbook.utility.ServletException("Solo il catalogue manager può effettuare questa operazione!!");
 
         String idReview = request.getParameter("r_id");
 

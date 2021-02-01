@@ -1,8 +1,8 @@
 package socialbook.controller.GestioneUtente;
 
-import socialbook.model.BookList;
-import socialbook.model.BookListDAO;
-import socialbook.model.Customer;
+import socialbook.model.GestioneDatabase.BookList;
+import socialbook.model.GestioneDatabase.BookListDAO;
+import socialbook.model.GestioneDatabase.Customer;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -26,7 +26,7 @@ public class ScegliBooklistServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Customer customer = (Customer) request.getSession().getAttribute("personalCustomer"); //prendo il customer dalla sessione
         if(customer == null){
-            throw new socialbook.controller.ServletException("HEYY, devi fare l'accesso prima!!");  //controllo se il customer ha fatto l'accesso
+            throw new socialbook.utility.ServletException("HEYY, devi fare l'accesso prima!!");  //controllo se il customer ha fatto l'accesso
         }
 
         request.setAttribute("isbn", request.getParameter("isbn"));         //setto come attributo il parametro isbn che servirà nella servlet successiva

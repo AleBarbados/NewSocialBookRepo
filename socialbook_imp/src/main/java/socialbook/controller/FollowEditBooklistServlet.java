@@ -1,7 +1,7 @@
 package socialbook.controller;
 
-import socialbook.model.BookListDAO;
-import socialbook.model.Customer;
+import socialbook.model.GestioneDatabase.BookListDAO;
+import socialbook.model.GestioneDatabase.Customer;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -26,7 +26,7 @@ public class FollowEditBooklistServlet extends HttpServlet {
         RequestDispatcher dispatcher;
         Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
         if(customer == null)
-            throw new socialbook.controller.ServletException("HEYY, devi fare l'accesso prima!!");
+            throw new socialbook.utility.ServletException("HEYY, devi fare l'accesso prima!!");
 
         if (request.getParameter("follow") != null) {
             bookListDAO.doFollow(customer.getId_customer(), Integer.parseInt(request.getParameter("id")));

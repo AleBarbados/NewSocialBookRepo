@@ -1,8 +1,8 @@
 package socialbook.controller.GestioneUtente;
 
-import socialbook.model.Book;
-import socialbook.model.BookDAO;
-import socialbook.model.BookListDAO;
+import socialbook.model.GestioneDatabase.Book;
+import socialbook.model.GestioneDatabase.BookDAO;
+import socialbook.model.GestioneDatabase.BookListDAO;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -26,7 +26,7 @@ public class AddBookBooklistServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getSession().getAttribute("personalCustomer")==null)
-            throw new socialbook.controller.ServletException("Bisogna prima effettuare l'accesso!!");
+            throw new socialbook.utility.ServletException("Bisogna prima effettuare l'accesso!!");
 
         bookListDAO.doSaveBook(Integer.parseInt(request.getParameter("id")), request.getParameter("isbn")); //salviamo il libro nella booklist
 

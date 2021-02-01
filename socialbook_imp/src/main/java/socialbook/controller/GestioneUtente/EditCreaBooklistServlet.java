@@ -1,6 +1,8 @@
 package socialbook.controller.GestioneUtente;
 
-import socialbook.model.*;
+import socialbook.model.GestioneDatabase.BookList;
+import socialbook.model.GestioneDatabase.BookListDAO;
+import socialbook.model.GestioneDatabase.Customer;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -24,7 +26,7 @@ public class EditCreaBooklistServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
         if(customer == null){
-            throw new socialbook.controller.ServletException("HEYY, devi fare l'accesso prima!!");
+            throw new socialbook.utility.ServletException("HEYY, devi fare l'accesso prima!!");
         }
 
         BookList booklist = new BookList();

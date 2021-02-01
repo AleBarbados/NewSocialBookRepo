@@ -1,7 +1,10 @@
 package socialbook.controller.GestioneTicket;
 
-import socialbook.Utility.AdminRole;
-import socialbook.model.*;
+import socialbook.model.GestioneDatabase.Admin;
+import socialbook.model.GestioneDatabase.Customer;
+import socialbook.model.GestioneDatabase.Ticket;
+import socialbook.model.GestioneDatabase.TicketDAO;
+import socialbook.utility.AdminRole;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -28,7 +31,7 @@ public class AllTicketsServlet extends HttpServlet {
         Admin systemManager = (Admin) request.getSession().getAttribute("systemManager");
 
         if(customer == null && customerManager == null && systemManager == null)
-            throw new socialbook.controller.ServletException("Bisogna prima effettuare l'accesso!!");
+            throw new socialbook.utility.ServletException("Bisogna prima effettuare l'accesso!!");
 
         ArrayList<Ticket> tickets;
         ArrayList<Ticket> ticketsByAdminRole;

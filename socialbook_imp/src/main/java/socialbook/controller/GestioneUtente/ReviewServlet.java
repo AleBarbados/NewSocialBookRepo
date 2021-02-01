@@ -1,7 +1,7 @@
 package socialbook.controller.GestioneUtente;
 
-import socialbook.Utility.Utility;
-import socialbook.model.*;
+import socialbook.model.GestioneDatabase.*;
+import socialbook.utility.Utility;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -24,7 +24,7 @@ public class ReviewServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
         if(customer == null)
-            throw new socialbook.controller.ServletException("Devi prima effettuare l'accesso!!");
+            throw new socialbook.utility.ServletException("Devi prima effettuare l'accesso!!");
 
         String idReview = request.getParameter("rimuovi_rec");
         String isbn = request.getParameter("isbn");

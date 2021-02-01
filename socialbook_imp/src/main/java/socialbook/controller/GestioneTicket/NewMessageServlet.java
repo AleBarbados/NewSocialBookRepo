@@ -1,8 +1,8 @@
 package socialbook.controller.GestioneTicket;
 
-import socialbook.Utility.AdminRole;
-import socialbook.Utility.StatusEnumeration;
-import socialbook.model.*;
+import socialbook.model.GestioneDatabase.*;
+import socialbook.utility.AdminRole;
+import socialbook.utility.StatusEnumeration;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,8 +16,8 @@ import java.sql.Date;
 import java.util.Collections;
 import java.util.List;
 
-import static socialbook.Utility.StatusEnumeration.CLOSED;
-import static socialbook.Utility.StatusEnumeration.OPEN;
+import static socialbook.utility.StatusEnumeration.CLOSED;
+import static socialbook.utility.StatusEnumeration.OPEN;
 
 @WebServlet("/new-message-servlet")
 public class NewMessageServlet extends HttpServlet {

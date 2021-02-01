@@ -1,8 +1,8 @@
 package socialbook.controller.GestioneUtente;
 
-import socialbook.Utility.Utility;
-import socialbook.model.Customer;
-import socialbook.model.CustomerDAO;
+import socialbook.utility.Utility;
+import socialbook.model.GestioneDatabase.Customer;
+import socialbook.model.GestioneDatabase.CustomerDAO;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -23,7 +23,7 @@ public class CustomerEditServlet extends HttpServlet {
         Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
 
         if(customer == null)
-            throw new socialbook.controller.ServletException("Bisogna prima effettuare l'accesso!!");
+            throw new socialbook.utility.ServletException("Bisogna prima effettuare l'accesso!!");
 
         String fileName = request.getParameter("foto");
 
