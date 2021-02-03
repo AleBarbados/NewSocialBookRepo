@@ -1,4 +1,4 @@
-package socialbook.controller;
+package socialbook.controller.GestioneUtente;
 
 import socialbook.model.GestioneDatabase.BookListDAO;
 import socialbook.model.GestioneDatabase.Customer;
@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/FollowEditBooklist")
-public class FollowEditBooklistServlet extends HttpServlet {
+@WebServlet("/EditCreaBooklist")
+public class EditDeleteCreaBooklistServlet extends HttpServlet {
     private final BookListDAO bookListDAO = new BookListDAO();
 
     @Override
@@ -28,19 +28,7 @@ public class FollowEditBooklistServlet extends HttpServlet {
         if(customer == null)
             throw new socialbook.utility.ServletException("HEYY, devi fare l'accesso prima!!");
 
-        if (request.getParameter("follow") != null) {
-            bookListDAO.doFollow(customer.getId_customer(), Integer.parseInt(request.getParameter("id")));
-
-            destination = request.getHeader("referer");
-            response.sendRedirect(destination);
-
-        } else if (request.getParameter("unFollow") != null) {
-            bookListDAO.doUnFollow(customer.getId_customer(), Integer.parseInt(request.getParameter("id")));
-
-            destination = request.getHeader("referer");
-            response.sendRedirect(destination);
-
-        } else if(request.getParameter("delete") != null){
+        if(request.getParameter("delete") != null){
             bookListDAO.doDelete(Integer.parseInt(request.getParameter("id")));
 
             destination =request.getHeader("referer");

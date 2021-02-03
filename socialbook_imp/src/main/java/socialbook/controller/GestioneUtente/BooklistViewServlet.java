@@ -31,10 +31,10 @@ public class BooklistViewServlet extends HttpServlet {
 
         Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
 
-        if(customer.getId_customer()==Integer.parseInt(request.getParameter("idCustomer")))
+        if(customer != null && customer.getId_customer()==Integer.parseInt(request.getParameter("idCustomer")))
             request.setAttribute("idCustomer", customer.getId_customer());
 
-        if(bookListDAO.checkFollower(customer.getId_customer(), id))
+        if(customer != null && bookListDAO.checkFollower(customer.getId_customer(), id))
             request.setAttribute("follow", true);
 
         request.setAttribute("booklist", b);

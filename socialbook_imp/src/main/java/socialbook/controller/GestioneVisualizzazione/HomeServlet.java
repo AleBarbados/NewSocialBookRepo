@@ -1,5 +1,8 @@
 package socialbook.controller.GestioneVisualizzazione;
 
+import socialbook.model.GestioneDatabase.BookDAO;
+import socialbook.model.GestioneDatabase.CustomerDAO;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,14 +20,11 @@ public class HomeServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        /* CustomerDAO customerDAO = new CustomerDAO();
-        request.getSession().setAttribute("personalCustomer", customerDAO.doRetriveById(1));
-        request.getSession().setAttribute("cart", new CartDAO().doRetrieveByCustomer(1));
+        CustomerDAO customerDAO = new CustomerDAO();
+        request.getSession().setAttribute("utentiHome", customerDAO.doRetrieveAll());   //setto tutti gli utenti
 
-        AdminDAO adminDAO = new AdminDAO();
-        request.getSession().setAttribute("customerManager", adminDAO.doRetrieveByUsrEPwd("username", "password"));
-
-        request.setAttribute("ISBN", "9788869183157"); */
+        BookDAO bookDAO = new BookDAO();
+        request.getSession().setAttribute("libriHome", bookDAO.doRetrieveAll());  //setto tutti i libri
 
         String address= "/WEB-INF/jsp/index.jsp";
         RequestDispatcher dispatcher = request.getRequestDispatcher(address);
