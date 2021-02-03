@@ -29,20 +29,20 @@
                 <c:when test="${booklist!=null}">
                     <img width="60px" height="60px" alt="Immagine booklist" src="${pageContext.request.contextPath}/images/${booklist.image}">
                     <h2>${booklist.name}</h2>
-                    <form action="FollowEditBooklist" method="get">
+                    <form action="EditCreaBooklist" method="get">
                         <input type="hidden" class="btn" name="id" value="${booklist.id}"/>
                         <c:choose>
-                            <c:when test="${idCustomer == personalCustomer.id_customer}">
+                            <c:when test="${idCustomer != null && idCustomer == personalCustomer.id_customer}">
                                 <input type="submit" class="btn" name="edit" value="Modifica">
                                 <input type="submit" class="btn black" name="delete" value="Elimina">
                             </c:when>
                             <c:otherwise>
                                 <c:choose>
                                     <c:when test="${follow!=null}">
-                                        <input type="submit" class="btn black" name="unFollow" value="unFollow">
+                                        <a href="FollowBooklistServlet?id=${booklist.id}&unFollow=true" class="btn black">UnFollow</a>
                                     </c:when>
                                     <c:otherwise>
-                                        <input type="submit" class="btn" name="follow" value="Segui Booklist">
+                                        <a href="FollowBooklistServlet?id=${booklist.id}&follow=true" class="btn">Follow</a>
                                     </c:otherwise>
                                 </c:choose>
                             </c:otherwise>
@@ -57,9 +57,9 @@
                                             <div class="item">
                                                 <img alt="immagine prodotto" src="${pageContext.request.contextPath}/images/${book.image}">
                                                 <h3>${book.title}</h3>
-                                                <h6><span class="price">${book.price_cent/100} euro</span> / <a href="#">Buy Now</a></h6>
+                                                <h6><span class="price">${book.price_cent/100} euro</span></h6>
                                                 <div class="hover">
-                                                    <a href="product-single.html">
+                                                    <a href="paginaLibroServlet?libro=${book.isbn}">
                                                         <span><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>
                                                     </a>
                                                 </div>

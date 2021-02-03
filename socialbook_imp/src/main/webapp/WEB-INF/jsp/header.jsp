@@ -14,18 +14,6 @@
 </head>
 <body>
 <header>
-    <div class="header-top">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3"><a href="#" class="web-url">www.bookstore.com</a></div>
-                <div class="col-md-6">
-                    <h5>Free Shipping Over $99 + 3 Free Samples With Every Order</h5></div>
-                <div class="col-md-3">
-                    <span class="ph-number">Call : 800 1234 5678</span>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="main-menu">
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light">
@@ -34,7 +22,6 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
                     <c:choose>
                         <c:when test="${personalCustomer != null}">
                             <ul class="navbar-nav ml-auto">
@@ -48,17 +35,17 @@
                                     <a href="all-order-servlet">Ordini</a>
                                 </li>
                                 <li class="navbar-item">
-                                    <a href="" class="nav-link">Contattaci</a>
+                                    <a href="ticket-view-servlet?id=null&name=newTicket" class="nav-link">Contattaci</a>
                                 </li>
                                 <li class="navbar-item">
-                                    <a href="logout-servlet" class="nav-link">Log-out</a>
+                                    <a href="logout-servlet" onclick="return confirm('sicuro di voler uscire?');" class="nav-link">Logout</a>
                                 </li>
                             </ul>
 
                             <div class="cart my-2 my-lg-0">
                                 <span>
                                     <a href="show-cart-servlet"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></span>
-                                <span class="quntity">3</span>
+                                <span class="quntity">0</span>
                             </div>
                         </c:when>
                         <c:when test="${customerManager != null}">
@@ -70,7 +57,7 @@
                                     <a href="all-ticket-servlet" class="nav-link">Ticket</a>
                                 </li>
                                 <li class="navbar-item">
-                                    <a href="logout-servlet" class="nav-link">Log-out</a>
+                                    <a href="logout-servlet" onclick="return confirm('sicuro di voler uscire?');" class="nav-link">Logout</a>
                                 </li>
                             </ul>
                         </c:when>
@@ -80,33 +67,48 @@
                                     <a href="all-ticket-servlet" class="nav-link">Ticket</a>
                                 </li>
                                 <li class="navbar-item">
-                                    <a href="logout-servlet" class="nav-link">Log-out</a>
+                                    <a href="logout-servlet" onclick="return confirm('sicuro di voler uscire?');" class="nav-link">Logout</a>
                                 </li>
                             </ul>
                         </c:when>
                         <c:when test="${catalogueManager != null}">
                             <ul class="navbar-nav ml-auto">
                                 <li class="navbar-item">
-                                    <a href="catalogueManagerServlet1" class="nav-link">Prodotti</a>
+                                    <a href="mostraLibriServlet" class="nav-link">Libri</a>
                                 </li>
                                 <li class="navbar-item">
                                     <a href="all-ticket-servlet" class="nav-link">Ticket</a>
                                 </li>
                                 <li class="navbar-item">
-                                    <a href="logout-servlet" class="nav-link">Log-out</a>
+                                    <a href="logout-servlet" onclick="return confirm('sicuro di voler uscire?');" class="nav-link">Logout</a>
                                 </li>
                             </ul>
                         </c:when>
                         <c:otherwise>
                             <ul class="navbar-nav ml-auto">
                                 <li class="navbar-item">
-                                    <a href="" class="nav-link">Contattaci</a>
+                                    <a href="ticket-view-servlet?id=null&name=newTicket" class="nav-link">Contattaci</a>
                                 </li>
                                 <li class="navbar-item">
-                                    <a href="login-servlet" class="nav-link">Log-in</a>
+                                    <a href="#" class="nav-link">Login<span style="font-size:8px">&nabla;</span></a>
+                                    <ul class="hidden">
+                                        <li>
+                                            <form action="login-servlet" id = "form-container" method="post" class="form-container">
+                                                <b>Login</b>
+                                                <label for = "username" ><b>Username</b></label>
+                                                <br>
+                                                <input type="text" placeholder="Enter Username" width="150px" id ="username" name = "username" required>
+
+                                                <label for="pwd"><b>Password</b></label><br>
+                                                <input type="password" placeholder="Enter Password" width="150px" id ="pwd" name = "pwd" required>
+
+                                                <button type="submit" class="btn" onclick="accesso()">Login</button>
+                                            </form>
+                                        </li>
+                                        <li><a href="newCustomerServlet">Registrazione</a></li>
+                                    </ul>
                                 </li>
                             </ul>
-
                             <div class="cart my-2 my-lg-0">
                                 <span>
                                     <a href="show-cart-servlet"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></span>
@@ -114,14 +116,21 @@
                             </div>
                         </c:otherwise>
                     </c:choose>
-                    <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search here..." aria-label="Search">
-                        <span class="fa fa-search"></span>
+                    <form class="form-inline my-2 my-lg-0" action="ricercaServlet" method="get">
+                        <input class="form-control mr-sm-2" type="search" placeholder="cerca" aria-label="Search" name="query" value="<c:out value='${param.query}'/>">
+                        <span class="fa fa-search"><button type="submit">search</button></span>
                     </form>
                 </div>
             </nav>
         </div>
     </div>
 </header>
+<script>
+    function accesso(){
+
+        document.getElementById("form-container").style.display = "none";
+        document.getElementById("logout-button").style.display = "block";
+    }
+</script>
 </body>
 </html>

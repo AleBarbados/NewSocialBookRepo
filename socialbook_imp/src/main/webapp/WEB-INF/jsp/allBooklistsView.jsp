@@ -25,8 +25,8 @@
 </header>
     <section class="static about-sec">
         <div class="container">
-            <form action="FollowEditBooklist" method="get">
-                <c:if test="${idCustomer == personalCustomer.id_customer}">
+            <form action="EditCreaBooklist" method="get">
+                <c:if test="${idCustomer != null && idCustomer == personalCustomer.id_customer}">
                     <input class="btn" type="submit" name="Create" value="Nuova Booklist">
                 </c:if>
             </form>
@@ -37,7 +37,7 @@
                         <div class="row">
                             <c:forEach items="${booklists}" var="booklist">
                                 <c:choose>
-                                    <c:when test="${idCustomer == personalCustomer.id_customer}">
+                                    <c:when test="${idCustomer != null && idCustomer == personalCustomer.id_customer}">
                                         <div class="col-lg-3 col-md-6">
                                             <div class="item">
                                                 <img alt="immagine booklist" src="images/${booklist.image}">
@@ -48,8 +48,8 @@
                                                     </a>
                                                 </div>
                                             </div>
-                                            <a href="FollowEditBooklist?id=${booklist.id}&delete=true">Elimina</a>
-                                            <a href="FollowEditBooklist?id=${booklist.id}&edit=true">Modifica</a>
+                                            <a href="EditCreaBooklist?id=${booklist.id}&delete=true" class="btn black">Elimina</a>
+                                            <a href="EditCreaBooklist?id=${booklist.id}&edit=true" class="btn">Modifica</a>
                                         </div>
                                     </c:when>
                                     <c:otherwise>
@@ -92,7 +92,7 @@
                                                     </a>
                                                 </div>
                                             </div>
-                                            <a href="FollowEditBooklist?id=${booklist.id}&unFollow=true">UnFollow</a>
+                                            <a href="FollowBooklistServlet?id=${booklist.id}&unFollow=true">UnFollow</a>
                                         </div>
                                     </c:when>
                                     <c:otherwise>

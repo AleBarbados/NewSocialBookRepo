@@ -31,21 +31,23 @@ public class AllBooklistServlet extends HttpServlet {
         ArrayList<BookList> personalBooklists;
         ArrayList<BookList> followedBooklists;
 
-        int idCustomer = Integer.parseInt(request.getParameter("id"));
+        if(request.getParameter("id") != null) {
+            int idCustomer = Integer.parseInt(request.getParameter("id"));
 
-        if(customer.getId_customer() == idCustomer){    //l'utente loggato vuole vedere le proprie booklist
-            personalBooklists = bookListDAO.doRetriveFromCustomer(customer.getId_customer()); //prendo le booklist create dall'utente
-            followedBooklists = bookListDAO.doRetriveFollowed(customer.getId_customer());     //prendo le booklist seguite dall'utente
-        }else{      //l'utente loggato vuole vedere le booklist di un secondo utente
-            Customer customerLoggato = customerDAO.doRetriveById(idCustomer);
+            if (customer != null && customer.getId_customer() == idCustomer) {    //l'utente loggato vuole vedere le proprie booklist
+                personalBooklists = bookListDAO.doRetriveFromCustomer(customer.getId_customer()); //prendo le booklist create dall'utente
+                followedBooklists = bookListDAO.doRetriveFollowed(customer.getId_customer());     //prendo le booklist seguite dall'utente
+            } else {      //l'utente loggato vuole vedere le booklist di un secondo utente
+                Customer customerLoggato = customerDAO.doRetriveById(idCustomer);
 
-            personalBooklists = bookListDAO.doRetriveFromCustomer(customerLoggato.getId_customer()); //prendo le booklist create dall'utente
-            followedBooklists = bookListDAO.doRetriveFollowed(customerLoggato.getId_customer());//prendo le booklist seguite dall'utente
+                personalBooklists = bookListDAO.doRetriveFromCustomer(customerLoggato.getId_customer()); //prendo le booklist create dall'utente
+                followedBooklists = bookListDAO.doRetriveFollowed(customerLoggato.getId_customer());//prendo le booklist seguite dall'utente
+            }
+
+            request.setAttribute("idCustomer", idCustomer);  //setto come parametro l'id dell'utente
+            request.setAttribute("booklists", personalBooklists);
+            request.setAttribute("followed", followedBooklists);  //setto le liste di booklist
         }
-
-        request.setAttribute("idCustomer", customer.getId_customer());   //setto come parametro l'id dell'utente
-        request.setAttribute("booklists", personalBooklists);
-        request.setAttribute("followed", followedBooklists);  //setto le liste di booklist
 
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/allBooklistsView.jsp");
         requestDispatcher.forward(request, response); //mando tutto alla jsp

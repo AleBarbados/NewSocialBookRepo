@@ -40,19 +40,20 @@ public class EditCreaBooklistServlet extends HttpServlet {
         if(name != null)
             booklist.setName(name);
 
-        String fileName = request.getParameter("foto");
-        if(fileName != null)
-            booklist.setImage(fileName);
-        else
-            booklist.setImage("bl0.jpg");       //se l'utente non sceglie nessuna immagine, verrà salvata una predefinita
+
 
         booklist.setFavorite(false);
 
         if(request.getParameter("edit") != null)
             bookListDAO.doUpdate(booklist);
-        else
+        else {
+            String fileName = request.getParameter("foto");
+            if (fileName != null)
+                booklist.setImage(fileName);
+            else
+                booklist.setImage("bl0.jpg");       //se l'utente non sceglie nessuna immagine, verrà salvata una predefinita
             bookListDAO.doSave(booklist, customer.getId_customer());
-
+        }
         response.sendRedirect("allBooklistServlet?view=true");
     }
 }
