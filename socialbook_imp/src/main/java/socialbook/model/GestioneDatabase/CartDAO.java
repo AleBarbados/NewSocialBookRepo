@@ -15,7 +15,6 @@ public class CartDAO {
     public void doSave(Cart c, int id) {
         try(Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(DO_SAVE_CUSTOMER_CART, Statement.RETURN_GENERATED_KEYS);
-
             ps.setFloat(1, c.getPrice());
             ps.setBoolean(2, true);
             ps.setInt(3, id);
@@ -75,8 +74,10 @@ public class CartDAO {
             PreparedStatement ps = con.prepareStatement(DO_DELETE_BOOK_CART);
             ps.setInt(2, id);
             ps.setString(1, isbn);
-            ResultSet rs = ps.executeQuery();
 
+            if (ps.executeUpdate() != 1) {
+                throw new RuntimeException("DELETE error.");
+            }
         }catch(SQLException e) {
             throw new RuntimeException(e);
         }

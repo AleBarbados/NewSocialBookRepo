@@ -54,7 +54,7 @@
     </c:forEach>
     <div>
         Totale carrello: ${cart.getPrice()}
-        <a href="payment-servlet"> Procedi all'acquisto</a>
+        <a href="payment-servlet?id=pagamento"> Procedi all'acquisto</a>
     </div>
 
 </c:otherwise>

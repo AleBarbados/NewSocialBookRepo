@@ -2,6 +2,7 @@ package socialbook.model.GestioneDatabase;
 
 
 import java.sql.*;
+import java.util.Optional;
 
 public class InfoPaymentDAO {
     private final static String DO_SAVE = "INSERT INTO infoPayment(id_customer, card_number, payment_name, payment_surname, " +
@@ -10,7 +11,7 @@ public class InfoPaymentDAO {
     private final static String DO_RETRIEVE_BY_CUSTOMER = "SELECT id_customer, card_number, payment_name, payment_surname, " +
             " exp_date_mm, exp_date_yy, cvv FROM infoPayment WHERE id_customer = ?";
 
-    public InfoPayment doRetrieveByCustomer(int id_customer){
+    public Optional<InfoPayment> doRetrieveByCustomer(int id_customer){
         try(Connection con = ConPool.getConnection()){
             InfoPayment i = new InfoPayment();
             PreparedStatement ps = con.prepareStatement(DO_RETRIEVE_BY_CUSTOMER);
@@ -24,7 +25,9 @@ public class InfoPaymentDAO {
                 i.setExp_month(rs.getString(5));
                 i.setExp_year(rs.getString(6));
                 i.setCvv(rs.getInt(7));
-            }return i;
+                return Optional.of(i);
+            }
+            return Optional.empty();
 
         }catch(SQLException e){
             e.printStackTrace();
@@ -35,10 +38,12 @@ public class InfoPaymentDAO {
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement(DO_DELETE);
             ps.setInt(1, id_customer);
-            ResultSet rs = ps.executeQuery();
 
-        } catch (SQLException e){
-            e.printStackTrace();
+            if (ps.executeUpdate() != 1) {
+                throw new RuntimeException("DELETE error.");
+            }
+        }catch(SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 

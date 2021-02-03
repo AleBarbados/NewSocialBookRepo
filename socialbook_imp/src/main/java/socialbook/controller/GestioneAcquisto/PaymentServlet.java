@@ -1,5 +1,6 @@
 package socialbook.controller.GestioneAcquisto;
 
+import socialbook.Utility.CartManagement;
 import socialbook.model.GestioneDatabase.*;
 
 import javax.servlet.RequestDispatcher;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Optional;
 
 @WebServlet("/payment-servlet")
 public class PaymentServlet extends HttpServlet {
@@ -35,12 +37,7 @@ public class PaymentServlet extends HttpServlet {
 
             infoPaymentDAO.doSave(infoPayment);
 
-            Order order = orderDAO.doRetrieveByCart(customer.getId_customer());
-            order.setInvoice_addr(request.getParameter("address"));
-            orderDAO.doUpdate(order);
-
-            Cart cart = new Cart(customer.getId_customer(), 0);
-            cartDAO.doSave(cart, customer.getId_customer());
+            new CartManagement().doManageCart(customer.getId_customer(), request);
 
             RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/index.jsp");
             rd.forward(request, response);
@@ -51,17 +48,35 @@ public class PaymentServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher;
+
+        Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
+        System.out.println("arriva in get");
+
 
         if("elimina".equals(request.getParameter("id"))){
-            Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
+            request.getSession().removeAttribute("info");
             infoPaymentDAO.doDeleteById(customer.getId_customer());
 
-            dispatcher = request.getRequestDispatcher("WEB-INF/jsp/customerView.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/index.jsp");
             dispatcher.forward(request, response);
         }else {
-            dispatcher = request.getRequestDispatcher("WEB-INF/jsp/payment_info.jsp");
-            dispatcher.forward(request, response);
+            if("procedi".equals(request.getParameter("id"))){
+            new CartManagement().doManageCart(customer.getId_customer(), request);
+                RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/index.jsp");
+                rd.forward(request, response);
+                return;
+            }
+
+            if("pagamento".equals(request.getParameter("id"))){
+                Optional<InfoPayment> info = infoPaymentDAO.doRetrieveByCustomer(customer.getId_customer());
+                if(info != null && info.isPresent()){
+                    System.out.println("setto info pagamento");
+                    request.setAttribute("info", info.get());
+                }
+                RequestDispatcher  dispatcher = request.getRequestDispatcher("WEB-INF/jsp/payment_info.jsp");
+                dispatcher.forward(request, response);
+            }
+
         }
     }
 }

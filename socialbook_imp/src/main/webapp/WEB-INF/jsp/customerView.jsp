@@ -105,6 +105,8 @@
                                 </form>
                             </li>
                             <li> <a href = "all-ticket-servlet">tickets</a></li>
+                            <li> <a href = "all-order-servlet">ordini</a></li>
+
                         </ul>
                         <div class="btn-sec">
                             <form action="FollowersServlet" method="get">

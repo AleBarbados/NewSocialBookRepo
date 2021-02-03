@@ -45,7 +45,7 @@
                                     <a href="customerServlet?personalView=true" class="nav-link">Area Utente</a>
                                 </li>
                                 <li class="navbar-item">
-                                    <a href="">Ordini</a>
+                                    <a href="all-order-servlet">Ordini</a>
                                 </li>
                                 <li class="navbar-item">
                                     <a href="" class="nav-link">Contattaci</a>

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: alessia
@@ -15,6 +16,12 @@
     <jsp:include page="header.jsp"> <jsp:param name="header.jsp" value="Home"/></jsp:include>
 </header>
         <div id="checkout">
+            <c:choose>
+                <c:when test="${info!=null}">
+                    <a href="payment-servlet?id=elimina">Elimina carta</a>
+                    <a href="payment-servlet?id=procedi">Procedi al pagamento</a>
+                </c:when>
+                <c:otherwise>
 
             <div class="dati_ordine">
                 <h2>Procedi all'ordine</h2>
@@ -122,6 +129,8 @@
 
                     <input type="submit" id="pay"  name="pay" value="Procedi al pagamento">
                 </form>
+                </c:otherwise>
+                </c:choose>
 
         <script>
 

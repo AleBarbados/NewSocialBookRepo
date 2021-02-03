@@ -80,7 +80,11 @@ public class MessageDAO {
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement(DO_DELETE);
             ps.setInt(1, id_message);
-        }catch (SQLException e){
+
+            if (ps.executeUpdate() != 1) {
+                throw new RuntimeException("DELETE error.");
+            }
+        }catch(SQLException e) {
             throw new RuntimeException(e);
         }
     }
