@@ -25,14 +25,14 @@
                     <c:choose>
                         <c:when test="${personalCustomer != null}">
                             <ul class="navbar-nav ml-auto">
-                                <li class="navbar-item active">
+                                <li class="navbar-item">
                                     <a href="allBooklistServlet?id=${personalCustomer.id_customer}" class="nav-link">Booklist</a>
                                 </li>
                                 <li class="navbar-item">
                                     <a href="customerServlet?personalView=true" class="nav-link">Area Utente</a>
                                 </li>
                                 <li class="navbar-item">
-                                    <a href="all-order-servlet">Ordini</a>
+                                    <a href="all-order-servlet"  class="nav-link">Ordini</a>
                                 </li>
                                 <li class="navbar-item">
                                     <a href="ticket-view-servlet?id=null&name=newTicket" class="nav-link">Contattaci</a>
@@ -105,7 +105,7 @@
                                                 <button type="submit" class="btn" onclick="accesso()">Login</button>
                                             </form>
                                         </li>
-                                        <li><a href="newCustomerServlet">Registrazione</a></li>
+                                        <li><a href="newCustomerServlet"  class="nav-link">Registrazione</a></li>
                                     </ul>
                                 </li>
                             </ul>

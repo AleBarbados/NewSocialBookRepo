@@ -1,4 +1,4 @@
-package socialbook.controller;
+package socialbook.controller.GestioneAcquisto;
 
 import socialbook.model.GestioneDatabase.Customer;
 import socialbook.model.GestioneDatabase.Order;

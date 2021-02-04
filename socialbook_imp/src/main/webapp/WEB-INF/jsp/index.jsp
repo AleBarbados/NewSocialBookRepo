@@ -64,7 +64,7 @@
         <figure style="background:url(/images/about-img.jpg)no-repeat;"></figure>
     </div>
     <div class="about-content">
-        <h2>About bookstore,</h2>
+        <h2>SocialBook</h2>
         <p>SocialBook si propone come un social innovativo che permette la nascita di una vasta community unita dalla passione comune per i libri e, allo stesso tempo, ne mette a</p>
         <p>disposizione anche l’acquisto (in formato digitale). Puoi guardare il nostro catalogo, creare tue booklist e seguire altri utenti, REGISTRATI SUBITO!</p>
         <div class="btn-sec">
