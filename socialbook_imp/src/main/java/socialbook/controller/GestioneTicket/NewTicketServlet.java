@@ -52,7 +52,7 @@ public class NewTicketServlet extends HttpServlet {
                 dispatcher.forward(request, response);
             }
         }else{
-            //errore, admin non può creare ticket
+            throw new socialbook.utility.ServletException("Errore! L'admin non può creare il ticket");
         }
     }
 }

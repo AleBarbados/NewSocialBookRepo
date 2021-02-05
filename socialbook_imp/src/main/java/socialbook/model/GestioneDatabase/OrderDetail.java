@@ -1,8 +1,7 @@
-package socialbook.model;
+package socialbook.model.GestioneDatabase;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 public class OrderDetail {
     private int id_order;

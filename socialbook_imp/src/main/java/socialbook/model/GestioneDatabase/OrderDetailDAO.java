@@ -1,10 +1,5 @@
 package socialbook.model.GestioneDatabase;
 
-import socialbook.model.GestioneDatabase.Book;
-import socialbook.model.GestioneDatabase.BookDAO;
-import socialbook.model.GestioneDatabase.ConPool;
-import socialbook.model.OrderDetail;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
