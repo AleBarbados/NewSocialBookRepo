@@ -13,6 +13,9 @@
     <title>Orders:</title>
 </head>
 <body>
+<header>
+    <jsp:include page="header.jsp"> <jsp:param name="header.jsp" value="Home"/></jsp:include>
+</header>
 <c:choose>
     <c:when test="${orders != null && orders.size() > 0}">
 
@@ -25,7 +28,7 @@
 
                 </ul>
                 <ul id = "second_part_${count}">
-                    <li>Data ordine: ${orderer.getDate()}</li>
+                    <li>Data ordine: ${order.getStringDate()}</li>
                     <li>Costo ordine: ${order.getStringPrice_euro()}</li>
 
                     <c:forEach items="${products}" var="product">
