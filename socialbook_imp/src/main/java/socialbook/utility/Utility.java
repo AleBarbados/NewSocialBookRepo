@@ -23,6 +23,7 @@ import java.util.Date;
 public class Utility {
 
     public static String aggiuntaFoto(HttpServletRequest request) throws IOException, ServletException {
+
         String CARTELLA_UPLOAD = "images";  //cartella in cui verranno salvate le immagini prese dal form
 
         Part filePart = request.getPart("foto");

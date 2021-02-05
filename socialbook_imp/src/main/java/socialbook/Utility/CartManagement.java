@@ -13,7 +13,6 @@ public class CartManagement {
     public static void doManageCart(int id_customer, HttpServletRequest req){
 
         Order o = new OrderDAO().doRetrieveByCart(id_customer);
-        System.out.println("ordine"+o);
         o.setInvoice_addr(req.getParameter("address"));
         new OrderDAO().doUpdate(o);
 
