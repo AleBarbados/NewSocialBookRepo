@@ -29,7 +29,7 @@
                                     <a href="allBooklistServlet?id=${personalCustomer.id_customer}" class="nav-link">Booklist</a>
                                 </li>
                                 <li class="navbar-item">
-                                    <a href="customerServlet?personalView=true" class="nav-link">Area Utente</a>
+                                    <a href="customerServlet?personalView=true" class="nav-link">Profilo</a>
                                 </li>
                                 <li class="navbar-item">
                                     <a href="all-order-servlet"  class="nav-link">Ordini</a>
@@ -45,7 +45,6 @@
                             <div class="cart my-2 my-lg-0">
                                 <span>
                                     <a href="show-cart-servlet"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></span>
-                                <span class="quntity">0</span>
                             </div>
                         </c:when>
                         <c:when test="${customerManager != null}">
@@ -109,11 +108,6 @@
                                     </ul>
                                 </li>
                             </ul>
-                            <div class="cart my-2 my-lg-0">
-                                <span>
-                                    <a href="show-cart-servlet"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></span>
-                                <span class="quntity">3</span>
-                            </div>
                         </c:otherwise>
                     </c:choose>
                     <form class="form-inline my-2 my-lg-0" action="ricercaServlet" method="get">
@@ -127,7 +121,6 @@
 </header>
 <script>
     function accesso(){
-
         document.getElementById("form-container").style.display = "none";
         document.getElementById("logout-button").style.display = "block";
     }
