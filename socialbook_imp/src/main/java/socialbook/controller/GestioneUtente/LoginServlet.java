@@ -55,7 +55,7 @@ public class LoginServlet extends HttpServlet {
                         break;
                 }
 
-                RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/jsp/customerManagerView.jsp");
+                RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/jsp/index.jsp");
                 rd.forward(req, resp);
             }
         }

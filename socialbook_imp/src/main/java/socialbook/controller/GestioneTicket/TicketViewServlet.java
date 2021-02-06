@@ -43,7 +43,7 @@ public class TicketViewServlet extends HttpServlet {
             ArrayList<Message> messages = messageDAO.doRetrieveByTicket(Integer.parseInt(request.getParameter("id")));
 
             request.setAttribute("messages", messages);
-            dispatcher = request.getRequestDispatcher("WEB-INF/jsp/TicketViewProva.jsp");
+            dispatcher = request.getRequestDispatcher("WEB-INF/jsp/MessageTicket.jsp");
             dispatcher.forward(request, response);
         }
 
