@@ -1,35 +1,27 @@
-package socialbook.model.GestioneDatabase;
-
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+package dao;
 
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
-<<<<<<< HEAD
-/*
-public class BooklistDAOTest extends IntegrationTest{
-=======
+import java.util.List;
 
-/*public class BooklistDAOTest extends IntegrationTest{
->>>>>>> origin/develop
+public class TuristaDAOtest extends IntegrationTestCase {
+    TableTuristaManager manager;
 
+    @Override
     @BeforeEach
     public void setup() throws FileNotFoundException, SQLException {
         super.setup();
     }
 
+    @Override
     @AfterEach
     public void tearDown() throws SQLException {
         super.tearDown();
     }
 
-<<<<<<< HEAD
     /**
      * Testa la creazione, avvenuta tramite registrazione
-
-=======
->>>>>>> origin/develop
+     */
     @Test
     public void createTest1() throws SQLException {
         manager = new TuristaDAO(mockDb);
@@ -38,28 +30,22 @@ public class BooklistDAOTest extends IntegrationTest{
         assertNotNull(manager.retrieveById(1), "Deve tornare un turista");
     }
 
-<<<<<<< HEAD
     /**
      * testa il retrievebyid
      *
      * @throws SQLException
-
-=======
->>>>>>> origin/develop
+     */
     @Test
     public void retrieveByIdTest() throws SQLException {
         manager = new TuristaDAO(mockDb);
         assertNotNull(manager.retrieveById(1), "Deve tornare un turista");
     }
 
-<<<<<<< HEAD
     /**
      * testa il retrieveAll che torna tutti i turisti
      *
      * @throws SQLException
-=======
->>>>>>> origin/develop
-
+     */
     @Test
     public void retrieveAllTest() throws SQLException {
         manager = new TuristaDAO(mockDb);
@@ -67,14 +53,11 @@ public class BooklistDAOTest extends IntegrationTest{
         assertEquals(1, lista.size(), "Deve tornare 1");
     }
 
-<<<<<<< HEAD
     /**
      * Testa l'aggiornamento di un turista
      *
      * @throws SQLException
-=======
->>>>>>> origin/develop
-
+     */
     @Test
     public void updateTest() throws SQLException {
         manager = new TuristaDAO(mockDb);
@@ -85,14 +68,11 @@ public class BooklistDAOTest extends IntegrationTest{
         assertEquals("Nome1", manager.retrieveById(1).getNome(), "Deve ritornare Nome1");
     }
 
-<<<<<<< HEAD
     /**
      * Testa la cancellazione di un turista
      *
      * @throws SQLException
-
-=======
->>>>>>> origin/develop
+     */
     @Test
     public void deleteTest() throws SQLException {
         manager = new TuristaDAO(mockDb);
@@ -100,4 +80,3 @@ public class BooklistDAOTest extends IntegrationTest{
         assertNull(manager.retrieveById(1), "Deve tornare null");
     }
 }
-*/
