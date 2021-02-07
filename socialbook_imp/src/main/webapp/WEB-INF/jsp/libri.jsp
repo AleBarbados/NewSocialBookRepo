@@ -42,7 +42,7 @@
                     <c:when test="${personalCustomer != null}">
                         <tr>
                             <td>
-                                <form action="FollowEditBooklist" method="get">
+                                <form action="EditCreaBooklist" method="get">
                                     <input type="hidden" name="isbn" value="${book.isbn}">
                                     <input type="submit" name="addPreferiti" value="Aggiungi ai Preferiti">
                                 </form>
@@ -77,7 +77,7 @@
                     <c:when test="${personalCustomer != null}">
                         <tr>
                             <td>
-                                <form action="FollowEditBooklist" method="get">
+                                <form action="EditCreaBooklist" method="get">
                                     <input type="hidden" name="isbn" value="${book.isbn}">
                                     <input type="submit" name="addPreferiti" value="Aggiungi ai Preferiti">
                                 </form>
