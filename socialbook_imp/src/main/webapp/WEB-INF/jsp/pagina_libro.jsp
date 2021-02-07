@@ -39,7 +39,7 @@
                     <c:if test="${personalCustomer != null}">
                         <tr>
                             <td>
-                                <form action="FollowEditBooklist" method="get">
+                                <form action="EditCreaBooklist" method="get">
                                     <input type="hidden" name="isbn" value="${book.isbn}">
                                     <input type="submit" class="btn" name="addPreferiti" value="Aggiungi ai Preferiti">
                                 </form>

@@ -54,6 +54,6 @@ public class EditCreaBooklistServlet extends HttpServlet {
                 booklist.setImage("bl0.jpg");       //se l'utente non sceglie nessuna immagine, verrà salvata una predefinita
             bookListDAO.doSave(booklist, customer.getId_customer());
         }
-        response.sendRedirect("allBooklistServlet?view=true");
+        response.sendRedirect("allBooklistServlet?id="+customer.getId_customer());
     }
 }
