@@ -3,6 +3,7 @@ package socialbook.model.GestioneDatabase;
 import socialbook.utility.BookAlreadyInsertException;
 
 import java.sql.*;
+import java.util.Optional;
 
 public class CartDAO {
     private final static String DO_SAVE_CUSTOMER_CART = "INSERT INTO customerOrder ( order_price, cart, id_customer) VALUES (?,?,?)";
@@ -83,7 +84,7 @@ public class CartDAO {
         }
     }
 
-    public Cart doRetrieveByCustomer(int id_customer){
+    public Optional<Cart> doRetrieveByCustomer(int id_customer){
         try(Connection con = ConPool.getConnection()){
             Cart c = new Cart();
 
@@ -96,7 +97,10 @@ public class CartDAO {
                 c.setPrice(rs.getFloat(2));
                 c.setId_customer(id_customer);
                 c.setBooks(new OrderDetailDAO().doRetrieveByOrder(c.getId_cart()));
-            }return c;
+                return Optional.of(c);
+            }
+
+            return Optional.empty();
 
         }catch(SQLException e){
             e.printStackTrace();

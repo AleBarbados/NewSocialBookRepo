@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Optional;
 
 @WebServlet("/login-servlet")
 public class LoginServlet extends HttpServlet {
@@ -32,10 +33,13 @@ public class LoginServlet extends HttpServlet {
             customer = customerDAO.doRetrieveByUsername(username);
             session.setAttribute("personalCustomer", customer);
 
-            Cart cart = cartDAO.doRetrieveByCustomer(customer.getId_customer());
-            System.out.println("cart id: " + cart.getId_cart());
-            session.setAttribute("cart", cart);
-
+            Optional<Cart> cart = cartDAO.doRetrieveByCustomer(customer.getId_customer());
+            if(!cart.isPresent() || cart == null){
+                Cart newCart = new Cart(customer.getId_customer(), 0);
+                cartDAO.doSave(newCart, customer.getId_customer());
+                System.out.println("cart id: " + newCart.getId_cart());
+            }
+            session.setAttribute("cart", cart.get());
             RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/jsp/index.jsp");
             rd.forward(req, resp);
         } else {
