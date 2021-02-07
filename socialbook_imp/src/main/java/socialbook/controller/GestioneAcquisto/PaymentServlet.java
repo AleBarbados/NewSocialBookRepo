@@ -50,7 +50,6 @@ public class PaymentServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
-        System.out.println("arriva in get");
 
 
         if("elimina".equals(request.getParameter("id"))){
@@ -70,7 +69,6 @@ public class PaymentServlet extends HttpServlet {
             if("pagamento".equals(request.getParameter("id"))){
                 Optional<InfoPayment> info = infoPaymentDAO.doRetrieveByCustomer(customer.getId_customer());
                 if(info != null && info.isPresent()){
-                    System.out.println("setto info pagamento");
                     request.setAttribute("info", info.get());
                 }
                 RequestDispatcher  dispatcher = request.getRequestDispatcher("WEB-INF/jsp/payment_info.jsp");

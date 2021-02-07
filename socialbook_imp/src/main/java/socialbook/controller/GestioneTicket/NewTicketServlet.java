@@ -25,7 +25,7 @@ public class NewTicketServlet extends HttpServlet {
         Ticket ticket = new Ticket();
         RequestDispatcher dispatcher;
 
-        if(request.getParameter("customerManager") == null && request.getParameter("systemManager") == null){
+        if(request.getSession().getAttribute("customerManager") == null && request.getSession().getAttribute("systemManager") == null){
             ticket.setStatus(StatusEnumeration.OPEN);
             ticket.setIssue(request.getParameter("issue"));
 

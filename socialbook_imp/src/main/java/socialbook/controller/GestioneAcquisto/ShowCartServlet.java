@@ -55,7 +55,6 @@ public class ShowCartServlet extends HttpServlet {
                 cartDAO.doUpdateCustomerCart(cart);
                 req.getSession().setAttribute("cart", cart);
             }else if(req.getParameter("delete") != null){
-                System.out.println("arriva al do delete");
                 cart.remove(bookDAO.doRetrieveByIsbn(isbn));
 
                 cartDAO.doDeleteBookFromCart(cart.getId_cart(), isbn);

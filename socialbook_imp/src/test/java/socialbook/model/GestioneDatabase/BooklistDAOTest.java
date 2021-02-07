@@ -1,9 +1,10 @@
-package dao;
+//package dao;
 
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.List;
 
+/*
 public class TuristaDAOtest extends IntegrationTestCase {
     TableTuristaManager manager;
 
@@ -21,7 +22,7 @@ public class TuristaDAOtest extends IntegrationTestCase {
 
     /**
      * Testa la creazione, avvenuta tramite registrazione
-     */
+     *//*
     @Test
     public void createTest1() throws SQLException {
         manager = new TuristaDAO(mockDb);
@@ -34,7 +35,7 @@ public class TuristaDAOtest extends IntegrationTestCase {
      * testa il retrievebyid
      *
      * @throws SQLException
-     */
+     *//*
     @Test
     public void retrieveByIdTest() throws SQLException {
         manager = new TuristaDAO(mockDb);
@@ -45,7 +46,7 @@ public class TuristaDAOtest extends IntegrationTestCase {
      * testa il retrieveAll che torna tutti i turisti
      *
      * @throws SQLException
-     */
+     *//*
     @Test
     public void retrieveAllTest() throws SQLException {
         manager = new TuristaDAO(mockDb);
@@ -57,7 +58,7 @@ public class TuristaDAOtest extends IntegrationTestCase {
      * Testa l'aggiornamento di un turista
      *
      * @throws SQLException
-     */
+     *//*
     @Test
     public void updateTest() throws SQLException {
         manager = new TuristaDAO(mockDb);
@@ -73,10 +74,11 @@ public class TuristaDAOtest extends IntegrationTestCase {
      *
      * @throws SQLException
      */
+    /*
     @Test
     public void deleteTest() throws SQLException {
         manager = new TuristaDAO(mockDb);
         manager.delete(1);
         assertNull(manager.retrieveById(1), "Deve tornare null");
-    }
-}
+    }*/
+//}
