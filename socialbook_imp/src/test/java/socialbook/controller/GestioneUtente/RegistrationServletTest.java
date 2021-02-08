@@ -36,7 +36,6 @@ class RegistrationServletTest {
     CartDAO cartDAO ;
     @Mock
     BookListDAO bookListDAO ;
-
     @Mock
     RequestDispatcher rd;
 

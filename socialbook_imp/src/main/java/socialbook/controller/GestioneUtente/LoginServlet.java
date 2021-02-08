@@ -37,7 +37,6 @@ public class LoginServlet extends HttpServlet {
             if(!cart.isPresent() || cart == null){
                 Cart newCart = new Cart(customer.getId_customer(), 0);
                 cartDAO.doSave(newCart, customer.getId_customer());
-                System.out.println("cart id: " + newCart.getId_cart());
             }
             session.setAttribute("cart", cart.get());
             RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/jsp/index.jsp");
