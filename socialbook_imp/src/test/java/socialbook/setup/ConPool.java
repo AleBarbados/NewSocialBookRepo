@@ -1,4 +1,4 @@
-package setup;
+package socialbook.setup;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.h2.tools.RunScript;
@@ -11,18 +11,18 @@ import java.nio.file.Paths;
 import java.sql.SQLException;
 
 //singleton per il DB, lo inizializza, lo istanzia e lo pulisce
-public class MockConnection extends BasicDataSource {
-  private static MockConnection mockConnection = null;
+public class ConPool extends BasicDataSource {
+  private static ConPool mockConnection = null;
 
-  private MockConnection() {
+  private ConPool() {
     super();
   }
 
-  public static MockConnection getInstance() {
+  public static ConPool getInstance() {
     if (mockConnection == null) {
-      mockConnection = new MockConnection();
+      mockConnection = new ConPool();
       mockConnection.setDriverClassName("org.h2.Driver");
-      mockConnection.setUrl("jdbc:h2:./databaseTest;MODE=MYSQL;DATABASE_TO_UPPER=false;");
+      mockConnection.setUrl("jdbc:h2:./SocialBookTest;MODE=MYSQL;DATABASE_TO_UPPER=false;");
       mockConnection.setUsername("root");
       mockConnection.setPassword("root");
       mockConnection.setMaxTotal(512);
@@ -33,7 +33,7 @@ public class MockConnection extends BasicDataSource {
 
   public void initeDb() throws SQLException, FileNotFoundException {
     mockConnection.getConnection().createStatement().execute("drop all objects delete files");
-    Path path = Paths.get("src", "test", "resources", "backup.sql");
+    Path path = Paths.get("src", "test", "resources", "databaseTest.sql");
     String absolutePath = String.valueOf(path.toAbsolutePath());
     File file = new File(absolutePath);
     RunScript.execute(mockConnection.getConnection(), new FileReader(file));
