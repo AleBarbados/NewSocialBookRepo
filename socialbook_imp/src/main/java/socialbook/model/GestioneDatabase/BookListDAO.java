@@ -23,6 +23,7 @@ public class BookListDAO {
     private final static String DO_RETRIVE_FAVORITE = "SELECT booklist.id_booklist, booklist.booklist_name, booklist.favorite, booklist.image" +
             " FROM booklist JOIN booklistdetail ON booklist.id_booklist=booklistdetail.id_booklist WHERE booklistdetail.id_customer=? AND booklist.favorite=1 AND booklistdetail.property=0";
 
+    
     public BookList doRetriveBooklist(int id){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(DO_RETRIVE_BOOKLIST);

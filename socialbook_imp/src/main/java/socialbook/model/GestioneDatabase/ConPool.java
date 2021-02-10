@@ -26,8 +26,8 @@ public class ConPool {
             }
 
             PoolProperties p = new PoolProperties();
-            p.setUrl("jdbc:mysql://"+ prop.getProperty("database.server") +":"+prop.getProperty("database.port")+"/"+prop.getProperty("database.name")+"?serverTimezone=" + TimeZone.getDefault().getID());
-            p.setDriverClassName("com.mysql.cj.jdbc.Driver");
+            p.setUrl( prop.getProperty("connection.url"));
+            p.setDriverClassName(prop.getProperty("setDriverClassName"));
             p.setUsername(prop.getProperty("database.user"));
             p.setPassword(prop.getProperty("database.password"));
             p.setMaxActive(100);
