@@ -1,7 +1,3 @@
-DROP DATABASE IF EXISTS SocialBookTest;
-CREATE DATABASE SocialBookTest;
-USE SocialBookTest;
-
 CREATE TABLE customer(
     id_customer      int AUTO_INCREMENT,
     customer_name    varchar(15) NOT NULL,
@@ -26,8 +22,6 @@ CREATE TABLE book(
     plot             varchar(500) NOT NULL,
     catalogue        bool NOT NULL,
     image            varchar(20) NOT NULL,
-    FULLTEXT KEY(title),
-    FULLTEXT KEY(title, genre),
     PRIMARY KEY(ISBN)
 );
 
@@ -256,9 +250,9 @@ CREATE TABLE profiling(
 );
 
 INSERT INTO customer(customer_name, customer_surname, email, customer_pwd, customer_usr, c_description, image) VALUES
-('Ale', 'Bar', 'ale.bar@gmail.com', SHA1('barbados99'), 'AleBarbados', 'studentessa disperata', 'c1.jpg'),
-('Luca', 'Russo', 'luketto.222000@gmail.com', SHA1('pizzamandolino'), 'LukettoFurbetto', 'Voglio disperatamente porre fine alla mia vita alle volte', 'c2.jpg'),
-('Jeka', 'Proietto', 'angpro99@gmail.com', SHA1('vivaicarlini'), 'Jeka', 'beh che dire, follettini e follettine', 'c3.jpg');
+('Ale', 'Bar', 'ale.bar@gmail.com', 'barbados99', 'AleBarbados', 'studentessa disperata', 'c1.jpg'),
+('Luca', 'Russo', 'luketto.222000@gmail.com', 'pizzamandolino', 'LukettoFurbetto', 'Voglio disperatamente porre fine alla mia vita alle volte', 'c2.jpg'),
+('Jeka', 'Proietto', 'angpro99@gmail.com', 'vivaicarlini', 'Jeka', 'beh che dire, follettini e follettine', 'c3.jpg');
 
 
 INSERT INTO book(ISBN, title, genre, price_cent, publication_year, publishing_house, plot, catalogue, image) VALUES
@@ -315,4 +309,4 @@ INSERT INTO ticket(id_ticket, id_customer,  open_date, issue, t_status, destinat
 (1, 1, '2018-01-14', 'aiuto, sito del cazzo', 'OPEN', 'CUSTOMER_MANAGER');
 
 INSERT INTO customer(customer_name, customer_surname, email, customer_pwd, customer_usr, c_description) VALUES
-('Utente', 'Fittizio', 'nonpuoesistere@gmail.hhi', SHA1('nonpuoiaccedere'), 'UtenteFittizio', 'utente fittizio');
+('Utente', 'Fittizio', 'nonpuoesistere@gmail.hhi', 'nonpuoiaccedere', 'UtenteFittizio', 'utente fittizio');
