@@ -1,4 +1,4 @@
-package socialbook.Utility;
+package socialbook.utility;
 
 
 import socialbook.model.GestioneDatabase.Cart;

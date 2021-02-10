@@ -1,6 +1,6 @@
 package socialbook.controller.GestioneAcquisto;
 
-import socialbook.Utility.CartManagement;
+import socialbook.utility.CartManagement;
 import socialbook.model.GestioneDatabase.*;
 
 import javax.servlet.RequestDispatcher;
