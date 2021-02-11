@@ -108,8 +108,6 @@ public class Book {
         if(this == o) return true;
         if(o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return Objects.equals(isbn, book.isbn) && Objects.equals(title, book.title) && Objects.equals(genre, book.genre)
-                && price_cent == book.price_cent && publication_year == book.publication_year && Objects.equals(publishing_house, book.publishing_house)
-                && Objects.equals(plot, book.plot) && Objects.equals(image, book.image);
+        return Objects.equals(isbn, book.isbn);
     }
 }

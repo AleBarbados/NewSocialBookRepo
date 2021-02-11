@@ -17,8 +17,6 @@ public class BookListDAO {
     private final static String DO_DELETE = "DELETE FROM booklist WHERE id_booklist=?";
     private final static String DO_RETRIVE_BOOKS = "SELECT book.ISBN, book.title, book.genre, book.price_cent, book.publication_year, book.publishing_house," +
             " book.plot, book.catalogue, book.image FROM book JOIN booklistassociation ON book.ISBN=booklistassociation.id_book WHERE booklistassociation.id_booklist=?";
-    private final static String DO_RETRIVE_FROM_FOLLOW = "SELECT booklist.id_booklist, booklist.booklist_name, booklist.favorite, booklist.image" +
-            " FROM booklist JOIN booklistdetail ON booklist.id_booklist=booklistdetail.id_booklist WHERE booklistdetail.id_customer=? AND booklistdetail.property=1";
     private final static String DO_UPDATE = "UPDATE booklist SET booklist_name = ? , image = ? WHERE booklist.id_booklist=?";
     private final static String DO_RETRIVE_FAVORITE = "SELECT booklist.id_booklist, booklist.booklist_name, booklist.favorite, booklist.image" +
             " FROM booklist JOIN booklistdetail ON booklist.id_booklist=booklistdetail.id_booklist WHERE booklistdetail.id_customer=? AND booklist.favorite=1 AND booklistdetail.property=0";
@@ -154,7 +152,7 @@ public class BookListDAO {
     }
 
     public boolean checkFollower (int customer, int booklist){
-        ArrayList<BookList> booklists = doRetriveFromFollower(customer);
+        ArrayList<BookList> booklists = doRetriveFollowed(customer);
         if(!booklists.isEmpty()){
             for (BookList b:booklists) {
                 if(b.getId()==booklist){
@@ -163,28 +161,6 @@ public class BookListDAO {
             }
         }
         return false;
-    }
-
-    private ArrayList<BookList> doRetriveFromFollower(int customer) {
-        try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement(DO_RETRIVE_FROM_FOLLOW);
-
-            ArrayList<BookList> bookLists = new ArrayList<>();
-
-            ps.setInt(1, customer);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                BookList b = new BookList();
-                b.setId(rs.getInt(1));
-                b.setName(rs.getString(2));
-                b.setFavorite(rs.getBoolean(3));
-                b.setImage(rs.getString(4));
-                bookLists.add(b);
-            }
-            return bookLists;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     public void doSave(BookList bookList, int id_customer){

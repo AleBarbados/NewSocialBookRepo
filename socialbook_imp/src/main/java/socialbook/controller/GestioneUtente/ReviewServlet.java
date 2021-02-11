@@ -89,7 +89,7 @@ public class ReviewServlet extends HttpServlet {
         ArrayList<Review> reviews = reviewDAO.doRetrieveByISBN(isbn);
         request.setAttribute("recensioni", reviews);
 
-        ArrayList<Customer> customers = customerDAO.doRetrieveByReviews(reviews);
+        ArrayList<Customer> customers = customerDAO.doRetrieveByReviews();
         request.setAttribute("customers", customers);
 
         Utility.checkReview(request, isbn, customer.getId_customer());

@@ -7,6 +7,7 @@ import socialbook.setup.InitTestDb;
 
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,7 +20,6 @@ public class BooklistDAOTest  {
     public void setup() throws FileNotFoundException, SQLException {
         new InitTestDb().initeDb();
         bookListDAO = new BookListDAO();
-
     }
 
     @AfterEach
@@ -29,23 +29,50 @@ public class BooklistDAOTest  {
 
 
     /**
-     * testa il retrievebyid
-     *
-     * @throws SQLException
+     * testa il doRetrievebyid
      */
     @Test
-    public void doRetrieveBooklistTest() throws SQLException {
-            assertNotNull(bookListDAO.doRetriveBooklist(1), "Deve tornare un turista");
+    public void doRetrieveBooklistTest(){
+        assertNotNull(bookListDAO.doRetriveBooklist(1), "Deve tornare una booklist");
+    }
+
+    /**
+     * testa il doRetrieveFollowed
+     */
+    @Test
+    public void doRetriveFollowedTest(){
+        assertNotNull(bookListDAO.doRetriveFollowed(1), "Deve tornare una lista di booklist");
+    }
+
+    /**
+     * testa il doRetriveFromCustomer
+     */
+    @Test
+    public void doRetriveFromCustomerTest(){
+        assertNotNull(bookListDAO.doRetriveFromCustomer(1), "Deve tornare una lista di booklist");
+    }
+
+    /**
+     * testa il doRetriveBooks
+     */
+    @Test
+    public void doRetriveBooksTest(){
+        assertNotNull(bookListDAO.doRetriveBooks(1), "Deve tornare una lista di libri");
+    }
+
+    /**
+     * testa il doRetriveBooks
+     */
+    @Test
+    public void doRetriveFavoriteTest(){
+        assertNotNull(bookListDAO.doRetriveFavorite(1), "Deve tornare la booklist preferiti");
     }
 
     /**
      * Testa l'aggiornamento di una booklist
-     *
-     * @throws SQLException
      */
     @Test
-    public void updateTest() throws SQLException {
-        bookListDAO = new BookListDAO();
+    public void updateTest(){
         BookList bookList = bookListDAO.doRetriveBooklist(1);
         bookList.setName("Nome1");
         bookListDAO.doUpdate(bookList);
@@ -53,14 +80,54 @@ public class BooklistDAOTest  {
     }
 
     /**
-     * Testa la cancellazione di un turista
-     *
-     * @throws SQLException
+     * Testa la cancellazione di una booklist
      */
     @Test
-    public void doDeleteTest() throws SQLException {
-        bookListDAO = new BookListDAO();
+    public void doDeleteTest(){
         bookListDAO.doDelete(1);
         assertNull(bookListDAO.doRetriveBooklist(1), "Deve tornare null");
     }
+
+    /**
+     * testa la funzionalità di seguire una booklist
+     */
+    @Test
+    public void doFollowTest() {
+        bookListDAO.doFollow(1, 1);
+        ArrayList<BookList> bookLists = bookListDAO.doRetriveFollowed(1);
+        assertTrue(bookLists.contains(bookListDAO.doRetriveBooklist(1)));
+    }
+
+    /**
+     * testa la funzionalità di smettere di seguire una booklist
+     */
+    @Test
+    public void doUnFollowTest(){
+        bookListDAO.doFollow(1, 1);
+        bookListDAO.doUnFollow(1, 1);
+        ArrayList<BookList> bookLists = bookListDAO.doRetriveFollowed(1);
+        assertFalse(bookLists.contains(bookListDAO.doRetriveBooklist(1)));
+    }
+
+    /**
+     * testa la funzionalità di salvare una booklist
+     */
+    @Test
+    public void doSaveTest(){
+        BookList bookList = new BookList("Test", false, "");
+        bookListDAO.doSave(bookList, 1);
+        assertNotNull(bookListDAO.doRetriveBooklist(6));
+    }
+
+    /**
+     * testa la funzionalità di salvare un libro in una booklist
+     */
+    @Test
+    public void doSaveBookTest(){
+        bookListDAO.doSaveBook(1, "9788869186127");
+        ArrayList<Book> books = bookListDAO.doRetriveBooks(1);
+        BookDAO bookDAO = new BookDAO();
+        assertTrue(books.contains(bookDAO.doRetrieveByIsbn("9788869186127")));
+    }
+
 }
