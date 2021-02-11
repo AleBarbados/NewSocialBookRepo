@@ -156,7 +156,7 @@ public class BookDAO {
         return b;
     }
 
-    private boolean doRetrieveCatalogueByIsbn(String isbn) {
+    public boolean doRetrieveCatalogueByIsbn(String isbn) {
         try(Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(DO_RETRIEVE_CATALOGUE_BY_ISBN);
             ps.setString(1, isbn);
