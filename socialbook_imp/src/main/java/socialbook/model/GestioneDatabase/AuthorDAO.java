@@ -6,7 +6,6 @@ import java.util.ArrayList;
 public class AuthorDAO {
     private final static String DO_SAVE_AUTHOR = "INSERT INTO author (author_name, author_surname) VALUES (?,?)";
     private final static String DO_SAVE_AUTHOR_ASSOCIATION = "INSERT INTO authorAssociation (id_author, ISBN) VALUES (?,?)";
-    private final static String DO_RETRIEVE_IDAUTHOR_BY_ISBN = "SELECT id_author FROM authorAssociation WHERE ISBN = ?";
     private final static String DO_RETRIEVE_AUTHORS_BY_ISBN = "SELECT author.author_name, author.author_surname FROM author" +
             " JOIN authorassociation ON author.id_author=authorassociation.id_author WHERE ISBN=?";
     private final static String DO_RETRIEVE_IDAUTHOR_LIKE = "SELECT id_author FROM author WHERE author_name LIKE ? OR " +
@@ -78,21 +77,6 @@ public class AuthorDAO {
             }
             return id;
         }catch(SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private int doRetrieveIdAuthorByIsbn(String isbn) {
-        try(Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement(DO_RETRIEVE_IDAUTHOR_BY_ISBN);
-            ps.setString(1, isbn);
-
-            ResultSet rs = ps.executeQuery();
-            if(rs.next())
-                return rs.getInt(1);
-            else
-                return -1;
-        } catch(SQLException e) {
             throw new RuntimeException(e);
         }
     }

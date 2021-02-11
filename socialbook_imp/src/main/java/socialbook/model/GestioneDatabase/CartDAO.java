@@ -46,15 +46,12 @@ public class CartDAO {
             }
         }
         catch (SQLException e){
-            System.out.println(e);
-
+            throw new RuntimeException(e);
         }
-
     }
 
     public void doSaveBookCart(int id_order, String isbn) throws  BookAlreadyInsertException{
         try(Connection con = ConPool.getConnection()) {
-            System.out.println("do save book cart id "+id_order+" isbn "+isbn);
             PreparedStatement ps = con.prepareStatement(DO_SAVE_BOOK_CART);
             ps.setInt(1, id_order);
             ps.setString(2, isbn);
@@ -93,19 +90,15 @@ public class CartDAO {
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
                 c.setId_cart(rs.getInt(1));
-                System.out.println("set id cart "+ c.getId_cart());
                 c.setPrice(rs.getFloat(2));
                 c.setId_customer(id_customer);
                 c.setBooks(new OrderDetailDAO().doRetrieveByOrder(c.getId_cart()));
                 return Optional.of(c);
             }
-
             return Optional.empty();
-
         }catch(SQLException e){
             e.printStackTrace();
         }
         return null;
     }
-
 }

@@ -5,13 +5,10 @@ import java.util.ArrayList;
 
 public class MessageDAO {
 
-    private final static String DO_RETRIEVE_BY_TICKET = "SELECT id_message, sender, time_stamp, message_body FROM  " +
-            "                                            message WHERE id_ticket = ?";
-    private final static String DO_RETRIEVE_BY_ID = "SELECT id_message, sender, time_stamp, message_body, id_ticket FROM  " +
-            "                                        message WHERE id_message = ?";
-    private final static String DO_SAVE = "INSERT INTO message(sender, time_stamp, message_body, id_ticket)" +
+    private final static String DO_RETRIEVE_BY_TICKET = "SELECT id_message, sender, time_stamp, message_body FROM " +
+            " message WHERE id_ticket = ?";
+    private final static String DO_SAVE = "INSERT INTO message(sender, time_stamp, message_body, id_ticket) " +
             " VALUES(?,?,?,?) ";
-    private final static String DO_DELETE = "DELETE FROM message WHERE id = ?";
 
     public ArrayList<Message> doRetrieveByTicket(int id_ticket){
         try(Connection con = ConPool.getConnection()){
@@ -28,26 +25,6 @@ public class MessageDAO {
                 m.setMessage_body(rs.getString(4));
                 m.setId_ticket(id_ticket);
                 messages.add(m);
-            }
-            return messages;
-        } catch(SQLException e){
-            throw new RuntimeException(e);
-        }
-    }
-
-    public ArrayList<Message> doRetrieveById(int id_message){
-        try(Connection con = ConPool.getConnection()){
-            ArrayList<Message> messages = new ArrayList<>();
-            PreparedStatement ps = con.prepareStatement(DO_RETRIEVE_BY_ID);
-            ResultSet rs = ps.executeQuery();
-            ps.setInt(1, id_message);
-            while(rs.next()){
-                Message m = new Message();
-                m.setId_message(rs.getInt(1));
-                m.setSender(rs.getBoolean(2));
-                m.setTimestamp(rs.getTimestamp(3));
-                m.setMessage_body(rs.getString(4));
-                m.setId_ticket(rs.getInt(5));
             }
             return messages;
         } catch(SQLException e){
@@ -75,18 +52,4 @@ public class MessageDAO {
             throw new RuntimeException(e);
         }
     }
-
-    public void DoDelete(int id_message){
-        try(Connection con = ConPool.getConnection()){
-            PreparedStatement ps = con.prepareStatement(DO_DELETE);
-            ps.setInt(1, id_message);
-
-            if (ps.executeUpdate() != 1) {
-                throw new RuntimeException("DELETE error.");
-            }
-        }catch(SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
 }

@@ -18,8 +18,6 @@ public class BookDAO {
             + " image FROM book WHERE ISBN = ?";
     private final static String DO_RETRIEVE_BY_TITLE_OR_GENRE = "SELECT ISBN, title, genre, price_cent, publication_year, publishing_house, "
             + " plot, catalogue, image FROM book WHERE title LIKE ? OR genre LIKE ? LIMIT ?,?";
-    private final static String DO_RETRIEVE_BY_TITLE = "SELECT ISBN, title, genre, price_cent, publication_year, publishing_house, "
-            + " plot, catalogue, image FROM book WHERE title LIKE ? LIMIT ?,?";
     private final static String DO_RETRIEVE_BY_IDAUTHOR = "SELECT b.ISBN, b.title, b.genre, b.price_cent, b.publication_year, b.publishing_house, "
             + " b.plot, b.catalogue, b.image FROM book b,authorAssociation a WHERE a.id_author = ? AND b.ISBN = a.ISBN";
 
@@ -124,26 +122,6 @@ public class BookDAO {
         }
     }
 
-    public ArrayList<Book> doRetrieveByTitle(String like, int offset, int limit) {
-        try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement(DO_RETRIEVE_BY_TITLE);
-
-            ps.setString(1, like+"%");
-            ps.setInt(2, offset);
-            ps.setInt(3, limit);
-
-            ArrayList<Book> books = new ArrayList<>();
-            ResultSet rs = ps.executeQuery();
-
-            while (rs.next()) {
-               books.add(createBook(rs));
-            }
-            return books;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     public ArrayList<Book> doRetrieveByIdAuthor(int id) {
         try(Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(DO_RETRIEVE_BY_IDAUTHOR);
@@ -161,7 +139,6 @@ public class BookDAO {
             throw new RuntimeException(e);
         }
     }
-
 
     private Book createBook(ResultSet rs) throws SQLException {
         Book b = new Book();

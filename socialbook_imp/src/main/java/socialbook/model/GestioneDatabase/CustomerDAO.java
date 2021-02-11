@@ -97,7 +97,7 @@ public class CustomerDAO {
         }
     }
 
-    public void doSave( Customer customer){
+    public void doSave(Customer customer){
 
         try(Connection c = ConPool.getConnection()){
             PreparedStatement ps =
@@ -129,10 +129,9 @@ public class CustomerDAO {
         Customer customer = doRetrieveByUsername(usr);
         if(customer == null)
             return false;
-        else{
-        System.out.println("validating pwd given:"+pwd+" stored:"+customer.getC_pwd());
-        return (customer.getC_pwd().equals(pwd));
-    }}
+        else
+            return (customer.getC_pwd().equals(pwd));
+    }
 
     public Customer doRetrieveByUsername(String username){
         try (Connection con = ConPool.getConnection()) {

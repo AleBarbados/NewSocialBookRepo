@@ -25,10 +25,10 @@ public class FollowDAO {
         }
     }
 
-    public ArrayList<Follow> doRetriveAllFollowers(int follower) {
+    public ArrayList<Follow> doRetriveAllFollowers(int customer) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(DO_RETRIVE_ALL_FOLLOWERS);
-            ps.setInt(1, follower);
+            ps.setInt(1, customer);
             ArrayList<Follow> followers = new ArrayList<>();
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -75,11 +75,11 @@ public class FollowDAO {
         return false;
     }
 
-    public void doDelete(int customer, int follower) {
+    public void doDelete(int follower, int customer) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(DO_DELETE);
-            ps.setInt(follower, 1);
-            ps.setInt(customer, 2);
+            ps.setInt(customer, 1);
+            ps.setInt(follower, 2);
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("DELETE error.");
             }

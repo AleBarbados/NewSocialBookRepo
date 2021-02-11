@@ -34,6 +34,7 @@ public class InfoPaymentDAO {
         }
         return null;
     }
+
     public void doDeleteById(int id_customer){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement(DO_DELETE);
