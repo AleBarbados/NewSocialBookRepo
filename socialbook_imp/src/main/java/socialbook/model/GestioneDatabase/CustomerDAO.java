@@ -122,8 +122,8 @@ public class CustomerDAO {
         }catch (SQLException e){
             throw new RuntimeException(e);
         }
-
     }
+
     public boolean validate(String usr, String pwd){
 
         Customer customer = doRetrieveByUsername(usr);
@@ -184,7 +184,7 @@ public class CustomerDAO {
         }
     }
 
-    public ArrayList<Customer> doRetrieveByReviews(ArrayList<Review> reviews) {
+    public ArrayList<Customer> doRetrieveByReviews() {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(DO_RETRIEVE_BY_REVIEWS);
 
