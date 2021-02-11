@@ -1,5 +1,7 @@
 package socialbook.model.GestioneDatabase;
 
+import java.util.Objects;
+
 public class InfoPayment {
     /*    card_number, payment_name, surname, exp_date_mm, exp_date_yy, cvv, id_customer 	*/
     private int id_customer;
@@ -75,5 +77,18 @@ public class InfoPayment {
 
     public void setCvv(int cvv) {
         this.cvv = cvv;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        InfoPayment that = (InfoPayment) o;
+        return id_customer == that.id_customer ;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id_customer, card_number, payment_name, payment_surname, exp_month, exp_year, cvv);
     }
 }

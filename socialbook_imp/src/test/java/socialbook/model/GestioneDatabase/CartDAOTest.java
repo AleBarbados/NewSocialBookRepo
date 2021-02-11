@@ -1,5 +1,4 @@
 package socialbook.model.GestioneDatabase;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -7,18 +6,16 @@ import socialbook.setup.InitTestDb;
 
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
-import java.util.Optional;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class InfoPaymentDAOTest {
-    InfoPaymentDAO infoPaymentDAO;
-
+public class CartDAOTest {
+    CartDAO cartDAO;
     @BeforeEach
     public void setup() throws FileNotFoundException, SQLException {
         new InitTestDb().initeDb();
-        infoPaymentDAO = new InfoPaymentDAO();
-
+        cartDAO = new CartDAO();
     }
 
     @AfterEach
@@ -33,8 +30,8 @@ public class InfoPaymentDAOTest {
      */
     @Test
     public void doRetrieveByCustomerTest() throws SQLException {
-        infoPaymentDAO = new InfoPaymentDAO();
-        assertNotNull(infoPaymentDAO.doRetrieveByCustomer(1));
+        cartDAO = new CartDAO();
+        assertNotNull(cartDAO.doRetrieveByCustomer(2));
     }
 
     /**
@@ -44,21 +41,23 @@ public class InfoPaymentDAOTest {
      */
     @Test
     public void doSaveTest() throws SQLException {
-        infoPaymentDAO = new InfoPaymentDAO();
-        InfoPayment infoPayment = new InfoPayment(1,"1111222233334444", "ale", "bar", "03", "2020", 123);
-        infoPaymentDAO.doSave(infoPayment);
-        assertEquals(infoPayment, infoPaymentDAO.doRetrieveByCustomer(1).get());
+        cartDAO = new CartDAO();
+        Cart cart = new Cart(1, 0);
+        cartDAO.doSave(cart, 1);
+        assertEquals(cart, cartDAO.doRetrieveByCustomer(1).get());
     }
 
     /**
-     * testa il doDelete
+     * testa il doDeleteBookFromCart
      *
      * @throws SQLException
      */
     @Test
-    public void doDeleteTest() throws SQLException {
-        infoPaymentDAO = new InfoPaymentDAO();
-        infoPaymentDAO.doDeleteById(2);
-        assertEquals(Optional.empty() ,infoPaymentDAO.doRetrieveByCustomer(2));
+    public void doDeleteBookFromCartTest() throws SQLException {
+        cartDAO = new CartDAO();
+        cartDAO.doDeleteBookFromCart(1, "9788893817035");
+        List<Book> books = new OrderDetailDAO().doRetrieveByOrder(1);
+        assertEquals(false, books.contains(new BookDAO().doRetrieveByIsbn("9788893817035")));
     }
+
 }

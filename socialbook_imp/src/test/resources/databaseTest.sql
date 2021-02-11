@@ -313,3 +313,12 @@ INSERT INTO customer(customer_name, customer_surname, email, customer_pwd, custo
 
 INSERT INTO follow(id_customer, id_follower) VALUES
 (1,2);
+
+INSERT INTO infoPayment(id_customer, card_number, payment_name, payment_surname, exp_date_mm, exp_date_yy, cvv) VALUES
+(2,'1111222233334444', 'ale', 'bar', '03', '2020', 123);
+
+INSERT INTO customerOrder(order_price, invoice_addr, cart, order_date, id_customer ) VALUES
+(53, 'boh', 0, null, 2);
+
+INSERT INTO orderDetail(id_order, ISBN) VALUES
+(1, '9788893817035');
