@@ -36,4 +36,9 @@ public class AllOrdersViewServlet extends HttpServlet {
             dispatcher.forward(req, resp);
         }
     }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
+    }
 }

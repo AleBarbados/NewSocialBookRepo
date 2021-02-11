@@ -20,50 +20,48 @@ public class ShowCartServlet extends HttpServlet {
     private final BookDAO bookDAO = new BookDAO();
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doGet(req, resp);
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Cart cart = (Cart) req.getSession().getAttribute("cart");
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Cart cart = (Cart) request.getSession().getAttribute("cart");
         RequestDispatcher dispatcher;
-        Customer customer = (Customer) req.getSession().getAttribute("personalCustomer");
+        Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
 
-        String isbn = req.getParameter("isbn");
+        String isbn = request.getParameter("isbn");
 
         if( customer != null) {
-            if (req.getParameter("addCart") != null) {
-                if(cart == null){
-                    System.out.println("entro in cart null");
+            if (request.getParameter("addCart") != null) {
+                if(cart == null) {
                     cart = new Cart(customer.getId_customer(), 0);
                     cartDAO.doSave(cart, customer.getId_customer());
-                    req.getSession().setAttribute("cart", cart);
+                    request.getSession().setAttribute("cart", cart);
                 }
                 try {
                     cartDAO.doSaveBookCart(cart.getId_cart(), isbn);
                 } catch (BookAlreadyInsertException e) {
                     e.printStackTrace();
-                    req.getSession().setAttribute("cart", cart);
+                    request.getSession().setAttribute("cart", cart);
 
-
-                    dispatcher = req.getRequestDispatcher("WEB-INF/jsp/cartView.jsp");
-                    dispatcher.forward(req, resp);
+                    dispatcher = request.getRequestDispatcher("WEB-INF/jsp/cartView.jsp");
+                    dispatcher.forward(request, response);
                     return;
                 }
                 cart.insert(new BookDAO().doRetrieveByIsbn(isbn));
                 cartDAO.doUpdateCustomerCart(cart);
-                req.getSession().setAttribute("cart", cart);
-            }else if(req.getParameter("delete") != null){
+                request.getSession().setAttribute("cart", cart);
+            }else if(request.getParameter("delete") != null){
                 cart.remove(bookDAO.doRetrieveByIsbn(isbn));
 
                 cartDAO.doDeleteBookFromCart(cart.getId_cart(), isbn);
                 cartDAO.doUpdateCustomerCart(cart);
-                req.getSession().setAttribute("cart", cart);
+                request.getSession().setAttribute("cart", cart);
             }
 
-            dispatcher = req.getRequestDispatcher("WEB-INF/jsp/cartView.jsp");
-            dispatcher.forward(req, resp);
+            dispatcher = request.getRequestDispatcher("WEB-INF/jsp/cartView.jsp");
+            dispatcher.forward(request, response);
         }
         else {
             throw new socialbook.utility.ServletException("Bisogna prima effettuare l'accesso!!");

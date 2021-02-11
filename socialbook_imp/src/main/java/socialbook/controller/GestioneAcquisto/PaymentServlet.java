@@ -38,18 +38,17 @@ public class PaymentServlet extends HttpServlet {
             infoPaymentDAO.doSave(infoPayment);
 
             new CartManagement().doManageCart(customer.getId_customer(), request);
-
-            RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/index.jsp");
-            rd.forward(request, response);
-        }else{
-            System.out.println("req id"+ request.getParameter("pay"));
         }
+
+        RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/jsp/index.jsp");
+        rd.forward(request, response);
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
+        if(customer == null)
+            throw new socialbook.utility.ServletException("Bisogna prima effettuare l'accesso!!");
 
 
         if("elimina".equals(request.getParameter("id"))){
