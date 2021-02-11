@@ -60,6 +60,7 @@ class RegistrationServletTest {
         Mockito.verify(cartDAO).doSave(any(Cart.class), any(Integer.class));
 
     }
+
     @Test
     void testPostWrongPasswordNumber() throws Exception{
         //do un input al test
