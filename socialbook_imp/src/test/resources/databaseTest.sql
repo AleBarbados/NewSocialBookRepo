@@ -283,7 +283,6 @@ INSERT INTO booklist (booklist_name, favorite, image) VALUES
 ('Preferiti', 1, '');
 
 INSERT INTO booklistdetail (id_customer, id_booklist, property) VALUES
-(1, 1, 0),
 (1, 2, 0),
 (2, 3, 0),
 (1, 4, 0),
@@ -309,4 +308,8 @@ INSERT INTO ticket(id_ticket, id_customer,  open_date, issue, t_status, destinat
 (1, 1, '2018-01-14', 'aiuto, sito del cazzo', 'OPEN', 'CUSTOMER_MANAGER');
 
 INSERT INTO customer(customer_name, customer_surname, email, customer_pwd, customer_usr, c_description) VALUES
-('Utente', 'Fittizio', 'nonpuoesistere@gmail.hhi', 'nonpuoiaccedere', 'UtenteFittizio', 'utente fittizio');
+('Utente', 'Fittizio', 'nonpuoesistere@gmail.hhi', 'nonpuoiaccedere', 'UtenteFittizio', 'utente fittizio'),
+('Utente2', 'Fittizio2', 'nonpuoesistere2@gmail.hhi', 'nonpuoiaccedere2', 'UtenteFittizio2', 'utente fittizio2');
+
+INSERT INTO follow(id_customer, id_follower) VALUES
+(1,2);

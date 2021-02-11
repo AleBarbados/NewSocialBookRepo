@@ -1,5 +1,7 @@
 package socialbook.model.GestioneDatabase;
 
+import java.util.Objects;
+
 public class BookList {
     private int id;
     private String name;
@@ -11,6 +13,19 @@ public class BookList {
         this.name=name;
         this.favorite=favorite;
         this.image=image;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BookList bookList = (BookList) o;
+        return id == bookList.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, favorite, image);
     }
 
     public BookList() {
