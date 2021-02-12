@@ -308,6 +308,7 @@ INSERT INTO booklist (booklist_name, favorite, image) VALUES
 ('Esilarante Cavoletto', 0, 'c2.jpg'),
 ('WOW', 0, 'c1.jpg'),
 ('Preferiti', 1, ''),
+('Preferiti', 1, ''),
 ('Preferiti', 1, '');
 
 INSERT INTO booklistdetail (id_customer, id_booklist, property) VALUES
@@ -315,6 +316,7 @@ INSERT INTO booklistdetail (id_customer, id_booklist, property) VALUES
 (1, 2, 0),
 (2, 3, 0),
 (1, 4, 0),
+(2, 6, 0),
 (2, 5, 0);
 
 INSERT INTO booklistassociation (id_booklist, id_book) VALUES

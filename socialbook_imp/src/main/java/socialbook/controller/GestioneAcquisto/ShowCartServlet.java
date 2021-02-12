@@ -52,6 +52,7 @@ public class ShowCartServlet extends HttpServlet {
                 cart.insert(new BookDAO().doRetrieveByIsbn(isbn));
                 cartDAO.doUpdateCustomerCart(cart);
                 request.getSession().setAttribute("cart", cart);
+
             }else if(request.getParameter("delete") != null){
                 cart.remove(bookDAO.doRetrieveByIsbn(isbn));
 
