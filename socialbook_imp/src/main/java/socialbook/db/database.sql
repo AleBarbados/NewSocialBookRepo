@@ -265,21 +265,48 @@ INSERT INTO book(ISBN, title, genre, price_cent, publication_year, publishing_ho
 ('9788869183157', 'Harry Potter e la pietra filosofale', 'Fantasy', 1800, 2018, 'Salani', 'Nel giorno del suo undicesimo compleanno, la vita di Harry Potter cambia per sempre. Una lettera, consegnata dal gigantesco e arruffato Rubeus Hagrid, contiene infatti delle notizie sconvolgenti. Harry scopre di non essere un ragazzo come gli altri: è un mago e una straordinaria avventura lo aspetta..', true, 'b1.jpg'),
 ('9788893817035', 'Harry Potter e la camera dei segreti', 'Fantasy', 1699, 2018, 'Salani', 'Harry Potter è ormai celebre: durante il primo anno alla Scuola di Magia e Stregoneria di Hogwarts ha sconfitto il terribile Voldemort, vendicando la morte dei suoi genitori e coprendosi di gloria. Ma una spaventosa minaccia incombe sulla scuola: un incantesimo che colpisce i compagni di Harry, uno dopo l''altro, e che sembra legato a un antico mistero racchiuso nella tenebrosa Camera dei Segreti.', true, 'b2.jpg'),
 ('9788869186127', 'Harry Potter e il prigioniero di Azkaban', 'Fantasy', 1850, 2018, 'Salani', 'Una terribile minaccia incombe sulla Scuola di Magia e Stregoneria di Hogwarts. Sirius Black, il famigerato assassino, è evaso dalla prigione di Azkaban. È in caccia e la sua preda è proprio a Hogwarts, dove Harry e i suoi amici stanno per cominciare il loro terzo anno. Nonostante la sorveglianza dei Dissennatori la scuola non è più un luogo sicuro, perché al suo interno si nasconde un traditore...', false, 'b3.jpg'),
-('12345', 'MAH', 'Horror', 1900, 2020, 'Mondadori', 'jrbuebgibkjsbvjsbvjhs', true, 'c1.jpg'),
-('00000', 'EEEEE', 'Giallo', 2000, 2000, 'Feltrinelli', 'uergbsjbvsj', false, 'c2.jpg');
+('9788807888960', 'Storie di ordinaria follia', 'Narrativa contemporanea', 1045, 2017, 'Feltrinelli', 'La biografia di Bukowski include due tentativi di lavorare come impiegato, dimissioni dal "posto fisso" a cinquant''anni suonati, "per non uscire di senno del tutto" e vari divorzi. Questi scarsi elementi ricorrono con insistenza nella narrativa di Bukowski, più un romanzo a disordinate puntate che non racconti a sé, dove si alternano e si mischiano a personaggi ed eventi di fantasia. "Rispetto alla tradizione ' ||
+    'letteraria americana si sente che Bukowski realizza uno scarto, ed è uno scarto significativo", ha scritto Beniamino Placido su "La Repubblica", aggiungendo: "in questa scrittura molto "letteraria", ripetitiva, sostanzialmente prevedibile, Bukowski fa irruzione con una cosa nuova. La cosa nuova è lui stesso, Charles Bukowski. Lui che ha cinquant''anni, le tasche vuote, lo stomaco devastato, il sesso perennemente in furore; lui che soffre di emorragie e di insonnia; lui che ama il vecchio Hemingway; ' ||
+    'lui che passa le giornate cercando di racimolare qualche vincita alle corse dei cavalli; lui che ci sta per salutare adesso perché ha visto una gonna sollevarsi sulle gambe di una donna, lì su quella panchina del parco. Lui, Charles Bukowski, "forse un genio, forse un barbone". "Charles Bukowski, detto gambe d''elefante, il fallito", perché questi racconti sono sempre, rigorosamente in prima persona. E in presa diretta". Un pazzo innamorato beffardo, tenero, cinico, i cui racconti scaturiscono da esperienze ' ||
+    'dure, pagate tutte di persona, senza comodi alibi sociali e senza falsi pudori. ', true, 'storie_di_ordinaria_follia.jpg'),
+('9788807892905', 'La casa degli spiriti', 'Narrativa contemporanea', 1140, 2019, 'Feltrinelli','Una saga familiare del nostro secolo in cui si rispecchiano la storia e il destino di tutto un popolo, quello cileno, nei racconti delle donne di una importante e stravagante famiglia. Un grande affresco che per fascino ed emozione può ricordare al lettore, nell''ambito della narrativa sudamericana, soltanto "Cent''anni di solitudine" di García Márquez.', true, 'la_casa_degli_spiriti.jpg'),
+('9788807880896', 'Seta', 'Narrativa contemporanea', 712, 2013,'Feltrinelli', 'La Francia, i viaggi per mare, il profumo dei gelsi a Lavilledieu, i treni a vapore, la voce di Hélène. Hervé Joncour continuò a raccontare la sua vita, come mai, nella sua vita, aveva fatto. "Questo non è un romanzo. E neppure un racconto. Questa è una storia. Inizia con un uomo che attraversa il mondo, e finisce con un lago che se ne sta lì, in una giornata di vento. L''uomo si chiama Hervé Joncour. Il lago non si sa."', false, 'seta.jpg'),
+('9788807900495', 'La coscienza di Zeno', 'Narrativa classica', 950, 2014, 'Feltrinelli', '"La coscienza di Zeno" (1923), uno dei capolavori della letteratura europea del Novecento, è la tragicomica vicenda di un "inetto a vivere", che, su sollecitazione del proprio psicanalista, ripercorre le tappe della sua oscillante e inconcludente esistenza punteggiata dai ripetuti, e inutili, tentativi di smettere di fumare. Zeno Cosini è una specie di marionetta tirata da fili che, quanto più indaga, tanto più gli sfuggono. È' ||
+    ' schiacciato da un destino che sembra ineluttabile: desideroso dell''Ordine, è sommerso dal Caos; alla infantile ricerca di certezze, si ritrova compiaciuto funambolo sul filo oscillante della catastrofe personale e familiare. Introduzione di Franco Marcoaldi. ', true, 'zeno.jpg'),
+('9788807902505', 'Il canto di Natale', 'Narrativa classica', 712, 2016, 'Feltrinelli', 'Scrooge è talmente cattivo e avaro da rifiutare anche il calore del Natale, per lui solo una perdita di tempo e di soldi. Sarà il fantasma del suo ex socio Jacob Marley a visitarlo per primo. Poi lo visiteranno altri tre spiriti, che gli restituiranno in rapida sequenza la visione del suo Natale passato (di quando cioè lui era un bambino solo e triste), di quello presente (quello del suo contabile Cratchit e del figlio in predicato' ||
+    ' di morte per la mancanza di cure adeguate) e infine del Natale futuro, quello della sua morte, che verrà accolta con derisione e freddezza da tutti i suoi conoscenti. ', false, 'canto_di_natale.jpg'),
+('9788807900150', 'Alice nel paese delle Meraviglie', 'Narrativa classica', 760, 2013, 'Feltrinelli', 'Un luogo unico al mondo. Una terra colma di meraviglia, mistero e pericolo. Si dice che per sopravvivere si debba essere matti come un cappellaio... Visitate il Paese delle Meraviglie, seguendo Alice e il Coniglio Bianco. ', false, 'alice.jpg'),
+('9788807900303', 'The Dubliners', 'Narrativa classica', 855, 2013, 'Feltrinelli', 'Quindici racconti di vita quotidiana degli abitanti di Dublino durante i primi anni del ventesimo secolo', true, 'dubliners.jpg'),
+('9788807901997', 'Il piacere', 'Narrativa classica', 3420, 2015, 'Feltrinelli', 'Andrea Sperelli, giovane aristocratico di origini abruzzesi, aspetta con ansia l''ex amante Elena Muti nella sua casa romana a Palazzo Zuccari. Durante l''attesa torna con la memoria alla scena del loro addio, avvenuto quasi due anni prima, nel marzo 1885, su una carrozza in via Nomentana.', false, 'piacere.jpg'),
+('9788804707035', 'Io, robot', 'Fantascienza classica', 1330, 2018, 'Feltrinelli', 'Gloria Weston ha otto anni e vuole un mondo di bene al suo robot Robbie. Ci gioca a nascondino, si fa portare a cavalcioni, lo costringe a far finta di essere un aereo, gli racconta le stesse favole milioni di volte e lui la ascolta con robotica pazienza.', true, 'io_robot.jpg'),
+('9788842820185', 'Sogni di robot', 'Fantascienza classica', 799, 2014, 'Feltrinelli', 'Se l''uomo è fatto della stessa sostanza dei sogni, che cosa succede quando i robot cominciano a sognare? Succede che robot inquieti, troppo umani, lottano e fuggono, amano e si ribellano; e tentano di evadere dalla cattività meccanica imposta loro da padroni in carne e ossa e governata dalle Tre leggi della robotica.', true, 'sogni_robot.jpg');
 
 INSERT INTO author(id_author, author_name, author_surname) VALUES
 (1, 'Joanne Kathleen', 'Rowling'),
-(2, 'Hor', 'Alighieri'),
-(3, 'Alessandro', 'Manzoni');
+(2, 'Charles', 'Bukowski'),
+(3, 'Isabel', 'Allende'),
+(4, 'Alessandro', 'Baricco'),
+(5, 'Italo', 'Svevo'),
+(6, 'Charles', 'Dickens'),
+(7, 'Lewis','Carrol'),
+(8,'James', 'Joice'),
+(9, 'Gabriele', 'D''Annunzio'),
+(10, 'Isaac', 'Asimov');
 
 INSERT INTO authorAssociation (id_author, ISBN) VALUES
 (1, '9788869183157'),
 (1, '9788893817035'),
 (1, '9788869186127'),
-(2, '12345'),
-(3, '00000'),
-(3, '12345');
+(2, '9788807888960'),
+(3, '9788807892905'),
+(4, '9788807880896'),
+(5, '9788807900495'),
+(6,'9788807902505'),
+(7, '9788807900150'),
+(8, '9788807900303'),
+(9, '9788807901997'),
+(10, '9788804707035'),
+(10, '9788842820185');
 
 INSERT INTO booklist (booklist_name, favorite, image) VALUES
 ('Super Incredibile', 0, 'c1.jpg'),
@@ -297,14 +324,14 @@ INSERT INTO booklistdetail (id_customer, id_booklist, property) VALUES
 
 INSERT INTO booklistassociation (id_booklist, id_book) VALUES
 (1, '9788869183157'),
-(1, '9788893817035'), 
+(1, '9788842820185'),
 (2, '9788869183157'), 
-(2, '9788869186127'), 
-(3, '9788869186127');
+(2, '9788807901997'),
+(3, '9788807902505');
 
 INSERT INTO review(id_customer, ISBN, review_date, body, vote) VALUES
 (1, '9788869183157', '2021-01-22', '-', '5'),
-(2, '9788893817035', '2020-04-20', 'Questa storia è ok.', '3'),
+(2, '9788807902505', '2020-04-20', 'Questa storia è ok.', '3'),
 (3, '9788869183157', '2018-01-14', 'Beh che dire', '1');
 
 INSERT INTO admin(admn_usr, admn_pwd, admn_role) VALUES
@@ -316,3 +343,6 @@ INSERT INTO ticket(id_ticket, id_customer,  open_date, issue, t_status, destinat
 
 INSERT INTO customer(customer_name, customer_surname, email, customer_pwd, customer_usr, c_description) VALUES
 ('Utente', 'Fittizio', 'nonpuoesistere@gmail.hhi', SHA1('nonpuoiaccedere'), 'UtenteFittizio', 'utente fittizio');
+
+INSERT INTO follow(id_customer, id_follower) VALUES
+(2,1);
