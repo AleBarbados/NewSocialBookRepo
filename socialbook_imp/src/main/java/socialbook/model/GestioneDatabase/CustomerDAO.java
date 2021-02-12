@@ -18,7 +18,7 @@ public class CustomerDAO {
     private final static String DO_UPDATE = "UPDATE customer SET customer_pwd=?, c_description=?, image=? WHERE id_customer=?";
     private final static String DO_DELETE_BY_ID = "DELETE FROM customer WHERE id_customer = ?";
     private final static String DO_RETRIEVE_BY_REVIEWS = "SELECT c.id_customer, c.customer_name, c.customer_surname FROM customer c, review r " +
-            " WHERE c.id_customer = r.id_customer";
+            " WHERE c.id_customer = r.id_customer AND r.ISBN = ?";
 
     public Customer doRetriveById(int id){
         try (Connection con = ConPool.getConnection()) {
@@ -184,9 +184,10 @@ public class CustomerDAO {
         }
     }
 
-    public ArrayList<Customer> doRetrieveByReviews() {
+    public ArrayList<Customer> doRetrieveByReviews(String isbn) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(DO_RETRIEVE_BY_REVIEWS);
+            ps.setString(1, isbn);
 
             ArrayList<Customer> customers = new ArrayList<>();
             ResultSet rs = ps.executeQuery();
