@@ -16,15 +16,6 @@ public class RegistrationServlet extends HttpServlet {
     private CartDAO cartDAO = new CartDAO();
     private BookListDAO bookListDAO = new BookListDAO();
 
-    //4 test purpose only ->
-    public RegistrationServlet() { }
-
-    public RegistrationServlet(CustomerDAO customerDAO,CartDAO cartDAO ,BookListDAO bookListDAO) {
-        this.customerDAO = customerDAO;
-        this.cartDAO = cartDAO;
-        this.bookListDAO =bookListDAO;
-    }
-    // <-
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

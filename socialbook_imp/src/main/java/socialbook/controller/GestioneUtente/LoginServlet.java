@@ -15,9 +15,17 @@ import java.util.Optional;
 
 @WebServlet("/login-servlet")
 public class LoginServlet extends HttpServlet {
-    private final CustomerDAO customerDAO = new CustomerDAO();
-    private final AdminDAO adminDAO = new AdminDAO();
-    private final CartDAO cartDAO = new CartDAO();
+    private CustomerDAO customerDAO = new CustomerDAO();
+    private AdminDAO adminDAO = new AdminDAO();
+    private CartDAO cartDAO = new CartDAO();
+
+    public LoginServlet(){}
+
+    public LoginServlet(CustomerDAO customerDAO, AdminDAO adminDAO, CartDAO cartDAO){
+        this.customerDAO = customerDAO;
+        this.adminDAO = adminDAO;
+        this.cartDAO = cartDAO;
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -46,6 +54,7 @@ public class LoginServlet extends HttpServlet {
             }
             RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/jsp/index.jsp");
             rd.forward(req, resp);
+
         } else if (admin != null) {
             switch (admin.getA_role()) {
                 case CUSTOMER_MANAGER:

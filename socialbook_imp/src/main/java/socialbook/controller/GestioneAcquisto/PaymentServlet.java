@@ -15,11 +15,10 @@ import java.util.Optional;
 @WebServlet("/payment-servlet")
 public class PaymentServlet extends HttpServlet {
     private final InfoPaymentDAO infoPaymentDAO = new InfoPaymentDAO();
-    private final OrderDAO orderDAO = new OrderDAO();
-    private final CartDAO cartDAO = new CartDAO();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
         if(customer == null)
             throw new socialbook.utility.ServletException("Bisogna prima effettuare l'accesso!!");
