@@ -14,8 +14,6 @@ import java.sql.SQLException;
 
 //singleton per il DB, lo inizializza, lo istanzia e lo pulisce
 public class InitTestDb {
-
-
     public void initeDb() throws SQLException, FileNotFoundException {
         try (Connection conn = ConPool.getConnection()) {
             conn.createStatement().execute("drop all objects delete files");

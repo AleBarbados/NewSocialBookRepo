@@ -56,18 +56,26 @@ public class ReviewServlet extends HttpServlet {
                 body = request.getParameter("commento");
                 if(body.equals(""))
                     newReview.setBody("-");
-                else
+                else {
+                    if(!body.matches("[a-zA-Z0-9- !?:.,()]{0,300}"))
+                        throw new socialbook.utility.ServletException("");
+
                     newReview.setBody(body);
+                }
 
                 reviewDAO.doSave(newReview);
-            } else {                  //utente ha già recensito il libro in questione
+            } else {      //utente ha già recensito il libro in questione
                 if(review.getBody().equals("-")) {
                     body = request.getParameter("commento");
 
                     if(body.equals(""))
                         review.setBody("-");
-                    else
+                    else {
+                        if(!body.matches("[a-zA-Z0-9- !?:.,()]{0,300}"))
+                            throw new socialbook.utility.ServletException("");
+
                         review.setBody(body);
+                    }
                 }
 
                 if(review.getVote().equals("-")) {
