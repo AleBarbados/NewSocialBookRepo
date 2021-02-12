@@ -249,10 +249,10 @@ CREATE TABLE profiling(
 	PRIMARY KEY(id_customer)
 );
 
-INSERT INTO customer(customer_name, customer_surname, email, customer_pwd, customer_usr, c_description, image) VALUES
-('Ale', 'Bar', 'ale.bar@gmail.com', 'barbados99', 'AleBarbados', 'studentessa disperata', 'c1.jpg'),
-('Luca', 'Russo', 'luketto.222000@gmail.com', 'pizzamandolino', 'LukettoFurbetto', 'Voglio disperatamente porre fine alla mia vita alle volte', 'c2.jpg'),
-('Jeka', 'Proietto', 'angpro99@gmail.com', 'vivaicarlini', 'Jeka', 'beh che dire, follettini e follettine', 'c3.jpg');
+INSERT INTO customer(id_customer, customer_name, customer_surname, email, customer_pwd, customer_usr, c_description, image) VALUES
+(1, 'Ale', 'Bar', 'ale.bar@gmail.com', '23b3f46985f4ee91038447bf3b506b2fbf8f77bc', 'AleBarbados', 'studentessa disperata', 'c1.jpg'),
+(2, 'Luca', 'Russo', 'luketto.222000@gmail.com', 'pizzamandolino', 'LukettoFurbetto', 'Voglio disperatamente porre fine alla mia vita alle volte', 'c2.jpg'),
+(3, 'Jeka', 'Proietto', 'angpro99@gmail.com', 'vivaicarlini', 'Jeka', 'beh che dire, follettini e follettine', 'c3.jpg');
 
 
 INSERT INTO book(ISBN, title, genre, price_cent, publication_year, publishing_house, plot, catalogue, image) VALUES
@@ -302,7 +302,9 @@ INSERT INTO review(id_customer, ISBN, review_date, body, vote) VALUES
 
 INSERT INTO admin(admn_usr, admn_pwd, admn_role) VALUES
 ('username', 'password', 'CUSTOMER_MANAGER'),
-('usr', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'CUSTOMER_MANAGER');
+('usr', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'CUSTOMER_MANAGER'),
+('prova', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'CUSTOMER_MANAGER');
+
 
 INSERT INTO ticket(id_ticket, id_customer,  open_date, issue, t_status, destination) VALUES
 (1, 1, '2018-01-14', 'aiuto, sito del cazzo', 'OPEN', 'CUSTOMER_MANAGER');
@@ -318,7 +320,9 @@ INSERT INTO infoPayment(id_customer, card_number, payment_name, payment_surname,
 (2,'1111222233334444', 'ale', 'bar', '03', '2020', 123);
 
 INSERT INTO customerOrder(order_price, invoice_addr, cart, order_date, id_customer ) VALUES
+(53, 'boh', 1, null, 1),
 (53, 'boh', 0, null, 2);
 
+
 INSERT INTO orderDetail(id_order, ISBN) VALUES
-(1, '9788893817035');
+(1, '9788869183157');

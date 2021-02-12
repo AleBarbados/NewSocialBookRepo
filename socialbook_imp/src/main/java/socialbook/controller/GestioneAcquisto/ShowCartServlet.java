@@ -45,7 +45,7 @@ public class ShowCartServlet extends HttpServlet {
                     e.printStackTrace();
                     request.getSession().setAttribute("cart", cart);
 
-                    dispatcher = request.getRequestDispatcher("WEB-INF/jsp/cartView.jsp");
+                    dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cartView.jsp");
                     dispatcher.forward(request, response);
                     return;
                 }
@@ -61,7 +61,7 @@ public class ShowCartServlet extends HttpServlet {
                 request.getSession().setAttribute("cart", cart);
             }
 
-            dispatcher = request.getRequestDispatcher("WEB-INF/jsp/cartView.jsp");
+            dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cartView.jsp");
             dispatcher.forward(request, response);
         }
         else {

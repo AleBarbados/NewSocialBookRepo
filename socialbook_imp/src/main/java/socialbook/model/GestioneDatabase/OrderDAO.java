@@ -14,6 +14,7 @@ public class OrderDAO {
     public void doUpdate(Order o){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps = con.prepareStatement(DO_UPDATE);
+            System.out.println("in update id ordine" + o.getId_order() + "id_customer" + o.getId_customer());
             ps.setString(1, o.getInvoice_addr());
             ps.setBoolean(2, false);
             ps.setDate(3, new Date(new java.util.Date().getTime()));
@@ -52,18 +53,19 @@ public class OrderDAO {
 
     public Order doRetrieveByCart(int id_customer){
         try(Connection con = ConPool.getConnection()){
-            Order o = new Order();
             PreparedStatement ps = con.prepareStatement(DO_RETRIEVE_BY_CUSTOMER_CART);
             ps.setInt(1, id_customer);
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
+                Order o = new Order();
                 o.setId_order(rs.getInt(1));
                 o.setOrder_price(rs.getInt(2));
                 o.setInvoice_addr(rs.getString(3));
                 o.setCart(rs.getBoolean(4));
                 o.setDate(rs.getDate(5));
                 o.setId_customer(id_customer);
-            }return o;
+                return o;
+            }return null;
 
         }catch(SQLException e){
             e.printStackTrace();

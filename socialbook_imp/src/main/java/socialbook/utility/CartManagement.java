@@ -10,10 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 
 public class CartManagement {
 
-    public static void doManageCart(int id_customer, HttpServletRequest req){
+    public static void doManageCart(int id_customer, String addr){
 
         Order o = new OrderDAO().doRetrieveByCart(id_customer);
-        o.setInvoice_addr(req.getParameter("address"));
+        o.setInvoice_addr(addr);
         new OrderDAO().doUpdate(o);
 
         Cart cart = new Cart(id_customer, 0);

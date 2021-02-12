@@ -13,6 +13,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import static org.junit.jupiter.api.Assertions.*;
@@ -28,6 +29,8 @@ public class LoginServletIntegrationTest {
     HttpServletResponse response;
     @Mock
     RequestDispatcher rd;
+    @Mock
+    HttpSession session;
     @InjectMocks
     LoginServlet loginServlet = new LoginServlet();
 
@@ -52,21 +55,26 @@ public class LoginServletIntegrationTest {
 
     }
 
+    @Test
     public void doPostTrueCustomerTest() throws Exception{
 
-        when(request.getParameter("username")).thenReturn("Alessia99");
-        when(request.getParameter("pwd")).thenReturn("7c76bc4ec270168613b1228471f29caa6dbc56f2");
+        when(request.getSession()).thenReturn(session);
+        when(request.getParameter("username")).thenReturn("AleBarbados");
+        when(request.getParameter("pwd")).thenReturn("barbados99");
+        when(request.getRequestDispatcher("/WEB-INF/jsp/index.jsp")).thenReturn(rd);
+        assertDoesNotThrow(() ->loginServlet.doPost(request, response));
 
     }
 
+    @Test
     public void doPostTrueAdminTest() throws Exception{
 
-        when(request.getParameter("username")).thenReturn("Alessia99");
-        when(request.getParameter("pwd")).thenReturn("7c76bc4ec270168613b1228471f29caa6dbc56f2");
-        Exception thrown = Assertions.assertThrows(ServletException.class, () -> {
-            loginServlet.doPost(request, response);
-        });
-        assertTrue(thrown.getMessage().contains("Le credenziali inserite non sono valide!!"));
+        when(request.getSession()).thenReturn(session);
+        when(request.getParameter("username")).thenReturn("prova");
+        when(request.getParameter("pwd")).thenReturn("password");
+        when(request.getRequestDispatcher("/WEB-INF/jsp/index.jsp")).thenReturn(rd);
+
+        assertDoesNotThrow( () -> loginServlet.doPost(request, response));
 
     }
 }
