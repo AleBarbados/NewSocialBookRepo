@@ -14,7 +14,6 @@ import java.io.IOException;
 
 @WebServlet("/followEdit")
 public class FollowEditServlet extends HttpServlet {
-    private final CustomerDAO customerDAO = new CustomerDAO();
     private final FollowDAO followDAO = new FollowDAO();
 
     @Override
@@ -23,7 +22,7 @@ public class FollowEditServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher dispatcher;
         Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");
         String destination;
