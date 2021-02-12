@@ -225,17 +225,19 @@ public class BookListDAO {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(DO_RETRIVE_FAVORITE);
 
-            BookList b = new BookList();
-
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
+                BookList b = new BookList();
+
                 b.setId(rs.getInt(1));
                 b.setName(rs.getString(2));
                 b.setFavorite(rs.getBoolean(3));
                 b.setImage(rs.getString(4));
+
+                return b;
             }
-            return b;
+            return null;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

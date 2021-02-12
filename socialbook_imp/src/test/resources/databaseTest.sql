@@ -254,7 +254,6 @@ INSERT INTO customer(id_customer, customer_name, customer_surname, email, custom
 (2, 'Luca', 'Russo', 'luketto.222000@gmail.com', 'pizzamandolino', 'LukettoFurbetto', 'Voglio disperatamente porre fine alla mia vita alle volte', 'c2.jpg'),
 (3, 'Jeka', 'Proietto', 'angpro99@gmail.com', 'vivaicarlini', 'Jeka', 'beh che dire, follettini e follettine', 'c3.jpg');
 
-
 INSERT INTO book(ISBN, title, genre, price_cent, publication_year, publishing_house, plot, catalogue, image) VALUES
 ('9788869183157', 'Harry Potter e la pietra filosofale', 'Fantasy', 1800, 2018, 'Salani', 'Nel giorno del suo undicesimo compleanno, la vita di Harry Potter cambia per sempre. Una lettera, consegnata dal gigantesco e arruffato Rubeus Hagrid, contiene infatti delle notizie sconvolgenti. Harry scopre di non essere un ragazzo come gli altri: è un mago e una straordinaria avventura lo aspetta..', true, 'b1.jpg'),
 ('9788893817035', 'Harry Potter e la camera dei segreti', 'Fantasy', 1699, 2018, 'Salani', 'Harry Potter è ormai celebre: durante il primo anno alla Scuola di Magia e Stregoneria di Hogwarts ha sconfitto il terribile Voldemort, vendicando la morte dei suoi genitori e coprendosi di gloria. Ma una spaventosa minaccia incombe sulla scuola: un incantesimo che colpisce i compagni di Harry, uno dopo l''altro, e che sembra legato a un antico mistero racchiuso nella tenebrosa Camera dei Segreti.', true, 'b2.jpg'),
@@ -280,13 +279,15 @@ INSERT INTO booklist (booklist_name, favorite, image) VALUES
 ('Esilarante Cavoletto', 0, 'c2.jpg'),
 ('WOW', 0, 'c1.jpg'),
 ('Preferiti', 1, ''),
+('Preferiti', 1, ''),
 ('Preferiti', 1, '');
 
 INSERT INTO booklistdetail (id_customer, id_booklist, property) VALUES
 (1, 2, 0),
 (2, 3, 0),
 (1, 4, 0),
-(2, 5, 0);
+(2, 5, 0),
+(3, 6, 0);
 
 INSERT INTO booklistassociation (id_booklist, id_book) VALUES
 (1, '9788869183157'),
@@ -297,7 +298,7 @@ INSERT INTO booklistassociation (id_booklist, id_book) VALUES
 
 INSERT INTO review(id_customer, ISBN, review_date, body, vote) VALUES
 (1, '9788869183157', '2021-01-22', '-', '5'),
-(2, '9788893817035', '2020-04-20', 'Questa storia è ok.', '3'),
+(2, '9788893817035', '2020-04-20', 'Questa storia è ok.', '-'),
 (3, '9788869183157', '2018-01-14', 'Beh che dire', '1');
 
 INSERT INTO admin(admn_usr, admn_pwd, admn_role) VALUES
