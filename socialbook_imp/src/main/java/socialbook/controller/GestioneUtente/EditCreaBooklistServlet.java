@@ -1,8 +1,6 @@
 package socialbook.controller.GestioneUtente;
 
-import socialbook.model.GestioneDatabase.BookList;
-import socialbook.model.GestioneDatabase.BookListDAO;
-import socialbook.model.GestioneDatabase.Customer;
+import socialbook.model.GestioneDatabase.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -15,7 +13,13 @@ import java.io.IOException;
 @MultipartConfig
 @WebServlet("/EditCreaBooklistServlet")
 public class EditCreaBooklistServlet extends HttpServlet {
-    private final BookListDAO bookListDAO = new BookListDAO();
+    private BookListDAO bookListDAO = new BookListDAO();
+
+    //4 test purpose only ->
+    public EditCreaBooklistServlet() {
+    }// <-
+
+
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -37,10 +41,11 @@ public class EditCreaBooklistServlet extends HttpServlet {
             booklist = bookListDAO.doRetriveBooklist(Integer.parseInt(idBooklist));
         }
 
-        if(name != null)
+        if(name != null) {
+            if(!name.matches("([a-zA-Z]{1,30})"))
+                throw new ServletException("Formato nome non corretto");
             booklist.setName(name);
-
-
+        }
 
         booklist.setFavorite(false);
 

@@ -8,19 +8,12 @@ public class BookList {
     private boolean favorite;
     private String image;
 
-    public BookList(int id, String name, boolean favorite, String image){
-        this.id=id;
-        this.name=name;
-        this.favorite=favorite;
-        this.image=image;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BookList bookList = (BookList) o;
-        return id == bookList.id;
+        return id == bookList.id && name.equals(bookList.name);
     }
 
     @Override
