@@ -75,7 +75,6 @@ public class  Review {
         if (o == null || getClass() != o.getClass()) return false;
 
         Review review = (Review) o;
-        return id_review == review.id_review && Objects.equals(body, review.body) && Objects.equals(vote, review.vote) &&
-                Objects.equals(date, review.date) && id_customer == review.id_customer && Objects.equals(isbn, review.isbn);
+        return id_review == review.id_review;
     }
 }

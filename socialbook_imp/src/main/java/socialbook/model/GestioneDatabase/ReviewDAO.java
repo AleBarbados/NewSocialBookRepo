@@ -106,6 +106,7 @@ public class ReviewDAO {
             throw new RuntimeException(e);
         }
     }
+
     private Review createReview(ResultSet rs) throws SQLException {
         Review r = new Review();
 
