@@ -11,20 +11,9 @@ import java.io.IOException;
 
 @WebServlet("/registration-servlet")
 public class RegistrationServlet extends HttpServlet {
-
     private CustomerDAO customerDAO = new CustomerDAO();
     private CartDAO cartDAO = new CartDAO();
     private BookListDAO bookListDAO = new BookListDAO();
-
-    //4 test purpose only ->
-    public RegistrationServlet() { }
-
-    public RegistrationServlet(CustomerDAO customerDAO,CartDAO cartDAO ,BookListDAO bookListDAO) {
-        this.customerDAO = customerDAO;
-        this.cartDAO = cartDAO;
-        this.bookListDAO =bookListDAO;
-    }
-    // <-
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -50,7 +39,7 @@ public class RegistrationServlet extends HttpServlet {
         if(!password.matches("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$"))
             throw new socialbook.utility.ServletException("Password non conforme");
 
-        if(!description.matches("^(?=(\\s*[a-zA-Z\\d]){0,150}$).*$"))
+        if(!description.matches("[a-zA-Z0-9- !?:.,()]{0,150}"))
             throw new socialbook.utility.ServletException("Formato descrizione non conforme");
 
         Customer customer = new Customer(name, surname, email, Utility.encryptionSHA1(password), username, description);

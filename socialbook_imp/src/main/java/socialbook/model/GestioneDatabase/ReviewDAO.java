@@ -17,7 +17,7 @@ public class ReviewDAO {
 
             ps.setInt(1, r.getId_customer());
             ps.setString(2, r.getIsbn());
-            ps.setDate(3, r.getDate());
+            ps.setDate(3, new Date(new java.util.Date().getTime()));
             ps.setString(4, r.getBody());
             ps.setString(5, r.getVote());
 
@@ -94,7 +94,7 @@ public class ReviewDAO {
     public void doUpdateById(Review r) {
         try(Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(DO_UPDATE_BY_ID);
-            ps.setDate(1,r.getDate());
+            ps.setDate(1, new Date(new java.util.Date().getTime()));
             ps.setString(2, r.getBody());
             ps.setString(3, r.getVote());
             ps.setInt(4, r.getId_review());
