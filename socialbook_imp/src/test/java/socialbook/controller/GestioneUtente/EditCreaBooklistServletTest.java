@@ -12,7 +12,6 @@ import socialbook.model.GestioneDatabase.BookListDAO;
 import socialbook.model.GestioneDatabase.Customer;
 import socialbook.model.GestioneDatabase.CustomerDAO;
 import socialbook.setup.InitTestDb;
-;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -63,7 +62,7 @@ public class EditCreaBooklistServletTest {
         when(request.getParameter("foto")).thenReturn("Test");
         editCreaBooklistServlet.doGet(request, response);
 
-        assertEquals("Test", bookListDAO.doRetriveBooklist(6).getName());
+        assertEquals("Test", bookListDAO.doRetriveBooklist(7).getName());
     }
 
     @Test
