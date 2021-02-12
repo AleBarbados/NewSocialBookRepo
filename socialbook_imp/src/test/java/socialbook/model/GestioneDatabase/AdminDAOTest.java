@@ -9,8 +9,6 @@ import socialbook.setup.InitTestDb;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 public class AdminDAOTest {
     AdminDAO adminDAO;
 
