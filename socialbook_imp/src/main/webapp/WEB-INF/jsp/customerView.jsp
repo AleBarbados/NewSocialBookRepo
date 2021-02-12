@@ -37,7 +37,7 @@
                     <p>${customer.description}</p>
                     <ul>
                         <c:choose>
-                            <c:when test="${follow!=true&&idCustomer == personalCustomer.id_customer}">
+                            <c:when test="${follow!=true&&idCustomer == personalCustomer.id_customer && personalCustomer!=null}">
                                 <li>
                                     <form action="followEdit" method="post">
                                         <input type="hidden" name="id" value="${customer.id_customer}">
@@ -45,7 +45,7 @@
                                     </form>
                                 </li>
                             </c:when>
-                            <c:when test="${follow==true&&idCustomer == personalCustomer.id_customer}">
+                            <c:when test="${follow==true&&idCustomer == personalCustomer.id_customer && personalCustomer!=null}">
                                 <li>
                                     <form action="followEdit" method="post">
                                         <input type="hidden" name="id" value="${customer.id_customer}">

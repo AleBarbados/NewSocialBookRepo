@@ -56,7 +56,7 @@
                     </c:if>
                 </div>
             </div>
-            <div class="recenzione">
+            <div class="recensione">
                 <br><br>
                 <c:if test="${personalCustomer != null}">
                     <c:if test="${recensione_no == null}">
@@ -89,7 +89,7 @@
                     </c:if>
                 </c:if>
             </div>
-            <div class="recenzioni">
+            <div class="recensioni">
                 <c:if test="${not empty recensioni}">
                     <c:forEach items="${recensioni}" var="rec">
                         <div class="breadcrumb">
@@ -106,14 +106,14 @@
                                     <c:when test="${customerManager != null}">
                                         <form action="customerManagerReviewServlet" method="get">
                                             <input type="hidden" name="r_id" value="${rec.id_review}">
-                                            <input type="submit" class="btn black" value="rimuovi">
+                                            <input type="submit" class="btn black" value="Rimuovi">
                                         </form>
                                     </c:when>
                                     <c:when test="${personalCustomer != null && personalCustomer.id_customer == rec.id_customer}">
                                         <form action="reviewServlet" method="post">
                                             <input type="hidden" name="isbn" value="${book.isbn}">
                                             <input type="hidden" name="rimuovi_rec" value="${rec.id_review}">
-                                            <input type="submit" class="btn black" value="rimuovi">
+                                            <input type="submit" class="btn black" value="Rimuovi">
                                         </form>
                                     </c:when>
                                 </c:choose>
