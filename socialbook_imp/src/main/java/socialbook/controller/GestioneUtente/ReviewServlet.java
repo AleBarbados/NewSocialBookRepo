@@ -37,15 +37,11 @@ public class ReviewServlet extends HttpServlet {
         } else {        //utente aggiunge recensione
             Review review = reviewDAO.doRetrieveByISBNCustomer(isbn, idCustomer);
 
-            Calendar calendar = Calendar.getInstance();      //si ottiene la data attuale
-            java.sql.Date date = new Date (calendar.getTimeInMillis());
-
             if(review == null) {                 //utente non ha mai recensito il libro in questione
                 Review newReview = new Review();
 
                 newReview.setId_customer(idCustomer);
                 newReview.setIsbn(isbn);
-                newReview.setDate(date);
 
                 vote = request.getParameter("voto");
                 if(vote == null)
@@ -62,7 +58,6 @@ public class ReviewServlet extends HttpServlet {
 
                     newReview.setBody(body);
                 }
-
                 reviewDAO.doSave(newReview);
             } else {      //utente ha già recensito il libro in questione
                 if(review.getBody().equals("-")) {
@@ -86,8 +81,6 @@ public class ReviewServlet extends HttpServlet {
                     else
                         review.setVote(vote);
                 }
-
-                review.setDate(date);
                 reviewDAO.doUpdateById(review);
             }
         }

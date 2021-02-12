@@ -1,9 +1,0 @@
-2021-02-12 20:08:04 jdbc[12]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "customer" not found; SQL statement:
-SELECT id_customer, customer_name, customer_surname,  customer_pwd, customer_usr, c_description, email, image FROM customer WHERE id_customer = ? [42102-200]
-2021-02-12 20:09:47 jdbc[12]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "customer" not found; SQL statement:
-SELECT id_customer, customer_name, customer_surname,  customer_pwd, customer_usr, c_description, email, image FROM customer WHERE id_customer = ? [42102-200]
-2021-02-12 20:17:37 jdbc[12]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "customer" not found; SQL statement:
-SELECT id_customer, customer_name, customer_surname,  customer_pwd, customer_usr, c_description, email, image FROM customer WHERE id_customer = ? [42102-200]

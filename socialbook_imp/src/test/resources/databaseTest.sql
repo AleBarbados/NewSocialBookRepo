@@ -279,13 +279,15 @@ INSERT INTO booklist (booklist_name, favorite, image) VALUES
 ('Esilarante Cavoletto', 0, 'c2.jpg'),
 ('WOW', 0, 'c1.jpg'),
 ('Preferiti', 1, ''),
+('Preferiti', 1, ''),
 ('Preferiti', 1, '');
 
 INSERT INTO booklistdetail (id_customer, id_booklist, property) VALUES
 (1, 2, 0),
 (2, 3, 0),
 (1, 4, 0),
-(2, 5, 0);
+(2, 5, 0),
+(3, 6, 0);
 
 INSERT INTO booklistassociation (id_booklist, id_book) VALUES
 (1, '9788869183157'),
@@ -296,7 +298,7 @@ INSERT INTO booklistassociation (id_booklist, id_book) VALUES
 
 INSERT INTO review(id_customer, ISBN, review_date, body, vote) VALUES
 (1, '9788869183157', '2021-01-22', '-', '5'),
-(2, '9788893817035', '2020-04-20', 'Questa storia è ok.', '3'),
+(2, '9788893817035', '2020-04-20', 'Questa storia è ok.', '-'),
 (3, '9788869183157', '2018-01-14', 'Beh che dire', '1');
 
 INSERT INTO admin(admn_usr, admn_pwd, admn_role) VALUES

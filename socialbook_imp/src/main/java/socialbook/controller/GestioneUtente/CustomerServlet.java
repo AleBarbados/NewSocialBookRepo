@@ -37,7 +37,7 @@ public class CustomerServlet extends HttpServlet {
             }
 
             BookList favourites = booklistDAO.doRetriveFavorite(customer.getId_customer());
-            request.setAttribute("preferiti", booklistDAO.doRetriveBooks(favourites.getId()));  //prendo preferiti del customer per renderle poi visibili sulla sua pagoina
+            request.setAttribute("preferiti", booklistDAO.doRetriveBooks(favourites.getId()));  //prendo preferiti del customer per renderle poi visibili sulla sua pagina
 
         } else if(request.getParameter("personalView") != null){    //in caso l'utente voglia visitare la sua area personale carichiamo i suoi dati
             if(customerLoggato == null)
