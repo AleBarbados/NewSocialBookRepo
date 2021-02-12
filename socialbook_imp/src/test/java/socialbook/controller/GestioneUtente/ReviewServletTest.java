@@ -23,8 +23,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-
-class ReviewServletTest{
+class ReviewServletTest {
     //creo mock per Request, Response e RequestDispatcher (oggetti fittizi)
     @Mock
     HttpServletRequest request;
@@ -55,7 +54,7 @@ class ReviewServletTest{
     }
 
     @Test
-    void testGet() throws Exception{
+    void testGet() throws Exception {
         //do un input al test
         Customer customer = customerDAO.doRetriveById(3);
         String isbn = "9788869186127";

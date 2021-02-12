@@ -22,8 +22,7 @@ import java.sql.SQLException;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
-@ExtendWith( MockitoExtension.class)
-
+@ExtendWith(MockitoExtension.class)
 class RegistrationServletTest {
     //creo mock per Request, Response e RequestDispatcher (oggetti fittizi)
     @Mock
@@ -49,7 +48,7 @@ class RegistrationServletTest {
     }
 
     @Test
-    void testPost() throws Exception{
+    void testPost() throws Exception {
         //do un input al test
         when(request.getParameter("name")).thenReturn("Alessia");
         when(request.getParameter("surname")).thenReturn("Barbato");
@@ -64,7 +63,7 @@ class RegistrationServletTest {
     }
 
     @Test
-    void testWrongNameLength() throws Exception{
+    void testWrongNameLength() throws Exception {
         //lunghezza del nome sbagliata
         when(request.getParameter("name")).thenReturn("Alessiaaaaaaaaaa");
         when(request.getParameter("surname")).thenReturn("Barbato");
@@ -102,7 +101,7 @@ class RegistrationServletTest {
     }
 
     @Test
-    void testWrongSurnameLength() throws Exception{
+    void testWrongSurnameLength() throws Exception {
         when(request.getParameter("name")).thenReturn("Alessia");
         //lunghezza del cognome sbagliata
         when(request.getParameter("surname")).thenReturn("Barbatoooooooooo");
@@ -121,7 +120,7 @@ class RegistrationServletTest {
     }
 
     @Test
-    void testWrongUsernameLength() throws Exception{
+    void testWrongUsernameLength() throws Exception {
         when(request.getParameter("name")).thenReturn("Alessia");
         when(request.getParameter("surname")).thenReturn("Barbato");
         //lunghezza username sbagliata
@@ -140,7 +139,7 @@ class RegistrationServletTest {
     }
 
     @Test
-    void testWrongUsernameFormat() throws Exception{
+    void testWrongUsernameFormat() throws Exception {
         when(request.getParameter("name")).thenReturn("Alessia");
         when(request.getParameter("surname")).thenReturn("Barbato");
         //formato username non corretto
@@ -159,7 +158,7 @@ class RegistrationServletTest {
     }
 
     @Test
-    void testWrongSurnameFormat() throws Exception{
+    void testWrongSurnameFormat() throws Exception {
         when(request.getParameter("name")).thenReturn("Alessia");
         //formato del cognome sbagliato
         when(request.getParameter("surname")).thenReturn("Barbato2");
@@ -178,7 +177,7 @@ class RegistrationServletTest {
     }
 
     @Test
-    void testPostWrongEmailFormat() throws Exception{
+    void testPostWrongEmailFormat() throws Exception {
         when(request.getParameter("name")).thenReturn("Alessia");
         when(request.getParameter("surname")).thenReturn("Barbato");
         when(request.getParameter("username")).thenReturn("Alessia");
@@ -197,7 +196,7 @@ class RegistrationServletTest {
     }
 
     @Test
-    void testPostWrongPasswordNumber() throws Exception{
+    void testPostWrongPasswordNumber() throws Exception {
         when(request.getParameter("name")).thenReturn("Alessia");
         when(request.getParameter("surname")).thenReturn("Barbato");
         when(request.getParameter("username")).thenReturn("Alessia");
@@ -217,7 +216,7 @@ class RegistrationServletTest {
     }
 
     @Test
-    void testPostWrongPasswordUpperCase() throws Exception{
+    void testPostWrongPasswordUpperCase() throws Exception {
         when(request.getParameter("name")).thenReturn("Alessia");
         when(request.getParameter("surname")).thenReturn("Barbato");
         when(request.getParameter("username")).thenReturn("Alessia");
@@ -237,7 +236,7 @@ class RegistrationServletTest {
     }
 
     @Test
-    void testPostWrongPasswordLowerCase() throws Exception{
+    void testPostWrongPasswordLowerCase() throws Exception {
         when(request.getParameter("name")).thenReturn("Alessia");
         when(request.getParameter("surname")).thenReturn("Barbato");
         when(request.getParameter("username")).thenReturn("Alessia");
