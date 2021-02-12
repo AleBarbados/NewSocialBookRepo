@@ -45,7 +45,7 @@ public class InfoPaymentDAOTest {
     @Test
     public void doSaveTest() throws SQLException {
         infoPaymentDAO = new InfoPaymentDAO();
-        InfoPayment infoPayment = new InfoPayment(1,"1111222233334444", "ale", "bar", "03", "2020", 123);
+        InfoPayment infoPayment = new InfoPayment(1,"111222333444", "ale", "bar", "03", "2020", 123);
         infoPaymentDAO.doSave(infoPayment);
         assertEquals(infoPayment, infoPaymentDAO.doRetrieveByCustomer(1).get());
     }

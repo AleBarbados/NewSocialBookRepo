@@ -28,6 +28,7 @@ public class LoginServlet extends HttpServlet {
         String pwd = Utility.encryptionSHA1(password);
 
         Customer customer;
+        Admin admin = adminDAO.doRetrieveByUsrEPwd(username, pwd);
 
         if (customerDAO.validate(username, pwd)) {          //validazione utente
             customer = customerDAO.doRetrieveByUsername(username);
@@ -45,29 +46,23 @@ public class LoginServlet extends HttpServlet {
             }
             RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/jsp/index.jsp");
             rd.forward(req, resp);
-        } else {
-            // controllo amministratore
-            Admin admin = adminDAO.doRetrieveByUsrEPwd(username, pwd);
-
-            if (admin != null) {
-                switch (admin.getA_role()) {
-                    case CUSTOMER_MANAGER:
-                        session.setAttribute("customerManager", admin);
-                        break;
-                    case CATALOGUE_MANAGER:
-                        session.setAttribute("catalogueManager", admin);
-                        break;
-                    case SYSTEM_MANAGER:
-                        session.setAttribute("systemManager", admin);
-                        break;
-                }
-
-                RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/jsp/index.jsp");
-                rd.forward(req, resp);
+        } else if (admin != null) {
+            switch (admin.getA_role()) {
+                case CUSTOMER_MANAGER:
+                    session.setAttribute("customerManager", admin);
+                    break;
+                case CATALOGUE_MANAGER:
+                    session.setAttribute("catalogueManager", admin);
+                    break;
+                case SYSTEM_MANAGER:
+                    session.setAttribute("systemManager", admin);
+                    break;
             }
-        }
 
-        throw new socialbook.utility.ServletException("Le credenziali inserite non sono valide!!");
+            RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/jsp/index.jsp");
+            rd.forward(req, resp);
+        } else
+            throw new socialbook.utility.ServletException("Le credenziali inserite non sono valide!!");
     }
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

@@ -26,7 +26,7 @@ public class PaginaLibroServlet extends HttpServlet {
         request.setAttribute("recensioni", reviews);
         request.setAttribute("book", bookDAO.doRetrieveByIsbn(isbn));
 
-        ArrayList<Customer> customers = customerDAO.doRetrieveByReviews();
+        ArrayList<Customer> customers = customerDAO.doRetrieveByReviews(isbn);
         request.setAttribute("customers", customers);
 
         Customer customer = (Customer) request.getSession().getAttribute("personalCustomer");

@@ -37,14 +37,16 @@
                                 <input type="submit" class="btn black" name="delete" value="Elimina">
                             </c:when>
                             <c:otherwise>
-                                <c:choose>
-                                    <c:when test="${follow!=null}">
-                                        <a href="FollowBooklistServlet?id=${booklist.id}&unFollow=true" class="btn black">UnFollow</a>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <a href="FollowBooklistServlet?id=${booklist.id}&follow=true" class="btn">Follow</a>
-                                    </c:otherwise>
-                                </c:choose>
+                                <c:if test="${personalCustomer!=null}">
+                                    <c:choose>
+                                        <c:when test="${follow!=null}">
+                                            <a href="FollowBooklistServlet?id=${booklist.id}&unFollow=true" class="btn black">UnFollow</a>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <a href="FollowBooklistServlet?id=${booklist.id}&follow=true" class="btn">Follow</a>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:if>
                             </c:otherwise>
                         </c:choose>
                     </form>

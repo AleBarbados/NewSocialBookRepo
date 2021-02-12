@@ -105,6 +105,6 @@ public class CustomerDAOTest {
      */
     @Test
     public void doRetrieveByReviewsTest(){
-        assertNotNull(customerDAO.doRetrieveByReviews(), "Deve tornare un customer");
+        assertNotNull(customerDAO.doRetrieveByReviews("9788869183157"), "Deve tornare una lista di customer");
     }
 }
