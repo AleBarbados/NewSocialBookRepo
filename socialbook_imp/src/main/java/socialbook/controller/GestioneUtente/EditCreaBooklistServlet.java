@@ -15,11 +15,6 @@ import java.io.IOException;
 public class EditCreaBooklistServlet extends HttpServlet {
     private BookListDAO bookListDAO = new BookListDAO();
 
-    //4 test purpose only ->
-    public EditCreaBooklistServlet() {
-    }// <-
-
-
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

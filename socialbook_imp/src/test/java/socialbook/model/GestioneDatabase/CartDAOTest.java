@@ -42,11 +42,23 @@ public class CartDAOTest {
     @Test
     public void doSaveTest() throws SQLException {
         cartDAO = new CartDAO();
-        Cart cart = new Cart(1, 0);
-        cartDAO.doSave(cart, 1);
-        assertEquals(cart, cartDAO.doRetrieveByCustomer(1).get());
+        Cart cart = new Cart(2, 0);
+        cartDAO.doSave(cart, 2);
+        assertEquals(cart, cartDAO.doRetrieveByCustomer(2).get());
     }
 
+    /**
+     * testa il doSave
+     *
+     * @throws SQLException
+     */
+    @Test
+    public void doSaveBookTest() throws SQLException {
+        cartDAO = new CartDAO();
+        Cart cart = new Cart(2, 0);
+        cartDAO.doSave(cart, 2);
+        assertEquals(cart, cartDAO.doRetrieveByCustomer(2).get());
+    }
     /**
      * testa il doDeleteBookFromCart
      *

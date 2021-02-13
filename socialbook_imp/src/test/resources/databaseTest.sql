@@ -326,4 +326,5 @@ INSERT INTO customerOrder(order_price, invoice_addr, cart, order_date, id_custom
 
 
 INSERT INTO orderDetail(id_order, ISBN) VALUES
-(1, '9788869183157');
+(1, '9788869183157'),
+(1, '9788893817035');
