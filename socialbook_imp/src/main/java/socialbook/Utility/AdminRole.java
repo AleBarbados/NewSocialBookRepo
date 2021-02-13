@@ -1,4 +1,4 @@
-package socialbook.Utility;
+package socialbook.utility;
 
 public enum AdminRole {
     SYSTEM_MANAGER,

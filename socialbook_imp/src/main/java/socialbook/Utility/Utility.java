@@ -1,4 +1,7 @@
-package socialbook.Utility;
+package socialbook.utility;
+
+import socialbook.model.GestioneDatabase.Review;
+import socialbook.model.GestioneDatabase.ReviewDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -14,9 +17,13 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Utility {
+
     public static String aggiuntaFoto(HttpServletRequest request) throws IOException, ServletException {
+
         String CARTELLA_UPLOAD = "images";  //cartella in cui verranno salvate le immagini prese dal form
 
         Part filePart = request.getPart("foto");
@@ -54,8 +61,35 @@ public class Utility {
 
     public static void redirect(HttpServletResponse response, String destinazione, String confronto) throws IOException {
         if (destinazione == null || destinazione.contains(confronto) || destinazione.trim().isEmpty()) {
-            destinazione = ".";     //la destinazione sarà la pagina corrente
+            destinazione = ".";     //la destinazione sarà l'homepage
         }
         response.sendRedirect(destinazione);
+    }
+
+    public static String formatDate(Date date){
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        return date == null ? "" : sdf.format(date);
+    }
+
+    public static void checkReview(HttpServletRequest request, String isbn, int id_customer) {
+        ReviewDAO reviewDAO = new ReviewDAO();
+        Review review = reviewDAO.doRetrieveByISBNCustomer(isbn, id_customer);
+
+        if(review == null)      //utente non ha mai recensito questo libro
+            request.setAttribute("recensione_si", "si");
+        else {
+            String voto = review.getVote();
+            String body = review.getBody();
+
+            if (!voto.equals("-") && !body.equals("-"))
+                request.setAttribute("recensione_no", "no");   //utente ha inserito sia voto che commento
+
+            if (voto.equals("-"))
+                request.setAttribute("vote", "si");     //utente ha inserito solo il commento
+
+            if (body.equals("-"))
+                request.setAttribute("body", "si");     //utente ha inserito solo il voto
+        }
     }
 }

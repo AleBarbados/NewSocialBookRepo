@@ -6,23 +6,30 @@
 </head>
 
 <body>
-    <h1>Tutti i libri</h1>
-        <c:forEach items="${books}" var="book">
-            <table>
+<header>
+    <jsp:include page="header.jsp"> <jsp:param name="header.jsp" value="Home"/></jsp:include>
+</header>
+<h1>Tutti i libri</h1>
+<c:forEach items="${books}" var="book">
+    <table>
+        <tr>
+            <td><img width="60px" height="60px" alt="immagine prodotto" src="${pageContext.request.contextPath}/images/${book.image}"></td>
+        </tr>
+        <tr>
+            <td><a href="paginaLibroServlet?libro=${book.isbn}"><h2>${book.title}</h2></a></td>
+        </tr>
+        <tr>
+            <c:if test="${book.catalogue}">
+                <td>PREZZO: ${book.price_euro}</td>
+            </c:if>
+        </tr>
+        <c:choose>
+            <c:when test="${book.catalogue}">
                 <tr>
-                    <td><img width="60px" height="60px" alt="immagine prodotto" src="${pageContext.request.contextPath}/images/${book.image}"></td>
-                </tr>
-                <tr>
-                    <td><h2>${book.title}</h2></td>
-                </tr>
-                <tr>
-                    <td>PREZZO: ${book.price_euro}</td>
+                    <td>CATALOGO</td>
                 </tr>
                 <c:choose>
-                    <c:when test="${book.catalogue == true}">
-                        <tr>
-                            <td>CATALOGO</td>
-                        </tr>
+                    <c:when test="${catalogueManager != null}">
                         <tr>
                             <td>
                                 <form action="catalogueManagerServlet1" method="get">
@@ -32,10 +39,32 @@
                             </td>
                         </tr>
                     </c:when>
-                    <c:otherwise>
+                    <c:when test="${personalCustomer != null}">
                         <tr>
-                            <td>NON CATALOGO</td>
+                            <td>
+                                <form action="EditCreaBooklist" method="get">
+                                    <input type="hidden" name="isbn" value="${book.isbn}">
+                                    <input type="submit" name="addPreferiti" value="Aggiungi ai Preferiti">
+                                </form>
+                                <form action="ScegliBooklistServlet" method="get">
+                                    <input type="hidden" name="isbn" value="${book.isbn}">
+                                    <input type="submit" value="Aggiungi a Booklist">
+                                </form>
+                                <form action = "show-cart-servlet" method = "get">
+                                <input type = "hidden" name = "isbn" value = "${book.isbn}">
+                                <input type = "submit" name = "addCart" value = "Aggiungi al carrello">
+                                </form>
+                            </td>
                         </tr>
+                    </c:when>
+                </c:choose>
+            </c:when>
+            <c:otherwise>
+                <tr>
+                    <td>NON CATALOGO</td>
+                </tr>
+                <c:choose>
+                    <c:when test="${catalogueManager != null}">
                         <tr>
                             <td>
                                 <form action="catalogueManagerServlet1" method="get">
@@ -44,25 +73,50 @@
                                 </form>
                             </td>
                         </tr>
-                    </c:otherwise>
+                    </c:when>
+                    <c:when test="${personalCustomer != null}">
+                        <tr>
+                            <td>
+                                <form action="EditCreaBooklist" method="get">
+                                    <input type="hidden" name="isbn" value="${book.isbn}">
+                                    <input type="submit" name="addPreferiti" value="Aggiungi ai Preferiti">
+                                </form>
+                                <form action="ScegliBooklistServlet" method="get">
+                                    <input type="hidden" name="isbn" value="${book.isbn}">
+                                    <input type="submit" value="Aggiungi a Booklist">
+                                </form>
+                            </td>
+                        </tr>
+                    </c:when>
                 </c:choose>
-                <tr>
-                    <td>
-                        <form action="catalogueManagerServlet1" method="get">
-                            <input type="hidden" name="isbn" value="${book.isbn}">
-                            <input type="hidden" name="operazione" value="modifica">
-                            <input type="submit" value="Modifica prezzo">
-                        </form>
-                    </td>
-                </tr>
-            </table>
-            <br>
-        </c:forEach>
-        <br><br>
-
+            </c:otherwise>
+        </c:choose>
+        <c:if test="${book.catalogue}">
+            <c:choose>
+                <c:when test="${catalogueManager != null}">
+                    <tr>
+                        <td>
+                            <form action="catalogueManagerServlet1" method="get">
+                                <input type="hidden" name="isbn" value="${book.isbn}">
+                                <input type="hidden" name="operazione" value="modifica">
+                                <input type="submit" value="Modifica prezzo">
+                            </form>
+                        </td>
+                    </tr>
+                </c:when>
+            </c:choose>
+        </c:if>
+    </table>
+    <br>
+</c:forEach>
+<br><br>
+<c:choose>
+    <c:when test="${catalogueManager != null}">
         <form action="catalogueManagerServlet1" method="get">
             <input type="hidden" name="operazione" value="creazione">
             <input type="submit" value="Nuovo libro">
         </form>
+    </c:when>
+</c:choose>
 </body>
 </html>

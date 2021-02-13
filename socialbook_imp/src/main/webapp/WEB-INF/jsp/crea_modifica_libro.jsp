@@ -6,6 +6,9 @@
 </head>
 
 <body>
+<header>
+    <jsp:include page="header.jsp"> <jsp:param name="header.jsp" value="Home"/></jsp:include>
+</header>
     <form action="catalogueManagerServlet2" method="post" enctype="multipart/form-data">
         <table>
             <c:if test="${operazione == 'creazione'}">
