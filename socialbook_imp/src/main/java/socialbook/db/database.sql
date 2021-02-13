@@ -336,7 +336,7 @@ INSERT INTO admin(admn_usr, admn_pwd, admn_role) VALUES
 ('usr', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'CUSTOMER_MANAGER');
 
 INSERT INTO ticket(id_ticket, id_customer,  open_date, issue, t_status, destination) VALUES
-(1, 1, '2018-01-14', 'aiuto, sito del cazzo', 'OPEN', 'CUSTOMER_MANAGER');
+(1, 1, '2018-01-14', 'aiuto, non riesco a inserire una recensione', 'OPEN', 'CUSTOMER_MANAGER');
 
 INSERT INTO customer(customer_name, customer_surname, email, customer_pwd, customer_usr, c_description) VALUES
 ('Utente', 'Fittizio', 'nonpuoesistere@gmail.hhi', SHA1('nonpuoiaccedere'), 'UtenteFittizio', 'utente fittizio');
