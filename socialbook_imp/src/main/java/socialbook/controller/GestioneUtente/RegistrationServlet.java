@@ -41,7 +41,7 @@ public class RegistrationServlet extends HttpServlet {
         if(!password.matches("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$"))
             throw new socialbook.utility.ServletException("Password non conforme");
 
-        if(!description.matches("^(?=(\\s*[a-zA-Z\\d]){0,150}$).*$"))
+        if(!description.matches("([a-zA-Z0-9- !?:.,()]{0,150})"))
             throw new socialbook.utility.ServletException("Formato descrizione non conforme");
 
         Customer customer = new Customer(name, surname, email, Utility.encryptionSHA1(password), username, description);
