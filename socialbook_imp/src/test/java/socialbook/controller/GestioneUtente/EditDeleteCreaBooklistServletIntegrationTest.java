@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith( MockitoExtension.class)
-public class EditDeleteCreaBooklistServletTest {
+public class EditDeleteCreaBooklistServletIntegrationTest {
     @Mock
     HttpServletRequest request;
     @Mock
@@ -47,6 +47,11 @@ public class EditDeleteCreaBooklistServletTest {
         new InitTestDb().destroyDb();
     }
 
+    /**
+     * testa l'eliminazione di una booklist dal database che va a buon fine
+     * @throws ServletException
+     * @throws IOException
+     */
     @Test
     void doGetDeleteTest() throws ServletException, IOException {
         BookListDAO bookListDAO = new BookListDAO();
@@ -63,6 +68,11 @@ public class EditDeleteCreaBooklistServletTest {
         assertNull(bookListDAO.doRetriveBooklist(1));
     }
 
+    /**
+     * testa l'inserimento di un libro ai preferiti
+     * @throws ServletException
+     * @throws IOException
+     */
     @Test
     void doGetAddPreferitiTest() throws ServletException, IOException {
         BookListDAO bookListDAO = new BookListDAO();

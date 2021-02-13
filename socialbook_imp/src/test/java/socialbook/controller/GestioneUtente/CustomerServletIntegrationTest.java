@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class CustomerServletTest {
+class CustomerServletIntegrationTest {
     //creo mock per Request, Response, Session e RequestDispatcher (oggetti fittizi)
     @Mock
     HttpServletRequest request;
@@ -54,6 +54,10 @@ class CustomerServletTest {
         new InitTestDb().destroyDb();
     }
 
+    /**
+     * testa il caso in cui non c'è nessun utente loggato
+     * @throws Exception
+     */
     @Test
     void testPersonalCustomerNull() throws Exception {
         when(request.getSession()).thenReturn(session);
@@ -67,12 +71,15 @@ class CustomerServletTest {
         );
     }
 
+    /**
+     * testa il lancio della NumberFormatException
+     * @throws Exception
+     */
     @Test
     void testCustomerNumberException() throws Exception {
         when(request.getSession()).thenReturn(session);
         when(session.getAttribute("personalCustomer")).thenReturn(customerDAO.doRetriveById(1));
         when(request.getParameter("customerView")).thenReturn("test");
-        //verrà lanciata la NumberFormatException
         when(request.getParameter("idCustomer")).thenReturn("test");
 
         Assertions.assertThrows(NumberFormatException.class, () -> {
@@ -80,12 +87,15 @@ class CustomerServletTest {
         });
     }
 
+    /**
+     * testa la visualizzazione di un customer che non esiste
+     * @throws Exception
+     */
     @Test
     void testCustomerNull() throws Exception {
         when(request.getSession()).thenReturn(session);
         when(session.getAttribute("personalCustomer")).thenReturn(customerDAO.doRetriveById(1));
         when(request.getParameter("customerView")).thenReturn("test");
-        //non esiste nessun customer con id 50
         when(request.getParameter("idCustomer")).thenReturn("50");
 
         assertAll(
@@ -96,6 +106,10 @@ class CustomerServletTest {
         );
     }
 
+    /**
+     * testa l'esistenza del follow tra due utenti
+     * @throws Exception
+     */
     @Test
     void testFollowTrue() throws Exception {
         when(request.getSession()).thenReturn(session);
@@ -112,6 +126,10 @@ class CustomerServletTest {
         );
     }
 
+    /**
+     * testa la non esistenza del follow tra due utenti
+     * @throws Exception
+     */
     @Test
     void testFollowFalse() throws Exception {
         when(request.getSession()).thenReturn(session);

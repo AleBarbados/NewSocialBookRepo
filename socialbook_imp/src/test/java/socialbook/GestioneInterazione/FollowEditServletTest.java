@@ -44,6 +44,10 @@ public class FollowEditServletTest {
         new InitTestDb().destroyDb();
     }
 
+    /**
+     * testa l'esistenza del follow tra due customer
+     * @throws Exception
+     */
     @Test
     public void doGetFollowTest() throws Exception{
         FollowDAO followDAO = new FollowDAO();

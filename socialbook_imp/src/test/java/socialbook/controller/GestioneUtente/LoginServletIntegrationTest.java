@@ -20,9 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith( MockitoExtension.class)
-
 public class LoginServletIntegrationTest {
-
     @Mock
     HttpServletRequest request;
     @Mock
@@ -44,17 +42,37 @@ public class LoginServletIntegrationTest {
         new InitTestDb().destroyDb();
     }
 
+    /**
+     * testa il login con credenziali errate (l'username non è presente nel database)
+     * @throws Exception
+     */
     @Test
-    public void doPostFalseTest() throws Exception{
+    public void doPostFalseUsernameTest() throws Exception{
         when(request.getParameter("username")).thenReturn("Alessia99");
         when(request.getParameter("pwd")).thenReturn("7c76bc4ec270168613b1228471f29caa6dbc56f2");
         Exception thrown = Assertions.assertThrows(ServletException.class, () -> {
             loginServlet.doPost(request, response);
         });
         assertTrue(thrown.getMessage().contains("Le credenziali inserite non sono valide!!"));
-
     }
 
+    /**
+     * testa il login con credenziali errate (la password è errata)
+     * @throws Exception
+     */
+    @Test
+    public void doPostFalsePasswordTest() throws Exception{
+        when(request.getParameter("username")).thenReturn("AleBarbados");
+        when(request.getParameter("pwd")).thenReturn("pass");
+        Exception thrown = Assertions.assertThrows(ServletException.class, () -> {
+            loginServlet.doPost(request, response);
+        });
+        assertTrue(thrown.getMessage().contains("Le credenziali inserite non sono valide!!"));
+    }
+    /**
+     * testa il login del customer che ha successo
+     * @throws Exception
+     */
     @Test
     public void doPostTrueCustomerTest() throws Exception{
 
@@ -63,9 +81,12 @@ public class LoginServletIntegrationTest {
         when(request.getParameter("pwd")).thenReturn("barbados99");
         when(request.getRequestDispatcher("/WEB-INF/jsp/index.jsp")).thenReturn(rd);
         assertDoesNotThrow(() ->loginServlet.doPost(request, response));
-
     }
 
+    /**
+     * testa il login dell'admin che ha successo
+     * @throws Exception
+     */
     @Test
     public void doPostTrueAdminTest() throws Exception{
 
@@ -75,6 +96,5 @@ public class LoginServletIntegrationTest {
         when(request.getRequestDispatcher("/WEB-INF/jsp/index.jsp")).thenReturn(rd);
 
         assertDoesNotThrow( () -> loginServlet.doPost(request, response));
-
     }
 }

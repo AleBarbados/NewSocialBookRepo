@@ -28,8 +28,6 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith( MockitoExtension.class)
 public class PaymentServletIntegrationTest {
-
-
     @Mock
     HttpServletRequest request;
     @Mock
@@ -54,6 +52,10 @@ public class PaymentServletIntegrationTest {
         new InitTestDb().destroyDb();
     }
 
+    /**
+     * testa l'inserimento del metodo di pagamento del customer loggato
+     * @throws Exception
+     */
     @Test
     public void doPostCustomerNotNull()throws Exception{
 
@@ -72,9 +74,11 @@ public class PaymentServletIntegrationTest {
         paymentServlet.doPost(request, response);
         Optional<InfoPayment> infoPayment = new InfoPaymentDAO().doRetrieveByCustomer(1);
         assertTrue(infoPayment.isPresent());
-
     }
 
+    /**
+     * testa l'assenza del customer loggato
+     */
     @Test
     public void doPostCustomerNull(){
 
@@ -86,6 +90,10 @@ public class PaymentServletIntegrationTest {
         assertTrue(thrown.getMessage().contains("Bisogna prima effettuare l'accesso!!"));
     }
 
+    /**
+     * testa il formato non corretto del nome
+     * @throws Exception
+     */
     @Test
     public void doPostWrongName()throws Exception{
 
@@ -107,6 +115,10 @@ public class PaymentServletIntegrationTest {
 
     }
 
+    /**
+     * testa il formato non corretto del cognome
+     * @throws Exception
+     */
     @Test
     public void doPostWrongSurname()throws Exception{
 
@@ -128,6 +140,10 @@ public class PaymentServletIntegrationTest {
 
     }
 
+    /**
+     * testa il formato non corretto del numero di carta
+     * @throws Exception
+     */
     @Test
     public void doPostWrongNumber()throws Exception{
 
@@ -149,6 +165,10 @@ public class PaymentServletIntegrationTest {
 
     }
 
+    /**
+     * testa il formato non corretto del mese di scadenza
+     * @throws Exception
+     */
     @Test
     public void doPostWrongMonth()throws Exception{
 
@@ -170,6 +190,10 @@ public class PaymentServletIntegrationTest {
 
     }
 
+    /**
+     * testa il formato non corretto dell'anno di scadenza
+     * @throws Exception
+     */
     @Test
     public void doPostWrongYear()throws Exception{
 
@@ -191,6 +215,10 @@ public class PaymentServletIntegrationTest {
 
     }
 
+    /**
+     * testa il formato non corretto del cvv
+     * @throws Exception
+     */
     @Test
     public void doPostWrongCvv()throws Exception{
 
@@ -209,6 +237,5 @@ public class PaymentServletIntegrationTest {
             paymentServlet.doPost(request, response);
         });
         assertTrue(thrown.getMessage().contains("Formato cvv sbagliato"));
-
     }
 }
