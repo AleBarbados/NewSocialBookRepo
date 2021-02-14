@@ -46,19 +46,15 @@ public class ReviewServlet extends HttpServlet {
                 vote = request.getParameter("voto");
                 if(vote == null)
                     newReview.setVote("-");
-                else {
-                    if(!vote.matches("([0-5])"))
-                        throw new socialbook.utility.ServletException("Il voto va da 1 a 5!");
-
+                else
                     newReview.setVote(vote);
-                }
 
                 body = request.getParameter("commento");
                 if(body.equals(""))
                     newReview.setBody("-");
                 else {
                     if(!body.matches("([a-zA-Z0-9- !?:.,()]{0,300})"))
-                        throw new socialbook.utility.ServletException("Formato recensione non corretto");
+                        throw new socialbook.utility.ServletException("");
 
                     newReview.setBody(body);
                 }
@@ -71,7 +67,7 @@ public class ReviewServlet extends HttpServlet {
                         review.setBody("-");
                     else {
                         if(!body.matches("([a-zA-Z0-9- !?:.,()]{0,300})"))
-                            throw new socialbook.utility.ServletException("Formato recensione non corretto");
+                            throw new socialbook.utility.ServletException("");
 
                         review.setBody(body);
                     }
@@ -82,12 +78,8 @@ public class ReviewServlet extends HttpServlet {
 
                     if(vote == null)
                         review.setVote("-");
-                    else {
-                        if(!vote.matches("([0-5])"))
-                            throw new socialbook.utility.ServletException("Il voto va da 1 a 5!");
-
+                    else
                         review.setVote(vote);
-                    }
                 }
                 reviewDAO.doUpdateById(review);
             }
