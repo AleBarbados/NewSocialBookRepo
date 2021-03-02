@@ -57,7 +57,7 @@ public class ReviewServlet extends HttpServlet {
                 if(body.equals(""))
                     newReview.setBody("-");
                 else {
-                    if(!body.matches("([a-zA-Z0-9- !?:.,()]{0,300})"))
+                    if(!body.matches("([a-zA-Z0-9- !?:.,'()]{0,300})"))
                         throw new socialbook.utility.ServletException("Formato recensione non corretto");
 
                     newReview.setBody(body);
@@ -70,7 +70,7 @@ public class ReviewServlet extends HttpServlet {
                     if(body.equals(""))
                         review.setBody("-");
                     else {
-                        if(!body.matches("([a-zA-Z0-9- !?:.,()]{0,300})"))
+                        if(!body.matches("([a-zA-Z0-9- !?:.,'()]{0,300})"))
                             throw new socialbook.utility.ServletException("Formato recensione non corretto");
 
                         review.setBody(body);

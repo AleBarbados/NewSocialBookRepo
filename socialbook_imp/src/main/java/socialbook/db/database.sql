@@ -316,8 +316,8 @@ INSERT INTO booklistdetail (id_customer, id_booklist, property) VALUES
 (1, 2, 0),
 (2, 3, 0),
 (1, 4, 0),
-(2, 6, 0),
-(2, 5, 0);
+(2, 5, 0),
+(3, 5, 0);
 
 INSERT INTO booklistassociation (id_booklist, id_book) VALUES
 (1, '9788869183157'),
@@ -332,7 +332,7 @@ INSERT INTO review(id_customer, ISBN, review_date, body, vote) VALUES
 (3, '9788869183157', '2018-01-14', 'Beh che dire', '1');
 
 INSERT INTO admin(admn_usr, admn_pwd, admn_role) VALUES
-('username', 'password', 'CUSTOMER_MANAGER'),
+('username', SHA1('password'), 'CUSTOMER_MANAGER'),
 ('usr', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'CUSTOMER_MANAGER');
 
 INSERT INTO ticket(id_ticket, id_customer,  open_date, issue, t_status, destination) VALUES
