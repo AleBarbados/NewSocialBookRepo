@@ -60,8 +60,10 @@ public class ReviewDAOTest {
         review.setBody("Test body");
         review.setVote("2");
         reviewDAO.doUpdateById(review);
-         assertAll( () -> assertEquals("Test body", reviewDAO.doRetrieveByISBNCustomer("9788869183157", 3).getBody(), "Deve tornare Test body"),
-                 ()-> assertEquals("2", reviewDAO.doRetrieveByISBNCustomer("9788869183157", 3).getVote(), "Dere tornare 2")
+         assertAll( () -> assertEquals("Test body", reviewDAO.doRetrieveByISBNCustomer("9788869183157", 3).getBody(),
+                 "Deve tornare Test body"),
+                 ()-> assertEquals("2", reviewDAO.doRetrieveByISBNCustomer("9788869183157", 3).getVote(),
+                         "Dere tornare 2")
          );
      }
 

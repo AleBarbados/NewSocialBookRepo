@@ -316,7 +316,7 @@ INSERT INTO booklistdetail (id_customer, id_booklist, property) VALUES
 (1, 2, 0),
 (2, 3, 0),
 (1, 4, 0),
-(2, 5, 0),
+(2, 6, 0),
 (3, 5, 0);
 
 INSERT INTO booklistassociation (id_booklist, id_book) VALUES
