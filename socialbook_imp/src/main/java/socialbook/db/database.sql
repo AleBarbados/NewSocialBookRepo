@@ -317,7 +317,7 @@ INSERT INTO booklistdetail (id_customer, id_booklist, property) VALUES
 (2, 3, 0),
 (1, 4, 0),
 (2, 6, 0),
-(2, 5, 0);
+(3, 5, 0);
 
 INSERT INTO booklistassociation (id_booklist, id_book) VALUES
 (1, '9788869183157'),
