@@ -1,0 +1,140 @@
+Quali sono i tuoi hobby?	Quanti libri leggi all'anno?	Quali sono i tuoi generi preferiti?
+Leggere, Suonare, Cantare, Ballare, Serie tv/film	Tra 1 e 3	Storico, Fantascienza, Avventura, Satira
+Leggere, Suonare, Videogiochi, Serie tv/film	Più di 5	Fumetti, Fantascienza, Fantasy, Poesia
+Leggere, Cantare, Serie tv/film, Viaggiare, Cucinare	Più di 5	Drammatico, Romantico, Fantasy, Avventura, Romanzo di formazione, Horror
+Leggere, Videogiochi, Sport	Tra 1 e 3	Giallo, Storico, Fumetti, Avventura, Horror
+Leggere, Cantare, Serie tv/film, Viaggiare	Tra 1 e 3	Drammatico, Fantascienza, Fantasy, Poesia
+Leggere, Ballare, Serie tv/film, Cucinare	Tra 1 e 3	Giallo, Romantico
+Leggere, Videogiochi, Serie tv/film, Viaggiare, Cucinare	Più di 5	Giallo, Storico, Fantascienza, Avventura
+Leggere, Sport, Arte	Tra 3 e 5	Storico, Avventura
+Leggere, Ballare, Serie tv/film, Viaggiare	Tra 1 e 3	Romantico, Storico, Fumetti, Avventura, Romanzo di formazione
+Ballare, Viaggiare, Cucinare	Tra 1 e 3	Fantasy, Horror
+Leggere, Videogiochi, Serie tv/film, Viaggiare, Arte	Tra 3 e 5	Storico, Avventura, Poesia
+Leggere, Serie tv/film, Arte	Più di 5	Giallo, Storico, Fantasy, Avventura
+Leggere, Suonare, Cantare, Viaggiare, Cucinare	Tra 3 e 5	Romanzo di formazione, Scienza
+Videogiochi, Serie tv/film, Viaggiare, Sport	Nessuno	Fantascienza
+Leggere, Viaggiare, Arte	Tra 1 e 3	Storico, Fantascienza, Fantasy, Horror
+Serie tv/film, Cucinare	Nessuno	Fantascienza, Fantasy, Avventura
+Videogiochi, Serie tv/film	Nessuno	Fumetti
+Leggere, Viaggiare, Cucinare, Arte	Più di 5	Romantico, Storico, Avventura
+Leggere, Serie tv/film, Cucinare, Arte	Tra 3 e 5	Giallo, Drammatico, Fumetti, Fantasy, Avventura
+Cantare, Serie tv/film, Viaggiare, Arte	Tra 1 e 3	Drammatico, Romanzo di formazione, Poesia
+Serie tv/film	Più di 5	Giallo, Drammatico, Fantasy, Romanzo di formazione
+Videogiochi, Serie tv/film, Viaggiare	Nessuno	Giallo, Fantascienza, Fantasy, Avventura
+Videogiochi, Serie tv/film, Viaggiare, Sport	Tra 1 e 3	Giallo, Fantascienza, Fantasy, Horror
+Leggere, Serie tv/film, Viaggiare, Sport	Più di 5	Giallo, Saggi
+Suonare, Cantare, Serie tv/film, Arte	Tra 1 e 3	Fumetti, Fantascienza, Fantasy
+Sport	Tra 1 e 3	Attualità 
+Serie tv/film	Tra 1 e 3	Romantico
+Videogiochi	Tra 1 e 3	Romantico
+Leggere, Suonare, Serie tv/film	Tra 1 e 3	Giallo, Fantascienza
+Serie tv/film	Tra 1 e 3	Fantascienza, Avventura, Horror
+Cantare, Ballare	Tra 1 e 3	Romantico
+Leggere, Videogiochi, Serie tv/film	Più di 5	Storico, Romanzo di formazione, Horror, Poesia
+Serie tv/film, Cucinare	Nessuno	Romantico, Avventura
+Videogiochi, Serie tv/film, Sport, Arte	Tra 3 e 5	Fantascienza, Fantasy, Avventura
+Leggere, Videogiochi, Serie tv/film, Viaggiare, Cucinare	Più di 5	Giallo, Avventura
+Leggere, Videogiochi, Viaggiare	Più di 5	Giallo, Romantico, Fantasy, Romanzo di formazione
+Leggere, Cantare, Serie tv/film, Viaggiare, Arte	Più di 5	Giallo, Drammatico, Romantico, Fantasy, Avventura
+Leggere, Serie tv/film, Viaggiare, Sport	Più di 5	Drammatico, Romantico
+Videogiochi, Serie tv/film, Sport	Nessuno	Avventura
+Suonare, Cantare, Serie tv/film, Arte	Tra 1 e 3	Horror
+Leggere, Serie tv/film	Più di 5	Romantico, Fantasy, Avventura, Romanzo di formazione, Poesia
+Leggere, Videogiochi, Serie tv/film, Cucinare, Arte	Più di 5	Giallo, Storico, Avventura, Horror
+Leggere, Serie tv/film, Arte	Tra 1 e 3	Giallo, Fantascienza, Avventura
+Leggere, Serie tv/film, Cucinare	Più di 5	Fantascienza, Fantasy, Avventura
+Leggere, Suonare, Cantare, Serie tv/film	Tra 3 e 5	Giallo, Motivazionale
+Leggere, Suonare, Videogiochi, Serie tv/film, Cucinare	Tra 3 e 5	Fantascienza, Fantasy, Avventura
+Leggere, Serie tv/film, Viaggiare	Più di 5	Giallo, Drammatico, Fantasy, Avventura, Poesia
+Serie tv/film	Tra 1 e 3	Fantasy
+Leggere, Ballare, Serie tv/film, Viaggiare, Cucinare	Tra 3 e 5	Giallo, Drammatico, Romanzo di formazione, Horror
+Leggere, Suonare, Serie tv/film, Cucinare	Più di 5	Giallo, Drammatico, Romantico, Fantascienza, Fantasy, Avventura
+Leggere, Serie tv/film, Viaggiare, Volontariato	Più di 5	Drammatico, Romantico, Fantasy
+Leggere, Serie tv/film, Viaggiare, Arte	Tra 1 e 3	Giallo, Romanzo di formazione, Poesia
+Leggere, Serie tv/film, Sport	Tra 1 e 3	Giallo, Drammatico, Romantico, Fantasy
+Leggere, Serie tv/film	Tra 3 e 5	Giallo
+Leggere, Cantare, Ballare, Serie tv/film	Più di 5	Giallo, Drammatico, Romanzo di formazione, Poesia
+Serie tv/film, Sport	Nessuno	Fantascienza
+Suonare, Serie tv/film	Tra 1 e 3	Drammatico, Fantasy, Horror
+Sport	Tra 1 e 3	Psicologico 
+Arte	Nessuno	Drammatico, Romantico
+Leggere, Serie tv/film, Cucinare, Arte	Più di 5	Romantico, Storico, Fantasy, Avventura, Horror
+Sport, Arte	Tra 3 e 5	Drammatico, Storico, Fantascienza, Fantasy
+Serie tv/film, Viaggiare, Cucinare, Sport	Tra 1 e 3	Giallo, Fantasy, Romanzo di formazione, Horror
+Leggere, Ballare, Videogiochi, Viaggiare, Cucinare	Più di 5	Giallo, Romantico, Avventura, Romanzo di formazione
+Videogiochi, Serie tv/film, Viaggiare, Cucinare	Tra 1 e 3	Giallo, Fumetti, Fantascienza, Fantasy
+Leggere, Serie tv/film, Viaggiare	Tra 3 e 5	Romantico, Storico, Fantascienza, Fantasy, Avventura
+Leggere, Serie tv/film, Viaggiare, Cucinare, Serie tv/film	Tra 1 e 3	Giallo, Fumetti, Fantasy, Avventura, Horror
+Leggere, Videogiochi, Serie tv/film	Più di 5	Fumetti, Romanzo di formazione, Poesia
+Leggere, Sport	Tra 3 e 5	Romanzo di formazione, Psicologico
+Serie tv/film	Nessuno	Drammatico
+Suonare, Serie tv/film, Viaggiare, Cucinare	Tra 3 e 5	Giallo, Storico, Romanzo di formazione
+Suonare, Videogiochi, Serie tv/film, Viaggiare, Arte	Più di 5	Giallo, Drammatico, Romantico, Storico
+Leggere, Ballare, Serie tv/film, Viaggiare	Più di 5	Giallo, Drammatico, Romanzo di formazione, Horror
+Serie tv/film, Viaggiare, Cucinare, Arte	Tra 1 e 3	Giallo, Avventura, Romanzo di formazione
+Leggere, Serie tv/film, Viaggiare, Sport	Più di 5	Giallo, Drammatico, Storico, Romanzo di formazione, Classici, Saggi
+Videogiochi, Serie tv/film, Viaggiare, Sport	Tra 3 e 5	Drammatico, Storico, Fantascienza, Fantasy, Avventura
+Videogiochi, Serie tv/film, Viaggiare, Cucinare	Nessuno	Giallo, Storico, Fumetti, Fantascienza, Fantasy, Avventura
+Videogiochi, Serie tv/film, Cucinare, Sport, Arte	Tra 1 e 3	Giallo, Drammatico, Fantascienza, Fantasy, Avventura, Horror
+Videogiochi, Serie tv/film, Sport	Tra 1 e 3	Giallo
+Videogiochi, Serie tv/film	Tra 1 e 3	Giallo, Fumetti, Fantascienza, Fantasy, Avventura, Horror
+Suonare, Videogiochi, Viaggiare, Sport	Tra 1 e 3	Storico, Fantascienza, Fantasy, Avventura
+Serie tv/film	Più di 5	Avventura
+Leggere, Serie tv/film, Viaggiare, Cucinare, Sport	Più di 5	Giallo, Drammatico, Fumetti, Fantasy
+Leggere, Serie tv/film, Viaggiare, Sport	Tra 3 e 5	Storico, Fantascienza, Fantasy, Avventura
+Leggere, Serie tv/film	Più di 5	Fantascienza, Fantasy, Avventura
+Leggere, Serie tv/film, Viaggiare, Cucinare	Più di 5	Giallo, Storico
+Leggere, Serie tv/film, Viaggiare, Cucinare	Più di 5	Romantico, Romanzo di formazione, Psicologia
+Videogiochi, Serie tv/film, Sport	Tra 1 e 3	Horror
+Cucinare	Tra 1 e 3	Storico
+Leggere, Cantare, Videogiochi, Serie tv/film, Cucinare	Tra 1 e 3	Storico, Fantascienza, Avventura, Horror, Gangster
+Leggere, Videogiochi, Serie tv/film, Cucinare, Sport	Tra 3 e 5	Giallo, Fantascienza, Fantasy, Avventura, Poesia
+Suonare, Cantare, Videogiochi, Serie tv/film, Viaggiare	Nessuno	Giallo, Fantasy, Avventura, Poesia
+Leggere, Viaggiare, Cucinare, Sport 	Più di 5	Giallo, Storico, Avventura, Romanzo di formazione
+Ballare, Videogiochi, Serie tv/film, Arte	Nessuno	Giallo, Romantico, Fumetti, Fantasy, Romanzo di formazione, Horror
+Leggere, Ballare, Serie tv/film, Cucinare	Tra 3 e 5	Romantico, Fantascienza, Fantasy, Avventura
+Serie tv/film, Viaggiare	Tra 1 e 3	Giallo, Storico, Avventura
+Sport	Tra 1 e 3	Psicologico 
+Serie tv/film, Viaggiare, Sport, Beauty	Tra 1 e 3	Drammatico, Romantico
+Cantare, Cucinare	Tra 1 e 3	Romantico
+Viaggiare	Tra 1 e 3	Romanzo di formazione
+Cucinare, Sport	Tra 1 e 3	Giallo
+Serie tv/film, Viaggiare, Cucinare	Tra 1 e 3	Saggi
+Serie tv/film	Nessuno	Drammatico
+Leggere, Videogiochi, Serie tv/film	Più di 5	Fumetti, Poesia
+Leggere, Serie tv/film, Viaggiare, Cucinare	Più di 5	Drammatico, Avventura, Romanzo di formazione
+Videogiochi, Serie tv/film	Tra 3 e 5	Avventura
+Leggere, Serie tv/film, Viaggiare, Sport	Più di 5	Drammatico, Romantico
+Cucinare, Sport	Tra 1 e 3	Giallo
+Serie tv/film, Sport	Tra 1 e 3	Giallo, Drammatico
+Leggere, Serie tv/film, Viaggiare, Sport	Più di 5	Drammatico, Romantico
+Leggere, Serie tv/film, Viaggiare	Tra 3 e 5	Romantico, Fantasy, Avventura, Poesia
+Leggere, Cantare, Viaggiare	Tra 1 e 3	Giallo, Poesia
+Cantare, Serie tv/film, Viaggiare, Arte	Tra 1 e 3	Drammatico, Romanzo di formazione, Poesia
+Leggere, Suonare, Videogiochi, Serie tv/film	Più di 5	Giallo, Fantascienza, Fantasy, Avventura, Horror
+Leggere, Serie tv/film, Viaggiare	Tra 3 e 5	Giallo, Romanzo di formazione
+Leggere, Videogiochi, Viaggiare, Arte	Più di 5	Fantasy, Avventura, Romanzo di formazione
+Leggere, Serie tv/film, Sport	Più di 5	Giallo, Drammatico
+Videogiochi, Serie tv/film	Nessuno	Fumetti, Fantascienza, Fantasy, Avventura
+Sport	Tra 1 e 3	Fantascienza, Horror
+Viaggiare, Cucinare	Tra 1 e 3	Giallo, Romantico, Avventura
+Cantare, Serie tv/film, Cucinare	Più di 5	Giallo, Drammatico, Poesia
+Cantare, Serie tv/film, Cucinare	Più di 5	Giallo, Drammatico, Poesia
+Ballare, Serie tv/film, Viaggiare, Cucinare, Sport	Nessuno	Romantico, Fantascienza, Fantasy, Avventura
+Serie tv/film, Sport	Nessuno	Fantascienza
+Viaggiare, Cucinare	Tra 1 e 3	Giallo, Romantico, Avventura
+Leggere, Sport	Più di 5	Giallo, Drammatico, Storico
+Serie tv/film, Cucinare	Nessuno	Giallo
+Cantare, Videogiochi	Più di 5	Giallo, Romantico, Fumetti
+Leggere, Ballare, Serie tv/film	Tra 3 e 5	Drammatico, Storico, Poesia
+Serie tv/film	Tra 1 e 3	Fantasy
+Leggere, Serie tv/film, Cucinare, Arte	Tra 3 e 5	Giallo, Drammatico, Fumetti, Fantasy, Avventura, Poesia
+Sport	Nessuno	Giallo, Romantico
+Leggere, Serie tv/film	Tra 3 e 5	Giallo, Drammatico, Fantascienza
+Videogiochi	Nessuno	Giallo, Drammatico, Fumetti, Fantascienza, Avventura
+Leggere	Tra 3 e 5	Giallo, Storico
+Leggere, Serie tv/film, Viaggiare, Cucinare, Sport	Tra 1 e 3	Giallo, Fantasy
+Leggere, Serie tv/film, Cucinare, Arte	Tra 3 e 5	Giallo, Drammatico, Fumetti, Fantasy, Avventura, Poesia
+Sport	Tra 1 e 3	Storico
+Leggere, Serie tv/film, Viaggiare	Tra 1 e 3	Drammatico, Fumetti
+Leggere, Serie tv/film, Viaggiare	Tra 1 e 3	Drammatico, Fumetti
