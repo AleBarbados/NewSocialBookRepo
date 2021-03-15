@@ -137,3 +137,6 @@ Leggere, Serie tv/film, Viaggiare, Cucinare, Sport	Tra 1 e 3	Giallo, Fantasy
 Leggere, Serie tv/film, Cucinare, Arte	Tra 3 e 5	Giallo, Drammatico, Fumetti, Fantasy, Avventura, Poesia
 Sport	Tra 1 e 3	Storico
 Leggere, Serie tv/film, Viaggiare	Tra 1 e 3	Drammatico, Fumetti
+Serie tv/film, Arte	Tra 3 e 5	Romantico, Classici
+Serie tv/film	Tra 3 e 5	Poesia, Romantico
+Serie tv/film	Tra 3 e 5	Romantico

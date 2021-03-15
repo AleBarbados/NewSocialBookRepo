@@ -148,159 +148,160 @@ def pesoLibri(dati):
     for row in range(len1):
         dati.iat[row, 1] = libri_dic[dati.iloc[row]["Quanti libri leggi all'anno?"]]
 
+def clustering():
+    #Calcolo del peso degli hobby per ogni singolo utente
 
-#Calcolo del peso degli hobby per ogni singolo utente
+    pesoLibri(dati)
+    discretizzazione(hobby_dic, 0, dati)
+    discretizzazione(genre_dic, 1, dati)
 
-pesoLibri(dati)
-discretizzazione(hobby_dic, 0, dati)
-discretizzazione(genre_dic, 1, dati)
+    ############################### Nromalizziamo e standardizziamo i dati
+    # I dati vengono scalati per una migliore distribuzione
+    scaler = StandardScaler()
+    X_scaled = scaler.fit_transform(dati)
 
-############################### Nromalizziamo e standardizziamo i dati
-# I dati vengono scalati per una migliore distribuzione
-scaler = StandardScaler()
-X_scaled = scaler.fit_transform(dati)
+    # Normalizzazione dei dati in modo tale che la distribuzione dei dati
+    # assomigli ad una distribuzione gaussiana
+    X_normalized = normalize(X_scaled)
 
-# Normalizzazione dei dati in modo tale che la distribuzione dei dati
-# assomigli ad una distribuzione gaussiana
-X_normalized = normalize(X_scaled)
+    # Conversione da un panda dataframe ad un numpyArray
+    X_normalized = pd.DataFrame(X_normalized)
 
-# Conversione da un panda dataframe ad un numpyArray
-X_normalized = pd.DataFrame(X_normalized)
+    #Stampa dei dati scalati e normalizzati
+    print("###### STAMPA DATI SCALATI E NORMALIZZATI PER PCA ######")
+    print(X_normalized)
 
-#Stampa dei dati scalati e normalizzati
-print("###### STAMPA DATI SCALATI E NORMALIZZATI PER PCA ######")
-print(X_normalized)
+    ####################################  PCA
 
-####################################  PCA
+    #Dichiarazione variabile pca, essa possiede il metodo per eseguire l'algoritmo
+    pca = PCA(n_components = 2)
+    #Esecuzione algoritmo
+    X_principal = pca.fit_transform(X_normalized)
+    #Conversione a dataFrame di pandas
+    X_principal = pd.DataFrame(X_principal)
+    #Nome degli headers delle colonne
+    X_principal.columns = ['P1', 'P2']
 
-#Dichiarazione variabile pca, essa possiede il metodo per eseguire l'algoritmo
-pca = PCA(n_components = 2)
-#Esecuzione algoritmo
-X_principal = pca.fit_transform(X_normalized)
-#Conversione a dataFrame di pandas
-X_principal = pd.DataFrame(X_principal)
-#Nome degli headers delle colonne
-X_principal.columns = ['P1', 'P2']
-
-#Stampa dati ridotti da PCA
-print("####### STAMPA DATI OTTENUTI DAL PCA #######")
-print(X_principal)
-
-
-########################################### Inizio DBSCAN
-
-# Passaggio dei dati all'algoritmo DBSCAN, la funzione accetta un array di dati con caratteristiche numeriche
-# Parametro eps: Distanza massima tra due campioni per essere considerati nello stesso vicinato
-# Parametro min_samples: numero minimo di punti per considerare un intorno di un punto denso
-db_default = DBSCAN(eps = 0.1, min_samples = 3).fit(X_principal)
-
-#La funzione ritorna un array di zeri dello stesso tipo e forma dell'array dato
-#In questo caso un array di booleani  in quanto dtype = bool
-core_samples_mask = np.zeros_like(db_default.labels_, dtype=bool)
-#Con questa istruzione in una matrice numpy vengono tracciati i dati del dataset che sono
-# punti densi, i valori che non vengono settati a true significa che sono punti di rumore
-core_samples_mask[db_default.core_sample_indices_] = True
-
-#Recupero dei labes per tutti i dati, ogni label indica a quale cluster appartiene
-#Labels è un array
-labels = db_default.labels_
+    #Stampa dati ridotti da PCA
+    print("####### STAMPA DATI OTTENUTI DAL PCA #######")
+    print(X_principal)
 
 
-################### Da qui recuperiamo a quale cluster un film appartiene
-cluster_dic_list = [{
+    ########################################### Inizio DBSCAN
 
-}]
+    # Passaggio dei dati all'algoritmo DBSCAN, la funzione accetta un array di dati con caratteristiche numeriche
+    # Parametro eps: Distanza massima tra due campioni per essere considerati nello stesso vicinato
+    # Parametro min_samples: numero minimo di punti per considerare un intorno di un punto denso
+    db_default = DBSCAN(eps = 0.2, min_samples = 6).fit(X_principal)
 
-# Con questo ciclo per ogni film presente nel dataset recuperiamo il cluster a cui appartiene
-# I labels sono ordinati allo stesso modo del dataset quindi il labels[0] contiene il cluster del film movie_dataset.loc[0][0]
-for c_row in range(len(dati)):
-  cluster_dic_list.append({"dato_numero" : c_row,"ClusterNumber" : labels[c_row]})
+    #La funzione ritorna un array di zeri dello stesso tipo e forma dell'array dato
+    #In questo caso un array di booleani  in quanto dtype = bool
+    core_samples_mask = np.zeros_like(db_default.labels_, dtype=bool)
+    #Con questa istruzione in una matrice numpy vengono tracciati i dati del dataset che sono
+    # punti densi, i valori che non vengono settati a true significa che sono punti di rumore
+    core_samples_mask[db_default.core_sample_indices_] = True
 
-
-# Calcolo del numero dei cluster senza considerare i punti di rumore
-n_clusters_ = len(set(labels)) - (1 if -1 in labels else 0)
-#Calcolo dei punti di rumore
-n_noise_ = list(labels).count(-1)
-
-print("############################\nRISULTATI DBSCAN\n########################")
-print('Numero di cluster stimati: %d' % n_clusters_)
-print('Numero di punti di rumore: %d' % n_noise_)
-print("Coefficiente di forma: %0.3f" % metrics.silhouette_score(dati, labels))
+    #Recupero dei labes per tutti i dati, ogni label indica a quale cluster appartiene
+    #Labels è un array
+    labels = db_default.labels_
 
 
-######################## INIZIO RAPPRESENTAZIONE GRAFICA DBSCAN
-# Codice reperito dalla guida ufficiale della libreria sklearn per la rappresentazione del clustering
-unique_labels = set(labels)
-colors = [plt.cm.Spectral(each)
-          for each in np.linspace(0, 1, len(unique_labels))]
-for k, col in zip(unique_labels, colors):
-    if k == -1:
-        # Black used for noise.
-        col = [0, 0, 0, 1]
+    ################### Da qui recuperiamo a quale cluster un film appartiene
+    cluster_dic_list = [{
 
-    class_member_mask = (labels == k)
+    }]
 
-    xy = dati[class_member_mask & core_samples_mask]
-    plt.plot(xy.iloc[:, 0], xy.iloc[:, 1], 'o', markerfacecolor=tuple(col),
-             markeredgecolor='k', markersize=14)
-
-    xy = dati[class_member_mask & ~core_samples_mask]
-    plt.plot(xy.iloc[:, 0], xy.iloc[:, 1], 'o', markerfacecolor=tuple(col),
-             markeredgecolor='k', markersize=6)
-
-plt.title('DBSCAN Numero di cluster stimati: %d' % n_clusters_)
-plt.show()
-######################## FINE RAPPRESENTAZIONE GRAFICA DBSCAN
-######################## FINE DBSCAN
+    # Con questo ciclo per ogni film presente nel dataset recuperiamo il cluster a cui appartiene
+    # I labels sono ordinati allo stesso modo del dataset quindi il labels[0] contiene il cluster del film movie_dataset.loc[0][0]
+    for c_row in range(len(dati)):
+      cluster_dic_list.append({"dato_numero" : c_row,"ClusterNumber" : labels[c_row]})
 
 
-###############################KMEANS######################################
+    # Calcolo del numero dei cluster senza considerare i punti di rumore
+    n_clusters_ = len(set(labels)) - (1 if -1 in labels else 0)
+    #Calcolo dei punti di rumGraphDrawerore
+    n_noise_ = list(labels).count(-1)
 
-#Con questa istruzione rendiamo deterministica la posizione iniziale dei 12 centroidi
-#Attraverso una fase di testing dove abbiamo provato diversi valori di seme siamo arrivati alla
-#conclusione che con il valore 7 otteniamo il migliore coefficiente di forma
-np.random.seed(7)
-
-#Otteniamo una variabile k-means
-km = KMeans(n_clusters = 15)
-
-
+    print("############################\nRISULTATI DBSCAN\n########################")
+    print('Numero di cluster stimati: %d' % n_clusters_)
+    print('Numero di punti di rumore: %d' % n_noise_)
+    print("Coefficiente di forma: %0.3f" % metrics.silhouette_score(dati, labels))
 
 
-#settiamo il titolo della finestra che ospita il grafico come la sua dimensione
-fig = plt.figure("Risultato K-MEANS", figsize=(4, 3))
-#Poichè abbiamo 3 caratteristiche per ogni dato ( Peso genere, anno e punteggio) otteniamo un grafico avente
-# tre dimensioni
-ax = Axes3D(fig, rect=[0, 0, .95, 1], elev=48, azim=134)
-#esecuzione dell'algoritmo sul dataset senza l'id ( si veda il codice sopra )
-km.fit(dati)
-#Ottenimento dei labes
-labels = km.labels_
+    ######################## INIZIO RAPPRESENTAZIONE GRAFICA DBSCAN
+    # Codice reperito dalla guida ufficiale della libreria sklearn per la rappresentazione del clustering
+    unique_labels = set(labels)
+    colors = [plt.cm.Spectral(each)
+              for each in np.linspace(0, 1, len(unique_labels))]
+    for k, col in zip(unique_labels, colors):
+        if k == -1:
+            # Black used for noise.
+            col = [0, 0, 0, 1]
 
-# Dizionario che conterrà l'id dei film ed il loro cluster di appartenenza
-kmeans_dic_list = []
+        class_member_mask = (labels == k)
 
-# Ci permette di recuperare tutti i film nel cluster del k-means
-for c_row in range(len(dati)):
-    kmeans_dic_list.append({"FilmId": c_row, "ClusterNumber": labels[c_row]})
+        xy = dati[class_member_mask & core_samples_mask]
+        plt.plot(xy.iloc[:, 0], xy.iloc[:, 1], 'o', markerfacecolor=tuple(col),
+                 markeredgecolor='k', markersize=14)
 
-#Con questa istruzione poniamo i punti nello spazio tridimensionale
-ax.scatter(dati.iloc[:, 2], dati.iloc[:, 0], dati.iloc[:, 1], c=labels.astype(np.float), edgecolor='k')
+        xy = dati[class_member_mask & ~core_samples_mask]
+        plt.plot(xy.iloc[:, 0], xy.iloc[:, 1], 'o', markerfacecolor=tuple(col),
+                 markeredgecolor='k', markersize=6)
 
-#Istruzioni necessarie per la rappresentazione, reperite dalla guida ufficiale di sk learn
-ax.w_xaxis.set_ticklabels([])
-ax.w_yaxis.set_ticklabels([])
-ax.w_zaxis.set_ticklabels([])
-ax.set_xlabel('Genere')
-ax.set_ylabel('Hobby')
-ax.set_zlabel('Num_libri')
-title = "K-MEANS"
-ax.set_title(title)
-ax.dist = 12
+    plt.title('DBSCAN Numero di cluster stimati: %d' % n_clusters_)
+    plt.show()
+    ######################## FINE RAPPRESENTAZIONE GRAFICA DBSCAN
+    ######################## FINE DBSCAN
 
-#Risultati k-means
-print("\n\n#################### RISULTATI K-MEANS ############################")
-print("Coefficiente di forma %0.3f" % metrics.silhouette_score(dati, labels))
 
-#istruzione che visualizza il grafico tridimensionale
-plt.show()
+    ###############################KMEANS######################################
+
+    #Con questa istruzione rendiamo deterministica la posizione iniziale dei 12 centroidi
+    #Attraverso una fase di testing dove abbiamo provato diversi valori di seme siamo arrivati alla
+    #conclusione che con il valore 7 otteniamo il migliore coefficiente di forma
+    np.random.seed(21)
+
+    #Otteniamo una variabile k-means
+    km = KMeans(n_clusters = 21)
+
+
+
+
+    #settiamo il titolo della finestra che ospita il grafico come la sua dimensione
+    fig = plt.figure("Risultato K-MEANS", figsize=(4, 3))
+    #Poichè abbiamo 3 caratteristiche per ogni dato ( Peso genere, anno e punteggio) otteniamo un grafico avente
+    # tre dimensioni
+    ax = Axes3D(fig, rect=[0, 0, .95, 1], elev=48, azim=134)
+    #esecuzione dell'algoritmo sul dataset senza l'id ( si veda il codice sopra )
+    km.fit(dati)
+    #Ottenimento dei labes
+    labels = km.labels_
+
+    # Dizionario che conterrà l'id dei film ed il loro cluster di appartenenza
+    kmeans_dic_list = []
+
+    # Ci permette di recuperare tutti i film nel cluster del k-means
+    for c_row in range(len(dati)):
+        kmeans_dic_list.append({"Id": c_row, "ClusterNumber": labels[c_row]})
+
+    #Con questa istruzione poniamo i punti nello spazio tridimensionale
+    ax.scatter(dati.iloc[:, 2], dati.iloc[:, 0], dati.iloc[:, 1], c=labels.astype(np.float), edgecolor='k')
+
+    #Istruzioni necessarie per la rappresentazione, reperite dalla guida ufficiale di sk learn
+    ax.w_xaxis.set_ticklabels([])
+    ax.w_yaxis.set_ticklabels([])
+    ax.w_zaxis.set_ticklabels([])
+    ax.set_xlabel('Genere')
+    ax.set_ylabel('Hobby')
+    ax.set_zlabel('Num_libri')
+    title = "K-MEANS"
+    ax.set_title(title)
+    ax.dist = 12
+
+    #Risultati k-means
+    print("\n\n#################### RISULTATI K-MEANS ############################")
+    print("Coefficiente di forma %0.3f" % metrics.silhouette_score(dati, labels))
+
+    #istruzione che visualizza il grafico tridimensionale
+    plt.show()
+    return kmeans_dic_list
