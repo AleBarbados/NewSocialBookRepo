@@ -137,17 +137,3 @@ Leggere, Serie tv/film, Viaggiare, Cucinare, Sport	Tra 1 e 3	Giallo, Fantasy
 Leggere, Serie tv/film, Cucinare, Arte	Tra 3 e 5	Giallo, Drammatico, Fumetti, Fantasy, Avventura, Poesia
 Sport	Tra 1 e 3	Storico
 Leggere, Serie tv/film, Viaggiare	Tra 1 e 3	Drammatico, Fumetti
-Serie tv/film, Arte	Tra 3 e 5	Romantico, Classici
-Serie tv/film	Tra 3 e 5	Poesia, Romantico
-Serie tv/film	Tra 3 e 5	Romantico
-Videogiochi	Tra 1 e 3	Fumetti
-Videogiochi, Arte	Tra 1 e 3	Avventura, Fantasy
-Videogiochi	Tra 1 e 3	Drammatico
-Viaggiare, Videogiochi	Tra 1 e 3	Romantico
-Leggere	Tra 1 e 3	Romantico, Classici
-Leggere, Serie tv/film	Tra 1 e 3	Classici, Poesia
-Videogiochi	Tra 1 e 3	Fantascienza, Horror
-Serie tv/film, Arte	Tra 1 e 3	Romantico, Classici
-Leggere, Suonare	Tra 1 e 3	Romantico, Storico
-Serie tv/film, Suonare	Tra 1 e 3	Romantico, Storico
-Serie tv/film, Cantare	Tra 1 e 3	Romantico, Scienza

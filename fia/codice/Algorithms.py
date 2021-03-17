@@ -192,7 +192,7 @@ def clustering():
     # Passaggio dei dati all'algoritmo DBSCAN, la funzione accetta un array di dati con caratteristiche numeriche
     # Parametro eps: Distanza massima tra due campioni per essere considerati nello stesso vicinato
     # Parametro min_samples: numero minimo di punti per considerare un intorno di un punto denso
-    db_default = DBSCAN(eps = 0.2, min_samples = 6).fit(X_principal)
+    db_default = DBSCAN(eps = 0.2, min_samples = 4).fit(X_principal)
 
     # La funzione ritorna un array di zeri dello stesso tipo e forma dell'array dato, uso per rappresentazione grafica
     core_samples_mask = np.zeros_like(db_default.labels_, dtype = bool)
@@ -301,3 +301,7 @@ def clustering():
     # Visualizzazione grafico tridimensionale
     plt.show()
     return kmeans_dic_list
+
+
+
+clustering()
