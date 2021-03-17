@@ -301,7 +301,3 @@ def clustering():
     # Visualizzazione grafico tridimensionale
     plt.show()
     return kmeans_dic_list
-
-
-
-clustering()
